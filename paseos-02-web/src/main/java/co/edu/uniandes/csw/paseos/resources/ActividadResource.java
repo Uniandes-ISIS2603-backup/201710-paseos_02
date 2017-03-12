@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.paseos.resources;
 import co.edu.uniandes.csw.paseos.dtos.ActividadDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.ActividadLogic;
 import co.edu.uniandes.csw.paseos.entities.ActividadEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -40,36 +41,48 @@ public class ActividadResource
     
     private List<ActividadDetailDTO> listEntity2DTO(List<ActividadEntity> listaEntrada)
     {
-        return null;
+       List<ActividadDetailDTO> resp = new ArrayList<>();
+        for(ActividadEntity e : listaEntrada)
+        {
+            resp.add(new ActividadDetailDTO(e));
+        } 
+        return resp;
         
     }
     
     @GET
     public List<ActividadDetailDTO> getActividades( )
     {
-        return null;
-        
+        return listEntity2DTO(actividadLogic.getActividades());      
     }
     
     @GET
     @Path("{id: \\d+}")
     public ActividadDetailDTO getActividad(@PathParam("id") Long id) 
     {
-        return null;
+        return new ActividadDetailDTO(actividadLogic.getActividad(id));
         
     }
     
     @POST
     public ActividadDetailDTO createActividad(ActividadDetailDTO dto) 
     {
-        return null;
-       
+        try
+        {
+        return new ActividadDetailDTO(actividadLogic.createActividad(dto.toEntity()));
+        }
+        catch(BusinessLogicException e)
+        {
+            //TODO
+        }
+      return null; 
     }
     
     @PUT
     @Path("{id: \\d+}")
     public ActividadDetailDTO updateActividad(@PathParam("id") Long id, ActividadDetailDTO dto) 
     {
+        //TODO
         return null;
         
     }
@@ -78,7 +91,7 @@ public class ActividadResource
     @Path("{id: \\d+}")
     public void deleteActividad(@PathParam("id") Long id)
     {
-       
+       actividadLogic.deleteActividad(id);
     }
     
 }
