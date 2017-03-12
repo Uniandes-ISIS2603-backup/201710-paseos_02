@@ -15,10 +15,45 @@ import javax.persistence.Id;
  * @author Juan David Vega
  */
 @Entity
-public class GuiaEntity 
+public class GuiaEntity extends UsuarioEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    private String fromación;
+
+    private String experiencia;
+
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    @java.lang.Override
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
+
+    public String getFromación()
+    {
+        return fromación;
+    }
+
+    public void setFromación(String fromación)
+    {
+        this.fromación = fromación;
+    }
+
+    public String getExperiencia()
+    {
+        return experiencia;
+    }
+
+    public void setExperiencia(String experiencia)
+    {
+        this.experiencia = experiencia;
+    }
 }

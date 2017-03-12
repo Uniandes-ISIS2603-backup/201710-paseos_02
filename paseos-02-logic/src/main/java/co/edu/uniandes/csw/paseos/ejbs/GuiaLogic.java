@@ -16,3 +16,7 @@ public class GuiaLogic
 {
     
 }
+public GuiaEntity getGuias()
+{
+    return null;
+}

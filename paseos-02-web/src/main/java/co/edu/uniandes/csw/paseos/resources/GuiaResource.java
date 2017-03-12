@@ -40,14 +40,19 @@ public class GuiaResource
     
     private List<GuiaDetailDTO> listEntity2DTO(List<GuiaEntity> listaEntrada)
     {
-        return null;
+        List <GuiaEntity> list = new arrayList <>();
+        for (GuiaEntity entity : listaEntrada)
+        {
+            list.add(new GuiaDetailDTO(entity));
+        }
+        return list;
         
     }
     
     @GET
-    public List<GuiaDetailDTO> getGuiaes( )
+    public List<GuiaDetailDTO> getGuias( )
     {
-        return null;
+        return listEntity2DTO(guiaLogic.getGuias());
         
     }
     
