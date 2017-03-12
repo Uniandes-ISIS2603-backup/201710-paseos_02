@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.paseos.resources;
 import co.edu.uniandes.csw.paseos.dtos.InscripcionDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.InscripcionLogic;
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -38,16 +39,19 @@ public class InscripcionResource
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords; 
     
-    private List<InscripcionDetailDTO> listEntity2DTO(List<InscripcionEntity> listaEntrada)
+    private List<InscripcionDetailDTO> listEntity2DTO(List<InscripcionEntity> entityList)
     {
-        return null;
-        
+        List<InscripcionDetailDTO> list = new ArrayList<>();
+        for (InscripcionEntity entity : entityList) {
+            list.add(new InscripcionDetailDTO(entity));
+        }
+        return list;
     }
     
     @GET
     public List<InscripcionDetailDTO> getInscripciones( )
     {
-        return null;
+        return listEntity2DTO(inscripcionLogic.getInscripciones());
         
     }
     
@@ -55,22 +59,24 @@ public class InscripcionResource
     @Path("{id: \\d+}")
     public InscripcionDetailDTO getInscripcion(@PathParam("id") Long id) 
     {
-        return null;
+        return new InscripcionDetailDTO(inscripcionLogic.getInscripcion(id));
         
     }
     
     @POST
-    public InscripcionDetailDTO createInscripcion(InscripcionDetailDTO dto) 
+    public InscripcionDetailDTO createInscripcion(InscripcionDetailDTO dto) throws BusinessLogicException 
     {
-        return null;
+        return new InscripcionDetailDTO(inscripcionLogic.createInscripcion(dto.toEntity()));
        
     }
     
     @PUT
     @Path("{id: \\d+}")
     public InscripcionDetailDTO updateInscripcion(@PathParam("id") Long id, InscripcionDetailDTO dto) 
-    {
-        return null;
+    {   
+        InscripcionEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new InscripcionDetailDTO(inscripcionLogic.updateInscripcion(entity));
         
     }
     
@@ -78,7 +84,7 @@ public class InscripcionResource
     @Path("{id: \\d+}")
     public void deleteInscripcion(@PathParam("id") Long id)
     {
-       
+       inscripcionLogic.deleteInscripcion(id);
     }
     
 }

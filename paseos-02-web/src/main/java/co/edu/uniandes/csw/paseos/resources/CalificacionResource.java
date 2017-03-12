@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.paseos.resources;
 import co.edu.uniandes.csw.paseos.dtos.CalificacionDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.CalificacionLogic;
 import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -40,14 +41,18 @@ public class CalificacionResource
     
     private List<CalificacionDetailDTO> listEntity2DTO(List<CalificacionEntity> listaEntrada)
     {
-        return null;
+        List<CalificacionDetailDTO> list = new ArrayList<>();
+        for (CalificacionEntity entity : listaEntrada) {
+            list.add(new CalificacionDetailDTO(entity));
+        }
+        return list;
         
     }
     
     @GET
     public List<CalificacionDetailDTO> getCalificaciones( )
     {
-        return null;
+        return listEntity2DTO(calificacionLogic.getCalificaciones());
         
     }
     
@@ -55,14 +60,14 @@ public class CalificacionResource
     @Path("{id: \\d+}")
     public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) 
     {
-        return null;
+        return new CalificacionDetailDTO(calificacionLogic.getCalificacion(id));
         
     }
     
     @POST
-    public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO dto) 
+    public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO dto) throws BusinessLogicException 
     {
-        return null;
+        return new CalificacionDetailDTO(calificacionLogic.createCalificacion(dto.toEntity()));
        
     }
     
@@ -70,7 +75,9 @@ public class CalificacionResource
     @Path("{id: \\d+}")
     public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) 
     {
-        return null;
+        CalificacionEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new CalificacionDetailDTO(calificacionLogic.updateEmployee(entity));
         
     }
     
@@ -78,7 +85,7 @@ public class CalificacionResource
     @Path("{id: \\d+}")
     public void deleteCalificacion(@PathParam("id") Long id)
     {
-       
+       calificacionLogic.deleteCalificacion(id);
     }
     
 }
