@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 
@@ -30,6 +31,15 @@ public class CalificacionEntity implements Serializable
     
     private Integer puntuacion;
     
+    @ManyToOne
+    private CaminanteEntity caminante;
+    
+    @ManyToOne
+    private GuiaEntity guia;
+    
+    @ManyToOne
+    private PaseoEcologicoEntity paseoEcologico;
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
 
@@ -41,6 +51,32 @@ public class CalificacionEntity implements Serializable
         this.id = id;
     }
 
+    public CaminanteEntity getCaminante() {
+        return caminante;
+    }
+
+    public void setCaminante(CaminanteEntity caminante) {
+        this.caminante = caminante;
+    }
+
+    public GuiaEntity getGuia() {
+        return guia;
+    }
+
+    public void setGuia(GuiaEntity guia) {
+        this.guia = guia;
+    }
+
+    public PaseoEcologicoEntity getPaseoEcologico() {
+        return paseoEcologico;
+    }
+
+    public void setPaseoEcologico(PaseoEcologicoEntity paseoEcologico) {
+        this.paseoEcologico = paseoEcologico;
+    }
+    
+    
+    
     public String getComentario() {
         return comentario;
     }
@@ -49,11 +85,11 @@ public class CalificacionEntity implements Serializable
         this.comentario = comentario;
     }
 
-    public int getPuntuacion() {
+    public Integer getPuntuacion() {
         return puntuacion;
     }
 
-    public void setPuntuacion(int puntuacion) {
+    public void setPuntuacion(Integer puntuacion) {
         this.puntuacion = puntuacion;
     }
 
