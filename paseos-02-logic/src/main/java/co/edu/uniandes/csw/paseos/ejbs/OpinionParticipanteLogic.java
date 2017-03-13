@@ -29,7 +29,8 @@ public class OpinionParticipanteLogic
 
     public OpinionParticipanteEntity createOpinionParticipante (OpinionParticipanteEntity entity)
     {
-        return persistence.create(entity);
+       persistence.create(entity);
+       return entity;
     }
 
     public OpinionParticipanteEntity updateOpinionParticipante (OpinionParticipanteEntity entity)

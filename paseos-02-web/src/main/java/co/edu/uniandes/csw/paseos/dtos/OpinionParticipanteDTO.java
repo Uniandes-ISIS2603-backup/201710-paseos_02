@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.paseos.dtos;
 
 import co.edu.uniandes.csw.paseos.entities.OpinionParticipanteEntity;
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.List;
@@ -15,14 +16,13 @@ import java.util.List;
  * @author Maria del Rosario Leon
  */
 @XmlRootElement
-public class OpinionParticipanteDTO
+public class OpinionParticipanteDTO implements Serializable
 {
     private Long id;
 
     private String comentario;
 
     private List <String> imagenes;
-
 
     private Date fechaDelPaseo;
 
@@ -48,7 +48,6 @@ public class OpinionParticipanteDTO
         entity.setComentario(this.getComentario());
         entity.setFechaDelPaseo(this.getFechaDelPaseo());
         entity.setImagenes(this.getImagenes());
-
         return entity;
     }
 

@@ -6,70 +6,69 @@
 package co.edu.uniandes.csw.paseos.dtos;
 
 import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Juan David Vega
  */
-public class GuiaDTO
+@XmlRootElement
+public class GuiaDTO extends UsuarioDTO
 {
-    private long id;
-    private String formación;
+    private String formacion;
+    
     private String experiencia;
-
-
-    public GuiaDTO()
+    
+    public GuiaDTO( )
     {
-
-    }
-
-     public GuiaDTO(GuiaEntity entity)
-    {
-        if (entity != null)
-        {
-            this.id = entity.getId();
-            this.formación = entity.getFromación();
-            this.experiencia = entity.getExperiencia();
-        }
+        
     }
     
-
-     public GuiaEntity toEntity( )
+    public GuiaDTO(GuiaEntity entity)
     {
-       GuiaEntity entity = new GuiaEntity();
-       entity.setId(this.getId());
-       entity.setExperiencia(this.getExperiencia());
-       entity.setFromación(this.getFormación());
-        return entity;
+        if(entity != null)
+        {
+            this.id = entity.getId();
+            this.nombre = entity.getNombre();
+            this.identificacion = entity.getIdentificacion();
+            this.tipoIdentificacion = entity.getTipoIdentificacion();
+            this.edad = entity.getEdad();
+            this.telefono = entity.getTelefono();
+            this.direccion = entity.getDireccion();
+            this.correoElectronico = entity.getCorreoElectronico();
+            this.experiencia = entity.getExperiencia();
+            this.formacion = entity.getFormacion();
+        }
+    }
+    public GuiaEntity toEntity( )
+    {
+        GuiaEntity guia = new GuiaEntity();
+        guia.setId(this.getId());
+        guia.setNombre(this.getNombre());
+        guia.setIdentificacion(this.getIdentificacion());
+        guia.setTipoIdentificacion(this.getTipoIdentificacion());
+        guia.setEdad(this.getEdad());
+        guia.setTelefono(this.getTelefono());
+        guia.setDireccion(this.getDireccion());
+        guia.setCorreoElectronico(this.getCorreoElectronico());
+        guia.setExperiencia(this.getExperiencia());
+        guia.setFormacion(this.getFormacion());
+        return guia;
     }
 
-    public long getId()
-    {
-        return id;
+    public String getFormacion() {
+        return formacion;
     }
 
-    public void setId(long id)
-    {
-        this.id = id;
+    public void setFormacion(String formacion) {
+        this.formacion = formacion;
     }
 
-    public String getFormación()
-    {
-        return formación;
-    }
-
-    public void setFormación(String formación)
-    {
-        this.formación = formación;
-    }
-
-    public String getExperiencia()
-    {
+    public String getExperiencia() {
         return experiencia;
     }
 
-    public void setExperiencia(String experiencia)
-    {
+    public void setExperiencia(String experiencia) {
         this.experiencia = experiencia;
     }
 }

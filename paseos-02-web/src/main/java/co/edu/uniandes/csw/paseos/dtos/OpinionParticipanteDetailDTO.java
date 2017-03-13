@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author jd.vega11
+ * @author Maria del Rosario Leon
  */
 @XmlRootElement
 public class OpinionParticipanteDetailDTO extends OpinionParticipanteDTO

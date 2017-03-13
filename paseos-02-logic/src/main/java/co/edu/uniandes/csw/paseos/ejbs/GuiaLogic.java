@@ -17,31 +17,29 @@ import java.util.List;
  * @author María del Rosario León
  */
 @Stateless
-public class GuiaLogic {
+public class GuiaLogic 
+{
     @Inject
-    private GuiaPersistence persistence;
+    private GuiaPersistence guiaPersisence;
 
     public List<GuiaEntity> getGuias() {
-        return persistence.findAll();
+        return guiaPersisence.findAll();
     }
 
-    public GuiaEntity createGuia (GuiaEntity entity)
-    {
-       return persistence.create(entity);
+    public GuiaEntity getGuia(Long id) {
+        return guiaPersisence.find(id);
     }
 
-    public GuiaEntity updateGuia (GuiaEntity entity)
-    {
-        return persistence.update(entity);
+    public GuiaEntity createGuia(GuiaEntity guia) {
+        guiaPersisence.create(guia);
+        return guia;
     }
 
-    public GuiaEntity getGuia (Long id)
-    {
-        return persistence.find(id);
+    public GuiaEntity updateGuia(GuiaEntity guia) {
+        return guiaPersisence.update(guia);
     }
 
-    public void deleteGuia (Long id)
-    {
-        persistence.delete(id);
+    public void deleteGuia(Long id) {
+        guiaPersisence.delete(id);
     }
 }

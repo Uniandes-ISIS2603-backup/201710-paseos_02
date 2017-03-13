@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.paseos.entities;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * @author Maria del Rosario Leon
  */
 @Entity
-public class OpinionParticipanteEntity
+public class OpinionParticipanteEntity implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +23,9 @@ public class OpinionParticipanteEntity
 
     private String comentario;
 
-    private List <String> imagenes;
+    private List<String> imagenes;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fechaDelPaseo;
 
     public Long getId()
