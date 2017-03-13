@@ -15,6 +15,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class LugarDetailDTO extends LugarDTO
 {
+    
+    private PaseoEcologicoDTO paseoEcologico;
+    
     public LugarDetailDTO( )
     {
         super( );
@@ -23,13 +26,25 @@ public class LugarDetailDTO extends LugarDTO
     public LugarDetailDTO(LugarEntity entity)
     {
         super(entity);
+        if(entity != null)
+     
+            if(entity.getPaseoEcologico() != null) this.paseoEcologico = new PaseoEcologicoDTO(entity.getPaseoEcologico());
     }
+    
     
     @Override
     public LugarEntity toEntity() 
     {
         LugarEntity entity = super.toEntity();
+        if(this.getPaseoEcologico() != null) entity.setPaseoEcologico(this.getPaseoEcologico().toEntity());
         return entity;
     }
-    
+    public PaseoEcologicoDTO getPaseoEcologico() {
+        return paseoEcologico;
+    }
+
+    public void setPaseoEcologico(PaseoEcologicoDTO paseoEcologico) 
+    {
+        this.paseoEcologico = paseoEcologico;
+    }
 }
