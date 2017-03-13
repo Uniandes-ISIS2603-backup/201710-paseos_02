@@ -22,9 +22,9 @@ public class OpinionParticipanteDTO implements Serializable
 
     private String comentario;
 
-    private List <String> imagenes;
+    private String imagen;
 
-    private Date fechaDelPaseo;
+    private Date fecha;
 
     public OpinionParticipanteDTO( )
     {
@@ -37,8 +37,8 @@ public class OpinionParticipanteDTO implements Serializable
         {
             this.id = entity.getId();
             this.comentario = entity.getComentario();
-            this.imagenes = entity.getImagenes();
-            this.fechaDelPaseo = entity.getFechaDelPaseo();
+            this.imagen = entity.getImagen();
+            this.fecha = entity.getFecha();
         }
     }
      public OpinionParticipanteEntity toEntity( )
@@ -46,8 +46,8 @@ public class OpinionParticipanteDTO implements Serializable
         OpinionParticipanteEntity entity = new OpinionParticipanteEntity();
         entity.setId(this.getId());
         entity.setComentario(this.getComentario());
-        entity.setFechaDelPaseo(this.getFechaDelPaseo());
-        entity.setImagenes(this.getImagenes());
+        entity.setFecha(this.getFecha());
+        entity.setImagen(this.getImagen());
         return entity;
     }
 
@@ -67,19 +67,19 @@ public class OpinionParticipanteDTO implements Serializable
         this.comentario = comentario;
     }
 
-    public List<String> getImagenes() {
-        return imagenes;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setImagenes(List<String> imagenes) {
-        this.imagenes = imagenes;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
-    public Date getFechaDelPaseo() {
-        return fechaDelPaseo;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setFechaDelPaseo(Date fechaDelPaseo) {
-        this.fechaDelPaseo = fechaDelPaseo;
+    public void setFechaDelPaseo(Date fecha) {
+        this.fecha = fecha;
     }
 }

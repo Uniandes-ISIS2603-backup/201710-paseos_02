@@ -23,10 +23,16 @@ public class OpinionParticipanteEntity implements Serializable
 
     private String comentario;
 
-    private List<String> imagenes;
+    private String imagen;
 
     @Temporal(TemporalType.DATE)
-    private Date fechaDelPaseo;
+    private Date fecha;
+    
+    @ManyToOne
+    private PaseoEcologicoEntity paseoEcologico;
+    
+    @ManyToOne
+    private CaminanteEntity caminante;
 
     public Long getId()
     {
@@ -48,23 +54,39 @@ public class OpinionParticipanteEntity implements Serializable
         this.comentario = comentario;
     }
 
-    public List<String> getImagenes()
+    public Date getFecha()
     {
-        return imagenes;
+        return fecha;
     }
 
-    public void setImagenes(List<String> imagenes)
+    public void setFecha(Date fecha)
     {
-        this.imagenes = imagenes;
+        this.fecha = fecha;
     }
 
-    public Date getFechaDelPaseo()
-    {
-        return fechaDelPaseo;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setFechaDelPaseo(Date fechaDelPaseo)
-    {
-        this.fechaDelPaseo = fechaDelPaseo;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
+
+    public PaseoEcologicoEntity getPaseoEcologico() {
+        return paseoEcologico;
+    }
+
+    public void setPaseoEcologico(PaseoEcologicoEntity paseoEcologico) {
+        this.paseoEcologico = paseoEcologico;
+    }
+
+    public CaminanteEntity getCaminante() {
+        return caminante;
+    }
+
+    public void setCaminante(CaminanteEntity caminante) {
+        this.caminante = caminante;
+    }
+    
+    
 }

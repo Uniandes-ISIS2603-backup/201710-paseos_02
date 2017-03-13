@@ -27,10 +27,10 @@ public class CaminanteEntity extends UsuarioEntity
     @OneToMany(mappedBy = "caminante")
     private List<CalificacionEntity> calificacionesGuia;
     
-    /*
+    
     @OneToMany(mappedBy = "caminante")
     private List<OpinionParticipanteEntity> opiniones;
-    */
+    
     public String getCondicionesFisicas() {
         return condicionesFisicas;
     }
@@ -56,7 +56,6 @@ public class CaminanteEntity extends UsuarioEntity
         this.calificacionesGuia = calificacionesGuia;
     }
     
-    /*
     public List<OpinionParticipanteEntity> getOpiniones() {
         return opiniones;
     }
@@ -64,7 +63,6 @@ public class CaminanteEntity extends UsuarioEntity
     public void setOpiniones(List<OpinionParticipanteEntity> opiniones) {
         this.opiniones = opiniones;
     }
-    */
     
     @Override
     public boolean equals(Object obj)

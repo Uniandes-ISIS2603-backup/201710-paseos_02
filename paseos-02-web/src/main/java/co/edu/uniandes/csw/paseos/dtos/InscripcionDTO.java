@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.paseos.dtos;
 
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
+import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Sebastian Millan
  */
 @XmlRootElement
-public class InscripcionDTO
+public class InscripcionDTO implements Serializable
 {
     private Long id;
     
@@ -37,12 +38,12 @@ public class InscripcionDTO
     {
         if(entity != null)
         {
-         this.costo = entity.getCosto();
-         this.fechaDelPaseo = entity.getFechaDelPaseo();
-         this.fechaInscripcion = entity.getFechaInscripcion();
-         this.id = entity.getId();
-         this.observaciones = entity.getObservaciones();
-         this.realizoPago = entity.getRealizoPago();
+            this.costo = entity.getCosto();
+            this.fechaDelPaseo = entity.getFechaDelPaseo();
+            this.fechaInscripcion = entity.getFechaInscripcion();
+            this.id = entity.getId();
+            this.observaciones = entity.getObservaciones();
+            this.realizoPago = entity.getRealizoPago();
         }
     }
      public InscripcionEntity toEntity( )

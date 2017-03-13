@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- *
  * @author Maria del Rosario Leon
  */
 @Stateless

@@ -66,8 +66,8 @@ public class PaseoEcologicoEntity implements Serializable
     @OneToMany(mappedBy = "paseoEcologico")
     private List<InscripcionEntity> inscripciones;
     
-    //@OneToMany(mappedBy = "paseoEcologico")
-    //private List<OpinionParticipanteEntity> opiniones;
+    @OneToMany(mappedBy = "paseoEcologico")
+    private List<OpinionParticipanteEntity> opiniones;
 
     public Long getId() {
         return id;
@@ -194,7 +194,6 @@ public class PaseoEcologicoEntity implements Serializable
         this.inscripciones = inscripciones;
     }
     
-    /*
     public List<OpinionParticipanteEntity> getOpiniones() {
         return opiniones;
     }
@@ -202,7 +201,7 @@ public class PaseoEcologicoEntity implements Serializable
     public void setOpiniones(List<OpinionParticipanteEntity> opiniones) {
         this.opiniones = opiniones;
     }
-    */
+    
      @Override
     public boolean equals(Object obj)
     {

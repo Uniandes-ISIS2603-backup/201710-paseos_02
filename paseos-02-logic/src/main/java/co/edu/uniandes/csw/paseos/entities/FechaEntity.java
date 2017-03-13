@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author jd.vega11
+ * @author Juan David Vega 
  */
 @Entity
 public class FechaEntity implements Serializable
