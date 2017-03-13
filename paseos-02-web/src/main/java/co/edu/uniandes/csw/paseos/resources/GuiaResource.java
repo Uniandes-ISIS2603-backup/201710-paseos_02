@@ -40,37 +40,41 @@ public class GuiaResource
     
     private List<GuiaDetailDTO> listEntity2DTO(List<GuiaEntity> listaEntrada)
     {
-        return null;
+        List<GuiaDetailDTO> l = new ArrayList<>( );
+        for(GuiaEntity entity : listaEntrada)
+        {
+            l.add(new GuiaDetailDTO(entity));
+        }
+        return l;  
         
     }
     
     @GET
-    public List<GuiaDetailDTO> getGuiaes( )
+    public List<GuiaDetailDTO> getGuias( )
     {
-        return null;
-        
+        return listEntity2DTO(guiaLogic.getGuias()); 
     }
     
     @GET
     @Path("{id: \\d+}")
     public GuiaDetailDTO getGuia(@PathParam("id") Long id) 
     {
-        return null;
-        
+        return new GuiaDetailDTO(guiaLogic.getGuia(id));
     }
     
     @POST
     public GuiaDetailDTO createGuia(GuiaDetailDTO dto) 
     {
-        return null;
-       
+        return new GuiaDetailDTO(guiaLogic.createGuia(dto.toEntity()));
     }
     
     @PUT
     @Path("{id: \\d+}")
     public GuiaDetailDTO updateGuia(@PathParam("id") Long id, GuiaDetailDTO dto) 
     {
-        return null;
+        GuiaEntity guia = dto.toEntity();
+        guia.setId(id);
+        return new GuiaDetailDTO(guiaLogic.updateGuia(guia));
         
     }
     
@@ -78,7 +82,7 @@ public class GuiaResource
     @Path("{id: \\d+}")
     public void deleteGuia(@PathParam("id") Long id)
     {
-       
+       guiaLogic.deleteGuia(id);
     }
     
     

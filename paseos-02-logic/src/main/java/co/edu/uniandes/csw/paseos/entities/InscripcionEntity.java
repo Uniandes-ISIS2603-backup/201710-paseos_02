@@ -14,13 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Sebastian Millan
  */
 @Entity
-@PrimaryKeyJoinColumn(referencedColumnName="id")
 public class InscripcionEntity implements Serializable
 {
     @Id
@@ -29,10 +29,10 @@ public class InscripcionEntity implements Serializable
     
     private boolean realizoPago;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fechaInscripcion;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fechaDelPaseo;
     
     private String observaciones;

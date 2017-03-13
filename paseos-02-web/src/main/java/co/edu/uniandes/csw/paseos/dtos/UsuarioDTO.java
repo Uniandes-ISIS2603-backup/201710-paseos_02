@@ -3,42 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.paseos.entities;
+package co.edu.uniandes.csw.paseos.dtos;
 
+import co.edu.uniandes.csw.paseos.entities.UsuarioEntity;
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Juan David Vega
- */ 
-@Entity
-@Inheritance( strategy = InheritanceType.JOINED )
-public  class UsuarioEntity implements Serializable
+ * @author jd.vega11
+ */
+@XmlRootElement
+public class UsuarioDTO implements Serializable
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
     
-    private String nombre;
+    protected String nombre;
     
-    private Integer identificacion;
+    protected Integer identificacion;
     
-    private String tipoIdentificacion;
+    protected String tipoIdentificacion;
     
-    private Integer edad;
+    protected Integer edad;
     
-    private Integer telefono;
+    protected Integer telefono;
     
-    private String direccion;
+    protected String direccion;
     
-    private String correoElectronico;
-
+    protected String correoElectronico;
+    
+    public UsuarioDTO( )
+    {
+        
+    }
+   
     public Long getId() {
         return id;
     }
@@ -103,21 +101,5 @@ public  class UsuarioEntity implements Serializable
         this.correoElectronico = correoElectronico;
     }
     
-     @Override
-    public boolean equals(Object obj)
-    {
-        if (this.getId() != null) {
-            return this.getId().equals(((UsuarioEntity) obj).getId());
-        }
-        return super.equals(obj);
-    }
-
-    @Override
-    public int hashCode()
-    {
-        if (this.getId() != null) {
-            return this.getId().hashCode();
-        }
-        return super.hashCode();
-    }
+    
 }

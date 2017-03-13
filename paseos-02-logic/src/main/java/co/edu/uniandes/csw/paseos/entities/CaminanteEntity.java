@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.paseos.entities;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
@@ -18,14 +19,69 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(referencedColumnName="id")
 public class CaminanteEntity extends UsuarioEntity
 {
-    private List<String> condicionesFisicas;        
-
-    public List<String> getCondicionesFisicas() {
+    private String condicionesFisicas;
+    
+    @OneToMany(mappedBy = "caminante")
+    private List<InscripcionEntity> paseosInscritos;
+    
+    @OneToMany(mappedBy = "caminante")
+    private List<CalificacionEntity> calificacionesGuia;
+    
+    /*
+    @OneToMany(mappedBy = "caminante")
+    private List<OpinionParticipanteEntity> opiniones;
+    */
+    public String getCondicionesFisicas() {
         return condicionesFisicas;
     }
 
-    public void setCondicionesFisicas(List<String> condicionesFisicas) {
+    public void setCondicionesFisicas(String condicionesFisicas) {
         this.condicionesFisicas = condicionesFisicas;
+    }
+    
+    
+    public List<InscripcionEntity> getPaseosInscritos() {
+        return paseosInscritos;
+    }
+
+    public void setPaseosInscritos(List<InscripcionEntity> paseosInscritos) {
+        this.paseosInscritos = paseosInscritos;
+    }
+
+    public List<CalificacionEntity> getCalificacionesGuia() {
+        return calificacionesGuia;
+    }
+
+    public void setCalificacionesGuia(List<CalificacionEntity> calificacionesGuia) {
+        this.calificacionesGuia = calificacionesGuia;
+    }
+    
+    /*
+    public List<OpinionParticipanteEntity> getOpiniones() {
+        return opiniones;
+    }
+
+    public void setOpiniones(List<OpinionParticipanteEntity> opiniones) {
+        this.opiniones = opiniones;
+    }
+    */
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this.getId() != null) {
+            return this.getId().equals(((CaminanteEntity) obj).getId());
+        }
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        if (this.getId() != null) {
+            return this.getId().hashCode();
+        }
+        return super.hashCode();
     }
     
 }

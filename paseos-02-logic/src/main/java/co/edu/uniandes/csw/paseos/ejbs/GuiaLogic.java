@@ -5,14 +5,41 @@
  */
 package co.edu.uniandes.csw.paseos.ejbs;
 
+import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
+import co.edu.uniandes.csw.paseos.persistence.GuiaPersistence;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
  * @author Juan David Vega
  */
 @Stateless
-public class GuiaLogic 
-{
-    
+public class GuiaLogic {
+
+    @Inject
+    private GuiaPersistence guiaPersisence;
+
+    public List<GuiaEntity> getGuias() {
+        return guiaPersisence.findAll();
+    }
+
+    public GuiaEntity getGuia(Long id) {
+        return guiaPersisence.find(id);
+    }
+
+    public GuiaEntity createGuia(GuiaEntity guia) {
+        guiaPersisence.create(guia);
+        return guia;
+    }
+
+    public GuiaEntity updateGuia(GuiaEntity guia) {
+        return guiaPersisence.update(guia);
+    }
+
+    public void deleteGuia(Long id) {
+        guiaPersisence.delete(id);
+    }
+
 }
