@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.paseos.ejbs;
 
 import co.edu.uniandes.csw.paseos.entities.ActividadEntity;
-import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.paseos.persistence.ActividadPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -50,7 +49,8 @@ public class ActividadLogic
      * @return Objeto de ActividadEntity con los datos nuevos y su ID.
      *
      */
-    public ActividadEntity createActividad(ActividadEntity entity) throws BusinessLogicException {
+    public ActividadEntity createActividad(ActividadEntity entity){
+        
         persistence.create(entity);
         return entity;
     }

@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.paseos.resources;
 import co.edu.uniandes.csw.paseos.dtos.ActividadDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.ActividadLogic;
 import co.edu.uniandes.csw.paseos.entities.ActividadEntity;
-import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -67,24 +66,16 @@ public class ActividadResource
     @POST
     public ActividadDetailDTO createActividad(ActividadDetailDTO dto) 
     {
-        try
-        {
-        return new ActividadDetailDTO(actividadLogic.createActividad(dto.toEntity()));
-        }
-        catch(BusinessLogicException e)
-        {
-            //TODO
-        }
-      return null; 
+        return new ActividadDetailDTO(actividadLogic.createActividad(dto.toEntity())); 
     }
     
     @PUT
     @Path("{id: \\d+}")
     public ActividadDetailDTO updateActividad(@PathParam("id") Long id, ActividadDetailDTO dto) 
     {
-        //TODO
-        return null;
-        
+        ActividadEntity act = dto.toEntity();
+        act.setId(id);
+        return new ActividadDetailDTO(actividadLogic.updateActividad(act));
     }
     
     @DELETE
