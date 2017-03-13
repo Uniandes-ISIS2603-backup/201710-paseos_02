@@ -5,8 +5,13 @@
  */
 package co.edu.uniandes.csw.paseos.resources;
 
+import co.edu.uniandes.csw.paseos.dtos.FechaDTO;
+import co.edu.uniandes.csw.paseos.dtos.FechaDetailDTO;
+import co.edu.uniandes.csw.paseos.dtos.PaseoEcologicoDTO;
 import co.edu.uniandes.csw.paseos.dtos.PaseoEcologicoDetailDTO;
+import co.edu.uniandes.csw.paseos.ejbs.FechaLogic;
 import co.edu.uniandes.csw.paseos.ejbs.PaseoEcologicoLogic;
+import co.edu.uniandes.csw.paseos.entities.FechaEntity;
 import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,45 +45,48 @@ public class PaseoEcologicoResource
     
     private List<PaseoEcologicoDetailDTO> listEntity2DTO(List<PaseoEcologicoEntity> listaEntrada)
     {
-        return null;
-        
+        List<PaseoEcologicoDetailDTO> l = new ArrayList<>( );
+        for(PaseoEcologicoEntity entity : listaEntrada)
+        {
+            l.add(new PaseoEcologicoDetailDTO(entity));
+        }
+        return l;        
     }
     
     @GET
     public List<PaseoEcologicoDetailDTO> getPaseoEcologicos( )
     {
-        return null;
-        
+        return listEntity2DTO(paseoEcologicoLogic.getPaseos());        
     }
     
     @GET
     @Path("{id: \\d+}")
     public PaseoEcologicoDetailDTO getPaseoEcologico(@PathParam("id") Long id) 
     {
-        return null;
-        
+        return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.getPaseo(id));
     }
     
     @POST
     public PaseoEcologicoDetailDTO createPaseoEcologico(PaseoEcologicoDetailDTO dto) 
     {
-        return null;
-       
+        return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.createPaseo(dto.toEntity()));
     }
+    
     
     @PUT
     @Path("{id: \\d+}")
     public PaseoEcologicoDetailDTO updatePaseoEcologico(@PathParam("id") Long id, PaseoEcologicoDetailDTO dto) 
     {
-        return null;
-        
+        PaseoEcologicoEntity paseo = dto.toEntity();
+        paseo.setId(id);
+        return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.updatePaseo(paseo));
     }
     
     @DELETE
     @Path("{id: \\d+}")
     public void deletePaseoEcologico(@PathParam("id") Long id)
     {
-       
+       paseoEcologicoLogic.deletePaseo(id);
     }
     
     

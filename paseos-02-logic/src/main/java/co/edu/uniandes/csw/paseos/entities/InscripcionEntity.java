@@ -11,15 +11,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Sebastian Millan
  */
 @Entity
-@PrimaryKeyJoinColumn(referencedColumnName="id")
 public class InscripcionEntity implements Serializable
 {
     @Id
@@ -28,15 +29,21 @@ public class InscripcionEntity implements Serializable
     
     private boolean realizoPago;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fechaInscripcion;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     private Date fechaDelPaseo;
     
     private String observaciones;
     
     private double costo;
+    
+    @ManyToOne
+    private CaminanteEntity caminante;
+    
+    @ManyToOne
+    private PaseoEcologicoEntity paseoEcologico;
 
     public Long getId() {
         return id;
@@ -46,6 +53,24 @@ public class InscripcionEntity implements Serializable
         this.id = id;
     }
 
+    public CaminanteEntity getCaminante() {
+        return caminante;
+    }
+
+    public void setCaminante(CaminanteEntity caminante) {
+        this.caminante = caminante;
+    }
+
+    public PaseoEcologicoEntity getPaseoEcologico() {
+        return paseoEcologico;
+    }
+
+    public void setPaseoEcologico(PaseoEcologicoEntity paseoEcologico) {
+        this.paseoEcologico = paseoEcologico;
+    }
+
+    
+    
     public boolean getRealizoPago() {
         return realizoPago;
     }

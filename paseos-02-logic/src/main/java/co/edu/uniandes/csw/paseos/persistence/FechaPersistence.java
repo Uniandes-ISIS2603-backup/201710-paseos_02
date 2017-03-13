@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.paseos.persistence;
 
-import co.edu.uniandes.csw.paseos.entities.UsuarioEntity;
+import co.edu.uniandes.csw.paseos.entities.FechaEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,40 +13,40 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
- *
  * @author Juan David Vega
  */
 @Stateless
-public class UsuarioPersistence 
+public class FechaPersistence 
 {
     @PersistenceContext(unitName="paseosPU")
     protected EntityManager em;
     
-    public UsuarioEntity find(Long id)
+    public FechaEntity find(Long id)
     {
-        return em.find(UsuarioEntity.class, id);
+        return em.find(FechaEntity.class, id);
     }
     
-    public List<UsuarioEntity> findAll( )
+    public List<FechaEntity> findAll( )
     {
-        Query solicitud = em.createQuery("select u from UsuarioEntity u");
+        Query solicitud = em.createQuery("select u from FechaEntity u");
         return solicitud.getResultList();
     }
     
-    public UsuarioEntity create(UsuarioEntity entity)
+    public FechaEntity create(FechaEntity entity)
     {
         em.persist(entity);
         return entity;
     }
     
-    public UsuarioEntity update(UsuarioEntity entity)
+    public FechaEntity update(FechaEntity entity)
     {
         return em.merge(entity);
     }
     
     public void delete(Long id)
     {
-        UsuarioEntity eliminado = em.find(UsuarioEntity.class, id);
+        FechaEntity eliminado = em.find(FechaEntity.class, id);
         em.remove(eliminado);
-    }    
+    }
+    
 }

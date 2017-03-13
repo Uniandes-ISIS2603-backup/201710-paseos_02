@@ -40,37 +40,40 @@ public class CaminanteResource
     
     private List<CaminanteDetailDTO> listEntity2DTO(List<CaminanteEntity> listaEntrada)
     {
-        return null;
-        
+        List<CaminanteDetailDTO> l = new ArrayList<>( );
+        for(CaminanteEntity entity : listaEntrada)
+        {
+            l.add(new CaminanteDetailDTO(entity));
+        }
+        return l; 
     }
     
     @GET
     public List<CaminanteDetailDTO> getCaminantes( )
     {
-        return null;
-        
+        return listEntity2DTO(caminanteLogic.getCaminantes());
     }
     
     @GET
     @Path("{id: \\d+}")
     public CaminanteDetailDTO getCaminante(@PathParam("id") Long id) 
     {
-        return null;
-        
+        return new CaminanteDetailDTO(caminanteLogic.getCaminante(id));
     }
     
     @POST
     public CaminanteDetailDTO createCaminante(CaminanteDetailDTO dto) 
     {
-        return null;
-       
+         return new CaminanteDetailDTO(caminanteLogic.createCaminante(dto.toEntity()));
     }
     
     @PUT
     @Path("{id: \\d+}")
     public CaminanteDetailDTO updateCaminante(@PathParam("id") Long id, CaminanteDetailDTO dto) 
     {
-        return null;
+        CaminanteEntity caminante = dto.toEntity();
+        caminante.setId(id);
+        return new CaminanteDetailDTO(caminanteLogic.updateCaminante(caminante));
         
     }
     
@@ -78,7 +81,7 @@ public class CaminanteResource
     @Path("{id: \\d+}")
     public void deleteCaminante(@PathParam("id") Long id)
     {
-       
+       caminanteLogic.deleteCaminante(id);
     }
     
 }

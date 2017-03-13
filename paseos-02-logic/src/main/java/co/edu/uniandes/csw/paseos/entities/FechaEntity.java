@@ -7,64 +7,42 @@ package co.edu.uniandes.csw.paseos.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author Sebastian Millan
+ * @author jd.vega11
  */
 @Entity
-public class CalificacionEntity implements Serializable
+public class FechaEntity implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String comentario;
-    
-    private Integer puntuacion;
-    
-    @ManyToOne
-    private CaminanteEntity caminante;
-    
-    @ManyToOne
-    private GuiaEntity guia;
-    
-    @ManyToOne
-    private PaseoEcologicoEntity paseoEcologico;
-    
     @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private Date fechaRealizacion;
+    
+    private String observaciones;
+    
+    
+    @ManyToOne
+    private PaseoEcologicoEntity paseoEcologico; 
 
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public CaminanteEntity getCaminante() {
-        return caminante;
-    }
-
-    public void setCaminante(CaminanteEntity caminante) {
-        this.caminante = caminante;
-    }
-
-    public GuiaEntity getGuia() {
-        return guia;
-    }
-
-    public void setGuia(GuiaEntity guia) {
-        this.guia = guia;
     }
 
     public PaseoEcologicoEntity getPaseoEcologico() {
@@ -75,45 +53,39 @@ public class CalificacionEntity implements Serializable
         this.paseoEcologico = paseoEcologico;
     }
     
-    
-    
-    public String getComentario() {
-        return comentario;
+
+    public Date getFechaRealizacion() {
+        return fechaRealizacion;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setFechaRealizacion(Date fechaRealizacion) {
+        this.fechaRealizacion = fechaRealizacion;
     }
 
-    public Integer getPuntuacion() {
-        return puntuacion;
+    public String getObservaciones() {
+        return observaciones;
     }
 
-    public void setPuntuacion(Integer puntuacion) {
-        this.puntuacion = puntuacion;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
     
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj)
+    {
         if (this.getId() != null) {
-            return this.getId().equals(((InscripcionEntity) obj).getId());
+            return this.getId().equals(((FechaEntity) obj).getId());
         }
         return super.equals(obj);
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         if (this.getId() != null) {
             return this.getId().hashCode();
         }
         return super.hashCode();
     }
+
 }
