@@ -27,7 +27,7 @@ public class OpinionParticipantePersistence
         return em.find(OpinionParticipanteEntity.class, id);
     }
     
-    public List<OpinionParticipanteEntity> findAll( )
+    public List <OpinionParticipanteEntity> findAll( )
     {
         Query solicitud = em.createQuery("select u from OpinionParticipanteEntity u");
         return solicitud.getResultList();

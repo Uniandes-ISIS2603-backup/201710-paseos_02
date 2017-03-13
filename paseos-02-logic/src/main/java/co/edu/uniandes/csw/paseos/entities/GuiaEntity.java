@@ -12,7 +12,8 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Juan David Vega
+ * @author María del Rosario León
+ *
  */
 @Entity
 public class GuiaEntity extends UsuarioEntity

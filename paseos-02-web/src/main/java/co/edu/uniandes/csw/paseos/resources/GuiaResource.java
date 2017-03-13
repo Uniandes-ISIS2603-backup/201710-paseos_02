@@ -24,6 +24,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
 
+
 /**
  *
  * @author Juan David Vega 
@@ -40,7 +41,7 @@ public class GuiaResource
     
     private List<GuiaDetailDTO> listEntity2DTO(List<GuiaEntity> listaEntrada)
     {
-        List <GuiaEntity> list = new arrayList <>();
+        List <GuiaDetailDTO> list = new ArrayList<>();
         for (GuiaEntity entity : listaEntrada)
         {
             list.add(new GuiaDetailDTO(entity));
@@ -50,24 +51,23 @@ public class GuiaResource
     }
     
     @GET
-    public List<GuiaDetailDTO> getGuias( )
+    public List <GuiaDetailDTO> getGuias( )
     {
         return listEntity2DTO(guiaLogic.getGuias());
-        
     }
     
     @GET
     @Path("{id: \\d+}")
     public GuiaDetailDTO getGuia(@PathParam("id") Long id) 
     {
-        return null;
+        return new GuiaDetailDTO(guiaLogic.getGuia(id));
         
     }
     
     @POST
     public GuiaDetailDTO createGuia(GuiaDetailDTO dto) 
     {
-        return null;
+        return new GuiaDetailDTO(guiaLogic.createGuia(dto.toEntity()));
        
     }
     
@@ -75,15 +75,16 @@ public class GuiaResource
     @Path("{id: \\d+}")
     public GuiaDetailDTO updateGuia(@PathParam("id") Long id, GuiaDetailDTO dto) 
     {
-        return null;
-        
+        GuiaEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new GuiaDetailDTO(guiaLogic.updateGuia(entity));
     }
     
     @DELETE
     @Path("{id: \\d+}")
     public void deleteGuia(@PathParam("id") Long id)
     {
-       
+       guiaLogic.deleteGuia(id);
     }
     
     

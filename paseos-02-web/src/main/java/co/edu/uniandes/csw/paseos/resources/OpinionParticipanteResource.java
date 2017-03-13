@@ -40,14 +40,18 @@ public class OpinionParticipanteResource
     
     private List<OpinionParticipanteDetailDTO> listEntity2DTO(List<OpinionParticipanteEntity> listaEntrada)
     {
-        return null;
-        
+        List <OpinionParticipanteDetailDTO> list = new ArrayList<>();
+        for (OpinionParticipanteEntity entity : listaEntrada)
+        {
+            list.add(new OpinionParticipanteDetailDTO(entity));
+        }
+        return list;
     }
     
     @GET
     public List<OpinionParticipanteDetailDTO> getOpinionParticipantees( )
     {
-        return null;
+        return listEntity2DTO(opinionLogic.getOpinionesParticipantes());
         
     }
     
@@ -55,14 +59,14 @@ public class OpinionParticipanteResource
     @Path("{id: \\d+}")
     public OpinionParticipanteDetailDTO getOpinionParticipante(@PathParam("id") Long id) 
     {
-        return null;
+        return new OpinionParticipanteDetailDTO(opinionLogic.getOpinionParticipante(id));
         
     }
     
     @POST
     public OpinionParticipanteDetailDTO createOpinionParticipante(OpinionParticipanteDetailDTO dto) 
     {
-        return null;
+        return new OpinionParticipanteDetailDTO(opinionLogic.createOpinionParticipante(dto.toEntity()));
        
     }
     
@@ -70,7 +74,9 @@ public class OpinionParticipanteResource
     @Path("{id: \\d+}")
     public OpinionParticipanteDetailDTO updateOpinionParticipante(@PathParam("id") Long id, OpinionParticipanteDetailDTO dto) 
     {
-        return null;
+        OpinionParticipanteEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new OpinionParticipanteDetailDTO(entity);
         
     }
     
@@ -78,7 +84,7 @@ public class OpinionParticipanteResource
     @Path("{id: \\d+}")
     public void deleteOpinionParticipante(@PathParam("id") Long id)
     {
-       
+       opinionLogic.deleteOpinionParticipante(id);
     }
     
     
