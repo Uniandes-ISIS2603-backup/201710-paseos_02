@@ -36,7 +36,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
         super(entity);
         if(entity != null)
         {
-            /*
+            
             if(entity.getPaseosInscritos( ) != null)
             {
                  inscripciones = new ArrayList<InscripcionDTO>();
@@ -46,6 +46,15 @@ public class CaminanteDetailDTO extends CaminanteDTO
                 }
             }
             
+            if(entity.getCalificacionesGuia( )!= null)
+            {
+                calificaciones = new ArrayList<CalificacionDTO>();
+                for (CalificacionEntity calificacion : entity.getCalificacionesGuia()) {
+                    calificaciones.add(new CalificacionDTO(calificacion));
+                }
+            }
+            
+            /*
             if(entity.getOpiniones( ) != null)
             {
                 opiniones = new ArrayList<OpinionParticipanteDTO>();
@@ -55,13 +64,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
                 }
             }
 
-            if(entity.getCalificacionesGuia( )!= null)
-            {
-                calificaciones = new ArrayList<CalificacionDTO>();
-                for (CalificacionEntity calificacion : entity.getCalificacionesGuia()) {
-                    calificaciones.add(new CalificacionDTO(calificacion));
-                }
-            }
+            
            
             */
         }
@@ -71,7 +74,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
     public CaminanteEntity toEntity() 
     {
         CaminanteEntity entity = super.toEntity();
-        /*
+        
         if(this.getInscripciones() != null)
         {            
             List<InscripcionEntity> inscripcionesE = new ArrayList<InscripcionEntity>( );
@@ -82,16 +85,6 @@ public class CaminanteDetailDTO extends CaminanteDTO
             entity.setPaseosInscritos(inscripcionesE);
         }
         
-        if(this.getOpiniones() != null)
-        {
-            List<OpinionParticipanteEntity> opinionesE = new ArrayList<OpinionParticipanteEntity>( );
-            for(OpinionParticipanteDTO opinion: this.getOpiniones())
-            {
-                opinionesE.add(opinion.toEntity());
-            }
-            entity.setOpiniones(opinionesE);
-        }
-        
         if(this.getCalificaciones() != null)
         {
             List<CalificacionEntity> calificacionesE = new ArrayList<CalificacionEntity>( );
@@ -100,6 +93,16 @@ public class CaminanteDetailDTO extends CaminanteDTO
                 calificacionesE.add(calificacion.toEntity());
             }
             entity.setCalificacionesGuia(calificacionesE);
+        }
+        /*
+        if(this.getOpiniones() != null)
+        {
+            List<OpinionParticipanteEntity> opinionesE = new ArrayList<OpinionParticipanteEntity>( );
+            for(OpinionParticipanteDTO opinion: this.getOpiniones())
+            {
+                opinionesE.add(opinion.toEntity());
+            }
+            entity.setOpiniones(opinionesE);
         }
         */
         return entity;

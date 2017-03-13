@@ -20,79 +20,65 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Juan David Vega
  */
 @XmlRootElement
-public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO
-{
+public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
+
     private LugarDTO lugarDeEncuentro;
-    
+
     private LugarDTO lugarDeDestino;
-    
+
     private List<FechaDTO> fechas;
-    
+
     private List<ActividadDTO> actividades;
-   
+
     private GuiaDTO guia;
-    
+
     private List<CalificacionDTO> calificacionesGuia;
 
     private List<InscripcionDTO> inscripciones;
 
     private List<OpinionParticipanteDTO> opiniones;
-    
-    public PaseoEcologicoDetailDTO( )
-    {
-        super( );
+
+    public PaseoEcologicoDetailDTO() {
+        super();
     }
-    
-    public PaseoEcologicoDetailDTO(PaseoEcologicoEntity entity)
-    {
+
+    public PaseoEcologicoDetailDTO(PaseoEcologicoEntity entity) {
         super(entity);
-        if(entity != null)
-        {
+        if (entity != null) {
             //this.lugarDeEncuentro = new LugarDTO(entity.getLugarDeEncuentro());
             //this.lugarDeDestino = new LugarDTO(entity.getLugarDeDestino());
             this.guia = new GuiaDTO(entity.getGuia());
-            
-            
-            if(entity.getFechas() != null)
-            {
+
+            if (entity.getFechas() != null) {
                 fechas = new ArrayList<FechaDTO>();
-                for (FechaEntity fecha : entity.getFechas())
-                {
+                for (FechaEntity fecha : entity.getFechas()) {
                     fechas.add(new FechaDTO(fecha));
                 }
             }
-            
-            
-            /*
-            
-            if(entity.getActividades()!= null)
-            {
-            
-                actividades = new ArrayList<ActividadDTO>();
-                for (ActividadEntity actividad : entity.getActividades()) 
-                {
-                    actividades.add(new ActividadDTO(actividad));
-                }
-            }
-            
-            if(entity.getCalificacionesGuia() != null)
-            {
-                calificacionesGuia = new ArrayList<CalificacionDTO>();
-                for (CalificacionEntity calificacion : entity.getCalificacionesGuia()) 
-                {
-                    calificacionesGuia.add(new CalificacionDTO(calificacion));
-                }
-            }
-            
-            if(entity.getInscripciones( ) != null)
-            {
+
+            if (entity.getInscripciones() != null) {
                 inscripciones = new ArrayList<InscripcionDTO>();
-                for (InscripcionEntity inscripcion : entity.getInscripciones()) 
-                {
+                for (InscripcionEntity inscripcion : entity.getInscripciones()) {
                     inscripciones.add(new InscripcionDTO(inscripcion));
                 }
             }
-           
+
+            if (entity.getCalificacionesGuia() != null) {
+                calificacionesGuia = new ArrayList<CalificacionDTO>();
+                for (CalificacionEntity calificacion : entity.getCalificacionesGuia()) {
+                    calificacionesGuia.add(new CalificacionDTO(calificacion));
+                }
+            }
+
+            if (entity.getActividades() != null) {
+
+                actividades = new ArrayList<ActividadDTO>();
+                for (ActividadEntity actividad : entity.getActividades()) {
+                    actividades.add(new ActividadDTO(actividad));
+                }
+            }
+
+            /*    
             if(entity.getOpiniones( ) != null)
             {
                 opiniones = new ArrayList<OpinionParticipanteDTO>();
@@ -102,62 +88,54 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO
                 }
             }
             
-            */
+             */
         }
     }
-    
+
     @Override
-    public PaseoEcologicoEntity toEntity() 
-    {
+    public PaseoEcologicoEntity toEntity() {
         PaseoEcologicoEntity paseo = super.toEntity();
-       // paseo.setLugarDeEncuentro(this.getLugarDeEncuentro().toEntity());
-       // paseo.setLugarDeDestino(this.getLugarDeDestino().toEntity());
-       if(this.getGuia() != null)
-       {
-           paseo.setGuia(this.getGuia().toEntity());
-       }
-       
-       if(this.getFechas() != null)
-       {
-            List<FechaEntity> fechas = new ArrayList<FechaEntity>( );
-            for(FechaDTO fecha : this.getFechas())
-            {
+        // paseo.setLugarDeEncuentro(this.getLugarDeEncuentro().toEntity());
+        // paseo.setLugarDeDestino(this.getLugarDeDestino().toEntity());
+        if (this.getGuia() != null) {
+            paseo.setGuia(this.getGuia().toEntity());
+        }
+
+        if (this.getFechas() != null) {
+            List<FechaEntity> fechas = new ArrayList<FechaEntity>();
+            for (FechaDTO fecha : this.getFechas()) {
                 fechas.add(fecha.toEntity());
             }
             paseo.setFechas(fechas);
-       }
-        
-       /*
-       if(this.getActividades() != null)
-       {
-            List<ActividadEntity> actividades = new ArrayList<ActividadEntity>( );
-            for(ActividadDTO actividad : this.getActividades())
-            {
-                
-                actividades.add(actividad.toEntity());
-            }
-            paseo.setActividades(actividades);
-       }
-        
-        if(this.getCalificacionesGuia() != null)
-        {
-            
-            List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
-            for (CalificacionDTO calificacion : this.getCalificacionesGuia()) {
-                calificaciones.add(calificacion.toEntity());
-            }
-            paseo.setCalificacionesGuia(calificaciones);
         }
-        
-        if(this.getInscripciones() != null)
-        {
+
+        if (this.getInscripciones() != null) {
             List<InscripcionEntity> inscripciones = new ArrayList<InscripcionEntity>();
             for (InscripcionDTO inscripcion : this.getInscripciones()) {
                 inscripciones.add(inscripcion.toEntity());
             }
             paseo.setInscripciones(inscripciones);
         }
-        
+
+        if (this.getCalificacionesGuia() != null) {
+
+            List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+            for (CalificacionDTO calificacion : this.getCalificacionesGuia()) {
+                calificaciones.add(calificacion.toEntity());
+            }
+            paseo.setCalificacionesGuia(calificaciones);
+        }
+
+        if (this.getActividades() != null) {
+            List<ActividadEntity> actividades = new ArrayList<ActividadEntity>();
+            for (ActividadDTO actividad : this.getActividades()) {
+
+                actividades.add(actividad.toEntity());
+            }
+            paseo.setActividades(actividades);
+        }
+
+        /*
         if(this.getOpiniones() != null)
         {
             List<OpinionParticipanteEntity> opiniones = new ArrayList<OpinionParticipanteEntity>();
@@ -166,8 +144,7 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO
             }
             paseo.setOpiniones(opiniones);
         }
-        */
-        
+         */
         return paseo;
     }
 
@@ -178,7 +155,7 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO
     public void setFechas(List<FechaDTO> fechas) {
         this.fechas = fechas;
     }
-    
+
     public LugarDTO getLugarDeEncuentro() {
         return lugarDeEncuentro;
     }
@@ -234,5 +211,5 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO
     public void setOpiniones(List<OpinionParticipanteDTO> opiniones) {
         this.opiniones = opiniones;
     }
-        
+
 }

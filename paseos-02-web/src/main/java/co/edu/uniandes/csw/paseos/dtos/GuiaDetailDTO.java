@@ -21,7 +21,7 @@ public class GuiaDetailDTO extends GuiaDTO
 {
     private List<PaseoEcologicoDTO> paseos;
     
-    //private List<CalificacionDTO> calificaciones;
+    private List<CalificacionDTO> calificaciones;
     
     public GuiaDetailDTO( )
     {
@@ -43,7 +43,7 @@ public class GuiaDetailDTO extends GuiaDTO
                 
             }
             
-            /*
+            
             if(entity.getCalificaciones( ) != null)
             {
                 calificaciones = new ArrayList<CalificacionDTO>();
@@ -52,8 +52,7 @@ public class GuiaDetailDTO extends GuiaDTO
                     calificaciones.add(new CalificacionDTO(calificacion));
                 }
             }
-           
-            */
+         
         }
     }
     
@@ -72,7 +71,7 @@ public class GuiaDetailDTO extends GuiaDTO
             entity.setPaseosEcologico(paseosE);
         }
         
-        /*
+        
         if(this.getCalificaciones( ) != null)
         {
             List<CalificacionEntity> calificacionesG = new ArrayList<CalificacionEntity>();
@@ -82,7 +81,7 @@ public class GuiaDetailDTO extends GuiaDTO
             }
             entity.setCalificaciones(calificacionesG);
         }
-       */
+       
         
         return entity;
     }
@@ -94,15 +93,12 @@ public class GuiaDetailDTO extends GuiaDTO
     public void setPaseos(List<PaseoEcologicoDTO> paseos) {
         this.paseos = paseos;
     }
-
-    /*
     public List<CalificacionDTO> getCalificaciones() {
         return calificaciones;
     }
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }
-    */
     
     
 }

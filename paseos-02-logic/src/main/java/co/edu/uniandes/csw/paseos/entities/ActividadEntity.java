@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -27,6 +28,9 @@ public class ActividadEntity implements Serializable
     private List<String> equipamiento;
     private List<String> reglas;
     private String descripcion;
+    
+    @ManyToOne
+    private PaseoEcologicoEntity paseoEcologico;
 
     public Long getId() {
         return id;
@@ -75,6 +79,15 @@ public class ActividadEntity implements Serializable
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public PaseoEcologicoEntity getPaseoEcologico() {
+        return paseoEcologico;
+    }
+
+    public void setPaseoEcologico(PaseoEcologicoEntity paseoEcologico) {
+        this.paseoEcologico = paseoEcologico;
+    }
+    
     
      @Override
     public boolean equals(Object obj) {
