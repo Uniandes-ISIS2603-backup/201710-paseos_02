@@ -78,7 +78,7 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
                 }
             }
 
-            /*    
+               
             if(entity.getOpiniones( ) != null)
             {
                 opiniones = new ArrayList<OpinionParticipanteDTO>();
@@ -87,8 +87,6 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
                     opiniones.add(new OpinionParticipanteDTO(opinion));
                 }
             }
-            
-             */
         }
     }
 
@@ -135,7 +133,7 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
             paseo.setActividades(actividades);
         }
 
-        /*
+        
         if(this.getOpiniones() != null)
         {
             List<OpinionParticipanteEntity> opiniones = new ArrayList<OpinionParticipanteEntity>();
@@ -144,7 +142,7 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
             }
             paseo.setOpiniones(opiniones);
         }
-         */
+         
         return paseo;
     }
 
@@ -211,5 +209,4 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
     public void setOpiniones(List<OpinionParticipanteDTO> opiniones) {
         this.opiniones = opiniones;
     }
-
 }

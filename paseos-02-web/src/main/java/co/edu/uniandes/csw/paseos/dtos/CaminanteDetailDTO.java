@@ -54,7 +54,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
                 }
             }
             
-            /*
+            
             if(entity.getOpiniones( ) != null)
             {
                 opiniones = new ArrayList<OpinionParticipanteDTO>();
@@ -63,10 +63,6 @@ public class CaminanteDetailDTO extends CaminanteDTO
                     opiniones.add(new OpinionParticipanteDTO(opinion));
                 }
             }
-
-            
-           
-            */
         }
     }
     
@@ -94,7 +90,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
             }
             entity.setCalificacionesGuia(calificacionesE);
         }
-        /*
+        
         if(this.getOpiniones() != null)
         {
             List<OpinionParticipanteEntity> opinionesE = new ArrayList<OpinionParticipanteEntity>( );
@@ -104,7 +100,6 @@ public class CaminanteDetailDTO extends CaminanteDTO
             }
             entity.setOpiniones(opinionesE);
         }
-        */
         return entity;
     }
 
@@ -130,8 +125,5 @@ public class CaminanteDetailDTO extends CaminanteDTO
 
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
-    }
-    
-    
-    
+    }   
 }

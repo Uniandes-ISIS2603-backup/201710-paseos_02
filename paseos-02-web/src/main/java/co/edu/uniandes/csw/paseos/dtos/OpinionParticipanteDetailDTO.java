@@ -15,6 +15,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class OpinionParticipanteDetailDTO extends OpinionParticipanteDTO
 {
+    private CaminanteDTO caminante;
+    private PaseoEcologicoDTO paseo;
+    
     public OpinionParticipanteDetailDTO( )
     {
         super( );
@@ -23,13 +26,48 @@ public class OpinionParticipanteDetailDTO extends OpinionParticipanteDTO
     public OpinionParticipanteDetailDTO(OpinionParticipanteEntity entity)
     {
         super(entity);
+        if (entity != null)
+        {
+           if (entity.getCaminante()!= null )
+           {
+               this.caminante = new CaminanteDTO(entity.getCaminante());
+           }
+           if (entity.getPaseoEcologico() != null)
+               {
+                   this.paseo = new PaseoEcologicoDTO(entity.getPaseoEcologico());
+               }
+        }
     }
     
     @Override
     public OpinionParticipanteEntity toEntity() 
     {
         OpinionParticipanteEntity entity = super.toEntity();
+        if (this.getCaminante() != null)
+        {
+            entity.setCaminante(this.getCaminante().toEntity());
+        }
+        if (this.getPaseo() != null)
+        {
+            entity.setPaseoEcologico(this.getPaseo().toEntity());
+        }
         return entity;
+    }
+
+    public CaminanteDTO getCaminante() {
+        return caminante;
+    }
+
+    public void setCaminante(CaminanteDTO caminante) {
+        this.caminante = caminante;
+    }
+
+    public PaseoEcologicoDTO getPaseo() {
+        return paseo;
+    }
+
+    public void setPaseo(PaseoEcologicoDTO paseo) {
+        this.paseo = paseo;
     }
     
 }

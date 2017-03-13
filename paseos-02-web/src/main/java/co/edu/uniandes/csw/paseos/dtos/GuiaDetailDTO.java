@@ -39,10 +39,8 @@ public class GuiaDetailDTO extends GuiaDTO
                 for (PaseoEcologicoEntity paseo : entity.getPaseosEcologico()) 
                 {
                     paseos.add(new PaseoEcologicoDTO(paseo));
-                }
-                
+                }                
             }
-            
             
             if(entity.getCalificaciones( ) != null)
             {
@@ -99,6 +97,4 @@ public class GuiaDetailDTO extends GuiaDTO
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }
-    
-    
 }

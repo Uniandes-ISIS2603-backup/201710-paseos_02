@@ -76,7 +76,6 @@ public class PaseoEcologicoEntity implements Serializable
     public void setId(Long id) {
         this.id = id;
     }
-
     
     public List<FechaEntity> getFechas() {
         return fechas;

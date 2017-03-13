@@ -58,6 +58,5 @@ public class CaminanteDTO extends UsuarioDTO
 
     public void setCondicionesFisicas(String condicionesFisicas) {
         this.condicionesFisicas = condicionesFisicas;
-    }
-     
+    }     
 }
