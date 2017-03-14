@@ -19,28 +19,52 @@ import javax.inject.Inject;
 public class PaseoEcologicoLogic 
 {
    @Inject private PaseoEcologicoPersistence persistencia;
-      
+
+    /**
+     * Obtiene la lista de los guias.
+     *
+     * @return colección de objetos de PaseoEcologicoEntity.
+     */
    public List<PaseoEcologicoEntity> getPaseos( )
    {
        return persistencia.findAll();
    }
-   
+
+    /**
+     * Obtiene una instancia de la clase PaseoEcologicoEntity, a partir de un id.
+     * @param id identificador de la instancia que se desea obtener.
+     * @return instancia de la clase PaseoEcologicoEntity, que se desea obtener.
+     */
    public PaseoEcologicoEntity getPaseo(Long id)
    {
        return persistencia.find(id);
    }
-   
+
+    /**
+     * Crea en la persistencia una nueva instancia de la clase PaseoEcologicoEntity.
+     * @param paseo instancia de la calse PaseoEcologicoEntity que se desea crear
+     * @return La instancia creada.
+     */
    public PaseoEcologicoEntity createPaseo(PaseoEcologicoEntity paseo)
    {
        persistencia.create(paseo);
        return paseo;
    }
-   
+
+    /**
+     * Actualizar información de una instancia PaseoEcologicoEntity dada
+     * @param paseo instancia de la clase PaseoEcologicoEntity que se desea actualizar.
+     * @return Instancia de la clase PaseoEcologicoEntity con la información actualizada.
+     */
    public PaseoEcologicoEntity updatePaseo(PaseoEcologicoEntity paseo)
    {
        return persistencia.update(paseo);
    }
-   
+
+    /**
+     * Elimina una instancia de la clase PaseoEcologicoEnity dada por su id.
+     * @param id de la instancia que se quiere eliminar.
+     */
    public void deletePaseo(Long id)
    {
        persistencia.delete(id);

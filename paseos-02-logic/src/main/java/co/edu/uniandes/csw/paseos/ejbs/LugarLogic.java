@@ -38,7 +38,7 @@ public class LugarLogic
      * @return Objeto de lugar con los datos nuevos y su ID.
      * @generated
      */
-    public LugarEntity createLugar(LugarEntity entity) throws BusinessLogicException {
+    public LugarEntity createLugar(LugarEntity entity)  {
         
         return persistence.create(entity);
     }

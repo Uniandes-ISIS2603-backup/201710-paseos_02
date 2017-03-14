@@ -6,12 +6,13 @@
 package co.edu.uniandes.csw.paseos.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -29,10 +30,31 @@ public class LugarEntity implements Serializable
     private String infoAcceso;
     private String caracteristicas;
     private String imagen;
-    
-    
-    @ManyToOne
-    private PaseoEcologicoEntity paseoEcologico;
+
+
+
+    @OneToMany(mappedBy = "lugarDeEncuentro")
+    private List<PaseoEcologicoEntity> paseosEcologicos1;
+
+    @OneToMany(mappedBy = "lugarDeDestino")
+    private List<PaseoEcologicoEntity> paseosEcologicos2;
+
+
+    public List<PaseoEcologicoEntity> getPaseosEcologicos1() {
+        return paseosEcologicos1;
+    }
+
+    public void setPaseosEcologicos1(List<PaseoEcologicoEntity> paseosEcologicos1) {
+        this.paseosEcologicos1 = paseosEcologicos1;
+    }
+
+    public List<PaseoEcologicoEntity> getPaseosEcologicos2() {
+        return paseosEcologicos2;
+    }
+
+    public void setPaseosEcologicos2(List<PaseoEcologicoEntity> paseosEcologicos2) {
+        this.paseosEcologicos2 = paseosEcologicos2;
+    }
 
     public Long getId() 
     {
@@ -44,16 +66,6 @@ public class LugarEntity implements Serializable
         this.id = id;
     }
 
-    public PaseoEcologicoEntity getPaseoEcologico() 
-    {
-        return paseoEcologico;
-    }
-
-    public void setPaseoEcologico(PaseoEcologicoEntity paseoEcologico) 
-    {
-        this.paseoEcologico = paseoEcologico;
-    }
-    
     public String getNombre()
     {
         return nombre;
@@ -94,6 +106,7 @@ public class LugarEntity implements Serializable
     {
         this.imagen=i;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this.getId() != null) {

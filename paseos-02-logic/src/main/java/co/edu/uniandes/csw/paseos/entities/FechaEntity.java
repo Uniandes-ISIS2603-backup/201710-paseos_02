@@ -34,38 +34,69 @@ public class FechaEntity implements Serializable
     
     
     @ManyToOne
-    private PaseoEcologicoEntity paseoEcologico; 
+    private PaseoEcologicoEntity paseoEcologico;
 
-    
+
+    /**
+     * Obtiene el id de la instancia.
+     * @return Long, id de la instancia.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Modifica el id de la instancia.
+     * @param id, id que se quiere modificar.
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * obtiene el PaseoEcologico.
+     * @return paseoEcologico
+     */
     public PaseoEcologicoEntity getPaseoEcologico() {
         return paseoEcologico;
     }
 
+    /**
+     * Modifica el PaseoEcologico dado por parámetro.
+     * @param paseoEcologico PaseoEcologico que se desea modificar.
+     */
     public void setPaseoEcologico(PaseoEcologicoEntity paseoEcologico) {
         this.paseoEcologico = paseoEcologico;
     }
-    
 
+    /**
+     * Obtiene la fecha de realización.
+     * @return Fecha.
+     */
     public Date getFechaRealizacion() {
         return fechaRealizacion;
     }
 
+    /**
+     * Modifica la fecha de realización.
+     * @param fechaRealizacion nueva fecha.
+     */
     public void setFechaRealizacion(Date fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
     }
 
+    /**
+     * Obtiene las observaciones.
+     * @return las observaciones.
+     */
     public String getObservaciones() {
         return observaciones;
     }
 
+    /**
+     * Modifica las observaciones.
+     * @param observaciones Nuevas observaciones.
+     */
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }

@@ -21,27 +21,52 @@ public class OpinionParticipanteLogic
 {
     @Inject private OpinionParticipantePersistence persistence;
 
+    /**
+     * Obtiene la lista de las opiniones de los participantes.
+     *
+     * @return colección de objetos de OpinionesParticipanesEntity.
+     */
     public List<OpinionParticipanteEntity> getOpinionesParticipantes()
     {
         return persistence.findAll();
     }
 
+
+    /**
+     * Crea en la persistencia una nueva instancia de la clase OpinionParticipanteEntity.
+     * @param entity instancia de la calse OpinionParticipanteEntity que se desea crear
+     * @return La instancia creada.
+     */
     public OpinionParticipanteEntity createOpinionParticipante (OpinionParticipanteEntity entity)
     {
        persistence.create(entity);
        return entity;
     }
 
+    /**
+     * Actualizar información de una instancia OpinionParticipanteEntity dada
+     * @param entity instancia de la clase OpinionParticipanteEntity que se desea actualizar.
+     * @return Instancia de la clase OpinionParticipanteEntity con la información actualizada.
+     */
     public OpinionParticipanteEntity updateOpinionParticipante (OpinionParticipanteEntity entity)
     {
         return persistence.update(entity);
     }
 
+    /**
+     * Obtiene una instancia de la clase OpinionParticipanteEntity, a partir de un id.
+     * @param id identificador de la instancia que se desea obtener.
+     * @return instancia de la clase OpinionParticipanteEntity, que se desea obtener.
+     */
     public OpinionParticipanteEntity getOpinionParticipante (Long id)
     {
         return persistence.find(id);
     }
 
+    /**
+     * Elimina una instancia de la clase OpinionParticipanteEnity dada por su id.
+     * @param id de la instancia que se quiere eliminar.
+     */
     public void deleteOpinionParticipante (Long id)
     {
         persistence.delete(id);

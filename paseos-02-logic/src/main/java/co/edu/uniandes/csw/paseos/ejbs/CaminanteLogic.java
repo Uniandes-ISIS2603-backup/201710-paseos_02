@@ -21,23 +21,47 @@ public class CaminanteLogic {
     @Inject
     private CaminantePersistence caminantePersistence;
 
+    /**
+     * Obtiene la lista de los caminates.
+     *
+     * @return colección de objetos de CaminanteEntity.
+     */
     public List<CaminanteEntity> getCaminantes() {
         return caminantePersistence.findAll();
     }
 
+    /**
+     * Obtiene una instancia de la clase CaminanteaEntity, a partir de un id.
+     * @param id identificador de la instancia que se desea obtener.
+     * @return instancia de la clase CaminanteEntity, que se desea obtener.
+     */
     public CaminanteEntity getCaminante(Long id) {
         return caminantePersistence.find(id);
     }
 
+    /**
+     * Crea en la persistencia una nueva instancia de la clase CaminanteEntity.
+     * @param caminante instancia de la calse caminanteEntity que se desea crear
+     * @return La instancia creada.
+     */
     public CaminanteEntity createCaminante(CaminanteEntity caminante) {
         caminantePersistence.create(caminante);
         return caminante;
     }
 
+    /**
+     * Actualizar información de una instancia CaminanteEntity dada
+     * @param caminante instancia de la clase GuiaEntity que se desea actualizar.
+     * @return Instancia de la clase CaminanteEntity con la información actualizada.
+     */
     public CaminanteEntity updateCaminante(CaminanteEntity caminante) {
         return caminantePersistence.update(caminante);
     }
 
+    /**
+     * Elimina una instancia de la clase CaminanteEnity dada por su id.
+     * @param id id de la instancia que se quiere eliminar.
+     */
     public void deleteCaminante(Long id) {
         caminantePersistence.delete(id);
     }

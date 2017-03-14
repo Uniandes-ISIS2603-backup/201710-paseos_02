@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.paseos.resources;
 import co.edu.uniandes.csw.paseos.dtos.LugarDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.LugarLogic;
 import co.edu.uniandes.csw.paseos.entities.LugarEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -40,14 +42,19 @@ public class LugarResource
     
     private List<LugarDetailDTO> listEntity2DTO(List<LugarEntity> listaEntrada)
     {
-        return null;
-        
+        List<LugarDetailDTO> l = new ArrayList<>( );
+        for(LugarEntity entity : listaEntrada)
+        {
+            l.add(new LugarDetailDTO(entity));
+        }
+        return l;
+
     }
     
     @GET
     public List<LugarDetailDTO> getLugares( )
     {
-        return null;
+        return listEntity2DTO(lugarLogic.getLugares());
         
     }
     
@@ -55,29 +62,30 @@ public class LugarResource
     @Path("{id: \\d+}")
     public LugarDetailDTO getLugar(@PathParam("id") Long id) 
     {
-        return null;
+        return new LugarDetailDTO(lugarLogic.getLugar(id));
         
     }
     
     @POST
-    public LugarDetailDTO createLugar(LugarDetailDTO dto) 
+    public LugarDetailDTO createLugar(LugarDetailDTO dto)
     {
-        return null;
-       
+        return new LugarDetailDTO(lugarLogic.createLugar(dto.toEntity()));
     }
     
     @PUT
     @Path("{id: \\d+}")
     public LugarDetailDTO updateLugar(@PathParam("id") Long id, LugarDetailDTO dto) 
     {
-        return null;
-        
+        LugarEntity lugar = dto.toEntity();
+        lugar.setId(id);
+        return new LugarDetailDTO(lugarLogic.updateLugar(lugar));
+
     }
     
     @DELETE
     @Path("{id: \\d+}")
     public void deleteLugar(@PathParam("id") Long id)
     {
-       
+        lugarLogic.deleteLugar(id);
     }
 }

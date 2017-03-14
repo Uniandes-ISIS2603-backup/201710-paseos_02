@@ -6,7 +6,11 @@
 package co.edu.uniandes.csw.paseos.dtos;
 
 import co.edu.uniandes.csw.paseos.entities.LugarEntity;
+import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
+
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,8 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class LugarDetailDTO extends LugarDTO
 {
-    
-    private PaseoEcologicoDTO paseoEcologico;
+
+    private List<PaseoEcologicoDTO> paseosEcologicos;
     
     public LugarDetailDTO( )
     {
@@ -27,24 +31,40 @@ public class LugarDetailDTO extends LugarDTO
     {
         super(entity);
         if(entity != null)
-     
-            if(entity.getPaseoEcologico() != null) this.paseoEcologico = new PaseoEcologicoDTO(entity.getPaseoEcologico());
-    }
-    
-    
-    @Override
-    public LugarEntity toEntity() 
-    {
-        LugarEntity entity = super.toEntity();
-        if(this.getPaseoEcologico() != null) entity.setPaseoEcologico(this.getPaseoEcologico().toEntity());
-        return entity;
-    }
-    public PaseoEcologicoDTO getPaseoEcologico() {
-        return paseoEcologico;
+        {
+            if (entity.getPaseosEcologicos1() != null) {
+                paseosEcologicos = new ArrayList<PaseoEcologicoDTO>();
+                for (PaseoEcologicoEntity paseoEcologico : entity.getPaseosEcologicos1()) {
+                    paseosEcologicos.add(new PaseoEcologicoDTO(paseoEcologico));
+                }
+            }
+
+        }
     }
 
-    public void setPaseoEcologico(PaseoEcologicoDTO paseoEcologico) 
+    @Override
+    public LugarEntity toEntity()
     {
-        this.paseoEcologico = paseoEcologico;
+        LugarEntity entity = super.toEntity();
+        if (this.getPaseosEcologicos() != null) {
+            List<PaseoEcologicoEntity> paseosE = new ArrayList<PaseoEcologicoEntity>();
+            for (PaseoEcologicoDTO paseo : this.getPaseosEcologicos()) {
+                paseosE.add(paseo.toEntity());
+            }
+            entity.setPaseosEcologicos1(paseosE);
+            entity.setPaseosEcologicos2(paseosE);
+        }
+        return entity;
     }
+
+    public List<PaseoEcologicoDTO> getPaseosEcologicos() {
+        return paseosEcologicos;
+    }
+
+    public void setPaseosEcologicos(List<PaseoEcologicoDTO> paseosEcologicos) {
+        this.paseosEcologicos = paseosEcologicos;
+    }
+
+
+
 }

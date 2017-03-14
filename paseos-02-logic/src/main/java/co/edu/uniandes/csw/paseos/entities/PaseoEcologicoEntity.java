@@ -48,11 +48,11 @@ public class PaseoEcologicoEntity implements Serializable
     
     private String descripcion;
     
-    //@ManyToOne
-    //private LugarEntity lugarDeEncuentro;
+    @ManyToOne
+    private LugarEntity lugarDeEncuentro;
     
-   // @ManyToOne
-    //private LugarEntity lugarDeDestino;
+    @ManyToOne
+    private LugarEntity lugarDeDestino;
     
     @OneToMany(mappedBy = "paseoEcologico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ActividadEntity> actividades;
@@ -143,7 +143,7 @@ public class PaseoEcologicoEntity implements Serializable
         this.descripcion = descripcion;
     }
 
-    /*
+
     public LugarEntity getLugarDeEncuentro() {
         return lugarDeEncuentro;
     }
@@ -159,7 +159,7 @@ public class PaseoEcologicoEntity implements Serializable
     public void setLugarDeDestino(LugarEntity lugarDeDestino) {
         this.lugarDeDestino = lugarDeDestino;
     }
-    */
+
     public List<ActividadEntity> getActividades() {
         return actividades;
     }
