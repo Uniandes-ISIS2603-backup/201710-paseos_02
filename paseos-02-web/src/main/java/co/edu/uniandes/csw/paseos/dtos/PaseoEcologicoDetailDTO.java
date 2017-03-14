@@ -45,8 +45,8 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
     public PaseoEcologicoDetailDTO(PaseoEcologicoEntity entity) {
         super(entity);
         if (entity != null) {
-            //this.lugarDeEncuentro = new LugarDTO(entity.getLugarDeEncuentro());
-            //this.lugarDeDestino = new LugarDTO(entity.getLugarDeDestino());
+            this.lugarDeEncuentro = new LugarDTO(entity.getLugarDeEncuentro());
+            this.lugarDeDestino = new LugarDTO(entity.getLugarDeDestino());
             this.guia = new GuiaDTO(entity.getGuia());
 
             if (entity.getFechas() != null) {
@@ -93,8 +93,8 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
     @Override
     public PaseoEcologicoEntity toEntity() {
         PaseoEcologicoEntity paseo = super.toEntity();
-        // paseo.setLugarDeEncuentro(this.getLugarDeEncuentro().toEntity());
-        // paseo.setLugarDeDestino(this.getLugarDeDestino().toEntity());
+        paseo.setLugarDeEncuentro(this.getLugarDeEncuentro().toEntity());
+        paseo.setLugarDeDestino(this.getLugarDeDestino().toEntity());
         if (this.getGuia() != null) {
             paseo.setGuia(this.getGuia().toEntity());
         }
