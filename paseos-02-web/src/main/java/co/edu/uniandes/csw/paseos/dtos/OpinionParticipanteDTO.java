@@ -91,8 +91,8 @@ public class OpinionParticipanteDTO implements Serializable
     }
 
     /**
-     * Obtiene el id el comentario de la opinion.
-     * @return id
+     * Obtiene el comentario de la opinion.
+     * @return comentario
      */
     public String getComentario() {
         return comentario;
@@ -108,7 +108,7 @@ public class OpinionParticipanteDTO implements Serializable
 
     /**
      * Obtiene la ruta de la imagen.
-     * @return ruta del la imagen
+     * @return ruta de la imagen
      */
     public String getImagen() {
         return imagen;
