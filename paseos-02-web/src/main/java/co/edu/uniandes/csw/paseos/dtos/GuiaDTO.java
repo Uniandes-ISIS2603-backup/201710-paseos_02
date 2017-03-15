@@ -15,15 +15,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class GuiaDTO extends UsuarioDTO
 {
+    /**
+     * Atributo que representa la formación del guia
+     */
     private String formacion;
-    
+
+    /**
+     * Atributo que representa la experiencia del guia
+     */
     private String experiencia;
-    
+
+    /**
+     * Constructor de la clase
+     */
     public GuiaDTO( )
     {
         
     }
-    
+
+    /**
+     * Constructor de la clase
+     */
     public GuiaDTO(GuiaEntity entity)
     {
         if(entity != null)
@@ -40,6 +52,11 @@ public class GuiaDTO extends UsuarioDTO
             this.formacion = entity.getFormacion();
         }
     }
+
+    /**
+     * Conviete un GuiaDTO en Entity
+     * @return Instancia de GuíaEntity
+     */
     public GuiaEntity toEntity( )
     {
         GuiaEntity guia = new GuiaEntity();
@@ -56,18 +73,34 @@ public class GuiaDTO extends UsuarioDTO
         return guia;
     }
 
+    /**
+     * Obtiene la formación del guía
+     * @return formación
+     */
     public String getFormacion() {
         return formacion;
     }
 
+    /**
+     * Cambia la formación de un guía.
+     * @param formacion
+     */
     public void setFormacion(String formacion) {
         this.formacion = formacion;
     }
 
+    /**
+     * Obtiene la experiencia del guía
+     * @return experiencia
+     */
     public String getExperiencia() {
         return experiencia;
     }
 
+    /**
+     * Cambia la experiencia de un guía.
+     * @param experiencia
+     */
     public void setExperiencia(String experiencia) {
         this.experiencia = experiencia;
     }

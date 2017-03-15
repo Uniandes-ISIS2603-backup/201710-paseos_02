@@ -19,6 +19,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class GuiaDetailDTO extends GuiaDTO
 {
+    /**
+     * Lista de los paseos
+     */
     private List<PaseoEcologicoDTO> paseos;
     
     private List<CalificacionDTO> calificaciones;

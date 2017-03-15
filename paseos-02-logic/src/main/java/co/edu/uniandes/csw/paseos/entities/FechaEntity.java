@@ -29,10 +29,16 @@ public class FechaEntity implements Serializable
     
     @Temporal(TemporalType.DATE)
     private Date fechaRealizacion;
-    
+
+    /**
+     * Atributo que representa las observaciones.
+     */
     private String observaciones;
-    
-    
+
+
+    /**
+     * Atributo que representa un paseo ecológico.
+     */
     @ManyToOne
     private PaseoEcologicoEntity paseoEcologico;
 

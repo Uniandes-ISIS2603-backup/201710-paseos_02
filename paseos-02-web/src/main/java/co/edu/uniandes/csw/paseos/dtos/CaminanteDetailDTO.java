@@ -20,17 +20,32 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class CaminanteDetailDTO extends CaminanteDTO
 {
+    /**
+     * Lista de paseos a los que un caminante se a inscrito.
+     */
     private List<InscripcionDTO> inscripciones;
-    
+
+    /**
+     * Lista de las opiniones de un camiante.
+     */
     private List<OpinionParticipanteDTO> opiniones;
-    
+
+    /**
+     * Lista de calificación dadas por el caminante.
+     */
     private List<CalificacionDTO> calificaciones;
-    
+
+    /**
+     * Constructor de la clase
+     */
     public CaminanteDetailDTO( )
     {
         super( );
     }
-    
+
+    /**
+     * Constructor de la clase
+     */
     public CaminanteDetailDTO(CaminanteEntity entity)
     {
         super(entity);
@@ -65,7 +80,11 @@ public class CaminanteDetailDTO extends CaminanteDTO
             }
         }
     }
-    
+
+    /**
+     * Método que convierte un DTO en un Entity.
+     * @return Entity del caminante.
+     */
     @Override
     public CaminanteEntity toEntity() 
     {
@@ -103,14 +122,26 @@ public class CaminanteDetailDTO extends CaminanteDTO
         return entity;
     }
 
+    /**
+     * Obtiene la lista de inscripciones de un caminante.
+     * @return Lista de inscripciones
+     */
     public List<InscripcionDTO> getInscripciones() {
         return inscripciones;
     }
 
+    /**
+     * Modifica la lista de inscripciones de un caminante
+     * @param inscripciones nueva lista de inscripciones
+     */
     public void setInscripciones(List<InscripcionDTO> inscripciones) {
         this.inscripciones = inscripciones;
     }
 
+    /**
+     * Modifica la lista de opiniones hechas por un caminante.
+     * @return Lista de opiniones hechas por un caminante.
+     */
     public List<OpinionParticipanteDTO> getOpiniones() {
         return opiniones;
     }
@@ -119,10 +150,18 @@ public class CaminanteDetailDTO extends CaminanteDTO
         this.opiniones = opiniones;
     }
 
+    /**
+     * Obtiene la lista de calificaciones dadas por un caminante.
+     * @return Lista de calificaciones dadas por un caminante.
+     */
     public List<CalificacionDTO> getCalificaciones() {
         return calificaciones;
     }
 
+    /**
+     * Modifica la lista de calificaciones dadas por un caminante.
+     * @return Lista de calificaciones dadas por un caminante.
+     */
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }   

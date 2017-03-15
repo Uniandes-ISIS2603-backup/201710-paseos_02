@@ -22,26 +22,56 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
 
+    /**
+     *
+     */
     private LugarDTO lugarDeEncuentro;
 
+    /**
+     *
+     */
     private LugarDTO lugarDeDestino;
 
+    /**
+     *
+     */
     private List<FechaDTO> fechas;
 
+    /**
+     *
+     */
     private List<ActividadDTO> actividades;
 
+    /**
+     *
+     */
     private GuiaDTO guia;
 
+    /**
+     *
+     */
     private List<CalificacionDTO> calificacionesGuia;
 
+    /**
+     *
+     */
     private List<InscripcionDTO> inscripciones;
 
+    /**
+     *
+     */
     private List<OpinionParticipanteDTO> opiniones;
 
+    /**
+     * Constructor de la clase
+     */
     public PaseoEcologicoDetailDTO() {
         super();
     }
 
+    /**
+     * Constructor de la clase
+     */
     public PaseoEcologicoDetailDTO(PaseoEcologicoEntity entity) {
         super(entity);
         if (entity != null) {
@@ -146,66 +176,131 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
         return paseo;
     }
 
+    /**
+     * Obtiene las fechas del paseo.
+     * @return lista de fechas.
+     */
     public List<FechaDTO> getFechas() {
         return fechas;
     }
 
+    /**
+     * Modifica la lista de fechas del paseo
+     * @param fechas nueva lista del paseo
+     */
     public void setFechas(List<FechaDTO> fechas) {
         this.fechas = fechas;
     }
 
+    /**
+     * Obtiene el lugar de encuentro del paseo.
+     * @return lugar de encuentro.
+     */
     public LugarDTO getLugarDeEncuentro() {
         return lugarDeEncuentro;
     }
 
+    /**
+     * Modifica el lugar de encuentro del paseo
+     * @param lugarDeEncuentro nueva lista del paseo
+     */
     public void setLugarDeEncuentro(LugarDTO lugarDeEncuentro) {
         this.lugarDeEncuentro = lugarDeEncuentro;
     }
 
+    /**
+     * Obtiene el lugar de destino.
+     * @return lugar de destino.
+     */
     public LugarDTO getLugarDeDestino() {
         return lugarDeDestino;
     }
 
+    /**
+     * Modifica el lugar de destino del paseo
+     * @param lugarDeDestino nueva lista del paseo
+     */
     public void setLugarDeDestino(LugarDTO lugarDeDestino) {
         this.lugarDeDestino = lugarDeDestino;
     }
 
+    /**
+     * Obtiene las actividades del paseo.
+     * @return lista de actividades.
+     */
     public List<ActividadDTO> getActividades() {
         return actividades;
     }
 
+    /**
+     * Modifica las actividades del paseo
+     * @param actividades nueva lista del paseo
+     */
     public void setActividades(List<ActividadDTO> actividades) {
         this.actividades = actividades;
     }
 
+    /**
+     * Obtiene el guía del paseo.
+     * @return guía.
+     */
     public GuiaDTO getGuia() {
         return guia;
     }
 
+    /**
+     * Modifica el guia del paseo
+     * @param guia nueva lista del paseo
+     */
     public void setGuia(GuiaDTO guia) {
         this.guia = guia;
     }
 
+
+    /**
+     * Obtiene las fechas del paseo.
+     * @return lista de fechas.
+     */
     public List<CalificacionDTO> getCalificacionesGuia() {
         return calificacionesGuia;
     }
 
+    /**
+     * Modifica la calificacionesGuia del paseo
+     * @param calificacionesGuia nueva lista del paseo
+     */
     public void setCalificacionesGuia(List<CalificacionDTO> calificacionesGuia) {
         this.calificacionesGuia = calificacionesGuia;
     }
 
+    /**
+     * Obtiene las inscripciones del paseo.
+     * @return lista de inscripciones.
+     */
     public List<InscripcionDTO> getInscripciones() {
         return inscripciones;
     }
 
+    /**
+     * Modifica las inscripciones del paseo
+     * @param inscripciones nueva lista del paseo
+     */
     public void setInscripciones(List<InscripcionDTO> inscripciones) {
         this.inscripciones = inscripciones;
     }
 
+    /**
+     * Obtiene las opiniones sobre el paseo.
+     * @return lista de opiniones.
+     */
     public List<OpinionParticipanteDTO> getOpiniones() {
         return opiniones;
     }
 
+    /**
+     * Modifica las opiniones del paseo
+     * @param opiniones nueva lista del paseo
+     */
     public void setOpiniones(List<OpinionParticipanteDTO> opiniones) {
         this.opiniones = opiniones;
     }
