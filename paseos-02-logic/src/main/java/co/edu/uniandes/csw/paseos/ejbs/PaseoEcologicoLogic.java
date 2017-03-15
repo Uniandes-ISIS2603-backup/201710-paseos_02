@@ -69,5 +69,25 @@ public class PaseoEcologicoLogic
    {
        persistencia.delete(id);
    }
+   
+   public List<PaseoEcologicoEntity> darPaseosSegunTematica( String tematica )
+   {
+       return persistencia.darPaseosSegunTematica(tematica);
+   }
+   
+   public List<PaseoEcologicoEntity> darPaseosSegunCosto( Double costo )
+   {
+       return persistencia.darPaseosSegunCosto(costo);
+   }
+   
+   public List<PaseoEcologicoEntity> darPaseosSegunLugarEncuentro( String nombre )
+   {
+       return persistencia.darPaseosSegunLugarDeEncuentro(nombre);
+   }
+   
+   public List<PaseoEcologicoEntity> darPaseosSegunLugarDestino( String nombre )
+   {
+       return persistencia.darPaseosSegunLugarDeDestino(nombre);
+   }
     
 }

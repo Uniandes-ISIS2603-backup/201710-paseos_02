@@ -23,42 +23,42 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
 
     /**
-     *
+     * Atributo que representa el lugar de encuentro del paseo
      */
     private LugarDTO lugarDeEncuentro;
 
     /**
-     *
+     * Atributo que representa el lugar de destino del paseo
      */
     private LugarDTO lugarDeDestino;
 
     /**
-     *
+     * Atributo que representa la fecha del paseo
      */
     private List<FechaDTO> fechas;
 
     /**
-     *
+     * Atributo que representa la lista de actividades del paseo
      */
     private List<ActividadDTO> actividades;
 
     /**
-     *
+     * Atributo que representa el guia del paseo
      */
     private GuiaDTO guia;
 
     /**
-     *
+     * Atributo que representa la calificacion del guia del paseo
      */
     private List<CalificacionDTO> calificacionesGuia;
 
     /**
-     *
+     * Atributo que representa la lista de inscripciones del paseo
      */
     private List<InscripcionDTO> inscripciones;
 
     /**
-     *
+     * Atributo que representa la lista de opiniones del paseo
      */
     private List<OpinionParticipanteDTO> opiniones;
 
@@ -120,6 +120,10 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
         }
     }
 
+    /**
+     * Método que convierte un DTO en Entity
+     * @return Instancia de PaseoEcologicoEntity
+     */
     @Override
     public PaseoEcologicoEntity toEntity() {
         PaseoEcologicoEntity paseo = super.toEntity();

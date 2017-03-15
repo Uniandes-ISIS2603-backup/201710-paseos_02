@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author jd.vega11
+ * @author Juan David Vega
  */
 @Path("/fechas")
 @Consumes(MediaType.APPLICATION_JSON) 
@@ -36,8 +36,13 @@ public class FechaResource
     @Inject private FechaLogic fechaLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
-    @QueryParam("limit") private Integer maxRecords; 
-    
+    @QueryParam("limit") private Integer maxRecords;
+
+    /**
+     * Convierte una lista de fechaEntity a una lista de fechaDTO
+     * @param listaEntrada
+     * @return lista de entities
+     */
     private List<FechaDetailDTO> listEntity2DTO(List<FechaEntity> listaEntrada)
     {
         List<FechaDetailDTO> l = new ArrayList<>( );
@@ -47,26 +52,46 @@ public class FechaResource
         }
         return l;        
     }
-    
+
+    /**
+     * Obtiene todos las fecha
+     * @return lista de las fecha
+     */
     @GET
     public List<FechaDetailDTO> getFechas( )
     {
         return listEntity2DTO(fechaLogic.getFechas());        
     }
-    
+
+    /**
+     * Obtener una fecha dada por parámetro
+     * @param id de la fecha que se quiere obtener
+     * @return fecha dada por parámetro
+     */
     @GET
     @Path("{id: \\d+}")
     public FechaDetailDTO getFecha(@PathParam("id") Long id) 
     {
         return new FechaDetailDTO(fechaLogic.getFecha(id));
     }
-    
+
+    /**
+     * Crea una fecha
+     * @param dto instancia de la fecha que se quiere crear.
+     * @return nueva instancia creada.
+     */
     @POST
     public FechaDetailDTO createFecha(FechaDetailDTO dto) 
     {
         return new FechaDetailDTO(fechaLogic.createFecha(dto.toEntity()));
     }
-    
+
+    /**
+     * Modifica la informacion de una fecha
+     * @param id id de la fecha que se quiere modificar
+     * @param dto fecha que se quiere modificar
+     * @return fecha con la información actualizada
+     */
     @PUT
     @Path("{id: \\d+}")
     public FechaDetailDTO updateFecha(@PathParam("id") Long id, FechaDetailDTO dto) 
@@ -75,7 +100,11 @@ public class FechaResource
         fecha.setId(id);
         return new FechaDetailDTO(fechaLogic.updateFecha(fecha));
     }
-    
+
+    /**
+     * Elimina una fecha dada por parametro.
+     * @param id de la fecha a borrar.
+     */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteFecha(@PathParam("id") Long id)

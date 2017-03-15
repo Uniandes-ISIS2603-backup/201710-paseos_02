@@ -41,8 +41,13 @@ public class PaseoEcologicoResource
     @Inject private PaseoEcologicoLogic paseoEcologicoLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
-    @QueryParam("limit") private Integer maxRecords; 
-    
+    @QueryParam("limit") private Integer maxRecords;
+
+    /**
+     * Convierte una lista de PaseosEcologicosEntity a una lista de PaseosEcologicosDTO
+     * @param listaEntrada
+     * @return lista de entities
+     */
     private List<PaseoEcologicoDetailDTO> listEntity2DTO(List<PaseoEcologicoEntity> listaEntrada)
     {
         List<PaseoEcologicoDetailDTO> l = new ArrayList<>( );
@@ -52,13 +57,22 @@ public class PaseoEcologicoResource
         }
         return l;        
     }
-    
+
+    /**
+     * Obtiene todos los paseos ecologicos
+     * @return lista de paseos ecológicos
+     */
     @GET
     public List<PaseoEcologicoDetailDTO> getPaseoEcologicos( )
     {
         return listEntity2DTO(paseoEcologicoLogic.getPaseos());        
     }
-    
+
+    /**
+     * Obtener un paseo dado por parámetro
+     * @param id del paseo que se quiere obtener
+     * @return el paseo dado por parámetro
+     */
     @GET
     @Path("{id: \\d+}")
     public PaseoEcologicoDetailDTO getPaseoEcologico(@PathParam("id") Long id) 
@@ -94,13 +108,24 @@ public class PaseoEcologicoResource
         return listEntity2DTO(paseoEcologicoLogic.darPaseosSegunLugarDestino(nombre));
     }
     
+
+    /**
+     * Crea un paseo ecológico
+     * @param dto instancia de paseo ecologico que se quiere crear.
+     * @return nueva instancia creada.
+     */
     @POST
     public PaseoEcologicoDetailDTO createPaseoEcologico(PaseoEcologicoDetailDTO dto) 
     {
         return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.createPaseo(dto.toEntity()));
     }
-    
-    
+
+    /**
+     * Modifica la informacion de un paseo ecológico
+     * @param id id del paseo ecologico que se quiere modificar
+     * @param dto Paseo ecológico que se quiere modificar
+     * @return Paseo con la información actualizada
+     */
     @PUT
     @Path("{id: \\d+}")
     public PaseoEcologicoDetailDTO updatePaseoEcologico(@PathParam("id") Long id, PaseoEcologicoDetailDTO dto) 
@@ -109,7 +134,11 @@ public class PaseoEcologicoResource
         paseo.setId(id);
         return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.updatePaseo(paseo));
     }
-    
+
+    /**
+     * Elimina un paseo ecológico dado por parametro.
+     * @param id del paseo a borrar.
+     */
     @DELETE
     @Path("{id: \\d+}")
     public void deletePaseoEcologico(@PathParam("id") Long id)

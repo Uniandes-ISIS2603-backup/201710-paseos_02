@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -72,4 +73,48 @@ public class PaseoEcologicoPersistence
         PaseoEcologicoEntity eliminado = em.find(PaseoEcologicoEntity.class, id);
         em.remove(eliminado);
     }    
+    
+    public List<PaseoEcologicoEntity> darPaseosSegunTematica(String tematica)
+    {
+        TypedQuery<PaseoEcologicoEntity> q = em.createQuery("SELECT A FROM PaseoEcologicoEntity A WHERE A.tematica = :tematica", PaseoEcologicoEntity.class);
+
+        q.setParameter("tematica", tematica);
+
+        List<PaseoEcologicoEntity> res = q.getResultList();
+
+        return res;
+    }
+    
+    public List<PaseoEcologicoEntity> darPaseosSegunCosto(Double costo)
+    {
+        TypedQuery<PaseoEcologicoEntity> q = em.createQuery("SELECT A FROM PaseoEcologicoEntity A WHERE A.costo = :costo", PaseoEcologicoEntity.class);
+
+        q.setParameter("costo", costo);
+
+        List<PaseoEcologicoEntity> res = q.getResultList();
+
+        return res;
+    }
+    
+    public List<PaseoEcologicoEntity> darPaseosSegunLugarDeEncuentro(String nombre)
+    {
+        TypedQuery<PaseoEcologicoEntity> q = em.createQuery("SELECT A FROM PaseoEcologicoEntity A WHERE A.lugarDeEncuentro.nombre = :nombre", PaseoEcologicoEntity.class);
+
+        q.setParameter("nombre", nombre);
+
+        List<PaseoEcologicoEntity> res = q.getResultList();
+
+        return res;
+    }
+    
+    public List<PaseoEcologicoEntity> darPaseosSegunLugarDeDestino(String nombre)
+    {
+        TypedQuery<PaseoEcologicoEntity> q = em.createQuery("SELECT A FROM PaseoEcologicoEntity A WHERE A.lugarDeDestino.nombre = :nombre", PaseoEcologicoEntity.class);
+
+        q.setParameter("nombre", nombre);
+
+        List<PaseoEcologicoEntity> res = q.getResultList();
+
+        return res;
+    }
 }

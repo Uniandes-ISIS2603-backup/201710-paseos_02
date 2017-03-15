@@ -36,8 +36,13 @@ public class OpinionParticipanteResource
     @Inject private OpinionParticipanteLogic opinionLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
-    @QueryParam("limit") private Integer maxRecords; 
-    
+    @QueryParam("limit") private Integer maxRecords;
+
+    /**
+     * Convierte una lista de OpinionParticipanteEntity a una lista de OpinionParticipanteDTO
+     * @param listaEntrada
+     * @return lista de entities
+     */
     private List<OpinionParticipanteDetailDTO> listEntity2DTO(List<OpinionParticipanteEntity> listaEntrada)
     {
         List <OpinionParticipanteDetailDTO> list = new ArrayList<>();
@@ -47,14 +52,23 @@ public class OpinionParticipanteResource
         }
         return list;
     }
-    
+
+    /**
+     * Obtiene todos las Opinion de un participante
+     * @return lista de Opinion de un participante
+     */
     @GET
     public List<OpinionParticipanteDetailDTO> getOpinionParticipantees( )
     {
         return listEntity2DTO(opinionLogic.getOpinionesParticipantes());
         
     }
-    
+
+    /**
+     * Obtener una Opinion de un participante dada por parámetro
+     * @param id de la Opinion de un participante que se quiere obtener
+     * @return la Opinion de un participante dada por parámetro
+     */
     @GET
     @Path("{id: \\d+}")
     public OpinionParticipanteDetailDTO getOpinionParticipante(@PathParam("id") Long id) 
@@ -62,14 +76,25 @@ public class OpinionParticipanteResource
         return new OpinionParticipanteDetailDTO(opinionLogic.getOpinionParticipante(id));
         
     }
-    
+
+    /**
+     * Crea una Opinion de un participante
+     * @param dto instancia de Opinion de un participante que se quiere crear.
+     * @return nueva instancia creada.
+     */
     @POST
     public OpinionParticipanteDetailDTO createOpinionParticipante(OpinionParticipanteDetailDTO dto) 
     {
         return new OpinionParticipanteDetailDTO(opinionLogic.createOpinionParticipante(dto.toEntity()));
        
     }
-    
+
+    /**
+     * Modifica la informacion de una Opinion de un participante
+     * @param id id dela Opinion de un participante que se quiere modificar
+     * @param dto Opinion de un participante que se quiere modificar
+     * @return Opinion de un participante con la información actualizada
+     */
     @PUT
     @Path("{id: \\d+}")
     public OpinionParticipanteDetailDTO updateOpinionParticipante(@PathParam("id") Long id, OpinionParticipanteDetailDTO dto) 
@@ -79,7 +104,11 @@ public class OpinionParticipanteResource
         return new OpinionParticipanteDetailDTO(entity);
         
     }
-    
+
+    /**
+     * Elimina una Opinion de un participante dada por parametro.
+     * @param id de la opinion a borrar.
+     */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteOpinionParticipante(@PathParam("id") Long id)
