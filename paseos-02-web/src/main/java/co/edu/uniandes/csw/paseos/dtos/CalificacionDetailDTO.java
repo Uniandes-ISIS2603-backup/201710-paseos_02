@@ -10,22 +10,38 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Sebastian Millan
+ * @author Sebastián Millán
  */
 @XmlRootElement
 public class CalificacionDetailDTO extends CalificacionDTO 
 {
+    /**
+     * Caminante que realiza la calificación.
+     */
     private CaminanteDTO caminante;
     
+    /**
+     * Guía que recibe la calificación.
+     */
     private GuiaDTO guia;
     
+    /**
+     * Paseo sobre el que se realiza la calificación.
+     */
     private PaseoEcologicoDTO paseoEcologico;
     
+    /**
+     * Constructor de la clase
+     */
     public CalificacionDetailDTO( )
     {
         super( );
     }
     
+    /**
+     * Constructor de la clase
+     * @param entity entidad con la que se inicializa la clase
+     */
     public CalificacionDetailDTO(CalificacionEntity entity)
     {
         super(entity);
@@ -37,6 +53,10 @@ public class CalificacionDetailDTO extends CalificacionDTO
         }
     }
     
+    /**
+     * Método que convierte un DTO en Entity
+     * @return Instancia de CalificacionEntity
+     */
     @Override
     public CalificacionEntity toEntity() 
     {
@@ -47,30 +67,52 @@ public class CalificacionDetailDTO extends CalificacionDTO
         return entity;
     }
 
+    /**
+     * Obtiene el caminante que realizo la calificación.
+     * @return caminante.
+     */
     public CaminanteDTO getCaminante() {
         return caminante;
     }
 
+    /**
+     * Modifica el caminante que realizo la calificación.
+     * @param caminante
+     */
     public void setCaminante(CaminanteDTO caminante) {
         this.caminante = caminante;
     }
 
+    /**
+     * Obtiene el guía que recibe la calificación.
+     * @return caminante.
+     */
     public GuiaDTO getGuia() {
         return guia;
     }
 
+    /**
+     * Modifica el guía que recibio la calificación.
+     * @param guia
+     */
     public void setGuia(GuiaDTO guia) {
         this.guia = guia;
     }
 
+    /**
+     * Obtiene el paseo sobre el que se realizo la calificación.
+     * @return paseo.
+     */
     public PaseoEcologicoDTO getPaseoEcologico() {
         return paseoEcologico;
     }
 
+    /**
+     * Modifica el paseo sobre el que se realizo la calificación.
+     * @param paseoEcologico
+     */
     public void setPaseoEcologico(PaseoEcologicoDTO paseoEcologico) {
         this.paseoEcologico = paseoEcologico;
     }
-    
-    
-    
+  
 }

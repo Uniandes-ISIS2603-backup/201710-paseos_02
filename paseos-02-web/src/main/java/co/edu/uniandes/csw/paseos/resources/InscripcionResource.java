@@ -39,6 +39,11 @@ public class InscripcionResource
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords; 
     
+    /**
+     * Convierte una lista de InscripcionEntity a una lista de InscripcionDetailDTO
+     * @param entityList
+     * @return Lista de entities
+     */
     private List<InscripcionDetailDTO> listEntity2DTO(List<InscripcionEntity> entityList)
     {
         List<InscripcionDetailDTO> list = new ArrayList<>();
@@ -48,6 +53,10 @@ public class InscripcionResource
         return list;
     }
     
+    /**
+     * Obtiene todas las inscripciones
+     * @return Lista de inscripciones
+     */
     @GET
     public List<InscripcionDetailDTO> getInscripciones( )
     {
@@ -55,6 +64,11 @@ public class InscripcionResource
         
     }
     
+    /**
+     * Obtener una inscripción dada por parámetro
+     * @param id de la inscripción que se quiere obtener
+     * @return La inscripción dada por parámetro
+     */
     @GET
     @Path("{id: \\d+}")
     public InscripcionDetailDTO getInscripcion(@PathParam("id") Long id) 
@@ -63,6 +77,11 @@ public class InscripcionResource
         
     }
     
+    /**
+     * Crea una inscripción
+     * @param dto instancia de inscripción que se quiere crear.
+     * @return Nueva instancia creada.
+     */
     @POST
     public InscripcionDetailDTO createInscripcion(InscripcionDetailDTO dto) throws BusinessLogicException 
     {
@@ -70,6 +89,12 @@ public class InscripcionResource
        
     }
     
+    /**
+     * Modifica la informacion de una inscripción
+     * @param id id de la inscripción que se quiere modificar
+     * @param dto inscripción que se quiere modificar
+     * @return Inscripción con la información actualizada
+     */
     @PUT
     @Path("{id: \\d+}")
     public InscripcionDetailDTO updateInscripcion(@PathParam("id") Long id, InscripcionDetailDTO dto) 
@@ -80,6 +105,10 @@ public class InscripcionResource
         
     }
     
+    /**
+     * Elimina una inscrpción dada por parámetro.
+     * @param id de la inscrpción a borrar.
+     */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteInscripcion(@PathParam("id") Long id)

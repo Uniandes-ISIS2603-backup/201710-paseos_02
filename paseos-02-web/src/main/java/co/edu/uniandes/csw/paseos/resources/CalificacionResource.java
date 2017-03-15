@@ -27,7 +27,7 @@ import javax.ws.rs.PathParam;
 
 /**
  *
- * @author Sebastian Millan
+ * @author Sebastián Millán
  */
 @Path("/calificaciones")
 @Consumes(MediaType.APPLICATION_JSON) 
@@ -39,6 +39,11 @@ public class CalificacionResource
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords; 
     
+    /**
+     * Convierte una lista de CalififcacionEntity a una lista de CalificacionDetailDTO
+     * @param listaEntrada
+     * @return Lista de entities
+     */
     private List<CalificacionDetailDTO> listEntity2DTO(List<CalificacionEntity> listaEntrada)
     {
         List<CalificacionDetailDTO> list = new ArrayList<>();
@@ -49,6 +54,10 @@ public class CalificacionResource
         
     }
     
+    /**
+     * Obtiene todas las calificaciones
+     * @return Lista de calificaciones
+     */
     @GET
     public List<CalificacionDetailDTO> getCalificaciones( )
     {
@@ -56,6 +65,11 @@ public class CalificacionResource
         
     }
     
+    /**
+     * Obtener una calificacion dada por parámetro
+     * @param id de la calificacion que se quiere obtener
+     * @return La calificacion dada por parámetro
+     */
     @GET
     @Path("{id: \\d+}")
     public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) 
@@ -64,6 +78,11 @@ public class CalificacionResource
         
     }
     
+    /**
+     * Crea una calificación
+     * @param dto instancia de calificación que se quiere crear.
+     * @return Nueva instancia creada.
+     */
     @POST
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO dto) throws BusinessLogicException 
     {
@@ -71,6 +90,12 @@ public class CalificacionResource
        
     }
     
+    /**
+     * Modifica la informacion de una calificación
+     * @param id id de la calificación que se quiere modificar
+     * @param dto calificación que se quiere modificar
+     * @return Calificación con la información actualizada
+     */
     @PUT
     @Path("{id: \\d+}")
     public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) 
@@ -81,6 +106,10 @@ public class CalificacionResource
         
     }
     
+    /**
+     * Elimina una Calificación dada por parámetro.
+     * @param id de la calificación a borrar.
+     */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteCalificacion(@PathParam("id") Long id)

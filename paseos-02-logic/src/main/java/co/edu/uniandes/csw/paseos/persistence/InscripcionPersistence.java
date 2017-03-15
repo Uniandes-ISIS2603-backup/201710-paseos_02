@@ -23,34 +23,62 @@ public class InscripcionPersistence
     @PersistenceContext(unitName="paseosPU")
     protected EntityManager em;
     
+    /**
+     * Obtiene una Inscripcion según el id dado por parámetro.
+     * @param id id de la inscripción buscada.
+     * @return inscripción buscada.
+     */
     public InscripcionEntity find(Long id)
     {
         return em.find(InscripcionEntity.class, id);
     }
     
+    /**
+     * Obtiene todas las inscripciones de los participantes.
+     * @return Lista con todas las inscripciones de los participantes.
+     */
     public List<InscripcionEntity> findAll( )
     {
         Query solicitud = em.createQuery("select u from InscripcionEntity u");
         return solicitud.getResultList();
     }
     
+    /**
+     * Crea una nueva inscripción.
+     * @param entity inscripción que se desea crear.
+     * @return inscripción que se creo.
+     */
     public InscripcionEntity create(InscripcionEntity entity)
     {
         em.persist(entity);
         return entity;
     }
     
+    /**
+     * Modifica la información de una inscripción ya existente.
+     * @param entity Inscripción con la nueva información.
+     * @return Inscripción con la información actualizada.
+     */
     public InscripcionEntity update(InscripcionEntity entity)
     {
         return em.merge(entity);
     }
     
+    /**
+     * Elimina una inscripción dado el id por parametro.
+     * @param id de la opinion que se quiere eliminar.
+     */
     public void delete(Long id)
     {
         InscripcionEntity eliminado = em.find(InscripcionEntity.class, id);
         em.remove(eliminado);
     }
     
+    /**
+     * Obtiene todas las inscripciones de un paseo ecologico.
+     * @param id del paseo ecologico al que se le quiere obtener todas sus inscripciones.
+     * @return Lista con todas las inscripciones de un paseo ecologico.
+     */
     public List<InscripcionEntity> inscripcionesPorPaseo(Long id)
     {
         TypedQuery<InscripcionEntity> q = em.createQuery("SELECT A FROM InscripcionEntity A WHERE A.paseoEcologico.id = :id", InscripcionEntity.class);

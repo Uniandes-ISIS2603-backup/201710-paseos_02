@@ -33,7 +33,7 @@ public class OpinionParticipantePersistence
     }
 
     /**
-     * Obtiene todos las opiniones de los participantes.
+     * Obtiene todas las opiniones de los participantes.
      * @return Lista con todas las opiniones de los participantes.
      */
     public List <OpinionParticipanteEntity> findAll( )
@@ -55,7 +55,7 @@ public class OpinionParticipantePersistence
 
     /**
      * Modifica la información de una opinion ya existente.
-     * @param entity Opinion con la nueva informaciión.
+     * @param entity Opinion con la nueva información.
      * @return Opinion con la información actualizada.
      */
     public OpinionParticipanteEntity update(OpinionParticipanteEntity entity)
@@ -65,7 +65,7 @@ public class OpinionParticipantePersistence
 
 
     /**
-     * Elimina una Opinion dado del id dado parametro.
+     * Elimina una Opinion dado el id por parametro.
      * @param id de la opinion que se quiere eliminar.
      */
     public void delete(Long id)
