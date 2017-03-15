@@ -38,6 +38,11 @@ public class ActividadResource
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords; 
     
+    /**
+     * Convierte una lista de AcctividadEntity a una lista de ActividadDTO
+     * @param listaEntrada
+     * @return lista de DTO
+     */
     private List<ActividadDetailDTO> listEntity2DTO(List<ActividadEntity> listaEntrada)
     {
        List<ActividadDetailDTO> resp = new ArrayList<>();
@@ -49,12 +54,20 @@ public class ActividadResource
         
     }
     
+    /**
+     * Metodo que retorna una lista con todas las actividades
+     * @return lista de actividades
+     */
     @GET
     public List<ActividadDetailDTO> getActividades( )
     {
         return listEntity2DTO(actividadLogic.getActividades());      
     }
-    
+    /**
+     * Metodo que retorna una actividad cuyo id sea el pasado por parametro
+     * @param id
+     * @return actividad con id igual al parametro
+     */
     @GET
     @Path("{id: \\d+}")
     public ActividadDetailDTO getActividad(@PathParam("id") Long id) 
@@ -62,13 +75,23 @@ public class ActividadResource
         return new ActividadDetailDTO(actividadLogic.getActividad(id));
         
     }
+    /**
+     * Metodo que crea una actividad con el dto pasado por parametro
+     * @param dto
+     * @return la nueva actividad
+     */
     
     @POST
     public ActividadDetailDTO createActividad(ActividadDetailDTO dto) 
     {
         return new ActividadDetailDTO(actividadLogic.createActividad(dto.toEntity())); 
     }
-    
+    /**
+     * Metodo que modifica la actividad con el id pasado por parametro usando los datos del dto pasado por parametro
+     * @param id el id de la actividad a modificar
+     * @param dto los datos para modificar la actividad
+     * @return la actividad actualizada
+     */
     @PUT
     @Path("{id: \\d+}")
     public ActividadDetailDTO updateActividad(@PathParam("id") Long id, ActividadDetailDTO dto) 
@@ -77,7 +100,10 @@ public class ActividadResource
         act.setId(id);
         return new ActividadDetailDTO(actividadLogic.updateActividad(act));
     }
-    
+    /**
+     * Metodo que elimina la actividad con el id pasado por parametro
+     * @param id el id de la actividad a eliminar
+     */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteActividad(@PathParam("id") Long id)
