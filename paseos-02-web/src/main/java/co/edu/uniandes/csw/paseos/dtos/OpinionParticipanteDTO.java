@@ -18,19 +18,37 @@ import java.util.List;
 @XmlRootElement
 public class OpinionParticipanteDTO implements Serializable
 {
+    /**
+     * Atributo que representa el id del usuario
+     */
     private Long id;
 
+    /**
+     * Atributo que representa el comentario de la opinion
+     */
     private String comentario;
 
+    /**
+     * Atributo que representa la ruta de la imagen
+     */
     private String imagen;
 
+    /**
+     * Atributo que representa la fecha de la opinion
+     */
     private Date fecha;
 
+    /**
+     * Constructor de la clase
+     */
     public OpinionParticipanteDTO( )
     {
         
     }
-    
+
+    /**
+     * Constructor de la clase
+     */
     public OpinionParticipanteDTO(OpinionParticipanteEntity entity)
     {
         if(entity != null)
@@ -41,7 +59,12 @@ public class OpinionParticipanteDTO implements Serializable
             this.fecha = entity.getFecha();
         }
     }
-     public OpinionParticipanteEntity toEntity( )
+
+    /**
+     * Conviete un GuiaDTO en Entity
+     * @return Instancia de OpinionParticipanteEntity
+     */
+    public OpinionParticipanteEntity toEntity( )
     {
         OpinionParticipanteEntity entity = new OpinionParticipanteEntity();
         entity.setId(this.getId());
@@ -51,34 +74,66 @@ public class OpinionParticipanteDTO implements Serializable
         return entity;
     }
 
+    /**
+     * Obtiene el id de la opinion.
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Modifica el id de la opinion.
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * Obtiene el id el comentario de la opinion.
+     * @return id
+     */
     public String getComentario() {
         return comentario;
     }
 
+    /**
+     * Modifica el comentario de la opinion.
+     * @param comentario
+     */
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
 
+    /**
+     * Obtiene la ruta de la imagen.
+     * @return ruta del la imagen
+     */
     public String getImagen() {
         return imagen;
     }
 
+    /**
+     * Modifica la ruta de la imagen imagen de la opinion.
+     * @param imagen
+     */
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
+    /**
+     * Obtiene la fecha en que fue hecha la opinion.
+     * @return fecha
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * Modifica la fecha de la opinion.
+     * @param fecha
+     */
     public void setFechaDelPaseo(Date fecha) {
         this.fecha = fecha;
     }

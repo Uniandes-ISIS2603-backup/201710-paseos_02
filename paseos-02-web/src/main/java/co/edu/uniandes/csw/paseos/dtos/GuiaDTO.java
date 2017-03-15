@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Juan David Vega
+ * @author María del Rosario León
  */
 @XmlRootElement
 public class GuiaDTO extends UsuarioDTO

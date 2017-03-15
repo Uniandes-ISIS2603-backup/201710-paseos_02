@@ -14,23 +14,32 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Juan David Vega
+ * @author María del Rosario León
  */
 @XmlRootElement
 public class GuiaDetailDTO extends GuiaDTO
 {
     /**
-     * Lista de los paseos
+     * Lista de los paseos del guía.
      */
     private List<PaseoEcologicoDTO> paseos;
-    
+
+    /**
+     * Lista de las calificaciones del guía.
+     */
     private List<CalificacionDTO> calificaciones;
-    
+
+    /**
+     * Constructor de la clase
+     */
     public GuiaDetailDTO( )
     {
         super( );
     }
-    
+
+    /**
+     * Constructor de la clase
+     */
     public GuiaDetailDTO(GuiaEntity entity)
     {
         super(entity);
@@ -56,7 +65,11 @@ public class GuiaDetailDTO extends GuiaDTO
          
         }
     }
-    
+
+    /**
+     * Método que convierte un DTO en Entity
+     * @return Instancia de GuiaEntity
+     */
     @Override
     public GuiaEntity toEntity() 
     {
@@ -87,16 +100,34 @@ public class GuiaDetailDTO extends GuiaDTO
         return entity;
     }
 
+    /**
+     * Obtiene los paseos del guía.
+     * @return lista de paseos
+     */
     public List<PaseoEcologicoDTO> getPaseos() {
         return paseos;
     }
 
+    /**
+     * Modifica la lista de paseos de un guía
+     * @param paseos Nueva lista de paseos.
+     */
     public void setPaseos(List<PaseoEcologicoDTO> paseos) {
         this.paseos = paseos;
     }
+
+    /**
+     * Obtiene las calificaciones del guía.
+     * @return lista de calificaciones
+     */
     public List<CalificacionDTO> getCalificaciones() {
         return calificaciones;
     }
+
+    /**
+     * Modifica la lista de calificaciones de un guía
+     * @param calificaciones Nueva lista de paseos.
+     */
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }
