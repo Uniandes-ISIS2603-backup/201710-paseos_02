@@ -66,6 +66,34 @@ public class PaseoEcologicoResource
         return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.getPaseo(id));
     }
     
+    @GET
+    @Path("/tematica")
+    public List<PaseoEcologicoDetailDTO> getPaseosPorTematica(@QueryParam("tematica") String tematica) 
+    {
+        return listEntity2DTO(paseoEcologicoLogic.darPaseosSegunTematica(tematica));
+    }
+    
+    @GET
+    @Path("/costo")
+    public List<PaseoEcologicoDetailDTO> getPaseosPorCosto(@QueryParam("costo") Double costo) 
+    {
+        return listEntity2DTO(paseoEcologicoLogic.darPaseosSegunCosto(costo));
+    }
+    
+    @GET
+    @Path("/lugarDeEncuentro")
+    public List<PaseoEcologicoDetailDTO> getPaseosPorLugarDeEncuentro(@QueryParam("lugarDeEncuentro") String nombre) 
+    {
+        return listEntity2DTO(paseoEcologicoLogic.darPaseosSegunLugarEncuentro(nombre));
+    }
+    
+    @GET
+    @Path("/lugarDeDestino")
+    public List<PaseoEcologicoDetailDTO> getPaseosPorLugarDeDestino(@QueryParam("lugarDeDestino") String nombre) 
+    {
+        return listEntity2DTO(paseoEcologicoLogic.darPaseosSegunLugarDestino(nombre));
+    }
+    
     @POST
     public PaseoEcologicoDetailDTO createPaseoEcologico(PaseoEcologicoDetailDTO dto) 
     {
