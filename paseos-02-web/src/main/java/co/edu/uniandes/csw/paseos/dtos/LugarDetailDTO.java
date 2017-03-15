@@ -19,14 +19,21 @@ import java.util.List;
 @XmlRootElement
 public class LugarDetailDTO extends LugarDTO
 {
-
+    /*
+    conexion con otra clase
+    */
     private List<PaseoEcologicoDTO> paseosEcologicos;
     
+    /*
+    metodo costructor
+    */
     public LugarDetailDTO( )
     {
         super( );
     }
-    
+    /*
+    metodo costructor
+    */
     public LugarDetailDTO(LugarEntity entity)
     {
         super(entity);
@@ -41,7 +48,9 @@ public class LugarDetailDTO extends LugarDTO
 
         }
     }
-
+    /*
+    cambia los elementos a entity
+    */
     @Override
     public LugarEntity toEntity()
     {
@@ -56,11 +65,15 @@ public class LugarDetailDTO extends LugarDTO
         }
         return entity;
     }
-
+    /*
+    debueve los paseos ecologicos
+    */
     public List<PaseoEcologicoDTO> getPaseosEcologicos() {
         return paseosEcologicos;
     }
-
+    /*
+    cambia los paseos ecologicos
+    */
     public void setPaseosEcologicos(List<PaseoEcologicoDTO> paseosEcologicos) {
         this.paseosEcologicos = paseosEcologicos;
     }

@@ -35,11 +35,17 @@ import javax.ws.rs.PathParam;
 @Produces(MediaType.APPLICATION_JSON)
 public class LugarResource
 {
+    /*
+    lista de atributos para realizar las operaciones
+    */
     @Inject private LugarLogic lugarLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords; 
     
+    /*
+    debuelve la lista de lugares
+    */
     private List<LugarDetailDTO> listEntity2DTO(List<LugarEntity> listaEntrada)
     {
         List<LugarDetailDTO> l = new ArrayList<>( );
@@ -50,14 +56,18 @@ public class LugarResource
         return l;
 
     }
-    
+    /*
+    busca y obtiene un lugar
+    */
     @GET
     public List<LugarDetailDTO> getLugares( )
     {
         return listEntity2DTO(lugarLogic.getLugares());
         
     }
-    
+    /*
+    busca y obtiene un lugar
+    */
     @GET
     @Path("{id: \\d+}")
     public LugarDetailDTO getLugar(@PathParam("id") Long id) 
@@ -65,7 +75,9 @@ public class LugarResource
         return new LugarDetailDTO(lugarLogic.getLugar(id));
         
     }
-    
+    /*
+    agrega el lugar
+    */
     @POST
     public LugarDetailDTO createLugar(LugarDetailDTO dto)
     {
@@ -81,7 +93,9 @@ public class LugarResource
         return new LugarDetailDTO(lugarLogic.updateLugar(lugar));
 
     }
-    
+    /*
+    elimina el lugar
+    */
     @DELETE
     @Path("{id: \\d+}")
     public void deleteLugar(@PathParam("id") Long id)
