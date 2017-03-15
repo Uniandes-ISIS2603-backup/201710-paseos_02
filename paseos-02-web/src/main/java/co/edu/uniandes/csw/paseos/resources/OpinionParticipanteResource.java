@@ -86,7 +86,6 @@ public class OpinionParticipanteResource
     public OpinionParticipanteDetailDTO createOpinionParticipante(OpinionParticipanteDetailDTO dto) 
     {
         return new OpinionParticipanteDetailDTO(opinionLogic.createOpinionParticipante(dto.toEntity()));
-       
     }
 
     /**

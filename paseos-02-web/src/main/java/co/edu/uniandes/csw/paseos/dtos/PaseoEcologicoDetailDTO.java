@@ -75,10 +75,20 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
     public PaseoEcologicoDetailDTO(PaseoEcologicoEntity entity) {
         super(entity);
         if (entity != null) {
-            this.lugarDeEncuentro = new LugarDTO(entity.getLugarDeEncuentro());
-            this.lugarDeDestino = new LugarDTO(entity.getLugarDeDestino());
-            this.guia = new GuiaDTO(entity.getGuia());
-
+            if(entity.getLugarDeEncuentro() != null)
+            {
+                this.lugarDeEncuentro = new LugarDTO(entity.getLugarDeEncuentro());
+            }
+            if(entity.getLugarDeDestino() != null)
+            {
+                this.lugarDeDestino = new LugarDTO(entity.getLugarDeDestino());
+            }
+            
+            if(entity.getGuia() != null)
+            {
+                this.guia = new GuiaDTO(entity.getGuia());
+            }
+            
             if (entity.getFechas() != null) {
                 fechas = new ArrayList<FechaDTO>();
                 for (FechaEntity fecha : entity.getFechas()) {
@@ -108,11 +118,10 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
                 }
             }
 
-               
             if(entity.getOpiniones( ) != null)
             {
                 opiniones = new ArrayList<OpinionParticipanteDTO>();
-                for (OpinionParticipanteEntity opinion : entity.getOpiniones()) 
+                for(OpinionParticipanteEntity opinion : entity.getOpiniones()) 
                 {
                     opiniones.add(new OpinionParticipanteDTO(opinion));
                 }
@@ -127,8 +136,14 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
     @Override
     public PaseoEcologicoEntity toEntity() {
         PaseoEcologicoEntity paseo = super.toEntity();
-        paseo.setLugarDeEncuentro(this.getLugarDeEncuentro().toEntity());
-        paseo.setLugarDeDestino(this.getLugarDeDestino().toEntity());
+        if (this.getLugarDeEncuentro() != null) 
+        {
+            paseo.setLugarDeEncuentro(this.getLugarDeEncuentro().toEntity());
+        }
+        if(this.getLugarDeDestino() != null)
+        {
+            paseo.setLugarDeDestino(this.getLugarDeDestino().toEntity());
+        }
         if (this.getGuia() != null) {
             paseo.setGuia(this.getGuia().toEntity());
         }
@@ -170,11 +185,11 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
         
         if(this.getOpiniones() != null)
         {
-            List<OpinionParticipanteEntity> opiniones = new ArrayList<OpinionParticipanteEntity>();
-            for (OpinionParticipanteDTO opinion : this.getOpiniones()) {
-                opiniones.add(opinion.toEntity());
+            List<OpinionParticipanteEntity> opinionesE = new ArrayList<OpinionParticipanteEntity>();
+            for(OpinionParticipanteDTO opinion : this.getOpiniones()) {
+                opinionesE.add(opinion.toEntity());
             }
-            paseo.setOpiniones(opiniones);
+            paseo.setOpiniones(opinionesE);
         }
          
         return paseo;

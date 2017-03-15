@@ -23,7 +23,7 @@ public class OpinionParticipanteDetailDTO extends OpinionParticipanteDTO
     /**
      * Paseo sobre el que se realiza la opinion.
      */
-    private PaseoEcologicoDTO paseo;
+    private PaseoEcologicoDTO paseoEcologico;
 
     /**
      * Constructor de la clase
@@ -41,14 +41,8 @@ public class OpinionParticipanteDetailDTO extends OpinionParticipanteDTO
         super(entity);
         if (entity != null)
         {
-           if (entity.getCaminante()!= null )
-           {
-               this.caminante = new CaminanteDTO(entity.getCaminante());
-           }
-           if (entity.getPaseoEcologico() != null)
-               {
-                   this.paseo = new PaseoEcologicoDTO(entity.getPaseoEcologico());
-               }
+           if(entity.getCaminante() != null) this.caminante = new CaminanteDTO(entity.getCaminante());
+           if(entity.getPaseoEcologico() != null) this.paseoEcologico = new PaseoEcologicoDTO(entity.getPaseoEcologico());
         }
     }
 
@@ -60,14 +54,8 @@ public class OpinionParticipanteDetailDTO extends OpinionParticipanteDTO
     public OpinionParticipanteEntity toEntity()
     {
         OpinionParticipanteEntity entity = super.toEntity();
-        if (this.getCaminante() != null)
-        {
-            entity.setCaminante(this.getCaminante().toEntity());
-        }
-        if (this.getPaseo() != null)
-        {
-            entity.setPaseoEcologico(this.getPaseo().toEntity());
-        }
+        if(this.getCaminante() != null) entity.setCaminante(this.getCaminante().toEntity());
+        if(this.getPaseoEcologico() != null) entity.setPaseoEcologico(this.getPaseoEcologico().toEntity());
         return entity;
     }
 
@@ -91,8 +79,8 @@ public class OpinionParticipanteDetailDTO extends OpinionParticipanteDTO
      * Obtiene el paseo sobre el que se realizo la opinion.
      * @return paseo.
      */
-    public PaseoEcologicoDTO getPaseo() {
-        return paseo;
+    public PaseoEcologicoDTO getPaseoEcologico() {
+        return paseoEcologico;
     }
 
     /**
@@ -100,7 +88,7 @@ public class OpinionParticipanteDetailDTO extends OpinionParticipanteDTO
      * @param paseo
      */
     public void setPaseo(PaseoEcologicoDTO paseo) {
-        this.paseo = paseo;
+        this.paseoEcologico = paseo;
     }
     
 }

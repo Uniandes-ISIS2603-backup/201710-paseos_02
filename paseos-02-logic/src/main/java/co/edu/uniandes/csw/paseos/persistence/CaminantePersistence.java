@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -72,4 +73,18 @@ public class CaminantePersistence
         CaminanteEntity eliminado = em.find(CaminanteEntity.class, id);
         em.remove(eliminado);
     }        
+    
+    public CaminanteEntity encontrarPorIdentificacion( Integer identificacion )
+    {
+        TypedQuery<CaminanteEntity> q
+                = em.createQuery("select u from CaminanteEntity u where u.identificacion = :identificacion", CaminanteEntity.class);
+        q = q.setParameter("identificacion", identificacion);
+        
+       List<CaminanteEntity> mismoId = q.getResultList();
+        if (mismoId.isEmpty() ) {
+            return null; 
+        } else {
+            return mismoId.get(0);
+        }
+    }
 }

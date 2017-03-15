@@ -37,7 +37,7 @@ public class PaseoEcologicoEntity implements Serializable
     /**
      * Atributo que representa la lista de fechas de un paseo
      */
-    @OneToMany(mappedBy = "paseoEcologico")
+    @OneToMany(mappedBy = "paseoEcologico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FechaEntity> fechas;
 
     /**
@@ -118,7 +118,7 @@ public class PaseoEcologicoEntity implements Serializable
     private List<OpinionParticipanteEntity> opiniones;
 
     /**
-     * Obtiene id de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene id de class 
      *
      * @return id java.lang.Long
      */
@@ -136,9 +136,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene fechas de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene fechas de class 
      *
-     * @return fechas java.util.List<co.edu.uniandes.csw.paseos.entities.FechaEntity>
+     * @return fechas
      */
     public List<FechaEntity> getFechas() {
         return fechas;
@@ -154,9 +154,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene tematica de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene tematica de class 
      *
-     * @return tematica java.lang.String
+     * @return tematica 
      */
     public String getTematica() {
         return tematica;
@@ -172,9 +172,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene nMinimCaminantes de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene nMinimCaminantes de class 
      *
-     * @return nMinimCaminantes java.lang.Integer
+     * @return nMinimCaminantes 
      */
     public Integer getnMinimCaminantes() {
         return nMinimCaminantes;
@@ -190,9 +190,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene nMaxCaminantes de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene nMaxCaminantes de class 
      *
-     * @return nMaxCaminantes java.lang.Integer
+     * @return nMaxCaminantes 
      */
     public Integer getnMaxCaminantes() {
         return nMaxCaminantes;
@@ -208,9 +208,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene condicionesFisicas de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene condicionesFisicas de class 
      *
-     * @return condicionesFisicas java.lang.String
+     * @return condicionesFisicas 
      */
     public String getCondicionesFisicas() {
         return condicionesFisicas;
@@ -226,7 +226,7 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene hayTransporte de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene hayTransporte de class 
      *
      * @return hayTransporte java.lang.Boolean
      */
@@ -244,9 +244,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene costo de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene costo de class 
      *
-     * @return costo java.lang.Double
+     * @return costo 
      */
     public Double getCosto() {
         return costo;
@@ -262,9 +262,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene descripcion de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene descripcion de class 
      *
-     * @return descripcion java.lang.String
+     * @return descripcion 
      */
     public String getDescripcion() {
         return descripcion;
@@ -280,9 +280,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene lugarDeEncuentro de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene lugarDeEncuentro de class 
      *
-     * @return lugarDeEncuentro co.edu.uniandes.csw.paseos.entities.LugarEntity
+     * @return lugarDeEncuentro 
      */
     public LugarEntity getLugarDeEncuentro() {
         return lugarDeEncuentro;
@@ -298,9 +298,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene lugarDeDestino de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene lugarDeDestino de class 
      *
-     * @return lugarDeDestino co.edu.uniandes.csw.paseos.entities.LugarEntity
+     * @return lugarDeDestino 
      */
     public LugarEntity getLugarDeDestino() {
         return lugarDeDestino;
@@ -316,9 +316,9 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene actividades de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene actividades de class 
      *
-     * @return actividades java.util.List<co.edu.uniandes.csw.paseos.entities.ActividadEntity>
+     * @return actividades 
      */
     public List<ActividadEntity> getActividades() {
         return actividades;
@@ -354,7 +354,7 @@ public class PaseoEcologicoEntity implements Serializable
     /**
      * Obtiene calificacionesGuia de class org.jetbrains.java.generate.element.FieldElement
      *
-     * @return calificacionesGuia java.util.List<co.edu.uniandes.csw.paseos.entities.CalificacionEntity>
+     * @return calificacionesGuia 
      */
     public List<CalificacionEntity> getCalificacionesGuia() {
         return calificacionesGuia;
@@ -372,7 +372,7 @@ public class PaseoEcologicoEntity implements Serializable
     /**
      * Obtiene inscripciones de class org.jetbrains.java.generate.element.FieldElement
      *
-     * @return inscripciones java.util.List<co.edu.uniandes.csw.paseos.entities.InscripcionEntity>
+     * @return inscripciones 
      */
     public List<InscripcionEntity> getInscripciones() {
         return inscripciones;
@@ -390,7 +390,7 @@ public class PaseoEcologicoEntity implements Serializable
     /**
      * Obtiene opiniones de class org.jetbrains.java.generate.element.FieldElement
      *
-     * @return opiniones java.util.List<co.edu.uniandes.csw.paseos.entities.OpinionParticipanteEntity>
+     * @return opiniones 
      */
     public List<OpinionParticipanteEntity> getOpiniones() {
         return opiniones;

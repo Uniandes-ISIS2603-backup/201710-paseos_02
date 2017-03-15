@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.paseos.ejbs;
 
 import co.edu.uniandes.csw.paseos.entities.OpinionParticipanteEntity;
-import co.edu.uniandes.csw.paseos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.paseos.persistence.OpinionParticipantePersistence;
 
 import javax.ejb.Stateless;

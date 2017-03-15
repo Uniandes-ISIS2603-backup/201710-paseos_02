@@ -35,6 +35,7 @@ public class CaminanteDTO extends UsuarioDTO
             this.direccion = entity.getDireccion();
             this.correoElectronico = entity.getCorreoElectronico();
             this.condicionesFisicas = entity.getCondicionesFisicas();
+            this.estado = entity.getEstado();
         }
     }
     public CaminanteEntity toEntity( )
@@ -49,6 +50,7 @@ public class CaminanteDTO extends UsuarioDTO
         caminante.setDireccion(this.getDireccion());
         caminante.setCorreoElectronico(this.getCorreoElectronico());
         caminante.setCondicionesFisicas(this.getCondicionesFisicas());
+        caminante.setEstado(this.getEstado());
         return caminante;
     }
 

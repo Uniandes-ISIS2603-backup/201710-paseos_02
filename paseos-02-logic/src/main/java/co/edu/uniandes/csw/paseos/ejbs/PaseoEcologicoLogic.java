@@ -6,6 +6,8 @@
 package co.edu.uniandes.csw.paseos.ejbs;
 
 import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.paseos.persistence.InscripcionPersistence;
 import co.edu.uniandes.csw.paseos.persistence.PaseoEcologicoPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -19,6 +21,8 @@ import javax.inject.Inject;
 public class PaseoEcologicoLogic 
 {
    @Inject private PaseoEcologicoPersistence persistencia;
+   
+   @Inject private InscripcionPersistence inscripcionPersistencia;
 
     /**
      * Obtiene la lista de los guias.
@@ -45,8 +49,9 @@ public class PaseoEcologicoLogic
      * @param paseo instancia de la calse PaseoEcologicoEntity que se desea crear
      * @return La instancia creada.
      */
-   public PaseoEcologicoEntity createPaseo(PaseoEcologicoEntity paseo)
+   public PaseoEcologicoEntity createPaseo(PaseoEcologicoEntity paseo) throws BusinessLogicException
    {
+       verificarDatos(paseo);
        persistencia.create(paseo);
        return paseo;
    }
@@ -65,9 +70,17 @@ public class PaseoEcologicoLogic
      * Elimina una instancia de la clase PaseoEcologicoEnity dada por su id.
      * @param id de la instancia que se quiere eliminar.
      */
-   public void deletePaseo(Long id)
+   public void deletePaseo(Long id) throws BusinessLogicException
    {
-       persistencia.delete(id);
+       if(inscripcionPersistencia.inscripcionesPorPaseo(id).isEmpty())
+       {
+           persistencia.delete(id);
+       }
+       else
+       {
+           throw new BusinessLogicException("No puede eliminar un paseo que tenga camiantes inscritos");
+       }
+       
    }
    
    public List<PaseoEcologicoEntity> darPaseosSegunTematica( String tematica )
@@ -89,5 +102,13 @@ public class PaseoEcologicoLogic
    {
        return persistencia.darPaseosSegunLugarDeDestino(nombre);
    }
-    
+
+   private void verificarDatos(PaseoEcologicoEntity entity) throws BusinessLogicException 
+   {
+        if (entity.getTematica() == null || entity.getCosto() == null || entity.getGuia() == null || entity.getLugarDeEncuentro() == null || entity.getLugarDeDestino() == null)
+        {
+            throw new BusinessLogicException("Para crear un paseo, minimo debe tener tematica, costo, guia asociado, lugar de encuentro y lugar de destino. \n"
+                    + "Verifique que dichos campos esten llenos y vuelva a intentar.");
+        }
+   }
 }

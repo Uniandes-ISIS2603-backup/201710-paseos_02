@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -48,6 +49,17 @@ public class InscripcionPersistence
     {
         InscripcionEntity eliminado = em.find(InscripcionEntity.class, id);
         em.remove(eliminado);
+    }
+    
+    public List<InscripcionEntity> inscripcionesPorPaseo(Long id)
+    {
+        TypedQuery<InscripcionEntity> q = em.createQuery("SELECT A FROM InscripcionEntity A WHERE A.paseoEcologico.id = :id", InscripcionEntity.class);
+
+        q.setParameter("id", id);
+
+        List<InscripcionEntity> res = q.getResultList();
+
+        return res;
     }
     
 }

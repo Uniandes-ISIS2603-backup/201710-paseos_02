@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.paseos.resources;
 import co.edu.uniandes.csw.paseos.dtos.CaminanteDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.CaminanteLogic;
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -62,14 +63,14 @@ public class CaminanteResource
     }
     
     @POST
-    public CaminanteDetailDTO createCaminante(CaminanteDetailDTO dto) 
+    public CaminanteDetailDTO createCaminante(CaminanteDetailDTO dto) throws BusinessLogicException
     {
          return new CaminanteDetailDTO(caminanteLogic.createCaminante(dto.toEntity()));
     }
     
     @PUT
     @Path("{id: \\d+}")
-    public CaminanteDetailDTO updateCaminante(@PathParam("id") Long id, CaminanteDetailDTO dto) 
+    public CaminanteDetailDTO updateCaminante(@PathParam("id") Long id, CaminanteDetailDTO dto) throws BusinessLogicException 
     {
         CaminanteEntity caminante = dto.toEntity();
         caminante.setId(id);

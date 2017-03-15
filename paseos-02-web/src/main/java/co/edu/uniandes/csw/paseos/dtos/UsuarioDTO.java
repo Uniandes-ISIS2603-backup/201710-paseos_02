@@ -55,6 +55,8 @@ public class UsuarioDTO implements Serializable
      * Atributo que representa el correo electronico del usuario
      */
     protected String correoElectronico;
+    
+    protected Boolean estado;
 
     /**
      * Constructor de la clase
@@ -191,6 +193,12 @@ public class UsuarioDTO implements Serializable
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
-    
-    
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
 }

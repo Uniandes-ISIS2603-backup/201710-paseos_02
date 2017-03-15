@@ -13,6 +13,7 @@ import co.edu.uniandes.csw.paseos.ejbs.FechaLogic;
 import co.edu.uniandes.csw.paseos.ejbs.PaseoEcologicoLogic;
 import co.edu.uniandes.csw.paseos.entities.FechaEntity;
 import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -39,6 +40,7 @@ import javax.ws.rs.PathParam;
 public class PaseoEcologicoResource 
 {
     @Inject private PaseoEcologicoLogic paseoEcologicoLogic;
+    @Inject private FechaLogic fechaLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords;
@@ -115,9 +117,9 @@ public class PaseoEcologicoResource
      * @return nueva instancia creada.
      */
     @POST
-    public PaseoEcologicoDetailDTO createPaseoEcologico(PaseoEcologicoDetailDTO dto) 
+    public PaseoEcologicoDetailDTO createPaseoEcologico(PaseoEcologicoDetailDTO dto) throws BusinessLogicException 
     {
-        return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.createPaseo(dto.toEntity()));
+        return  new PaseoEcologicoDetailDTO(paseoEcologicoLogic.createPaseo(dto.toEntity()));
     }
 
     /**
@@ -141,7 +143,7 @@ public class PaseoEcologicoResource
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deletePaseoEcologico(@PathParam("id") Long id)
+    public void deletePaseoEcologico(@PathParam("id") Long id) throws BusinessLogicException
     {
        paseoEcologicoLogic.deletePaseo(id);
     }
