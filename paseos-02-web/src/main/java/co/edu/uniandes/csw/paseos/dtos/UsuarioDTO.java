@@ -56,7 +56,7 @@ public class UsuarioDTO implements Serializable
      */
     protected String correoElectronico;
     
-    protected Boolean estado;
+    protected Boolean estado;  // TODO qu{e modela la variable estado?
 
     /**
      * Constructor de la clase

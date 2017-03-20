@@ -23,7 +23,10 @@ public class LugarDetailDTO extends LugarDTO
     conexion con otra clase
     */
     private List<PaseoEcologicoDTO> paseosEcologicos;
-    
+    // TODO en el diagrama de clases hay dos relaciones a paseos ecologicos 
+    // TODO Debería haber dos atributos distintos con nombres distintos
+    // TODO el entioty si tiene los dos atributos con nombres 1 y 2 (deberia tener mejores nombres) 
+    // TODO el dto no procesa los dos atributos del entity. 
     /*
     metodo costructor
     */
@@ -45,7 +48,7 @@ public class LugarDetailDTO extends LugarDTO
                     paseosEcologicos.add(new PaseoEcologicoDTO(paseoEcologico));
                 }
             }
-
+            // TODO entity.getPaseosEcologicos2 ? 
         }
     }
     /*
@@ -60,6 +63,7 @@ public class LugarDetailDTO extends LugarDTO
             for (PaseoEcologicoDTO paseo : this.getPaseosEcologicos()) {
                 paseosE.add(paseo.toEntity());
             }
+             // TODO por qué asigna los mismos paseos a las dos variables? 
             entity.setPaseosEcologicos1(paseosE);
             entity.setPaseosEcologicos2(paseosE);
         }

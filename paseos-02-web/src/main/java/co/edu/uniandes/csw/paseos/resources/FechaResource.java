@@ -29,6 +29,7 @@ import javax.ws.rs.core.MediaType;
  * @author Juan David Vega
  */
 @Path("/fechas")
+//TODO este recurso no está en el diagrama de clases? qué quiere decir? 
 @Consumes(MediaType.APPLICATION_JSON) 
 @Produces(MediaType.APPLICATION_JSON)
 public class FechaResource 

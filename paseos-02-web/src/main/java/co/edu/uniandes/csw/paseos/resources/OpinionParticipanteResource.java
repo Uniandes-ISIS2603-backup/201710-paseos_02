@@ -34,6 +34,7 @@ import javax.ws.rs.PathParam;
 public class OpinionParticipanteResource 
 {
     @Inject private OpinionParticipanteLogic opinionLogic;
+     // TODO eliminar los atributos que no se necesitan
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords;
@@ -72,7 +73,7 @@ public class OpinionParticipanteResource
     @GET
     @Path("{id: \\d+}")
     public OpinionParticipanteDetailDTO getOpinionParticipante(@PathParam("id") Long id) 
-    {
+    {// TODO si la opinion con el id dado no existe debe disparar una exception WebApplicationException 404
         return new OpinionParticipanteDetailDTO(opinionLogic.getOpinionParticipante(id));
         
     }
@@ -97,7 +98,7 @@ public class OpinionParticipanteResource
     @PUT
     @Path("{id: \\d+}")
     public OpinionParticipanteDetailDTO updateOpinionParticipante(@PathParam("id") Long id, OpinionParticipanteDetailDTO dto) 
-    {
+    {// TODO si la opinion con el id dado no existe debe disparar una exception WebApplicationException 404
         OpinionParticipanteEntity entity = dto.toEntity();
         entity.setId(id);
         return new OpinionParticipanteDetailDTO(entity);
@@ -111,7 +112,7 @@ public class OpinionParticipanteResource
     @DELETE
     @Path("{id: \\d+}")
     public void deleteOpinionParticipante(@PathParam("id") Long id)
-    {
+    {// TODO si la opinion con el id dado no existe debe disparar una exception WebApplicationException 404
        opinionLogic.deleteOpinionParticipante(id);
     }
     

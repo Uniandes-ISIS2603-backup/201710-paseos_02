@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * @author Maria del Rosario Leon
  */
+// TODO faltan las reglas de negocio. Al menos se debe verificar que el caminante existe, que el paseo existe y que ese caminante estuvo en un paseo.
 @Stateless
 public class OpinionParticipanteLogic
 {

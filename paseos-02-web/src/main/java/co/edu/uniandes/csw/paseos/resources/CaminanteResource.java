@@ -35,6 +35,7 @@ import javax.ws.rs.PathParam;
 public class CaminanteResource
 {
     @Inject private CaminanteLogic caminanteLogic;
+    // TODO eliminar los atributos que no se necesitan
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords; 
@@ -58,7 +59,7 @@ public class CaminanteResource
     @GET
     @Path("{id: \\d+}")
     public CaminanteDetailDTO getCaminante(@PathParam("id") Long id) 
-    {
+    {// TODO si el caminante con el id dado no existe debe disparar una exception WebApplicationException 404
         return new CaminanteDetailDTO(caminanteLogic.getCaminante(id));
     }
     
@@ -71,7 +72,7 @@ public class CaminanteResource
     @PUT
     @Path("{id: \\d+}")
     public CaminanteDetailDTO updateCaminante(@PathParam("id") Long id, CaminanteDetailDTO dto) throws BusinessLogicException 
-    {
+    {// TODO si el caminante con el id dado no existe debe disparar una exception WebApplicationException 404
         CaminanteEntity caminante = dto.toEntity();
         caminante.setId(id);
         return new CaminanteDetailDTO(caminanteLogic.updateCaminante(caminante));
@@ -81,7 +82,7 @@ public class CaminanteResource
     @DELETE
     @Path("{id: \\d+}")
     public void deleteCaminante(@PathParam("id") Long id)
-    {
+    {// TODO si el caminante con el id dado no existe debe disparar una exception WebApplicationException 404
        caminanteLogic.deleteCaminante(id);
     }
     

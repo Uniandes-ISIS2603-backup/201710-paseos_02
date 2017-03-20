@@ -15,6 +15,8 @@ import javax.inject.Inject;
  *
  * @author Sebastián Millán
  */
+// TODO faltan las reglas de negocio. Al menos se debe verificar que el caminante existe, que el paseo existe y que ese caminante estuvo en un paseo con ese guía.
+
 @Stateless
 public class CalificacionLogic 
 {

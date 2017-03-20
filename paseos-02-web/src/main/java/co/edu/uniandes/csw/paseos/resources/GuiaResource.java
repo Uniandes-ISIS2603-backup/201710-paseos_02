@@ -35,6 +35,7 @@ import javax.ws.rs.PathParam;
 public class GuiaResource
 {
     @Inject private GuiaLogic guiaLogic;
+      // TODO eliminar los atributos que no se necesitan
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords;
@@ -73,7 +74,7 @@ public class GuiaResource
     @GET
     @Path("{id: \\d+}")
     public GuiaDetailDTO getGuia(@PathParam("id") Long id) 
-    {
+    {// TODO si el guia con el id dado no existe debe disparar una exception WebApplicationException 404
         return new GuiaDetailDTO(guiaLogic.getGuia(id));
     }
 
@@ -97,7 +98,7 @@ public class GuiaResource
     @PUT
     @Path("{id: \\d+}")
     public GuiaDetailDTO updateGuia(@PathParam("id") Long id, GuiaDetailDTO dto) 
-    {
+    {// TODO si el guia con el id dado no existe debe disparar una exception WebApplicationException 404
         GuiaEntity guia = dto.toEntity();
         guia.setId(id);
         return new GuiaDetailDTO(guiaLogic.updateGuia(guia));
@@ -111,7 +112,7 @@ public class GuiaResource
     @DELETE
     @Path("{id: \\d+}")
     public void deleteGuia(@PathParam("id") Long id)
-    {
+    {// TODO si el guia con el id dado no existe debe disparar una exception WebApplicationException 404
        guiaLogic.deleteGuia(id);
     }
     

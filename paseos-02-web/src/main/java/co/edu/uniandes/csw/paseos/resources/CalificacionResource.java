@@ -35,6 +35,7 @@ import javax.ws.rs.PathParam;
 public class CalificacionResource 
 {
     @Inject private CalificacionLogic calificacionLogic;
+    // TODO eliminar los atributos que no se necesitan
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords; 
@@ -73,7 +74,7 @@ public class CalificacionResource
     @GET
     @Path("{id: \\d+}")
     public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) 
-    {
+    {   // TODO si la calificación con el id dado no existe debe disparar una exception WebApplicationException 404
         return new CalificacionDetailDTO(calificacionLogic.getCalificacion(id));
         
     }
@@ -99,7 +100,7 @@ public class CalificacionResource
     @PUT
     @Path("{id: \\d+}")
     public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) 
-    {
+    {  // TODO si la calificación con el id dado no existe debe disparar una exception WebApplicationException 404
         CalificacionEntity entity = dto.toEntity();
         entity.setId(id);
         return new CalificacionDetailDTO(calificacionLogic.updateEmployee(entity));
@@ -113,7 +114,7 @@ public class CalificacionResource
     @DELETE
     @Path("{id: \\d+}")
     public void deleteCalificacion(@PathParam("id") Long id)
-    {
+    {  // TODO si la calificación con el id dado no existe debe disparar una exception WebApplicationException 404
        calificacionLogic.deleteCalificacion(id);
     }
     

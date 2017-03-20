@@ -16,6 +16,8 @@ import java.util.List;
  *
  * @author María del Rosario León
  */
+
+// TODO no hay reglas de negocio? ni siquiera para la creación de un guía?
 @Stateless
 public class GuiaLogic 
 {

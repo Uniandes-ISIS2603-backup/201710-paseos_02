@@ -16,6 +16,9 @@ import javax.inject.Inject;
  *
  * @author Andrea Lopez
  */
+
+// TODO cuáles son als reglas de negocio ? 
+
 @Stateless
 public class LugarLogic 
 {

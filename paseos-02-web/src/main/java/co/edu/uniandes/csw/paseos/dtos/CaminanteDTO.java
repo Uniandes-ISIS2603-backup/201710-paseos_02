@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class CaminanteDTO extends UsuarioDTO
 {
-    private String condicionesFisicas;
+    private String condicionesFisicas; // TODO qué modela este atributo para que su valor sea un string?
     
     public CaminanteDTO( )
     {

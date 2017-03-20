@@ -29,6 +29,8 @@ import javax.ws.rs.PathParam;
  *
  * @author Sebastian Millan
  */
+
+// TODO inscripcion debería ser un subrecurso de caminante /caminantes/îd \\d+}/inscripciones
 @Path("/inscripciones")
 @Consumes(MediaType.APPLICATION_JSON) 
 @Produces(MediaType.APPLICATION_JSON)
@@ -72,7 +74,7 @@ public class InscripcionResource
     @GET
     @Path("{id: \\d+}")
     public InscripcionDetailDTO getInscripcion(@PathParam("id") Long id) 
-    {
+    {// TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
         return new InscripcionDetailDTO(inscripcionLogic.getInscripcion(id));
         
     }
@@ -98,7 +100,7 @@ public class InscripcionResource
     @PUT
     @Path("{id: \\d+}")
     public InscripcionDetailDTO updateInscripcion(@PathParam("id") Long id, InscripcionDetailDTO dto) 
-    {   
+    {   // TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
         InscripcionEntity entity = dto.toEntity();
         entity.setId(id);
         return new InscripcionDetailDTO(inscripcionLogic.updateInscripcion(entity));
@@ -112,7 +114,7 @@ public class InscripcionResource
     @DELETE
     @Path("{id: \\d+}")
     public void deleteInscripcion(@PathParam("id") Long id)
-    {
+    {// TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
        inscripcionLogic.deleteInscripcion(id);
     }
     

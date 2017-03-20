@@ -17,6 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Juan David Vega
  */
+
+// TODO revisar los warnings y arreglar los problemas
 @XmlRootElement
 public class CaminanteDetailDTO extends CaminanteDTO
 {
@@ -53,7 +55,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
         {
             
             if(entity.getPaseosInscritos( ) != null)
-            {
+            {  // TODO cambiar ArrayList<InscripcionDTO>() por ArrayList<>() y en todos los demás
                  inscripciones = new ArrayList<InscripcionDTO>();
                 for (InscripcionEntity inscripcion : entity.getPaseosInscritos()) 
                 {

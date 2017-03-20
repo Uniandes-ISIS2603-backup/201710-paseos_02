@@ -15,6 +15,8 @@ import javax.inject.Inject;
  *
  * @author Juan Diego Chaves
  */
+
+// TODO definir las reglas de negocio. Por ejemplo el atributo duración a qué se refiere? puede ser 0? qué valor debe tener? 
 @Stateless
 public class ActividadLogic 
 {

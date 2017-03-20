@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.paseos.resources;
-
+    // TODO borrar los imports  que no se necesitan
 import co.edu.uniandes.csw.paseos.dtos.FechaDTO;
 import co.edu.uniandes.csw.paseos.dtos.FechaDetailDTO;
 import co.edu.uniandes.csw.paseos.dtos.PaseoEcologicoDTO;
@@ -40,7 +40,10 @@ import javax.ws.rs.PathParam;
 public class PaseoEcologicoResource 
 {
     @Inject private PaseoEcologicoLogic paseoEcologicoLogic;
+ 
+    // TODO eliminar los atributos que no se necesitan
     @Inject private FechaLogic fechaLogic;
+    
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords;
@@ -78,12 +81,12 @@ public class PaseoEcologicoResource
     @GET
     @Path("{id: \\d+}")
     public PaseoEcologicoDetailDTO getPaseoEcologico(@PathParam("id") Long id) 
-    {
+    { // TODO si el paseo con el id dado no existe debe disparar una exception WebApplicationException 404
         return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.getPaseo(id));
     }
     
     @GET
-    @Path("/tematica")
+    @Path("/tematica") // TODO revisar si se necesita el path tematica y el queryparam al mismo tiempo
     public List<PaseoEcologicoDetailDTO> getPaseosPorTematica(@QueryParam("tematica") String tematica) 
     {
         return listEntity2DTO(paseoEcologicoLogic.darPaseosSegunTematica(tematica));
@@ -131,7 +134,7 @@ public class PaseoEcologicoResource
     @PUT
     @Path("{id: \\d+}")
     public PaseoEcologicoDetailDTO updatePaseoEcologico(@PathParam("id") Long id, PaseoEcologicoDetailDTO dto) 
-    {
+    {// TODO si el paseo con el id dado no existe debe disparar una exception WebApplicationException 404
         PaseoEcologicoEntity paseo = dto.toEntity();
         paseo.setId(id);
         return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.updatePaseo(paseo));
@@ -144,7 +147,7 @@ public class PaseoEcologicoResource
     @DELETE
     @Path("{id: \\d+}")
     public void deletePaseoEcologico(@PathParam("id") Long id) throws BusinessLogicException
-    {
+    {// TODO si el paseo con el id dado no existe debe disparar una exception WebApplicationException 404
        paseoEcologicoLogic.deletePaseo(id);
     }
     

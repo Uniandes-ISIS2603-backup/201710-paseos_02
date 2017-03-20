@@ -16,6 +16,9 @@ import javax.inject.Inject;
  *
  * @author Sebastian Millan
  */
+
+// TODO se deben definir la reglas de negocio. 
+// TODO Las fecahs cualquiera sirve? la variable costo qué significa? por qué hay uno en el pasdeo y otro en la inscripción=? son distintos? cómo están relacionados?
 @Stateless
 public class InscripcionLogic 
 {

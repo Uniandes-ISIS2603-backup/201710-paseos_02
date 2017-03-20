@@ -62,7 +62,7 @@ public class PaseoEcologicoLogic
      * @return Instancia de la clase PaseoEcologicoEntity con la información actualizada.
      */
    public PaseoEcologicoEntity updatePaseo(PaseoEcologicoEntity paseo)
-   {
+   { //TODO debe haber algo para verificar cuando se actualiza la info de un paseo
        return persistencia.update(paseo);
    }
 

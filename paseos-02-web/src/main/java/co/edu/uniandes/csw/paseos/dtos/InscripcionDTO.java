@@ -35,7 +35,7 @@ public class InscripcionDTO implements Serializable
     /**
      * Atributo que representa la fecha del paseo
      */
-    private Date fechaDelPaseo;
+    private Date fechaDelPaseo; // TODO por qué esto e sun atributo de la inscripción y no del paseo?
     
     /**
      * Atributo que representa las observaciones de la inscripción
