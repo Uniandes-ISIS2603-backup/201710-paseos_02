@@ -8,21 +8,15 @@ package co.edu.uniandes.csw.paseos.resources;
 import co.edu.uniandes.csw.paseos.dtos.GuiaDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.GuiaLogic;
 import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.PathParam;
 
 
 /**
@@ -73,9 +67,16 @@ public class GuiaResource
      */
     @GET
     @Path("{id: \\d+}")
-    public GuiaDetailDTO getGuia(@PathParam("id") Long id) 
-    {// TODO si el guia con el id dado no existe debe disparar una exception WebApplicationException 404
-        return new GuiaDetailDTO(guiaLogic.getGuia(id));
+    public GuiaDetailDTO getGuia(@PathParam("id") Long id)  throws BusinessLogicException
+    {
+        if (guiaLogic.getGuia(id) == null)
+        {
+            throw new WebApplicationException("El guía no existe", 404);
+        }
+        else
+            {
+            return new GuiaDetailDTO(guiaLogic.getGuia(id));
+        }
     }
 
     /**
@@ -97,11 +98,18 @@ public class GuiaResource
      */
     @PUT
     @Path("{id: \\d+}")
-    public GuiaDetailDTO updateGuia(@PathParam("id") Long id, GuiaDetailDTO dto) 
-    {// TODO si el guia con el id dado no existe debe disparar una exception WebApplicationException 404
-        GuiaEntity guia = dto.toEntity();
-        guia.setId(id);
-        return new GuiaDetailDTO(guiaLogic.updateGuia(guia));
+    public GuiaDetailDTO updateGuia(@PathParam("id") Long id, GuiaDetailDTO dto) throws BusinessLogicException
+    {
+        if (guiaLogic.getGuia(id) == null)
+        {
+            throw new WebApplicationException("El guía no existe", 404);
+        }
+        else
+        {
+            GuiaEntity guia = dto.toEntity();
+            guia.setId(id);
+            return new GuiaDetailDTO(guiaLogic.updateGuia(guia));
+        }
         
     }
 
@@ -112,8 +120,15 @@ public class GuiaResource
     @DELETE
     @Path("{id: \\d+}")
     public void deleteGuia(@PathParam("id") Long id)
-    {// TODO si el guia con el id dado no existe debe disparar una exception WebApplicationException 404
-       guiaLogic.deleteGuia(id);
+    {
+        if (guiaLogic.getGuia(id) == null)
+        {
+            throw new WebApplicationException("El guía no existe", 404);
+        }
+        else
+        {
+            guiaLogic.deleteGuia(id);
+        }
     }
     
     

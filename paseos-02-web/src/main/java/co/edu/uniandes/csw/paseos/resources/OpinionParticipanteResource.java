@@ -8,21 +8,15 @@ package co.edu.uniandes.csw.paseos.resources;
 import co.edu.uniandes.csw.paseos.dtos.OpinionParticipanteDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.OpinionParticipanteLogic;
 import co.edu.uniandes.csw.paseos.entities.OpinionParticipanteEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.PathParam;
 
 /**
  *
@@ -72,9 +66,15 @@ public class OpinionParticipanteResource
      */
     @GET
     @Path("{id: \\d+}")
-    public OpinionParticipanteDetailDTO getOpinionParticipante(@PathParam("id") Long id) 
-    {// TODO si la opinion con el id dado no existe debe disparar una exception WebApplicationException 404
-        return new OpinionParticipanteDetailDTO(opinionLogic.getOpinionParticipante(id));
+    public OpinionParticipanteDetailDTO getOpinionParticipante(@PathParam("id") Long id) throws BusinessLogicException
+    {
+        if (opinionLogic.getOpinionParticipante(id) == null)
+        {
+            throw new WebApplicationException("La opinion no existe", 404);
+        }
+        else {
+            return new OpinionParticipanteDetailDTO(opinionLogic.getOpinionParticipante(id));
+        }
         
     }
 
@@ -97,11 +97,18 @@ public class OpinionParticipanteResource
      */
     @PUT
     @Path("{id: \\d+}")
-    public OpinionParticipanteDetailDTO updateOpinionParticipante(@PathParam("id") Long id, OpinionParticipanteDetailDTO dto) 
-    {// TODO si la opinion con el id dado no existe debe disparar una exception WebApplicationException 404
-        OpinionParticipanteEntity entity = dto.toEntity();
-        entity.setId(id);
-        return new OpinionParticipanteDetailDTO(entity);
+    public OpinionParticipanteDetailDTO updateOpinionParticipante(@PathParam("id") Long id, OpinionParticipanteDetailDTO dto) throws BusinessLogicException
+    {
+        if (opinionLogic.getOpinionParticipante(id) == null)
+        {
+            throw new WebApplicationException("La opinion no existe", 404);
+        }
+        else
+        {
+            OpinionParticipanteEntity entity = dto.toEntity();
+            entity.setId(id);
+            return new OpinionParticipanteDetailDTO(entity);
+        }
         
     }
 
@@ -111,9 +118,15 @@ public class OpinionParticipanteResource
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteOpinionParticipante(@PathParam("id") Long id)
-    {// TODO si la opinion con el id dado no existe debe disparar una exception WebApplicationException 404
-       opinionLogic.deleteOpinionParticipante(id);
+    public void deleteOpinionParticipante(@PathParam("id") Long id) throws BusinessLogicException
+    {
+        if (opinionLogic.getOpinionParticipante(id) == null)
+        {
+            throw new WebApplicationException("El guía no existe", 404);
+        }
+        else {
+            opinionLogic.deleteOpinionParticipante(id);
+        }
     }
     
     
