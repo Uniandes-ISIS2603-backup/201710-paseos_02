@@ -23,6 +23,8 @@ public class LugarDetailDTO extends LugarDTO
     conexion con otra clase
     */
     private List<PaseoEcologicoDTO> paseosEcologicos;
+    private List<PaseoEcologicoDTO> paseosEcologicosSalida;
+    private List<PaseoEcologicoDTO> paseosEcologicosLlegada;
     // TODO en el diagrama de clases hay dos relaciones a paseos ecologicos 
     // TODO Debería haber dos atributos distintos con nombres distintos
     // TODO el entioty si tiene los dos atributos con nombres 1 y 2 (deberia tener mejores nombres) 
@@ -42,9 +44,15 @@ public class LugarDetailDTO extends LugarDTO
         super(entity);
         if(entity != null)
         {
-            if (entity.getPaseosEcologicos1() != null) {
+            if (entity.getPaseosEcologicosSalida() != null) {
                 paseosEcologicos = new ArrayList<PaseoEcologicoDTO>();
-                for (PaseoEcologicoEntity paseoEcologico : entity.getPaseosEcologicos1()) {
+                for (PaseoEcologicoEntity paseoEcologico : entity.getPaseosEcologicosSalida()) {
+                    paseosEcologicos.add(new PaseoEcologicoDTO(paseoEcologico));
+                }
+            }
+            if (entity.getPaseosEcologicosLlegada() != null) {
+                paseosEcologicos = new ArrayList<PaseoEcologicoDTO>();
+                for (PaseoEcologicoEntity paseoEcologico : entity.getPaseosEcologicosLlegada()) {
                     paseosEcologicos.add(new PaseoEcologicoDTO(paseoEcologico));
                 }
             }
@@ -58,28 +66,52 @@ public class LugarDetailDTO extends LugarDTO
     public LugarEntity toEntity()
     {
         LugarEntity entity = super.toEntity();
-        if (this.getPaseosEcologicos() != null) {
+        if (this.getPaseosEcologicosSalida() != null)
+        {
             List<PaseoEcologicoEntity> paseosE = new ArrayList<PaseoEcologicoEntity>();
-            for (PaseoEcologicoDTO paseo : this.getPaseosEcologicos()) {
+            for (PaseoEcologicoDTO paseo : this.getPaseosEcologicosSalida()) 
+            {
                 paseosE.add(paseo.toEntity());
             }
              // TODO por qué asigna los mismos paseos a las dos variables? 
-            entity.setPaseosEcologicos1(paseosE);
-            entity.setPaseosEcologicos2(paseosE);
+            entity.setPaseosEcologicosSalida(paseosE);
+            
+             if (this.getPaseosEcologicosLlegada() != null)
+        {
+            paseosE = new ArrayList<PaseoEcologicoEntity>();
+            for (PaseoEcologicoDTO paseo : this.getPaseosEcologicosLlegada()) 
+            {
+                paseosE.add(paseo.toEntity());
+            }
+            entity.setPaseosEcologicosLlegada(paseosE);
         }
         return entity;
     }
     /*
     debueve los paseos ecologicos
     */
-    public List<PaseoEcologicoDTO> getPaseosEcologicos() {
-        return paseosEcologicos;
+    public List<PaseoEcologicoDTO> getPaseosEcologicosLlegada() {
+        return paseosEcologicosLlegada;
     }
     /*
     cambia los paseos ecologicos
     */
-    public void setPaseosEcologicos(List<PaseoEcologicoDTO> paseosEcologicos) {
-        this.paseosEcologicos = paseosEcologicos;
+    public void setPaseosEcologicosLlegada(List<PaseoEcologicoDTO> paseosEcologicos) {
+        this.paseosEcologicosLlegada = paseosEcologicos;
+    }
+    
+    /*
+    cambia los paseos ecologicos
+    */
+    public void setPaseosEcologicosSalida(List<PaseoEcologicoDTO> paseosEcologicos) {
+        this.paseosEcologicosSalida = paseosEcologicos;
+    }
+
+    /*
+    debueve los paseos ecologicos
+    */
+    public List<PaseoEcologicoDTO> getPaseosEcologicosSalida() {
+        return paseosEcologicosSalida;
     }
 
 
