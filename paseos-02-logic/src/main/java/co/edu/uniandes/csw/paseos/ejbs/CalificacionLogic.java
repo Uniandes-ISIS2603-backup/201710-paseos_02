@@ -32,7 +32,7 @@ public class CalificacionLogic
      * @return Colección de objetos de CalificacionEntity.
      * 
      */
-    public List<CalificacionEntity> getCalificaciones(Long caminanteId) throws BusinessLogicException
+    public List<CalificacionEntity> getCalificaciones() throws BusinessLogicException
     {
         /*CaminanteEntity caminante = CaminLogic.getCaminante(caminanteId);
         if(caminante==null)
