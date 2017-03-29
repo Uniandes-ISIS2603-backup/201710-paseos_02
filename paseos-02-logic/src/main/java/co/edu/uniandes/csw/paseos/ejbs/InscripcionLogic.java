@@ -8,9 +8,11 @@ package co.edu.uniandes.csw.paseos.ejbs;
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.paseos.persistence.InscripcionPersistence;
+import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -23,6 +25,8 @@ import javax.inject.Inject;
 public class InscripcionLogic 
 {
      @Inject private InscripcionPersistence persistence;
+     
+     @Inject CaminanteLogic caminanteLogic;
     
     /**
      * Obtiene la lista de los registros de Inscripciones.
@@ -30,8 +34,9 @@ public class InscripcionLogic
      * @return Colección de objetos de InscripcionEntity.
      * 
      */
-    public List<InscripcionEntity> getInscripciones() {
-        return persistence.findAll();
+    public List<InscripcionEntity> getInscripciones(Long caminanteid) {
+        CaminanteEntity caminante = caminanteLogic.getCaminante(caminanteid);
+        return caminante.getPaseosInscritos();
     }
 
     /**
@@ -53,8 +58,12 @@ public class InscripcionLogic
      * @return Instancia de InscripcionEntity con los datos de la Inscripcion consultada.
      *
      */
-    public InscripcionEntity getInscripcion(Long id) {
-        return persistence.find(id);
+    public InscripcionEntity getInscripcion(Long caminanteid, Long inscripcionid) {
+        try {
+            return persistence.find(caminanteid, inscripcionid);
+        } catch (NoResultException e) {
+            throw new IllegalArgumentException("La inscripcion no existe");
+        }
     }
     
     /**
@@ -65,7 +74,7 @@ public class InscripcionLogic
      * 
      */
    
-    public InscripcionEntity updateInscripcion(InscripcionEntity entity) {
+    public InscripcionEntity updateInscripcion(Long caminanteid, Long inscripcionid, InscripcionEntity entity) {
         return persistence.update(entity);
     }
     
@@ -76,7 +85,8 @@ public class InscripcionLogic
      *
      */
    
-    public void deleteInscripcion(Long id) {
-        persistence.delete(id);
+    public void deleteInscripcion(Long caminanteid, Long id) {
+        InscripcionEntity old  = getInscripcion(caminanteid, id);
+        persistence.delete(old.getId());
     }
 }

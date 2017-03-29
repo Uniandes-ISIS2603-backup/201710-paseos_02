@@ -10,7 +10,10 @@ import javax.ejb.Stateless;
 import co.edu.uniandes.csw.paseos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.paseos.persistence.CaminantePersistence;
+import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
 /**
  *
  * @author Sebastián Millán
@@ -21,6 +24,7 @@ import javax.inject.Inject;
 public class CalificacionLogic 
 {
     @Inject private CalificacionPersistence persistence;
+    @Inject CaminanteLogic CaminLogic;
     
     /**
      * Obtiene la lista de los registros de Calificaciones.
@@ -28,8 +32,18 @@ public class CalificacionLogic
      * @return Colección de objetos de CalificacionEntity.
      * 
      */
-    public List<CalificacionEntity> getCalificaciones() {
-        return persistence.findAll();
+    public List<CalificacionEntity> getCalificaciones(Long caminanteId) throws BusinessLogicException
+    {
+        /*CaminanteEntity caminante = CaminLogic.getCaminante(caminanteId);
+        if(caminante==null)
+        {
+            throw new WebApplicationException("No existe el caminante",404);
+        }
+        else
+        {
+        */
+            return persistence.findAll();
+        //}
     }
 
     /**
@@ -77,4 +91,9 @@ public class CalificacionLogic
     public void deleteCalificacion(Long id) {
         persistence.delete(id);
     }
+    
+    /*public void verificarDatos(CalificacionEntity entity) throws BusinessLogicException     
+    {
+       if(persCamin.)
+    }*/
 }
