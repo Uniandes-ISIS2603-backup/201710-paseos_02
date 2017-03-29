@@ -57,7 +57,7 @@ public class CalificacionResource
      * @return Lista de calificaciones
      */
     @GET
-    public List<CalificacionDetailDTO> getCalificaciones( )
+    public List<CalificacionDetailDTO> getCalificaciones( ) throws BusinessLogicException
     {
         return listEntity2DTO(calificacionLogic.getCalificaciones()); 
     }
