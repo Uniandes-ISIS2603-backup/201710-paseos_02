@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.paseos.resources;
-    // TODO borrar los imports  que no se necesitan
+
 import co.edu.uniandes.csw.paseos.dtos.ActividadDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.ActividadLogic;
 import co.edu.uniandes.csw.paseos.entities.ActividadEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -18,11 +20,13 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.PathParam;
+
 
 /**
  *
@@ -32,7 +36,6 @@ import javax.ws.rs.PathParam;
 // TODO Segun el diagrama de clases actividades es un subrecurso de paseo ecológico. 
 // TODO entonces o se llama desde paseos ecologicos o se define el path que lo incluya: @Path("/paseos/{idPaseo \\d+}/actividades")
 // TODO los métodos deben recibir el idPaseo y verificar que efectivamente este exista
-@Path("/actividades")
 @Consumes(MediaType.APPLICATION_JSON) 
 @Produces(MediaType.APPLICATION_JSON)
 public class ActividadResource
@@ -61,12 +64,16 @@ public class ActividadResource
     
     /**
      * Metodo que retorna una lista con todas las actividades
+     * @param idPaseo
+     * @param 
      * @return lista de actividades
+     * @throws co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException
      */
     @GET
-    public List<ActividadDetailDTO> getActividades( )
+    @Path("paseos/{idPaseo}/actividades")
+    public List<ActividadDetailDTO> getActividades( @PathParam( "idPaseo" ) Long idPaseo  )  
     {
-        return listEntity2DTO(actividadLogic.getActividades());      
+        return listEntity2DTO(actividadLogic.getActividades(idPaseo));      
     }
     /**
      * Metodo que retorna una actividad cuyo id sea el pasado por parametro
@@ -75,11 +82,17 @@ public class ActividadResource
      */
     @GET
     @Path("{id: \\d+}")
-    public ActividadDetailDTO getActividad(@PathParam("id") Long id) 
+    public ActividadDetailDTO getActividad(@PathParam("idPaseoEcologico") Long idpaseo,@PathParam("id") Long id) 
     {
-        // TODO si la actividad con el id dado no existe debe disparar una exception WebApplicationException 404
-        return new ActividadDetailDTO(actividadLogic.getActividad(id));
-        
+        try
+           {
+                ActividadDetailDTO ans = new ActividadDetailDTO(actividadLogic.getActividad(idpaseo, id));
+                return ans;
+            }
+        catch(IllegalArgumentException e)
+            {
+            throw new WebApplicationException(404); 
+        }  
     }
     /**
      * Metodo que crea una actividad con el dto pasado por parametro
@@ -88,9 +101,17 @@ public class ActividadResource
      */
     // TODO Revisar el comentario del principio sobre el subrecruso. Una actividad se crea asociada con un paseo ecológico
     @POST
-    public ActividadDetailDTO createActividad(ActividadDetailDTO dto) 
+    public ActividadDetailDTO createActividad(ActividadDetailDTO dto) throws Exception
     { 
-        return new ActividadDetailDTO(actividadLogic.createActividad(dto.toEntity())); 
+        try
+        { 
+        return new ActividadDetailDTO(actividadLogic.createActividad(dto.toEntity()));
+        }
+       
+        catch(BusinessLogicException e)
+         {
+             throw new WebApplicationException(500);
+         }        
     }
     /**
      * Metodo que modifica la actividad con el id pasado por parametro usando los datos del dto pasado por parametro
@@ -113,7 +134,7 @@ public class ActividadResource
     @DELETE
     @Path("{id: \\d+}")
     public void deleteActividad(@PathParam("id") Long id)
-    {// TODO si la actividad con el id dado no existe debe disparar una exception WebApplicationException
+    {
        actividadLogic.deleteActividad(id);
     }
     
