@@ -31,7 +31,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
 
 /**
- *
  * @author Juan David Vega
  */
 @Path("/paseos")

@@ -31,7 +31,7 @@ import javax.ws.rs.PathParam;
  */
 
 // TODO inscripcion debería ser un subrecurso de caminante /caminantes/îd \\d+}/inscripciones
-@Path("/inscripciones")
+@Path("/caminantes/îd \\\\d+}/inscripciones")
 @Consumes(MediaType.APPLICATION_JSON) 
 @Produces(MediaType.APPLICATION_JSON)
 public class InscripcionResource
