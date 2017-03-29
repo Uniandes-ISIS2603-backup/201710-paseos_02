@@ -35,7 +35,7 @@ import javax.ws.rs.PathParam;
 @Consumes(MediaType.APPLICATION_JSON) 
 @Produces(MediaType.APPLICATION_JSON)
 public class InscripcionResource
-{
+{  
     @Inject private InscripcionLogic inscripcionLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
@@ -60,9 +60,9 @@ public class InscripcionResource
      * @return Lista de inscripciones
      */
     @GET
-    public List<InscripcionDetailDTO> getInscripciones( )
+    public List<InscripcionDetailDTO> getInscripciones(@PathParam("idCaminante") Long idCaminante) throws BusinessLogicException
     {
-        return listEntity2DTO(inscripcionLogic.getInscripciones());
+        return listEntity2DTO(inscripcionLogic.getInscripciones(idCaminante));
         
     }
     
@@ -73,9 +73,9 @@ public class InscripcionResource
      */
     @GET
     @Path("{id: \\d+}")
-    public InscripcionDetailDTO getInscripcion(@PathParam("id") Long id) 
+    public InscripcionDetailDTO getInscripcion(@PathParam("idCaminante") Long idCaminante, @PathParam("id") Long id) throws BusinessLogicException 
     {// TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
-        return new InscripcionDetailDTO(inscripcionLogic.getInscripcion(id));
+        return new InscripcionDetailDTO(inscripcionLogic.getInscripcion(idCaminante,id));
         
     }
     
@@ -99,11 +99,11 @@ public class InscripcionResource
      */
     @PUT
     @Path("{id: \\d+}")
-    public InscripcionDetailDTO updateInscripcion(@PathParam("id") Long id, InscripcionDetailDTO dto) 
+    public InscripcionDetailDTO updateInscripcion(@PathParam("idCaminante") Long idCaminante, @PathParam("id") Long id, InscripcionDetailDTO dto) 
     {   // TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
         InscripcionEntity entity = dto.toEntity();
         entity.setId(id);
-        return new InscripcionDetailDTO(inscripcionLogic.updateInscripcion(entity));
+        return new InscripcionDetailDTO(inscripcionLogic.updateInscripcion(idCaminante,id,entity));
         
     }
     
@@ -113,9 +113,9 @@ public class InscripcionResource
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteInscripcion(@PathParam("id") Long id)
+    public void deleteInscripcion(@PathParam("idCaminante") Long idCaminante, @PathParam("id") Long id)
     {// TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
-       inscripcionLogic.deleteInscripcion(id);
+       inscripcionLogic.deleteInscripcion(idCaminante,id);
     }
     
 }

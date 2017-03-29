@@ -34,15 +34,16 @@ public class CalificacionLogic
      */
     public List<CalificacionEntity> getCalificaciones(Long caminanteId) throws BusinessLogicException
     {
-        CaminanteEntity caminante = CaminLogic.getCaminante(caminanteId);
+        /*CaminanteEntity caminante = CaminLogic.getCaminante(caminanteId);
         if(caminante==null)
         {
             throw new WebApplicationException("No existe el caminante",404);
         }
         else
         {
+        */
             return persistence.findAll();
-        }
+        //}
     }
 
     /**
@@ -91,8 +92,8 @@ public class CalificacionLogic
         persistence.delete(id);
     }
     
-    public void verificarDatos(CalificacionEntity entity) throws BusinessLogicException     
+    /*public void verificarDatos(CalificacionEntity entity) throws BusinessLogicException     
     {
        if(persCamin.)
-    }
+    }*/
 }

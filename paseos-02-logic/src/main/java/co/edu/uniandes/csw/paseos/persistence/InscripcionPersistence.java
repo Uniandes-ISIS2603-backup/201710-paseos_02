@@ -28,19 +28,23 @@ public class InscripcionPersistence
      * @param id id de la inscripción buscada.
      * @return inscripción buscada.
      */
-    public InscripcionEntity find(Long id)
+    public InscripcionEntity find(Long caminanteid, Long inscripcionid)
     {
-        return em.find(InscripcionEntity.class, id);
+         TypedQuery<InscripcionEntity> q = em.createQuery("select p from InscripionEntity p where (p.caminante.id = :caminanteid) and (p.id = :inscripcionid)", InscripcionEntity.class);
+        q.setParameter("caminanteid", caminanteid);
+        q.setParameter("inscripcionid", inscripcionid);
+        return q.getSingleResult();
     }
     
     /**
      * Obtiene todas las inscripciones de los participantes.
      * @return Lista con todas las inscripciones de los participantes.
      */
-    public List<InscripcionEntity> findAll( )
+    public List<InscripcionEntity> findAll(Long caminanteid)
     {
-        Query solicitud = em.createQuery("select u from InscripcionEntity u");
-        return solicitud.getResultList();
+        TypedQuery<InscripcionEntity> q = em.createQuery("select p from InscripcionEntity p where (p.caminante.id = :caminanteid)", InscripcionEntity.class);
+        q.setParameter("caminanteid", caminanteid);
+        return q.getResultList();
     }
     
     /**

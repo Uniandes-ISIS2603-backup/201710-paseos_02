@@ -11,7 +11,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,12 +27,9 @@ public class CalificacionPersistence
      * @param id id de la calificación buscada.
      * @return calificación buscada.
      */
-    public CalificacionEntity find(Long guiaId, Long calificacionId)
+    public CalificacionEntity find(Long id)
     {
-        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.book.id = :bookid) and (p.id = :reviewid)", CalificacionEntity.class);
-        q.setParameter("bookid", bookid);
-        q.setParameter("reviewid", reviewid);
-        return q.getSingleResult();
+        return em.find(CalificacionEntity.class, id);
     }
     
     /**
