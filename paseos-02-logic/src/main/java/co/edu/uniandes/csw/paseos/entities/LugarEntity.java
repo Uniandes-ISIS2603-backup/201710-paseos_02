@@ -53,40 +53,40 @@ public class LugarEntity implements Serializable
     *Atributo de la conexion con otra clase
     */
     @OneToMany(mappedBy = "lugarDeEncuentro")
-    private List<PaseoEcologicoEntity> paseosEcologicos1;
+    private List<PaseoEcologicoEntity> paseosEcologicosSalida;
 
     /*
     *Atributo de la conexion con otra clase
     */
     @OneToMany(mappedBy = "lugarDeDestino")
-    private List<PaseoEcologicoEntity> paseosEcologicos2;
+    private List<PaseoEcologicoEntity> paseosEcologicosLlegada;
     
     /*
     * da la lista de paseos ecologicos
     */
-    public List<PaseoEcologicoEntity> getPaseosEcologicos1() {
-        return paseosEcologicos1;
+    public List<PaseoEcologicoEntity> getPaseosEcologicosSalida() {
+        return paseosEcologicosSalida;
     }
     
     /*
     * para cambiar el paseo ecologico
     */
-    public void setPaseosEcologicos1(List<PaseoEcologicoEntity> paseosEcologicos1) {
-        this.paseosEcologicos1 = paseosEcologicos1;
+    public void setPaseosEcologicosSalida(List<PaseoEcologicoEntity> paseosEcologicosSalida) {
+        this.paseosEcologicosSalida = paseosEcologicosSalida;
     }
     
     /*
     * La lista de los paeos ecologicos asociados al liugar
     */
-    public List<PaseoEcologicoEntity> getPaseosEcologicos2() {
-        return paseosEcologicos2;
+    public List<PaseoEcologicoEntity> getPaseosEcologicosLlegada() {
+        return paseosEcologicosLlegada;
     }
     
     /*
     * cambia el paseo ecologico
     */
-    public void setPaseosEcologicos2(List<PaseoEcologicoEntity> paseosEcologicos2) {
-        this.paseosEcologicos2 = paseosEcologicos2;
+    public void setPaseosEcologicosLlegada(List<PaseoEcologicoEntity> paseosEcologicosLlegada) {
+        this.paseosEcologicosLlegada = paseosEcologicosLlegada;
     }
     
     /*

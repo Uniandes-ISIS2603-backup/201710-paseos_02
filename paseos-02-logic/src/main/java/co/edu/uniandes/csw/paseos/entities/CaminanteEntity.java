@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.paseos.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -28,7 +29,7 @@ public class CaminanteEntity extends UsuarioEntity
      * Lista de paseos a los que un caminante se a inscrito.
      */
     @OneToMany(mappedBy = "caminante")
-    private List<InscripcionEntity> paseosInscritos;
+    private List<InscripcionEntity> paseosInscritos = new ArrayList<InscripcionEntity>();
 
     /**
      * Lista de calificaciones dadas a los guias por un caminate.

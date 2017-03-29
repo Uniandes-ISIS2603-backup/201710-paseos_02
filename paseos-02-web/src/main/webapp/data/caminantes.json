@@ -1,0 +1,41 @@
+[{ 
+    "id":1,
+    "nombre": "Juan",
+    "correoElectronico": "juan@hotmail.com",
+    "direccion": "Calle 59 B N 35-66",
+    "telefono": 55555555,
+    "edad": 34,
+    "identificacion": 899736,
+    "tipoIdentificacion": "CC",
+    "condicionesFisicas": "Velocidad, fuerza"
+}, { 
+    "id":2,
+    "nombre": "Alvaro",
+    "correoElectronico": "alvaro-98@hotmail.com",
+    "direccion": "Calle 24 B Bis N 89-66",
+    "telefono": 666666666,
+    "edad": 55,
+    "identificacion": 8989087,
+    "tipoIdentificacion": "CC",
+    "condicionesFisicas": "Poca resistencia"
+},{ 
+    "id":3,
+    "nombre": "Patricia",
+    "correoElectronico": "patricia-98@hotmail.com",
+    "direccion": "Carrera 116 A N 39-66",
+    "telefono": 777777,
+    "edad": 49,
+    "identificacion": 5482920,
+    "tipoIdentificacion": "CC",
+    "condicionesFisicas": "xxxxxxxxxxx"
+}, { 
+    "id":4,
+    "nombre": "Beatriz",
+    "correoElectronico": "beatriz-98@hotmail.com",
+    "direccion": "Calle 116 A N 39-66",
+    "telefono": 9898898,
+    "edad": 35,
+    "identificacion": 23883933,
+    "tipoIdentificacion": "CC",
+    "condicionesFisicas": "yyyyyyyyyyyyy"
+}]

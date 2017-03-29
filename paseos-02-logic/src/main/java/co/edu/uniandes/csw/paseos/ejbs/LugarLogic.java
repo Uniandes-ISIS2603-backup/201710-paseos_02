@@ -13,8 +13,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
- *
  * @author Andrea Lopez
+ * lugar !=null.
+ * debe de existir un paseo ecologico.
  */
 
 // TODO cuáles son als reglas de negocio ? 
