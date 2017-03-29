@@ -66,54 +66,54 @@ public class LugarDetailDTO extends LugarDTO
     public LugarEntity toEntity()
     {
         LugarEntity entity = super.toEntity();
-        if (this.getPaseosEcologicosSalida() != null)
-        {
+        if (this.getPaseosEcologicosSalida() != null) {
             List<PaseoEcologicoEntity> paseosE = new ArrayList<PaseoEcologicoEntity>();
-            for (PaseoEcologicoDTO paseo : this.getPaseosEcologicosSalida()) 
-            {
+            for (PaseoEcologicoDTO paseo : this.getPaseosEcologicosSalida()) {
                 paseosE.add(paseo.toEntity());
             }
-             // TODO por qué asigna los mismos paseos a las dos variables? 
+            // TODO por qué asigna los mismos paseos a las dos variables? 
             entity.setPaseosEcologicosSalida(paseosE);
-            
-             if (this.getPaseosEcologicosLlegada() != null)
-        {
-            paseosE = new ArrayList<PaseoEcologicoEntity>();
-            for (PaseoEcologicoDTO paseo : this.getPaseosEcologicosLlegada()) 
-            {
-                paseosE.add(paseo.toEntity());
+
+            if (this.getPaseosEcologicosLlegada() != null) {
+                paseosE = new ArrayList<PaseoEcologicoEntity>();
+                for (PaseoEcologicoDTO paseo : this.getPaseosEcologicosLlegada()) {
+                    paseosE.add(paseo.toEntity());
+                }
+                entity.setPaseosEcologicosLlegada(paseosE);
             }
-            entity.setPaseosEcologicosLlegada(paseosE);
         }
         return entity;
     }
-    /*
-    debueve los paseos ecologicos
-    */
-    public List<PaseoEcologicoDTO> getPaseosEcologicosLlegada() {
-        return paseosEcologicosLlegada;
-    }
-    /*
-    cambia los paseos ecologicos
-    */
-    public void setPaseosEcologicosLlegada(List<PaseoEcologicoDTO> paseosEcologicos) {
-        this.paseosEcologicosLlegada = paseosEcologicos;
-    }
     
-    /*
-    cambia los paseos ecologicos
-    */
-    public void setPaseosEcologicosSalida(List<PaseoEcologicoDTO> paseosEcologicos) {
-        this.paseosEcologicosSalida = paseosEcologicos;
+
+    public List<PaseoEcologicoDTO> getPaseosEcologicos() {
+        return paseosEcologicos;
     }
 
-    /*
-    debueve los paseos ecologicos
-    */
+    public void setPaseosEcologicos(List<PaseoEcologicoDTO> paseosEcologicos) {
+        this.paseosEcologicos = paseosEcologicos;
+    }
+
     public List<PaseoEcologicoDTO> getPaseosEcologicosSalida() {
         return paseosEcologicosSalida;
     }
 
+    public void setPaseosEcologicosSalida(List<PaseoEcologicoDTO> paseosEcologicosSalida) {
+        this.paseosEcologicosSalida = paseosEcologicosSalida;
+    }
 
+    public List<PaseoEcologicoDTO> getPaseosEcologicosLlegada() {
+        return paseosEcologicosLlegada;
+    }
 
+    public void setPaseosEcologicosLlegada(List<PaseoEcologicoDTO> paseosEcologicosLlegada) {
+        this.paseosEcologicosLlegada = paseosEcologicosLlegada;
+    }
+    
 }
+  
+    
+
+
+
+

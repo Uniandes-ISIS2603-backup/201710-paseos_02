@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- caminantesRecords fue inicializada en el controlador del estado caminantesList -->
+        <!-- Itera sobre cada uno de los caminantes en la colección caminantesRecords -->
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>    
+                    <th>Identificacion</th>  
+                    <th>Tipo de identificacion</th>    
+                    <th>Correo Electronico</th>  
+                    <th>Telefono</th>  
+                    <th>Edad</th>  
+                    <th>Condiciones fisicas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="caminante in caminantesRecords">
+                    <td id="{{$index}}-nombre"> {{caminante.nombre}}</td>
+                    <td id="{{$index}}-identificacion">{{caminante.identificacion}}</td>
+                    <td id="{{$index}}-tipoIdentificacion">{{caminante.tipoIdentificacion}}</td>
+                    <td id="{{$index}}-correoElectronico">{{caminante.correoElectronico}}</td>
+                    <td id="{{$index}}-telefono">{{caminante.telefono}}</td>
+                    <td id="{{$index}}-edad">{{caminante.edad}}</td>
+                    <td id="{{$index}}-condicionesFisicas">{{caminante.condicionesFisicas}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
