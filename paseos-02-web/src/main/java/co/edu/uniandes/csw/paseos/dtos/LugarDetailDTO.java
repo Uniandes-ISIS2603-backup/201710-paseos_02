@@ -85,7 +85,8 @@ public class LugarDetailDTO extends LugarDTO
             }
             entity.setPaseosEcologicosLlegada(paseosE);
         }
-        return entity;
+        }
+        return entity; 
     }
     /*
     debueve los paseos ecologicos
@@ -113,7 +114,4 @@ public class LugarDetailDTO extends LugarDTO
     public List<PaseoEcologicoDTO> getPaseosEcologicosSalida() {
         return paseosEcologicosSalida;
     }
-
-
-
 }

@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.paseos.resources;
 import co.edu.uniandes.csw.paseos.dtos.LugarDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.LugarLogic;
 import co.edu.uniandes.csw.paseos.entities.LugarEntity;
-import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -44,12 +44,12 @@ public class LugarResource {
     @Inject
     private LugarLogic lugarLogic;
     // TODO eliminar los atributos que no se necesitan
-    @Context
-    private HttpServletResponse response;
-    @QueryParam("page")
-    private Integer page;
-    @QueryParam("limit")
-    private Integer maxRecords;
+//    @Context
+//    private HttpServletResponse response;
+//    @QueryParam("page")
+//    private Integer page;
+//    @QueryParam("limit")
+//    private Integer maxRecords;
 
     /*
     debuelve la lista de lugares
@@ -77,9 +77,19 @@ public class LugarResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public LugarDetailDTO getLugar(@PathParam("id") Long id) {
+    public LugarDetailDTO getLugar(@PathParam("id") Long id) throws WebApplicationException
+    {
         // TODO si el lugar con el id dado no existe debe disparar una exception WebApplicationException 404
-        return new LugarDetailDTO(lugarLogic.getLugar(id));
+        LugarDetailDTO s=new LugarDetailDTO(lugarLogic.getLugar(id));
+        if(s!=null)
+        {
+            return new LugarDetailDTO(lugarLogic.getLugar(id));
+        }
+        else
+        {
+            throw new WebApplicationException("El lugar no existe 404");
+        }
+        
 
     }
 
@@ -93,11 +103,20 @@ public class LugarResource {
 
     @PUT
     @Path("{id: \\d+}")
-    public LugarDetailDTO updateLugar(@PathParam("id") Long id, LugarDetailDTO dto) {
+    public LugarDetailDTO updateLugar(@PathParam("id") Long id, LugarDetailDTO dto)
+    {
          // TODO si el lugar con el id dado no existe debe disparar una exception WebApplicationException 404
-        LugarEntity lugar = dto.toEntity();
-        lugar.setId(id);
-        return new LugarDetailDTO(lugarLogic.updateLugar(lugar));
+        LugarDetailDTO s=new LugarDetailDTO(lugarLogic.getLugar(id));
+        if(s!=null)
+        {
+            LugarEntity lugar = dto.toEntity();
+            lugar.setId(id);
+            return new LugarDetailDTO(lugarLogic.updateLugar(lugar));
+        }
+        else
+        {
+            throw new WebApplicationException("El lugar no existe 404");
+        }
 
     }
 
@@ -108,6 +127,14 @@ public class LugarResource {
     @Path("{id: \\d+}")
     public void deleteLugar(@PathParam("id") Long id) {
          // TODO si el lugar con el id dado no existe debe disparar una exception WebApplicationException 404
-        lugarLogic.deleteLugar(id);
+        LugarDetailDTO s=new LugarDetailDTO(lugarLogic.getLugar(id));
+        if(s!=null)
+        {
+           lugarLogic.deleteLugar(id);
+        }
+        else
+        {
+            throw new WebApplicationException("El lugar no existe 404");
+        }
     }
 }

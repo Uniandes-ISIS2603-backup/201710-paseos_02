@@ -39,11 +39,7 @@ public class LugarEntity implements Serializable
     /*
     *Atributo del info ACCESO
     */
-    private String infoAcceso;
-    /*
-    *Atributo de las caracteristicas
-    */
-    private String caracteristicas;
+    private String linkGoogleMaps;
     /*
     *Atributo de la imagen
     */
@@ -137,33 +133,17 @@ public class LugarEntity implements Serializable
     /*
     * devuelve el info del acceso
     */
-    public String getInfoAcceso()
+    public String getLinkGoogleMaps()
     {
-        return infoAcceso;
+        return linkGoogleMaps;
     }
     /*
     * cambia la info
     */
-    public void setInfoAcceso(String i)
+    public void setLinkGoogleMaps(String i)
     {
-        this.infoAcceso=i;
-    }
-    /*
-    * devuelve las caracteristicas
-    */
-    public String getCaracteristicas()
-    {
-        return caracteristicas;
-    }
-    /*
-    * cambia las caracteristicas
-    */
-    public void setCaracteristicas(String c)
-    {
-       this.caracteristicas=c;
-    }
-    
-    /*
+        this.linkGoogleMaps=i;
+    }      /*
     * devuelve la image
     */
     public String getImagen()
