@@ -24,21 +24,18 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
  * @author Sebastián Millán
  */
-@Path("/calificaciones")
+@Path("/caminantes/îd \\\\d+}/calificaciones")
 @Consumes(MediaType.APPLICATION_JSON) 
 @Produces(MediaType.APPLICATION_JSON)
 public class CalificacionResource 
 {
     @Inject private CalificacionLogic calificacionLogic;
-    // TODO eliminar los atributos que no se necesitan
-    @Context private HttpServletResponse response;
-    @QueryParam("page") private Integer page; 
-    @QueryParam("limit") private Integer maxRecords; 
     
     /**
      * Convierte una lista de CalififcacionEntity a una lista de CalificacionDetailDTO
@@ -60,10 +57,9 @@ public class CalificacionResource
      * @return Lista de calificaciones
      */
     @GET
-    public List<CalificacionDetailDTO> getCalificaciones( )
+    public List<CalificacionDetailDTO> getCalificaciones( ) throws BusinessLogicException
     {
-        return listEntity2DTO(calificacionLogic.getCalificaciones());
-        
+        return listEntity2DTO(calificacionLogic.getCalificaciones()); 
     }
     
     /**
@@ -73,10 +69,16 @@ public class CalificacionResource
      */
     @GET
     @Path("{id: \\d+}")
-    public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) 
-    {   // TODO si la calificación con el id dado no existe debe disparar una exception WebApplicationException 404
-        return new CalificacionDetailDTO(calificacionLogic.getCalificacion(id));
-        
+    public CalificacionDetailDTO getCalificacion(@PathParam("id") Long id) throws BusinessLogicException
+    {   
+        if(calificacionLogic.getCalificacion(id)==null)
+        {
+            throw new WebApplicationException("El guía no existe", 404);
+        }
+        else
+        {
+            return new CalificacionDetailDTO(calificacionLogic.getCalificacion(id));
+        }  
     }
     
     /**
@@ -88,7 +90,6 @@ public class CalificacionResource
     public CalificacionDetailDTO createCalificacion(CalificacionDetailDTO dto) throws BusinessLogicException 
     {
         return new CalificacionDetailDTO(calificacionLogic.createCalificacion(dto.toEntity()));
-       
     }
     
     /**
@@ -99,12 +100,18 @@ public class CalificacionResource
      */
     @PUT
     @Path("{id: \\d+}")
-    public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) 
-    {  // TODO si la calificación con el id dado no existe debe disparar una exception WebApplicationException 404
+    public CalificacionDetailDTO updateCalificacion(@PathParam("id") Long id, CalificacionDetailDTO dto) throws BusinessLogicException
+    {  
+        if(calificacionLogic.getCalificacion(id)==null)
+        {
+            throw new WebApplicationException("La calificacion no existe",404);
+        }
+        else
+        {
         CalificacionEntity entity = dto.toEntity();
         entity.setId(id);
         return new CalificacionDetailDTO(calificacionLogic.updateEmployee(entity));
-        
+        }
     }
     
     /**
@@ -114,8 +121,16 @@ public class CalificacionResource
     @DELETE
     @Path("{id: \\d+}")
     public void deleteCalificacion(@PathParam("id") Long id)
-    {  // TODO si la calificación con el id dado no existe debe disparar una exception WebApplicationException 404
-       calificacionLogic.deleteCalificacion(id);
+    {  
+        if(calificacionLogic.getCalificacion(id)==null)
+        {
+            throw new WebApplicationException("La calificacion no existe",404);
+        }
+        else
+        {
+            calificacionLogic.deleteCalificacion(id);    
+        }
+        
     }
     
 }
