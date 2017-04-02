@@ -1,16 +1,79 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div class="panel panel-default"> 
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <h2>{{currentCaminante.nombre}}</h2> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="thumb">
+                    <img class="img-responsive" ng-src="{{currentCaminante.imagen}}"/>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <dl>                     
+                    <hr>
+                    <dt>Identificacion</dt>
+                    <dd>{{currentCaminante.identificacion}}</dd>
+
+                    <hr>
+                    <dt>Tipo Identificacion</dt>
+                    <dd>{{currentCaminante.tipoIdentificacion}}</dd>
+
+                    <hr>
+                    <dt>Edad</dt>
+                    <dd>{{currentCaminante.edad}}</dd>
+
+                </dl>
+            </div>
+            <div class="col-md-3">
+                <dl>     
+
+                    <hr>
+                    <dt>Telefono</dt>
+                    <dd>{{currentCaminante.telefono}}</dd>
+
+                    <hr>
+                    <dt>Correo Electronico</dt>
+                    <dd>{{currentCaminante.correoElectronico}}</dd>
+
+                </dl>
+            </div>
+            <div class="col-md-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Condiciones Fisicas</th>    
+                            <th>Rendimiento Estimado (/10)</th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fuerza</td>
+                            <td>{{currentCaminante.condicionesFisicas.fuerza}}</td>                                       
+                        </tr>
+                        <tr>
+                            <td>Velocidad</td>
+                            <td>{{currentCaminante.condicionesFisicas.velocidad}}</td>                                       
+                        </tr>                       
+                        <tr>
+                            <td>Resistencia</td>
+                            <td>{{currentCaminante.condicionesFisicas.resistencia}}</td>                                       
+                        </tr>
+                        <tr>
+                            <td>Flexibilidad</td>
+                            <td>{{currentCaminante.condicionesFisicas.flexibilidad}}</td>                                       
+                        </tr>
+                        <tr>
+                            <td>Coordinacion</td>
+                            <td>{{currentCaminante.condicionesFisicas.coordinacion}}</td>                                       
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
