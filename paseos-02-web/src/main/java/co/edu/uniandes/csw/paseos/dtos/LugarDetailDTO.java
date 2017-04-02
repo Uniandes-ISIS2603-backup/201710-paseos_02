@@ -82,7 +82,7 @@ public class LugarDetailDTO extends LugarDTO
                 entity.setPaseosEcologicosLlegada(paseosE);
             }
         }
-        return entity;
+        return entity; 
     }
     
 

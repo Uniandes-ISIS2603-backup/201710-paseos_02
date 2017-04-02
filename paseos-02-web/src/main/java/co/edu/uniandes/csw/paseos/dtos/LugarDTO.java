@@ -32,11 +32,7 @@ public class LugarDTO implements Serializable
     /*
     *Atributo del info ACCESO
     */
-    private String infoAcceso;
-    /*
-    *Atributo de las caracteristicas
-    */
-    private String caracteristicas;
+    private String linkGoogleMaps;
     /*
     *Atributo de la imagen
     */
@@ -58,9 +54,8 @@ public class LugarDTO implements Serializable
         {
             this.id=entity.getId();
             this.direccion=entity.getDireccion();
-            this.caracteristicas=entity.getCaracteristicas();
             this.imagen=entity.getImagen();
-            this.infoAcceso=entity.getInfoAcceso();
+            this.linkGoogleMaps=entity.getLinkGoogleMaps();
             this.nombre=entity.getNombre();            
         }
     }
@@ -70,11 +65,10 @@ public class LugarDTO implements Serializable
      public LugarEntity toEntity( )
     {
        LugarEntity entity = new LugarEntity();
-       entity.setCaracteristicas(this.caracteristicas);
        entity.setDireccion(this.direccion);
        entity.setId(this.id);
        entity.setImagen(this.imagen);
-       entity.setInfoAcceso(this.infoAcceso);
+       entity.setLinkGoogleMaps(this.linkGoogleMaps);
        entity.setNombre(this.nombre);
        return entity;
     }
@@ -127,32 +121,17 @@ public class LugarDTO implements Serializable
     /*
     * devuelve el info del acceso
     */
-    public String getInfoAcceso()
+    public String getLinkGoogleMaps()
     {
-        return infoAcceso;
+        return linkGoogleMaps;
     }
     /*
     * cambia la info
     */
-    public void setInfoAcceso(String i)
+    public void setLinkGoogleMaps(String i)
     {
-        this.infoAcceso=i;
+      this.linkGoogleMaps=i;
     }
-    /*
-    * devuelve las caracteristicas
-    */
-    public String getCaracteristicas()
-    {
-        return caracteristicas;
-    }
-    /*
-    * cambia las caracteristicas
-    */
-    public void setCaracteristicas(String c)
-    {
-       this.caracteristicas=c;
-    }
-    
     /*
     * devuelve la image
     */
@@ -166,8 +145,6 @@ public class LugarDTO implements Serializable
     public void setImagen(String i)
     {
         this.imagen=i;
-    }
-     
-     
+    }    
 }
 

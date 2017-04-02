@@ -4,7 +4,6 @@
         'ui.router',
         // Internal modules dependencies       
         'caminanteModule'
-
     ]);
     // Resuelve problemas de las promesas. Presenta error al desplegar. No se incluye por ahora.
     //
