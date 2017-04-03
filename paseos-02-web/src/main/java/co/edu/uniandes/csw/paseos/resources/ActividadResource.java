@@ -7,7 +7,9 @@ package co.edu.uniandes.csw.paseos.resources;
 
 import co.edu.uniandes.csw.paseos.dtos.ActividadDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.ActividadLogic;
+import co.edu.uniandes.csw.paseos.ejbs.PaseoEcologicoLogic;
 import co.edu.uniandes.csw.paseos.entities.ActividadEntity;
+import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 
 import java.util.ArrayList;
@@ -22,10 +24,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 /**
@@ -41,11 +43,9 @@ import javax.ws.rs.core.MediaType;
 public class ActividadResource
 {
     @Inject private ActividadLogic actividadLogic;
+    @Inject private PaseoEcologicoLogic paseoLogic;
     // TODO eliminar los atributos que no se necesitan
     @Context private HttpServletResponse response;
-    @QueryParam("page") private Integer page; 
-    @QueryParam("limit") private Integer maxRecords; 
-    
     /**
      * Convierte una lista de AcctividadEntity a una lista de ActividadDTO
      * @param listaEntrada
@@ -67,12 +67,13 @@ public class ActividadResource
      * @param idPaseo
      * @param 
      * @return lista de actividades
-     * @throws co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException
      */
     @GET
     @Path("paseos/{idPaseo}/actividades")
     public List<ActividadDetailDTO> getActividades( @PathParam( "idPaseo" ) Long idPaseo  )  
     {
+        if(paseoLogic.getPaseo(idPaseo) == null)
+                   throw new WebApplicationException(Response.Status.NOT_FOUND);
         return listEntity2DTO(actividadLogic.getActividades(idPaseo));      
     }
     /**
@@ -81,12 +82,14 @@ public class ActividadResource
      * @return actividad con id igual al parametro
      */
     @GET
-    @Path("{id: \\d+}")
-    public ActividadDetailDTO getActividad(@PathParam("idPaseoEcologico") Long idpaseo,@PathParam("id") Long id) 
+    @Path("paseos/{idPaseo}/actividades/{id: \\d+}")
+    public ActividadDetailDTO getActividad(@PathParam("idPaseo") Long idPaseo,@PathParam("id") Long id) 
     {
         try
            {
-                ActividadDetailDTO ans = new ActividadDetailDTO(actividadLogic.getActividad(idpaseo, id));
+               if(paseoLogic.getPaseo(idPaseo) == null)
+                   throw new WebApplicationException(Response.Status.NOT_FOUND);
+                ActividadDetailDTO ans = new ActividadDetailDTO(actividadLogic.getActividad(idPaseo, id));
                 return ans;
             }
         catch(IllegalArgumentException e)
@@ -99,13 +102,20 @@ public class ActividadResource
      * @param dto
      * @return la nueva actividad
      */
-    // TODO Revisar el comentario del principio sobre el subrecruso. Una actividad se crea asociada con un paseo ecológico
+   
     @POST
-    public ActividadDetailDTO createActividad(ActividadDetailDTO dto) throws Exception
+    @Path("paseos/{idPaseo}/actividades")
+    public ActividadDetailDTO createActividad(@PathParam("idPaseo") Long idPaseo,ActividadDetailDTO dto) throws Exception
     { 
         try
         { 
-        return new ActividadDetailDTO(actividadLogic.createActividad(dto.toEntity()));
+            if(paseoLogic.getPaseo(idPaseo) == null)
+                   throw new WebApplicationException(Response.Status.NOT_FOUND);
+            ActividadEntity en = dto.toEntity();
+            PaseoEcologicoEntity pp = new PaseoEcologicoEntity();
+            pp.setId(idPaseo);
+            en.setPaseoEcologico(pp);
+        return new ActividadDetailDTO(actividadLogic.createActividad(en));
         }
        
         catch(BusinessLogicException e)
@@ -120,11 +130,18 @@ public class ActividadResource
      * @return la actividad actualizada
      */
     @PUT
-    @Path("{id: \\d+}")
-    public ActividadDetailDTO updateActividad(@PathParam("id") Long id, ActividadDetailDTO dto) 
-    { // TODO si la actividad con el id dado no existe debe disparar una exception WebApplicationException
+    @Path("paseos/{idPaseo}/actividades/{id: \\d+}")
+    public ActividadDetailDTO updateActividad(@PathParam("idPaseo") Long idPaseo, @PathParam("id") Long id, ActividadDetailDTO dto) 
+    { 
+        if(getActividad(idPaseo, id)==null)
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        
+        PaseoEcologicoEntity en = new PaseoEcologicoEntity();
+        en.setId(idPaseo);
+        
         ActividadEntity act = dto.toEntity();
         act.setId(id);
+        act.setPaseoEcologico(en);
         return new ActividadDetailDTO(actividadLogic.updateActividad(act));
     }
     /**
@@ -132,9 +149,12 @@ public class ActividadResource
      * @param id el id de la actividad a eliminar
      */
     @DELETE
-    @Path("{id: \\d+}")
-    public void deleteActividad(@PathParam("id") Long id)
+    @Path("paseos/{idPaseo}/actividades/{id: \\d+}")
+    public void deleteActividad(@PathParam("idPaseo") Long idPaseo,@PathParam("id") Long id)
     {
+         if(getActividad(idPaseo, id)==null)
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        
        actividadLogic.deleteActividad(id);
     }
     
