@@ -1,77 +1,79 @@
-<div class="panel panel-default"> 
-    <div class="panel-body">
-        <div class="row">
-            <div class="col-md-3">
-                <h2>{{currentCaminante.nombre}}</h2> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <div class="thumb">
-                    <img class="img-responsive" ng-src="{{currentCaminante.imagen}}"/>
+<div class="container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <h2>{{currentCaminante.nombre}}</h2>
                 </div>
-
             </div>
-            <div class="col-md-3">
-                <dl>                     
-                    <hr>
-                    <dt>Identificacion</dt>
-                    <dd>{{currentCaminante.identificacion}}</dd>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="thumb">
+                        <img class="img-responsive" ng-src="{{currentCaminante.imagen}}"/>
+                    </div>
 
-                    <hr>
-                    <dt>Tipo Identificacion</dt>
-                    <dd>{{currentCaminante.tipoIdentificacion}}</dd>
+                </div>
+                <div class="col-md-3">
+                    <dl>
+                        <hr>
+                        <dt>Identificacion</dt>
+                        <dd>{{currentCaminante.identificacion}}</dd>
 
-                    <hr>
-                    <dt>Edad</dt>
-                    <dd>{{currentCaminante.edad}}</dd>
+                        <hr>
+                        <dt>Tipo Identificacion</dt>
+                        <dd>{{currentCaminante.tipoIdentificacion}}</dd>
 
-                </dl>
-            </div>
-            <div class="col-md-3">
-                <dl>     
+                        <hr>
+                        <dt>Edad</dt>
+                        <dd>{{currentCaminante.edad}}</dd>
 
-                    <hr>
-                    <dt>Telefono</dt>
-                    <dd>{{currentCaminante.telefono}}</dd>
+                    </dl>
+                </div>
+                <div class="col-md-3">
+                    <dl>
 
-                    <hr>
-                    <dt>Correo Electronico</dt>
-                    <dd>{{currentCaminante.correoElectronico}}</dd>
+                        <hr>
+                        <dt>Telefono</dt>
+                        <dd>{{currentCaminante.telefono}}</dd>
 
-                </dl>
-            </div>
-            <div class="col-md-4">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Condiciones Fisicas</th>    
-                            <th>Rendimiento Estimado (/10)</th>                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Fuerza</td>
-                            <td>{{currentCaminante.condicionesFisicas.fuerza}}</td>                                       
-                        </tr>
-                        <tr>
-                            <td>Velocidad</td>
-                            <td>{{currentCaminante.condicionesFisicas.velocidad}}</td>                                       
-                        </tr>                       
-                        <tr>
-                            <td>Resistencia</td>
-                            <td>{{currentCaminante.condicionesFisicas.resistencia}}</td>                                       
-                        </tr>
-                        <tr>
-                            <td>Flexibilidad</td>
-                            <td>{{currentCaminante.condicionesFisicas.flexibilidad}}</td>                                       
-                        </tr>
-                        <tr>
-                            <td>Coordinacion</td>
-                            <td>{{currentCaminante.condicionesFisicas.coordinacion}}</td>                                       
-                        </tr>
-                    </tbody>
-                </table>
+                        <hr>
+                        <dt>Correo Electronico</dt>
+                        <dd>{{currentCaminante.correoElectronico}}</dd>
+
+                    </dl>
+                </div>
+                <!--<div class="col-md-4">-->
+                    <!--<table class="table">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th>Condiciones Fisicas</th>-->
+                            <!--<th>Rendimiento Estimado (/10)</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td>Fuerza</td>-->
+                            <!--<td>{{currentCaminante.condicionesFisicas.fuerza}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>Velocidad</td>-->
+                            <!--<td>{{currentCaminante.condicionesFisicas.velocidad}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>Resistencia</td>-->
+                            <!--<td>{{currentCaminante.condicionesFisicas.resistencia}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>Flexibilidad</td>-->
+                            <!--<td>{{currentCaminante.condicionesFisicas.flexibilidad}}</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>Coordinacion</td>-->
+                            <!--<td>{{currentCaminante.condicionesFisicas.coordinacion}}</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
             </div>
         </div>
     </div>

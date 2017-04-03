@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.paseos.resources;
 
 import co.edu.uniandes.csw.paseos.dtos.InscripcionDetailDTO;
 import co.edu.uniandes.csw.paseos.ejbs.InscripcionLogic;
+import co.edu.uniandes.csw.paseos.ejbs.CaminanteLogic;
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -31,12 +33,13 @@ import javax.ws.rs.PathParam;
  */
 
 // TODO inscripcion debería ser un subrecurso de caminante /caminantes/îd \\d+}/inscripciones
-@Path("/caminantes/îd \\\\d+}/inscripciones")
+@Path("/caminantes/idCaminante \\\\d+}/inscripciones")
 @Consumes(MediaType.APPLICATION_JSON) 
 @Produces(MediaType.APPLICATION_JSON)
 public class InscripcionResource
 {  
     @Inject private InscripcionLogic inscripcionLogic;
+    @Inject private CaminanteLogic caminanteLogic;
     @Context private HttpServletResponse response;
     @QueryParam("page") private Integer page; 
     @QueryParam("limit") private Integer maxRecords; 
@@ -62,6 +65,10 @@ public class InscripcionResource
     @GET
     public List<InscripcionDetailDTO> getInscripciones(@PathParam("idCaminante") Long idCaminante) throws BusinessLogicException
     {
+        if(caminanteLogic.getCaminante(idCaminante)==null)
+        {
+            throw new WebApplicationException("El caminante no existe",404);
+        }
         return listEntity2DTO(inscripcionLogic.getInscripciones(idCaminante));
         
     }
@@ -75,7 +82,16 @@ public class InscripcionResource
     @Path("{id: \\d+}")
     public InscripcionDetailDTO getInscripcion(@PathParam("idCaminante") Long idCaminante, @PathParam("id") Long id) throws BusinessLogicException 
     {// TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
-        return new InscripcionDetailDTO(inscripcionLogic.getInscripcion(idCaminante,id));
+        if(caminanteLogic.getCaminante(idCaminante)==null)
+        {
+            throw new WebApplicationException("El caminante no existe",404);
+        }
+        InscripcionEntity entity = inscripcionLogic.getInscripcion(idCaminante,id);
+        if(entity==null)
+        {
+            throw new WebApplicationException("La inscripción pedida no existe",404);
+        }
+        return new InscripcionDetailDTO(entity);
         
     }
     
@@ -85,10 +101,13 @@ public class InscripcionResource
      * @return Nueva instancia creada.
      */
     @POST
-    public InscripcionDetailDTO createInscripcion(InscripcionDetailDTO dto) throws BusinessLogicException 
+    public InscripcionDetailDTO createInscripcion(@PathParam("idCaminante") Long idCaminante,InscripcionDetailDTO dto) throws BusinessLogicException 
     {
+        if(caminanteLogic.getCaminante(idCaminante)==null)
+        {
+            throw new WebApplicationException("El caminante no existe",404);
+        }
         return new InscripcionDetailDTO(inscripcionLogic.createInscripcion(dto.toEntity()));
-       
     }
     
     /**
@@ -103,7 +122,12 @@ public class InscripcionResource
     {   // TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
         InscripcionEntity entity = dto.toEntity();
         entity.setId(id);
-        return new InscripcionDetailDTO(inscripcionLogic.updateInscripcion(idCaminante,id,entity));
+        InscripcionEntity result = inscripcionLogic.updateInscripcion(idCaminante,id,entity);
+        if(result==null)
+        {
+            throw new WebApplicationException("La inscripción no existe",404);
+        }
+        return new InscripcionDetailDTO(result);
         
     }
     
@@ -115,7 +139,12 @@ public class InscripcionResource
     @Path("{id: \\d+}")
     public void deleteInscripcion(@PathParam("idCaminante") Long idCaminante, @PathParam("id") Long id)
     {// TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
-       inscripcionLogic.deleteInscripcion(idCaminante,id);
+       InscripcionEntity result = inscripcionLogic.getInscripcion(idCaminante,id);
+        if(result==null)
+        {
+            throw new WebApplicationException("La inscripción no existe",404);
+        }
+        inscripcionLogic.deleteInscripcion(idCaminante,id);
     }
     
 }

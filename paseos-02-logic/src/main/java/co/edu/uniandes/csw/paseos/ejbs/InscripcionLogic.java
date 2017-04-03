@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.paseos.persistence.InscripcionPersistence;
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -48,6 +49,11 @@ public class InscripcionLogic
      */
     public InscripcionEntity createInscripcion(InscripcionEntity entity) throws BusinessLogicException {
         
+        Date actual = new Date();
+        if(entity.getFechaDelPaseo().compareTo(actual)<0)
+        {
+            throw new BusinessLogicException("No cumple con las reglas del negocio");
+        }
         return persistence.create(entity);
     }
     

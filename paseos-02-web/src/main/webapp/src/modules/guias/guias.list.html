@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<!--<div class="container-fluid">-->
+    <!--&lt;!&ndash;Header&ndash;&gt;-->
+    <!--<div class="row">-->
+        <!--<div class="col-lg-2" ng-repeat="guia in guiasRecords">-->
+            <!--<div style="padding-bottom: 30px">-->
+                <!--<center><a ui-sref="guiaDetail({guiaId: guia.id})">-->
+                    <!--<img class="img-responsive"  ng-src="{{guia.image}}" >-->
+                    <!--<p >{{guia.nombre}} </p>-->
+                <!--</a></center>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- caminantesRecords fue inicializada en el controlador del estado caminantesList -->
+            <!-- Itera sobre cada uno de los caminantes en la colección caminantesRecords -->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Identificacion</th>
+                    <th>Tipo de Id.</th>
+                    <th>Edad</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="guia in guiasRecords">
+                    <td id="{{$index}}-nombre"> <a ui-sref="guiaDetail({guiaId: guia.id})">{{guia.nombre}}</a></td>
+                    <td id="{{$index}}-identificacion">{{guia.identificacion}}</td>
+                    <td id="{{$index}}-tipoIdentificacion">{{guia.tipoIdentificacion}}</td>
+                    <td id="{{$index}}-edad">{{guia.edad}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

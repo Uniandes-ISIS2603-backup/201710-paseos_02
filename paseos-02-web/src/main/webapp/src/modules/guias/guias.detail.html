@@ -1,16 +1,80 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div class="container-fluid">
+    <!--Header-->
+    <!--<div class="row">-->
+        <!--<div class="col-lg-4">-->
+            <!--<img class="img-responsive" ng-src="{{currentGuia.image}}" width="250px">-->
+        <!--</div>-->
+        <!--<div class="col-lg-7">-->
+            <!--<p>Nombre: {{currentGuia.nombre}}</p>-->
+            <!--<p>iIdentificación: {{currentGuia.identificacion}}</p>-->
+            <!--<p>Tipo de identificación: {{currentGuia.tipoIdentificacion}}</p>-->
+            <!--<p>Edad: {{currentGuia.edad}}</p>-->
+            <!--<p>Telefono: {{currentGuia.telefono}}</p>-->
+            <!--<p>Dirección: {{currentGuia.direccion}}</p>-->
+            <!--<p>Correo Electronico: {{currentGuia.correoElectronico}}</p>-->
+            <!--<p>Formación: {{currentGuia.formacion}}</p>-->
+            <!--<p>Experiencia: {{currentGuia.experiencia}}</p>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row" style="padding-top: 50px">-->
+        <!--<div class="col-lg-6">-->
+            <!--<p>Nombre del paseo</p>-->
+            <!--&lt;!&ndash;<div class="col-lg-6" ng-repeat=" paseos in currentGuia.paseosEcologicos">&ndash;&gt;-->
+            <!--&lt;!&ndash;<a ui-sref="paseosDetail({paseoId : paseo.id})"></a>&ndash;&gt;-->
+        <!--</div>-->
+
+
+        <!--<div class="col-lg-6">-->
+            <!--<p>Calificaciones del guia</p>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div ui-view="childrenView"></div>-->
+<!--</div>-->
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h2>{{currentGuia.nombre}}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="thumb">
+                            <img class="img-responsive" ng-src="{{currentGuia.imagen}}"/>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <dl>
+                            <hr>
+                            <dt>Identificacion</dt>
+                            <dd>{{currentGuia.identificacion}}</dd>
+
+                            <hr>
+                            <dt>Tipo Identificacion</dt>
+                            <dd>{{currentGuia.tipoIdentificacion}}</dd>
+
+                            <hr>
+                            <dt>Edad</dt>
+                            <dd>{{currentGuia.edad}}</dd>
+
+                        </dl>
+                    </div>
+                    <div class="col-md-3">
+                        <dl>
+
+                            <hr>
+                            <dt>Telefono</dt>
+                            <dd>{{currentGuia.telefono}}</dd>
+
+                            <hr>
+                            <dt>Correo Electronico</dt>
+                            <dd>{{currentGuia.correoElectronico}}</dd>
+
+                        </dl>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
