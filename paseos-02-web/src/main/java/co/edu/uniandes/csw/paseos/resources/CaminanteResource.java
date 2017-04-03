@@ -24,6 +24,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -86,4 +87,12 @@ public class CaminanteResource
        caminanteLogic.deleteCaminante(id);
     }
     
+    @Path("/caminantes/{idCaminante: \\d+}/inscripciones")
+    public InscripcionResource getReviewResource(@PathParam("idCaminante") Long caminantesId) {
+         CaminanteEntity entity = caminanteLogic.getCaminante(caminantesId);
+        if (entity == null) {
+            throw new WebApplicationException("La inscripcion no existe", 404);
+        }
+        return new InscripcionResource();
+    }
 }

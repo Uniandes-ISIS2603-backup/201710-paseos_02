@@ -1,32 +1,52 @@
 (function (ng) {
-    // Definición del módulo
-    var mod = ng.module("inscripcionModule", ['ui.router']);
- 
-   // Configuración de los estados del módulo
+    var mod = ng.module('inscripcionModule', ['ui.router'])
+    mod.constant('inscripcionContext', 'api/inscripcion')
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            // En basePath se encuentran los templates y controladores de módulo
-            var basePath = 'src/modules/inscripciones/';
-            // Mostrar la lista de caminantes será el estado por defecto del módulo
-            $urlRouterProvider.otherwise("/inscripcionesList");
-            // Definición del estado 'caminantesList' donde se listan los caminantes
-            $stateProvider.state('inscripcionesList', {
-                // Url que aparecerá en el browser
-                url: '/inscripciones/list',
-                // Se define una variable books (del estado) que toma por valor 
-                // la colección de libros que obtiene utilizando $http.get 
-                 resolve: {
-                    inscrpciones: ['$http', function ($http) {
-                            return $http.get('data/inscripciones.json'); // $http retorna una promesa que aquí no se está manejando si viene con error.
-                        }]
+        var basePath = 'src/modules/inscripciones/'
+        $urlRouterProvider.otherwise('/inscripcionesList')
+
+        $stateProvider
+            .state('inscripciones', {
+                url: '/inscripciones',
+                abstract: true,
+                resolve: {
+                    inscripciones: ['$http', function ($http) {
+                        //  return $http.get( guiasContext )
+                        return $http.get('data/inscripciones.json')
+                    }]
                 },
-                // Template que se utilizara para ejecutar el estado
-                templateUrl: basePath + 'inscripciones.list.html',
-                // El controlador guarda en el scope en la variable caminantesRecords los datos que trajo el resolve
-                // caminantesRecords será visible en el template
-                controller: ['$scope', 'inscrpciones', function ($scope, caminantes) {
-                        $scope.inscripcionesRecords = caminantes.data;
-                    }]              
-            });
-        }
-    ]);
-})(window.angular);
+                views: {
+                    'mainView': {
+                        templateUrl: basePath + 'inscripciones.html',
+                        controller: ['$scope', 'inscripciones', function ($scope, inscripciones) {
+                            $scope.inscripcionesRecords = inscripciones.data
+                        }]
+                    }
+                }
+            })
+            .state('inscripcionesList', {
+                url: '/list',
+                parent: 'inscripciones',
+                views: {
+                    'listView': {
+                        templateUrl: basePath + 'inscripciones.list.html'
+                    }
+                }
+            })
+            .state('inscripcionDetail', {
+                url: '/{inscripcionId:int}/detail',
+                parent: 'inscripciones',
+                param: {
+                    inscripcionId: null
+                },
+                views: {
+                    'detailView': {
+                        templateUrl: basePath + 'inscripciones.detail.html',
+                        controller: ['$scope', '$stateParams', function ($scope, $params) {
+                            $scope.currentInscripcion = $scope.inscripcionesRecords[$params.inscripcionId - 1]
+                        }]
+                    }
+                }
+            })
+    }])
+})(window.angular)

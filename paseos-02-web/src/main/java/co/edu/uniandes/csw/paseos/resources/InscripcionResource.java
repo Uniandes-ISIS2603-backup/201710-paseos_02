@@ -33,7 +33,7 @@ import javax.ws.rs.WebApplicationException;
  */
 
 // TODO inscripcion debería ser un subrecurso de caminante /caminantes/îd \\d+}/inscripciones
-@Path("/caminantes/idCaminante \\\\d+}/inscripciones")
+
 @Consumes(MediaType.APPLICATION_JSON) 
 @Produces(MediaType.APPLICATION_JSON)
 public class InscripcionResource
@@ -60,15 +60,14 @@ public class InscripcionResource
     
     /**
      * Obtiene todas las inscripciones
+     * @param idCaminante
      * @return Lista de inscripciones
+     * @throws co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException
      */
     @GET
     public List<InscripcionDetailDTO> getInscripciones(@PathParam("idCaminante") Long idCaminante) throws BusinessLogicException
     {
-        if(caminanteLogic.getCaminante(idCaminante)==null)
-        {
-            throw new WebApplicationException("El caminante no existe",404);
-        }
+        
         return listEntity2DTO(inscripcionLogic.getInscripciones(idCaminante));
         
     }

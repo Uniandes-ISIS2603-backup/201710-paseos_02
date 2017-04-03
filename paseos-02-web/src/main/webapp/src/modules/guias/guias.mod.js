@@ -7,7 +7,7 @@
 
         $stateProvider
             .state('guias', {
-                url: '/guias',
+                url: basePath + '/guias',
                 abstract: true,
                 resolve: {
                     guias: ['$http', function ($http) {
