@@ -40,12 +40,17 @@
                     guiaId: null
                 },
                 views: {
+                    'listView': {
+                        templateUrl: basePath + 'guias.list.html'
+                    },
                     'detailView': {
                         templateUrl: basePath + 'guias.detail.html',
                         controller: ['$scope', '$stateParams', function ($scope, $params) {
-                            $scope.currentGuia = $scope.guiasRecords[$params.guiaId - 1]
+                            $scope.currentGuia = $scope.guiasRecords[$params.guiaId - 1];
                         }]
                     }
+
+
                 }
             })
     }])
