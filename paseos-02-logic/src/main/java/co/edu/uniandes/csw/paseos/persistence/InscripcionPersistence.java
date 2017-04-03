@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 
 /**
  *
@@ -23,6 +24,16 @@ public class InscripcionPersistence
     @PersistenceContext(unitName="paseosPU")
     protected EntityManager em;
     
+   protected EntityManager getEntityManager()
+   {
+       return em;
+   }
+   
+   protected Class<InscripcionEntity> getEntityClass()
+   {
+       return InscripcionEntity.class;
+   }
+    
     /**
      * Obtiene una Inscripcion según el id dado por parámetro.
      * @param id id de la inscripción buscada.
@@ -30,7 +41,7 @@ public class InscripcionPersistence
      */
     public InscripcionEntity find(Long caminanteid, Long inscripcionid)
     {
-         TypedQuery<InscripcionEntity> q = em.createQuery("select p from InscripionEntity p where (p.caminante.id = :caminanteid) and (p.id = :inscripcionid)", InscripcionEntity.class);
+        TypedQuery<InscripcionEntity> q = em.createQuery("select p from InscripionEntity p where (p.caminante.id = :caminanteid) and (p.id = :inscripcionid)", InscripcionEntity.class);
         q.setParameter("caminanteid", caminanteid);
         q.setParameter("inscripcionid", inscripcionid);
         return q.getSingleResult();

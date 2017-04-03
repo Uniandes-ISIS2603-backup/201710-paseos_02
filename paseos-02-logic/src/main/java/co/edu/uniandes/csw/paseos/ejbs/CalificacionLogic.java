@@ -15,7 +15,7 @@ import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 /**
- *
+ *deleteInscripcion
  * @author Sebastián Millán
  */
 // TODO faltan las reglas de negocio. Al menos se debe verificar que el caminante existe, que el paseo existe y que ese caminante estuvo en un paseo con ese guía.
