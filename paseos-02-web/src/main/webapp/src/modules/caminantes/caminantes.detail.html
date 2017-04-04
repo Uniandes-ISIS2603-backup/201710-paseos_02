@@ -39,9 +39,14 @@
                         <hr>
                         <dt>Correo Electronico</dt>
                         <dd>{{currentCaminante.correoElectronico}}</dd>
+                        
+                        <hr>
+                        <dt><a ui-sref="inscripcionesList({caminanteId: currentCaminante.id})"  class="btn btn-default" role="button">Inscripciones</br> Realizadas</dt>
+                        
 
                     </dl>
                 </div>
+                 <div ui-view="childrenView"></div>
                 <!--<div class="col-md-4">-->
                     <!--<table class="table">-->
                         <!--<thead>-->
