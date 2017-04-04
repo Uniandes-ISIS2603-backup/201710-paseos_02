@@ -8,7 +8,7 @@
    
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/lugares/';
-            $urlRouterProvider.otherwise("/lugares");
+            $urlRouterProvider.otherwise("/lugaresList");
 
             $stateProvider.state('lugares', {
                 url: '/lugares',
@@ -38,7 +38,7 @@
                 url: '/{lugaresId:int}/detail',
                 parent: 'lugares',
                 param: {
-                    lugaresId: null
+                    lugarId: null
                 },
                 views: {
                     'listView': {
@@ -47,7 +47,7 @@
                     'detailView': {
                         templateUrl: basePath + 'lugares.detail.html',
                         controller: ['$scope', '$stateParams', function ($scope, $params) {
-                                $scope.currentlugares = $scope.lugaresRecords[$params.lugaresId-1];
+                                $scope.currentLugares = $scope.lugaresRecords[$params.lugaresId-1];
                             }]
                     }
 
