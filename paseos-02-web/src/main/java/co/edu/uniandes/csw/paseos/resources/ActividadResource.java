@@ -74,12 +74,12 @@ public class ActividadResource
     {
         if(paseoLogic.getPaseo(idPaseo) == null)
                    throw new WebApplicationException(Response.Status.NOT_FOUND);
-        return listEntity2DTO(actividadLogic.getActividades(idPaseo));      
+//        return listEntity2DTO(actividadLogic.getActividades(idPaseo));
+            return null;
     }
     /**
      * Metodo que retorna una actividad cuyo id sea el pasado por parametro
      * @param id
-     * @return actividad con id igual al parametro
      */
     @GET
     @Path("paseos/{idPaseo}/actividades/{id: \\d+}")
@@ -89,8 +89,9 @@ public class ActividadResource
            {
                if(paseoLogic.getPaseo(idPaseo) == null)
                    throw new WebApplicationException(Response.Status.NOT_FOUND);
-                ActividadDetailDTO ans = new ActividadDetailDTO(actividadLogic.getActividad(idPaseo, id));
-                return ans;
+//                ActividadDetailDTO ans = new ActividadDetailDTO(actividadLogic.getActividad(idPaseo, id));
+//                return ans;
+               return null;
             }
         catch(IllegalArgumentException e)
             {
@@ -105,7 +106,7 @@ public class ActividadResource
    
     @POST
     @Path("paseos/{idPaseo}/actividades")
-    public ActividadDetailDTO createActividad(@PathParam("idPaseo") Long idPaseo,ActividadDetailDTO dto) throws Exception
+    public ActividadDetailDTO createActividad(@PathParam("idPaseo") Long idPaseo,ActividadDetailDTO dto) throws BusinessLogicException
     { 
         try
         { 
@@ -118,7 +119,7 @@ public class ActividadResource
         return new ActividadDetailDTO(actividadLogic.createActividad(en));
         }
        
-        catch(BusinessLogicException e)
+        catch(Exception e)
          {
              throw new WebApplicationException(500);
          }        

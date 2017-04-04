@@ -7,11 +7,11 @@ and open the template in the editor.
     <!--Header-->
     <div class="row">
         <div class="col-lg-2" ng-repeat="paseo in paseosRecords">
-            <div style="padding-bottom: 30px">
+            <div style="padding-top: 20px">
                 <center><a ui-sref="paseoDetail({paseoId: paseo.id})">
-                    <img class="img-responsive" ng-src="{{paseo.image}}">
-                    <p>{{paseo.costo}} </p>
-                    <p>{{paseo.tematica}} </p>
+                    <img class="img-responsive" ng-src="{{paseo.lugarDeEncuentro.imagen}}" style = "min-height: 150px">
+                    <p> Tematica: {{paseo.tematica}} </p>
+                    <p> Precio: {{paseo.costo}} </p>
                 </a></center>
             </div>
         </div>
