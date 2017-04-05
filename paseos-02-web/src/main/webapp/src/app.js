@@ -4,10 +4,10 @@
         'ui.router',
         // Internal modules dependencies       
         'caminanteModule',
-        'lugaresModule',
         'guiaModule',
         'paseosModule',
         'lugaresModule',
+        'actividadModule'
         // 'opinionesModule'
     ]);
     // Resuelve problemas de las promesas. Presenta error al desplegar. No se incluye por ahora.

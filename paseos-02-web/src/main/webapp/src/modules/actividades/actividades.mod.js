@@ -20,8 +20,8 @@
                                 }]
                         },
                         templateUrl: basePath + 'actividades.html',
-                        controller: ['$scope', 'paseos', 'atividades', '$stateParams', function ($scope, paseos, actividades, $params) {
-                                $scope.currentPaseo = paseos.data[$params.bookId - 1];
+                        controller: ['$scope', 'paseos', 'actividades', '$stateParams', function ($scope, paseos, actividades, $params) {
+                                $scope.currentPaseo = paseos.data[$params.paseoId - 1];
                                 $scope.actividadesRecords = actividades.data;
                             }]
                     }

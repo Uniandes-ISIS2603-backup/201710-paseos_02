@@ -7,7 +7,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="actividad in actividadRecords ">
+                <tr ng-repeat="actividad in actividadesRecords | filter:currentPaseo.id">
                     <td id="{{$index}}-id">{{actividad.nombre}}</td>
                     <td id="{{$index}}-id">{{actividad.duracion}}</td>
                     <td id="{{$index}}-id">{{actividad.descripcion}}</td>                                  

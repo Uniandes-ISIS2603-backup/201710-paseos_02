@@ -48,8 +48,8 @@
                         templateUrl: basePath + 'lugares.detail.html',
                         controller: ['$scope', '$stateParams', '$sce', function ($scope, $params, $sce) {
                               $scope.trust = function(data) {
-                                  return $sce.trustAsResourceUrl(data)
-                              }
+                                  return $sce.trustAsResourceUrl(data);
+                              },
                                 $scope.currentLugar = $scope.lugaresRecords[$params.lugarId];
                             }]
                     }
