@@ -16,17 +16,12 @@
             $stateProvider.state('inscripciones', {
                 url: '/inscripciones',
                 abstract: true,
-                parent: 'caminanteDetail',
-                resolve: {
-                    inscripciones: ['$http', 'caminantesContext', 'inscripcionesContext', '$stateParams', function ($http, caminantesContext, inscripcionesContext, $params) {
-                            return $http.get(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext);
-                        }]
-                },
+                parent: 'inscripcionDetail',
                 views: {
                     'childrenView': {
                         templateUrl: basePath + 'inscripciones.html'
                     }
-                },
+                }
             }).state('inscripcionesList', {
                 url: '/list',
                 parent: 'inscripciones',

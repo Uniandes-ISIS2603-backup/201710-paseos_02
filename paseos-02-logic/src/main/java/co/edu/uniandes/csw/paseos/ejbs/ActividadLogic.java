@@ -7,21 +7,26 @@ package co.edu.uniandes.csw.paseos.ejbs;
 
 import co.edu.uniandes.csw.paseos.entities.ActividadEntity;
 import co.edu.uniandes.csw.paseos.persistence.ActividadPersistence;
+import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 
 /**
  *
  * @author Juan Diego Chaves
  */
 
-// TODO definir las reglas de negocio. Por ejemplo el atributo duración a qué se refiere? puede ser 0? qué valor debe tener? 
 @Stateless
 public class ActividadLogic 
 {
     @Inject 
     private ActividadPersistence persistence;
+    @Inject 
+    private PaseoEcologicoLogic paseoLogic; 
+    
     
      /**
      * Obtiene la lista de los registros de Actividad.
@@ -29,8 +34,10 @@ public class ActividadLogic
      * @return Colección de objetos de ActividadEntity.
      *
      */
-    public List<ActividadEntity> getActividades() {
-        return persistence.findAll();
+  
+    public List<ActividadEntity> getActividades(Long idPaseo) {
+        PaseoEcologicoEntity paseo = paseoLogic.getPaseo(idPaseo);
+        return paseo.getActividades();
     }
     
       /**
@@ -40,8 +47,12 @@ public class ActividadLogic
      * @return Instancia de ActividadEntity con los datos de la Actividad consultada.
      *
      */
-    public ActividadEntity getActividad(Long id) {
-        return persistence.find(id);
+     public ActividadEntity getActividad(Long paseoid, Long actividadid) {
+        try {
+            return persistence.find(paseoid, actividadid);
+        } catch (NoResultException e) {
+            throw new IllegalArgumentException("La actividad no existe en ese paseo");
+        }
     }
 
     /**
@@ -51,8 +62,9 @@ public class ActividadLogic
      * @return Objeto de ActividadEntity con los datos nuevos y su ID.
      *
      */
-    public ActividadEntity createActividad(ActividadEntity entity){
-        
+    public ActividadEntity createActividad( ActividadEntity entity)throws BusinessLogicException{
+        if(entity.getDuracion()<=0)
+            throw new BusinessLogicException("La duracion no puede ser negativa");
         persistence.create(entity);
         return entity;
     }
@@ -77,4 +89,6 @@ public class ActividadLogic
     public void deleteActividad(Long id) {
         persistence.delete(id);
     }
+    
+  
 }

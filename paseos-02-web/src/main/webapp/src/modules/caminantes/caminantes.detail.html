@@ -7,12 +7,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="thumb">
                         <img class="img-responsive" ng-src="{{currentCaminante.imagen}}"/>
                     </div>
-
-                </div>
+               </div>
+            
                 <div class="col-md-3">
                     <dl>
                         <hr>
@@ -40,13 +40,10 @@
                         <dt>Correo Electronico</dt>
                         <dd>{{currentCaminante.correoElectronico}}</dd>
                         
-                        <hr>
-                        <dt><a ui-sref="inscripcionesList({caminanteId: currentCaminante.id})"  class="btn btn-default" role="button">Inscripciones</br> Realizadas</dt>
-                        
-
+                    </dd>
                     </dl>
                 </div>
-                 <div ui-view="childrenView"></div>
+                 <!--<div ui-view="childrenViewInscripciones"></div>
                 <!--<div class="col-md-4">-->
                     <!--<table class="table">-->
                         <!--<thead>-->
@@ -80,7 +77,32 @@
                     <!--</table>-->
                 <!--</div>-->
             </div>
-        </div>
+        
+           <div class="row">
+                <div class="col-md-3">
+                    <h3>Inscripciones</h3>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Fecha de inscripción</th>    
+                        <th>Realizo pago</th>  
+                        <th>Observaciones</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="inscripcion in currentCaminante.inscripciones">
+                        <td >{{inscripcion.fechaDeInscripcion}}</td>
+                        <td >{{inscripcion.realizoPago}}</td>
+                        <td >{{inscripcion.observaciones}}</td>   
+                    </tr>
+                </tbody>
+            </table>
+          </div>
     </div>
+    </div>    
 </div>
 

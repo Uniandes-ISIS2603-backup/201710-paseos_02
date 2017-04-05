@@ -10,7 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,19 +26,27 @@ public class ActividadPersistence
      * @param id id de la actividad buscada.
      * @return actividad buscada.
      */
-    public ActividadEntity find(Long id)
-    {
-        return em.find(ActividadEntity.class, id);
+     public ActividadEntity find(Long paseoEcologicoid, Long actividadid) {
+        TypedQuery<ActividadEntity> q = em.createQuery("select p from ActividadEntity p where (p.paseoEcologico.id = :paseoEcologicoid) and (p.id = actividadid)", ActividadEntity.class);
+        q.setParameter("paseoEcologicoid", paseoEcologicoid);
+        q.setParameter("actividadid", actividadid);
+        return q.getSingleResult();
     }
+
     /**
      * Obtiene una lista de todas las actividades.
      * @return lista de todas las actividades.
      */
-    public List<ActividadEntity> findAll( )
-    {
-        Query solicitud = em.createQuery("select u from ActividadEntity u");
-        return solicitud.getResultList();
+     public List<ActividadEntity> findAll(Integer page, Integer maxRecords, Long paseoEcologicoid) {
+        TypedQuery<ActividadEntity> q = em.createQuery("select p from ActividadEntity p where (p.paseoEcologico.id = :paseoEcologicoid)", ActividadEntity.class);
+        q.setParameter("paseoEcologicoid", paseoEcologicoid);
+        if (page != null && maxRecords != null) {
+            q.setFirstResult((page - 1) * maxRecords);
+            q.setMaxResults(maxRecords);
+        }
+        return q.getResultList();
     }
+    
       /**
      * Crea una nuevoa actividad
      * @param entity actividad que se desea crear.
