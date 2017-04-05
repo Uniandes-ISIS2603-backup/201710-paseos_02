@@ -1,16 +1,26 @@
-<!DOCTYPE html>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- caminantesRecords fue inicializada en el controlador del estado caminantesList -->
+            <!-- Itera sobre cada uno de los caminantes en la colección caminantesRecords -->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th><strong>Nombre del caminante: </strong> </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="opinion in opinionesRecords">
+                    <td id="{{$index}}-nombre del participante"> <a ui-sref="opinionDetail({opinionId: opinion.id})">{{opinion.caminante.nombre}}</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
