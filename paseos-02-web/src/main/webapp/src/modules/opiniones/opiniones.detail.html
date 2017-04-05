@@ -1,48 +1,30 @@
-<div class="container-fluid">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-3">
-                    <h2>{{currentOpinion.caminante.nombre}}</h2>
-                </div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <h2>{{currentOpinion.caminante.nombre}}</h2>
             </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="thumb">
-                        <img class="img-responsive" ng-src="{{currentOpinion.imagen}}"/>
-                    </div>
-
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="thumb">
+                    <img class="img-responsive" ng-src="{{currentOpinion.imagen}}"/>
                 </div>
-                <div class="col-md-3">
-                    <dl>
-                        <hr>
-                        <dt>Identificacion</dt>
-                        <dd>{{currentOpinion.identificacion}}</dd>
 
-                        <hr>
-                        <dt>Tipo Identificacion</dt>
-                        <dd>{{currentOpinion.tipoIdentificacion}}</dd>
+            </div>
+            <div class="col-md-3">
+                <dl>
+                    <hr>
+                    <dt>Fecha del paseo: </dt>
+                    <dd>{{currentOpinion.fecha}}</dd>
 
-                        <hr>
-                        <dt>Edad</dt>
-                        <dd>{{currentOpinion.edad}}</dd>
+                    <hr>
+                    <dt>Comentario sobre el paseo: </dt>
+                    <dd>{{currentGuia.comentario}}</dd>
 
-                    </dl>
-                </div>
-                <div class="col-md-3">
-                    <dl>
-
-                        <hr>
-                        <dt>Telefono</dt>
-                        <dd>{{currentOpinion.telefono}}</dd>
-
-                        <hr>
-                        <dt>Correo Electronico</dt>
-                        <dd>{{currentOpinion.correoElectronico}}</dd>
-
-                    </dl>
-                </div>
+                </dl>
             </div>
         </div>
     </div>
+</div>
 </div>
