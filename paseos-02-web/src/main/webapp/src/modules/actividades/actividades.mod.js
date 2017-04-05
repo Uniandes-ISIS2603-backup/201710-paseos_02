@@ -1,39 +1,24 @@
 (function (ng) {
     var mod = ng.module("actividadModule", ['ui.router']);
-
-    mod.constant("paseosContext", "api/paseos");
-
-    mod.constant("actividadesContext", "actividades");
-
+ 
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            var basePath = 'src/modules/actuvidades/';
+            var basePath = 'src/modules/actividades/';
             $urlRouterProvider.otherwise("/actividadesList");
-
-            $stateProvider.state('actividades', {
-                url: '/actividades',
-                abstract: true,
-                parent: 'paseoDetail',
-                resolve: {
-                    reviews: ['$http', 'paseosContext', 'actividadesContext', '$stateParams', function ($http, paseosContext, actividadesContext, $params) {
-                            return $http.get(paseosContext + '/' + $params.paseoId + '/' + actividadesContext);
+            $stateProvider.state('actividadesList', {
+                url: '/actividades/list',
+            
+                 resolve: {
+                    actividades: ['$http', function ($http) {
+                            return $http.get('data/actividades.json'); 
                         }]
                 },
-                views: {
-                    'childrenView': {
-                        templateUrl: basePath + 'actividades.html'
-                    }
-                },
-            }).state('actividadesList', {
-                url: '/list',
-                parent: 'actividades',
-                views: {
-                    'listView': {
-                        templateUrl: basePath + 'actvidades.list.html',
-                        controller: ['$scope', 'actividades', function ($scope, actividades) {
-                                $scope.actividadesRecords = actividades.data;
-                            }]
-                    }
-                }
+                templateUrl: basePath + 'actividades.list.html',
+             
+                controller: ['$scope', 'actividades', function ($scope, paseos) {
+                        $scope.actividadesRecords = paseos.data;
+                    }]              
             });
-        }]);
+        }
+    ]);
 })(window.angular);
+
