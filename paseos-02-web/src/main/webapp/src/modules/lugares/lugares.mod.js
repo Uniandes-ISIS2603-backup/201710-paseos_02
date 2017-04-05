@@ -1,6 +1,6 @@
 /* 
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template file, choose Tools | Templat
  * and open the template in the editor.
  */
 (function (ng) {
@@ -8,8 +8,8 @@
    
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/lugares/';
-            $urlRouterProvider.otherwise("/lugares");
-
+            $urlRouterProvider.otherwise("/lugaresList");
+ 
             $stateProvider.state('lugares', {
                 url: '/lugares',
                 abstract: true,
@@ -35,10 +35,10 @@
                     }
                 }
             }).state('lugaresDetail', {
-                url: '/{lugaresId:int}/detail',
+                url: '/{lugarId:int}/detail',
                 parent: 'lugares',
                 param: {
-                    lugaresId: null
+                    lugarId: null
                 },
                 views: {
                     'listView': {
@@ -46,8 +46,11 @@
                     },
                     'detailView': {
                         templateUrl: basePath + 'lugares.detail.html',
-                        controller: ['$scope', '$stateParams', function ($scope, $params) {
-                                $scope.currentlugares = $scope.lugaresRecords[$params.lugaresId-1];
+                        controller: ['$scope', '$stateParams', '$sce', function ($scope, $params, $sce) {
+                              $scope.trust = function(data) {
+                                  return $sce.trustAsResourceUrl(data)
+                              }
+                                $scope.currentLugar = $scope.lugaresRecords[$params.lugarId];
                             }]
                     }
 

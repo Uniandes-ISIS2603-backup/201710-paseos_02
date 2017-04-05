@@ -4,6 +4,7 @@
         'ui.router',
         // Internal modules dependencies       
         'caminanteModule',
+        'lugaresModule',
         'guiaModule',
         'paseosModule',
         'lugaresModule',
