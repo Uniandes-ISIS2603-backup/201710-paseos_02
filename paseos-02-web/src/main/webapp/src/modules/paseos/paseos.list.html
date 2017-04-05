@@ -6,11 +6,12 @@ and open the template in the editor.
 <div class="container-fluid">
     <!--Header-->
     <div class="row">
-        <div class="col-lg-2" ng-repeat="paseo in paseosRecords">
-            <div style="padding-top: 20px">
+        <div ng-repeat="paseo in paseosRecords">
+
+            <div class="col-lg-2 " style="padding-top: 20px; min-height: 350px" >
                 <center><a ui-sref="paseoDetail({paseoId: paseo.id})">
-                    <img class="img-responsive" ng-src="{{paseo.lugarDeEncuentro.imagen}}" style = "min-height: 150px">
-                    <p> Tematica: {{paseo.tematica}} </p>
+                    <img class="img-responsive" ng-src="{{paseo.lugarDeEncuentro.imagen}}" height="200px" style="min-height: 220px">
+                    <!--<p > Tematica: {{paseo.tematica}} </p>-->
                     <p> Precio: {{paseo.costo}} </p>
                 </a></center>
             </div>
