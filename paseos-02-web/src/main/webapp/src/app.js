@@ -6,7 +6,9 @@
         'caminanteModule',
         'lugaresModule',
         'guiaModule',
-        'paseosModule'
+        'paseosModule',
+        'lugaresModule',
+        // 'opinionesModule'
     ]);
     // Resuelve problemas de las promesas. Presenta error al desplegar. No se incluye por ahora.
     //
