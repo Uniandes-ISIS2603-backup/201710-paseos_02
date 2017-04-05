@@ -7,14 +7,11 @@ and open the template in the editor.
        <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-3">
-                        <h2>{{currentlugares.nombre}}</h2>
-                    </div>
                 </div>
                 <div class="row">
+                    
                     <div class="col-md-6">
                         <div class="thumb">
-
 
 
                             <img class="img-responsive" ng-src="{{currentLugar.imagen}}" height="300" width="300"/>
@@ -29,13 +26,16 @@ and open the template in the editor.
 
                             <dd>{{currentLugar.identificacion}}</dd>
                             <hr>
-                            <dt>direccion</dt>
+                            <dt>Nombre</dt>
+                            <dd>{{currentLugar.nombre}}</dd>
+                            <hr>
+                            <dt>Direccion</dt>
                             <dd>{{currentLugar.direccion}}</dd>
                         </dl>
                         </div>
                     <dl>
                             <hr>
-                            <dt>mapa</dt>
+                            <dt> </dt>
                             <iframe src= '{{trust(currentLugar.linkGoogleMaps)}}' width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
                         </dl>
