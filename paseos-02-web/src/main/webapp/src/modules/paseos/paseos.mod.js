@@ -6,10 +6,10 @@
 (function (ng){
     var mod = ng.module("paseosModule", ['ui.router']);
 
-    mod.constant('paseosContext', 'api/paseos')
+    mod.constant('paseosContext', 'api/paseos');
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        var basePath = 'src/modules/paseos/'
-        $urlRouterProvider.otherwise('/paseosList')
+        var basePath = 'src/modules/paseos/';
+        $urlRouterProvider.otherwise('/paseosList');
 
         $stateProvider
             .state('paseos', {
@@ -18,14 +18,14 @@
                 resolve: {
                     paseos: ['$http', function ($http) {
                         //  return $http.get( paseosContext )
-                        return $http.get('data/paseos.json')
+                        return $http.get('data/paseos.json');
                     }]
                 },
                 views: {
                     'mainView': {
                         templateUrl: basePath + 'paseos.html',
                         controller: ['$scope', 'paseos', function ($scope, paseos) {
-                            $scope.paseosRecords = paseos.data
+                            $scope.paseosRecords = paseos.data;
                         }]
                     }
                 }
@@ -55,8 +55,8 @@
 
 
                 }
-            })
-    }])
-})(window.angular)
+            });
+    }]);
+})(window.angular);
 
 
