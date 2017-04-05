@@ -1,24 +1,40 @@
 (function (ng) {
     var mod = ng.module("actividadModule", ['ui.router']);
- 
+    mod.constant("actividadesContext", "api/actividades");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/actividades/';
             $urlRouterProvider.otherwise("/actividadesList");
-            $stateProvider.state('actividadesList', {
-                url: '/actividades/list',
-            
-                 resolve: {
-                    actividades: ['$http', function ($http) {
-                            return $http.get('data/actividades.json'); 
-                        }]
-                },
-                templateUrl: basePath + 'actividades.list.html',
-             
-                controller: ['$scope', 'actividades', function ($scope, paseos) {
-                        $scope.actividadesRecords = paseos.data;
-                    }]              
-            });
-        }
-    ]);
-})(window.angular);
 
+            $stateProvider.state('actividades', {
+                url: '/actividades',
+                abstract: true,
+                parent: 'paseoDetail',
+                views: {
+                    childrenView: {                       
+                        resolve: {
+                            paseos: ['$http', function ($http) {
+                                    return $http.get('data/paseos.json');
+                                }],
+                            actividades: ['$http', function ($http) {
+                                    return $http.get('data/actividades.json');
+                                }]
+                        },
+                        templateUrl: basePath + 'actividades.html',
+                        controller: ['$scope', 'paseos', 'atividades', '$stateParams', function ($scope, paseos, actividades, $params) {
+                                $scope.currentPaseo = paseos.data[$params.bookId - 1];
+                                $scope.actividadesRecords = actividades.data;
+                            }]
+                    }
+                }
+
+            }).state('actividadesList', {
+                url: '/list',
+                parent: 'actividades',
+                views: {
+                    'listView': {
+                        templateUrl: basePath + 'actividades.list.html'
+                    }
+                }
+            });
+        }]);
+})(window.angular);
