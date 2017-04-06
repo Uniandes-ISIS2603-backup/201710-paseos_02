@@ -1,39 +1,49 @@
+
 (function (ng) {
     var mod = ng.module("actividadModule", ['ui.router']);
-
-    mod.constant("paseosContext", "api/paseos");
-
-    mod.constant("actividadesContext", "actividades");
-
+    mod.constant("actividadesContext", "api/actividades");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            var basePath = 'src/modules/actuvidades/';
+            var basePath = 'src/modules/actividades/';
             $urlRouterProvider.otherwise("/actividadesList");
 
             $stateProvider.state('actividades', {
                 url: '/actividades',
                 abstract: true,
                 parent: 'paseoDetail',
-                resolve: {
-                    reviews: ['$http', 'paseosContext', 'actividadesContext', '$stateParams', function ($http, paseosContext, actividadesContext, $params) {
-                            return $http.get(paseosContext + '/' + $params.paseoId + '/' + actividadesContext);
-                        }]
-                },
                 views: {
-                    'childrenView': {
-                        templateUrl: basePath + 'actividades.html'
+                    childrenView: {                       
+                        resolve: {
+                            paseos: ['$http', function ($http) {
+                                    return $http.get('data/paseos.json');
+                                }],
+                            actividades: ['$http', function ($http) {
+                                    return $http.get('data/actividades.json');
+                                }]
+                        },
+                        templateUrl: basePath + 'actividades.html',
+                        controller: ['$scope', 'paseos', 'actividades', '$stateParams', function ($scope, paseos, actividades, $params) {
+                                $scope.currentPaseo = paseos.data[$params.paseoId - 1];
+                                $scope.actividadesRecords = actividades.data;
+                            }]
                     }
-                },
+                }
+
             }).state('actividadesList', {
                 url: '/list',
                 parent: 'actividades',
                 views: {
                     'listView': {
-                        templateUrl: basePath + 'actvidades.list.html',
-                        controller: ['$scope', 'actividades', function ($scope, actividades) {
-                                $scope.actividadesRecords = actividades.data;
-                            }]
+                        templateUrl: basePath + 'actividades.list.html'
                     }
                 }
-            });
+            }).state('actividadDetail',{
+                url: '/{actividadId:int}/detail',
+                parent: 'actividades',
+                views: {
+                    'detailView': {
+                        templateUrl: basePath + 'actividades.detail.html'
+                    }
+                }});
+                    
         }]);
 })(window.angular);

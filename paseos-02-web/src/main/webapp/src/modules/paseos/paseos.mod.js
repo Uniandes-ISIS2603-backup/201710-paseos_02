@@ -9,7 +9,7 @@
     mod.constant('paseosContext', 'api/paseos');
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         var basePath = 'src/modules/paseos/';
-        $urlRouterProvider.otherwise('/paseosList');
+        $urlRouterProvider.otherwise('/paseos/list');
 
         $stateProvider
             .state('paseos', {
