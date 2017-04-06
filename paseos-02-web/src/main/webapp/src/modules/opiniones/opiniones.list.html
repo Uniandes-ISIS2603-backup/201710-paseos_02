@@ -5,22 +5,21 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3">
-            <!-- caminantesRecords fue inicializada en el controlador del estado caminantesList -->
-            <!-- Itera sobre cada uno de los caminantes en la colección caminantesRecords -->
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th><strong>Nombre del caminante: </strong> </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="opinion in opinionesRecords">
-                    <td id="{{$index}}-nombre del participante"> <a ui-sref="opinionDetail({opinionId: opinion.id})">{{opinion.caminante.nombre}}</a></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="col-sm-4">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th> Nombre del participante  </th>
+                <th> Fecha del comentario  </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="opinion in opinionesRecords">
+                <td id="{{$index}}-nombre">   <a ui-sref="opinionDetail({opinionId: opinion.id})">{{opinion.caminante.nombre}}</a></td>
+                <td id="{{$index}}-id">{{opinion.fecha}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+    <!--| filter:currentPaseo.id-->
 </div>

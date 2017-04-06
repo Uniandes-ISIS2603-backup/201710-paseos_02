@@ -9,20 +9,25 @@
             .state('opiniones', {
                 url: '/opiniones',
                 abstract: true,
-                resolve: {
-                    opiniones: ['$http', function ($http) {
-                        //  return $http.get( opinionesContext )
-                        return $http.get('data/opiniones.json')
-                    }]
-                },
+                parent: 'paseoDetail',
                 views: {
-                    'mainView': {
+                    childrenView: {
+                        resolve: {
+                            paseos: ['$http', function ($http) {
+                                return $http.get('data/paseos.json');
+                            }],
+                            opiniones: ['$http', function ($http) {
+                                return $http.get('data/opiniones.json');
+                            }]
+                        },
                         templateUrl: basePath + 'opiniones.html',
-                        controller: ['$scope', 'opiniones', function ($scope, opiniones) {
-                            $scope.opinionesRecords = opiniones.data
+                        controller: ['$scope', 'paseos', 'opiniones', '$stateParams', function ($scope, paseos, opiniones, $params) {
+                            $scope.currentPaseo = paseos.data[$params.paseoId - 1];
+                            $scope.opinionesRecords = opiniones.data;
                         }]
                     }
                 }
+
             })
             .state('opinionesList', {
                 url: '/list',
@@ -36,22 +41,14 @@
             .state('opinionDetail', {
                 url: '/{opinionId:int}/detail',
                 parent: 'opiniones',
-                param: {
-                    opinionId: null
-                },
                 views: {
-                    'listView': {
-                        templateUrl: basePath + 'opiniones.list.html'
-                    },
                     'detailView': {
                         templateUrl: basePath + 'opiniones.detail.html',
                         controller: ['$scope', '$stateParams', function ($scope, $params) {
-                            $scope.currentOpinion = $scope.opinionesRecords[$params.opinionId - 1];
+                            $scope.currentOpnion = $scope.opinionesRecords[$params.guiaId - 1];
                         }]
                     }
 
-
-                }
-            })
+                }})
     }])
 })(window.angular)
