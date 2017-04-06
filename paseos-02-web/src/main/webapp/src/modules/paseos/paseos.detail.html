@@ -4,97 +4,22 @@
             <h3> Paseo a {{currentPaseo.lugarDeDestino.nombre}} </h3>
             <h4> {{currentPaseo.tematica}} </h4>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-8">
             <ul class="nav nav-tabs">
+                <li role="presentation" class="active"> <a ui-sref="paseoFicha({paseoId: currentPaseo.id})">Ficha Tecnica</a></li>
                 <li role="presentation" class="active"> <a ui-sref="actividadesList({paseoId: currentPaseo.id})">Actividades</a></li>
-                <li role="presentation" class="active"> <a ui-sref="opinionesList({paseoId: currentPaseo.id})">Opiniones participantes</a></li>
+                <li role="presentation" class="active"> <a ui-sref="opinionesList({paseoId: currentPaseo.id})">Opiniones</a></li> 
+                <li role="presentation" class="active"> <a ui-sref="paseoGuia({paseoId: currentPaseo.id})">Guia</a></li>
             </ul>
         </div>
     </div>
-    <div ui-view="childrenView"></div>
     <div class="row">
-        <div class="col-md-4">
-            <div class="thumb">
-                <img class="img-responsive" ng-src="{{currentPaseo.lugarDeDestino.imagen}}"/>
-            </div>
-        </div>
+        <div class="col-md-2"></div>
         <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <dl>
-                                <dt>Descripción</dt>
-                                <dd>{{currentPaseo.descripcion}}</dd>
-
-                                <hr>
-                                <dt>Numero minimo de caminantes</dt>
-                                <dd>{{currentPaseo.nMinimCaminantes}}</dd>
-
-                                <hr>
-                                <dt>Numero maximo de caminantes</dt>
-                                <dd>{{currentPaseo.nMaximCaminantes}}</dd>
-
-                            </dl>
-                        </div>
-                        <div class="col-md-4">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Condiciones fisicas</th>
-                                        <th>Rendimiento esperado (/10)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Fuerza</td>
-                                        <td>{{currentPaseo.condicionesFisicas.fuerza}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Velocidad</td>
-                                        <td>{{currentPaseo.condicionesFisicas.velocidad}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Resistencia</td>
-                                        <td>{{currentPaseo.condicionesFisicas.resistencia}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Flexibilidad</td>
-                                        <td>{{currentPaseo.condicionesFisicas.flexibilidad}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Coordinacion</td>
-                                        <td>{{currentPaseo.condicionesFisicas.coordinacion}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <h4> Costo: $ {{currentPaseo.costo}} por persona. Incluye:</h4>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <form>
-                                                <h5><input type="radio" name="Almuerzo" value="Almuerzo" checked='{{currentPaseo.hayAlmuerzo}}'> Almuerzo </h5>
-                                            </form>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <form>
-                                                <h5><input type="radio" name="Transporte" value="Transporte" checked='{{currentPaseo.hayTransporte}}'> Transporte </h5>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <div ui-view="guiaView"></div>
         </div>
     </div>
+     <div ui-view="fichaTecnicaView"></div>
+    
+    <div ui-view="childrenView"></div>
 </div>

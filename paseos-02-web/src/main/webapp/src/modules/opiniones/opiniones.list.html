@@ -1,11 +1,4 @@
-
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <div class="container-fluid">
-    <div class="col-sm-4">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -14,7 +7,7 @@ and open the template in the editor.
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="opinion in opinionesRecords">
+            <tr ng-repeat="opinion in opinionesRecords | filter:currentPaseo.id">
                 <td id="{{$index}}-nombre">   <a ui-sref="opinionDetail({opinionId: opinion.id})">{{opinion.caminante.nombre}}</a></td>
                 <td id="{{$index}}-id">{{opinion.fecha}}</td>
             </tr>

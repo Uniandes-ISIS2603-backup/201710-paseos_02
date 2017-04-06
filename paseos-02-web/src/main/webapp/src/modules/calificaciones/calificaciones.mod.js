@@ -1,8 +1,7 @@
 (function (ng) {
     // Definición del módulo 
-    var mod = ng.module("calificacionModule", ['guiaModule', 'ui.router']);
+    var mod = ng.module("calificacionModule", ['ui.router']);
  
-   // Configuración de los estados del módulo
     mod.constant("guiasContext", "api/guias");
     
     mod.constant("calificacionesContext", "calificaciones");
@@ -26,7 +25,7 @@
                     'childrenView': {
                         templateUrl: basePath + 'calificaciones.html'
                     }
-                },
+                }
             }).state('calificacionesList', {
                 url: '/list',
                 parent: 'calificaciones',

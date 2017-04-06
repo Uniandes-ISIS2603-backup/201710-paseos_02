@@ -51,9 +51,35 @@
                         controller: ['$scope', '$stateParams', function ($scope, $params) {
                             $scope.currentPaseo = $scope.paseosRecords[$params.paseoId - 1];
                         }]
-                    }
-
-
+                    }                   
+                }
+            }).state('paseoFicha', {
+                url: '/{paseoId:int}/fichaTecnica',
+                parent: 'paseoDetail',
+                param: {
+                    paseoId: null
+                },
+                views: {
+                    'fichaTecnicaView': {
+                        templateUrl: basePath + 'paseos.fichaTecnica.html',
+                        controller: ['$scope', '$stateParams', function ($scope, $params) {
+                            $scope.currentPaseo = $scope.paseosRecords[$params.paseoId - 1];
+                        }]
+                    }                   
+                }
+            }).state('paseoGuia', {
+                url: '/{paseoId:int}/guia',
+                parent: 'paseoDetail',
+                param: {
+                    paseoId: null
+                },
+                views: {
+                    'guiaView': {
+                        templateUrl: basePath + 'paseos.guia.html',
+                        controller: ['$scope', '$stateParams', function ($scope, $params) {
+                            $scope.currentPaseo = $scope.paseosRecords[$params.paseoId - 1];
+                        }]
+                    }                   
                 }
             });
     }]);

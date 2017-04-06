@@ -1,10 +1,9 @@
 (function (ng) {
-    var mod = ng.module('opinionesModule', ['ui.router'])
-    mod.constant('opinionesContext', 'api/opiniones')
+    var mod = ng.module('opinionesModule', ['ui.router']);
+    mod.constant('opinionesContext', 'api/opiniones');
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        var basePath = 'src/modules/opiniones/'
-        $urlRouterProvider.otherwise('/opinionesList')
-
+        var basePath = 'src/modules/opiniones/';
+        $urlRouterProvider.otherwise('/opinionesList');
         $stateProvider
             .state('opiniones', {
                 url: '/opiniones',
@@ -42,13 +41,15 @@
                 url: '/{opinionId:int}/detail',
                 parent: 'opiniones',
                 views: {
+                    'listView': {
+                                templateUrl: basePath + 'opiniones.list.html'
+                            },
                     'detailView': {
                         templateUrl: basePath + 'opiniones.detail.html',
                         controller: ['$scope', '$stateParams', function ($scope, $params) {
-                            $scope.currentOpnion = $scope.opinionesRecords[$params.guiaId - 1];
+                            $scope.currentOpinion = $scope.opinionesRecords[$params.opinionId - 1];
                         }]
                     }
-
-                }})
-    }])
-})(window.angular)
+                }});
+    }]);
+})(window.angular);

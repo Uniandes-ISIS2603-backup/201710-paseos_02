@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <h2>{{currentPaseo.guia.nombre}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumb">
+                    <img class="img-responsive" ng-src="{{currentPaseo.guia.imagen}}"/>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <dl>
+                    <hr>
+                    <dt>Identificacion</dt>
+                    <dd>{{currentPaseo.guia.identificacion}}</dd>
+
+                    <hr>
+                    <dt>Tipo Identificacion</dt>
+                    <dd>{{currentPaseo.guia.tipoIdentificacion}}</dd>
+
+                    <hr>
+                    <dt>Edad</dt>
+                    <dd>{{currentPaseo.guia.edad}}</dd>
+
+                </dl>
+            </div>
+            <div class="col-md-3">
+                <dl>
+
+                    <hr>
+                    <dt>Telefono</dt>
+                    <dd>{{currentPaseo.guia.telefono}}</dd>
+
+                    <hr>
+                    <dt>Correo Electronico</dt>
+                    <dd>{{currentPaseo.guia.correoElectronico}}</dd>
+
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
