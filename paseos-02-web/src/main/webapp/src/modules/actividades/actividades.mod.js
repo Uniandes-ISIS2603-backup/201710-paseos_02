@@ -1,3 +1,4 @@
+
 (function (ng) {
     var mod = ng.module("actividadModule", ['ui.router']);
     mod.constant("actividadesContext", "api/actividades");
@@ -35,6 +36,14 @@
                         templateUrl: basePath + 'actividades.list.html'
                     }
                 }
-            });
+            }).state('actividadDetail',{
+                url: '/{actividadId:int}/detail',
+                parent: 'actividades',
+                views: {
+                    'detailView': {
+                        templateUrl: basePath + 'actividades.detail.html'
+                    }
+                }});
+                    
         }]);
 })(window.angular);

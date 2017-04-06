@@ -72,9 +72,35 @@
                             <dt>Correo Electronico</dt>
                             <dd>{{currentGuia.correoElectronico}}</dd>
 
+                            
                         </dl>
                     </div>
+                    
             </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Calificaciones</h3>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Puntuación</th>    
+                        <th>Fecha</th>  
+                        <th>Comentarios</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="calificacion in currentGuia.calificaciones">
+                        <td >{{calificacion.puntuacion}}</td>
+                        <td >{{calificacion.fecha}}</td>
+                        <td >{{calificacion.comentario}}</td>   
+                    </tr>
+                </tbody>
+            </table>
+          </div>
         </div>
     </div>
 </div>
