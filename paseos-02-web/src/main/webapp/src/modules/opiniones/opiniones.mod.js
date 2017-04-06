@@ -1,5 +1,5 @@
 (function (ng) {
-    var mod = ng.module('opinionModule', ['ui.router'])
+    var mod = ng.module('opinionesModule', ['ui.router'])
     mod.constant('opinionesContext', 'api/opiniones')
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         var basePath = 'src/modules/opiniones/'

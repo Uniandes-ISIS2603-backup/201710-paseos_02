@@ -6,9 +6,10 @@
         </div>
         <div class="col-md-4">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"> <a ui-sref="actividadesList({paseoId: currentPaseo.id})">Actividades</a></li>                   
+                <li role="presentation" class="active"> <a ui-sref="actividadesList({paseoId: currentPaseo.id})">Actividades</a></li>
+                <li role="presentation" class="active"> <a ui-sref="opinionesList({paseoId: currentPaseo.id})">Opiniones participantes</a></li>
             </ul>
-        </div>    
+        </div>
     </div>
     <div ui-view="childrenView"></div>
     <div class="row">
@@ -18,11 +19,11 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="panel panel-default"> 
+            <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-8">
-                            <dl>     
+                            <dl>
                                 <dt>Descripción</dt>
                                 <dd>{{currentPaseo.descripcion}}</dd>
 
@@ -32,7 +33,7 @@
 
                                 <hr>
                                 <dt>Numero maximo de caminantes</dt>
-                                <dd>{{currentPaseo.nMaximCaminantes}}</dd>                            
+                                <dd>{{currentPaseo.nMaximCaminantes}}</dd>
 
                             </dl>
                         </div>
@@ -71,20 +72,20 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="panel panel-default"> 
+                            <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <h4> Costo: $ {{currentPaseo.costo}} por persona. Incluye:</h5>
-                                        </div>                                        
+                                            <h4> Costo: $ {{currentPaseo.costo}} por persona. Incluye:</h4>
+                                        </div>
                                         <div class="col-md-2">
                                             <form>
-                                                <h5><input type="radio" name="Almuerzo" value="Almuerzo" checked='{{currentPaseo.hayAlmuerzo}}'> Almuerzo </h5>                                                
+                                                <h5><input type="radio" name="Almuerzo" value="Almuerzo" checked='{{currentPaseo.hayAlmuerzo}}'> Almuerzo </h5>
                                             </form>
                                         </div>
                                         <div class="col-md-2">
                                             <form>
-                                                <h5><input type="radio" name="Transporte" value="Transporte" checked='{{currentPaseo.hayTransporte}}'> Transporte </h5>                                               
+                                                <h5><input type="radio" name="Transporte" value="Transporte" checked='{{currentPaseo.hayTransporte}}'> Transporte </h5>
                                             </form>
                                         </div>
                                     </div>

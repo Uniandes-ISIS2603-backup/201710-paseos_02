@@ -7,8 +7,8 @@
         'guiaModule',
         'paseosModule',
         'lugaresModule',
-        'actividadModule'
-        // 'opinionesModule'
+        'actividadModule',
+        'opinionesModule'
     ]);
     // Resuelve problemas de las promesas. Presenta error al desplegar. No se incluye por ahora.
     //
