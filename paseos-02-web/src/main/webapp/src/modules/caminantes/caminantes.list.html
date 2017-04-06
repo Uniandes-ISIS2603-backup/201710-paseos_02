@@ -9,7 +9,8 @@
                         <th>Nombre</th>    
                         <th>Identificacion</th>  
                         <th>Tipo de Id.</th>                   
-                        <th>Edad</th>  
+                        <th>Edad</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -17,7 +18,7 @@
                         <td id="{{$index}}-nombre"> <a ui-sref="caminanteDetail({caminanteId: caminante.id})">{{caminante.nombre}}</a></td>
                         <td id="{{$index}}-identificacion">{{caminante.identificacion}}</td>
                         <td id="{{$index}}-tipoIdentificacion">{{caminante.tipoIdentificacion}}</td>                               
-                        <td id="{{$index}}-edad">{{caminante.edad}}</td>                    
+                        <td id="{{$index}}-edad">{{caminante.edad}}</td>
                     </tr>
                 </tbody>
             </table>

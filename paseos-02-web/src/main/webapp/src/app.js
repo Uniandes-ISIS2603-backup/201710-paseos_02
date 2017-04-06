@@ -6,6 +6,8 @@
         'caminanteModule',
         'guiaModule',
         'paseosModule',
+        'inscripcionModule',
+        'calificacionModule'
         'lugaresModule',
         'actividadModule'
         // 'opinionesModule'
