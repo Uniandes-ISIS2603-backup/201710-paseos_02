@@ -131,5 +131,13 @@ public class GuiaResource
         }
     }
     
+    @Path("guias/{idGuia: \\d+}/calificaciones")
+    public CalificacionResource getCalificacionResource(@PathParam("idGuia") Long idGuia) {
+         GuiaEntity entity = guiaLogic.getGuia(idGuia);
+        if (entity == null) {
+            throw new WebApplicationException("La calificación no existe", 404);
+        }
+        return new CalificacionResource();
+    }
     
 }
