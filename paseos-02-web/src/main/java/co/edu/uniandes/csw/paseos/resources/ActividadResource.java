@@ -148,9 +148,14 @@ public class ActividadResource
     @Path("paseos/{idPaseo}/actividades/{id: \\d+}")
     public void deleteActividad(@PathParam("idPaseo") Long idPaseo,@PathParam("id") Long id)
     {
+        try{
          if(getActividad(idPaseo, id)==null)
             throw new WebApplicationException(Response.Status.NOT_FOUND);
-        
+        }
+        catch(Exception e)
+        {
+             throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
        actividadLogic.deleteActividad(id);
     }
     
