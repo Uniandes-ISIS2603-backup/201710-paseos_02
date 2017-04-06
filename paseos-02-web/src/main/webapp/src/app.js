@@ -7,7 +7,7 @@
         'guiaModule',
         'paseosModule',
         'inscripcionModule',
-        'calificacionModule'
+        'calificacionModule',
         'lugaresModule',
         'actividadModule'
         // 'opinionesModule'
