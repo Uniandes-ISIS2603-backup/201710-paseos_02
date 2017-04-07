@@ -5,17 +5,26 @@
  */
 (function (ng) {
     var mod = ng.module("lugaresModule", ['ui.router']);
+    mod.constant("lugaresContext", "api/lugares");
    
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/lugares/';
             $urlRouterProvider.otherwise("/lugaresList");
- 
+            $stateProvider.state('reviews', {
+                url: '/reviews',
+                abstract: true,
+                parent: 'lugaresDetail',
+                resolve: {
+                    reviews: ['$http', 'lugaresContext', 'reviewsContext', '$stateParams', function ($http, lugaresContext, reviewsContext, $params) {
+                            return $http.get(lugaresContext + '/' + $params.lugarId + '/' + reviewsContext);
+                        }]
+                }; 
             $stateProvider.state('lugares', {
                 url: '/lugares',
                 abstract: true,
                 resolve: {
-                    lugares: ['$http', function ($http) {
-                            return $http.get('data/lugares.json');
+                    lugares: ['$http', 'lugaresContext', function ($http, lugaresContext) {
+                            return $http.get(lugaresContext);
                         }]
                 },
                 views: {
@@ -39,6 +48,11 @@
                 parent: 'lugares',
                 param: {
                     lugarId: null
+                },
+                resolve:  {
+                    currentLugar: ['$http', 'lugaresContext', '$stateParams', function ($http, lugaresContext, $params) {
+                            return $http.get(lugaresContext+'/'+$params.lugarId);
+                        }]
                 },
                 views: {
                     'listView': {
