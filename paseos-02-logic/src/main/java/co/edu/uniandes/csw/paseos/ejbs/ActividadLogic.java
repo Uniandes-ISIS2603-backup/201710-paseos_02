@@ -43,7 +43,7 @@ public class ActividadLogic
       /**
      * Obtiene los datos de una instancia de Actividad a partir de su ID.
      *
-     * @param id Identificador de la instancia a consultar
+     * @param actividadid Identificador de la instancia a consultar
      * @return Instancia de ActividadEntity con los datos de la Actividad consultada.
      *
      */

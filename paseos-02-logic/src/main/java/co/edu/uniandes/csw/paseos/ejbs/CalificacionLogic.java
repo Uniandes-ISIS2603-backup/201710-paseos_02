@@ -12,7 +12,10 @@ import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.paseos.persistence.CaminantePersistence;
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
+import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
+import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.ws.rs.WebApplicationException;
 /**
  *deleteInscripcion
@@ -24,7 +27,7 @@ import javax.ws.rs.WebApplicationException;
 public class CalificacionLogic 
 {
     @Inject private CalificacionPersistence persistence;
-    @Inject CaminanteLogic CaminLogic;
+    @Inject GuiaLogic guiaLogic;
     
     /**
      * Obtiene la lista de los registros de Calificaciones.
@@ -32,18 +35,10 @@ public class CalificacionLogic
      * @return Colección de objetos de CalificacionEntity.
      * 
      */
-    public List<CalificacionEntity> getCalificaciones() throws BusinessLogicException
+    public List<CalificacionEntity> getCalificaciones(Long guiaid) throws BusinessLogicException
     {
-        /*CaminanteEntity caminante = CaminLogic.getCaminante(caminanteId);
-        if(caminante==null)
-        {
-            throw new WebApplicationException("No existe el caminante",404);
-        }
-        else
-        {
-        */
-            return persistence.findAll();
-        //}
+            GuiaEntity guia = guiaLogic.getGuia(guiaid);
+            return guia.getCalificaciones();    
     }
 
     /**
@@ -55,6 +50,7 @@ public class CalificacionLogic
      */
     public CalificacionEntity createCalificacion(CalificacionEntity entity) throws BusinessLogicException {
         
+        verificarReglasNegocio(entity);
         return persistence.create(entity);
     }
     
@@ -66,7 +62,8 @@ public class CalificacionLogic
      * 
      */
    
-    public CalificacionEntity updateEmployee(CalificacionEntity entity) {
+    public CalificacionEntity updateCalificacion(CalificacionEntity entity) throws BusinessLogicException{
+        verificarReglasNegocio(entity);
         return persistence.update(entity);
     }
     
@@ -77,8 +74,15 @@ public class CalificacionLogic
      * @return Instancia de CalificacionEntity con los datos de la Calificacion consultada.
      *
      */
-    public CalificacionEntity getCalificacion(Long id) {
-        return persistence.find(id);
+    public CalificacionEntity getCalificacion(Long guiaid, Long id) {
+        try{
+            return persistence.find(guiaid,id);
+        }
+        catch(NoResultException e)
+        {
+            throw new IllegalArgumentException("La calificacion no existe");
+        }
+        
     }
     
     /**
@@ -88,7 +92,8 @@ public class CalificacionLogic
      *
      */
    
-    public void deleteCalificacion(Long id) {
+    public void deleteCalificacion(Long guiaid, Long id) {
+        CalificacionEntity old  = getCalificacion(guiaid,id);
         persistence.delete(id);
     }
     
@@ -96,4 +101,14 @@ public class CalificacionLogic
     {
        if(persCamin.)
     }*/
+    
+    public void verificarReglasNegocio(CalificacionEntity entity) throws BusinessLogicException
+    {
+       boolean id = entity.getId() == null;
+       boolean puntuacion = entity.getPuntuacion()>5;
+       if (id || puntuacion)
+       {
+           throw new BusinessLogicException("No se están cumpliendo las reglas de negocio.");
+       }
+    }
 }

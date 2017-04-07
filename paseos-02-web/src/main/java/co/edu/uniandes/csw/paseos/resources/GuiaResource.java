@@ -57,7 +57,7 @@ public class GuiaResource
     @GET
     public List<GuiaDetailDTO> getGuias( )
     {
-        return listEntity2DTO(guiaLogic.getGuias()); 
+        return listEntity2DTO(guiaLogic.getGuias());
     }
 
     /**
@@ -85,7 +85,7 @@ public class GuiaResource
      * @return nueva instancia creada.
      */
     @POST
-    public GuiaDetailDTO createGuia(GuiaDetailDTO dto) 
+    public GuiaDetailDTO createGuia(GuiaDetailDTO dto)
     {
         return new GuiaDetailDTO(guiaLogic.createGuia(dto.toEntity()));
     }
@@ -110,7 +110,7 @@ public class GuiaResource
             guia.setId(id);
             return new GuiaDetailDTO(guiaLogic.updateGuia(guia));
         }
-        
+
     }
 
     /**
@@ -131,5 +131,15 @@ public class GuiaResource
         }
     }
     
-    
+    @Path("guias/{idGuia: \\d+}/calificaciones")
+    public CalificacionResource getCalificacionResource(@PathParam("idGuia") Long idGuia) {
+         GuiaEntity entity = guiaLogic.getGuia(idGuia);
+        if (entity == null) {
+            throw new WebApplicationException("La calificación no existe", 404);
+        }
+        return new CalificacionResource();
+    }
+
+
+
 }

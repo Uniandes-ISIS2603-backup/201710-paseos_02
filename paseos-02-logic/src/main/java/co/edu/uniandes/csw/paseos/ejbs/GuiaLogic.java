@@ -13,14 +13,11 @@ import javax.inject.Inject;
 import java.util.List;
 
 /**
- *
  * @author María del Rosario León
  */
 
-// TODO no hay reglas de negocio? ni siquiera para la creación de un guía?
 @Stateless
-public class GuiaLogic 
-{
+public class GuiaLogic {
     @Inject
     private GuiaPersistence guiaPersisence;
 
@@ -35,6 +32,7 @@ public class GuiaLogic
 
     /**
      * Obtiene una instancia de la clase GuiaEntity, a partir de un id.
+     *
      * @param id identificador de la instancia que se desea obtener.
      * @return instancia de la clase GuiaEntity, que se desea obtener.
      */
@@ -44,16 +42,30 @@ public class GuiaLogic
 
     /**
      * Crea en la persistencia una nueva instancia de la clase GuiaEntity.
+     *
      * @param guia instancia de la calse guiaEntity que se desea crear
      * @return La instancia creada.
      */
-    public GuiaEntity createGuia(GuiaEntity guia) {
-        guiaPersisence.create(guia);
-        return guia;
+    public GuiaEntity createGuia(GuiaEntity guia) throws Exception {
+        List<GuiaEntity> guias = getGuias();
+        boolean existe = false;
+        for (GuiaEntity guiaAct : guias) {
+            if (guiaAct.getIdentificacion().equals(guia.getIdentificacion())) {
+                existe = true;
+                break;
+            }
+        }
+        if (!existe) {
+            guiaPersisence.create(guia);
+            return guia;
+        } else {
+            throw new Exception("El guía ya existe");
+        }
     }
 
     /**
      * Actualizar información de una instancia GuiaEntity dada
+     *
      * @param guia instancia de la clase GuiaEntity que se desea actualizar.
      * @return Instancia de la clase GuiaEntity con la información actualizada.
      */
@@ -63,9 +75,11 @@ public class GuiaLogic
 
     /**
      * Elimina una instancia de la clase GuiaEnity dada por su id.
+     *
      * @param id id de la instancia que se quiere eliminar.
      */
-    public void deleteGuia(Long id) {
+    public void deleteGuia(Long id)
+    {
         guiaPersisence.delete(id);
     }
 }

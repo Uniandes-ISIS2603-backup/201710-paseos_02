@@ -49,25 +49,23 @@ public class InscripcionLogic
      */
     public InscripcionEntity createInscripcion(InscripcionEntity entity) throws BusinessLogicException {
         
-        Date actual = new Date();
-        if(entity.getInstanciaPaseo().getFechaRealizacion().compareTo(actual)<0)
-        {
-            throw new BusinessLogicException("No cumple con las reglas del negocio");
-        }
+        verificarReglasNegocio(entity);
         return persistence.create(entity);
     }
     
     /**
      * Obtiene los datos de una instancia de Inscripcion a partir de su ID.
      *
-     * @param id Identificador de la instancia a consultar
+     * @param caminanteid Identificador de la instancia a consultar
      * @return Instancia de InscripcionEntity con los datos de la Inscripcion consultada.
      *
      */
     public InscripcionEntity getInscripcion(Long caminanteid, Long inscripcionid) {
-        try {
+        try{
             return persistence.find(caminanteid, inscripcionid);
-        } catch (NoResultException e) {
+        }
+        catch(NoResultException e)
+        {
             throw new IllegalArgumentException("La inscripcion no existe");
         }
     }
@@ -80,7 +78,8 @@ public class InscripcionLogic
      * 
      */
    
-    public InscripcionEntity updateInscripcion(Long caminanteid, Long inscripcionid, InscripcionEntity entity) {
+    public InscripcionEntity updateInscripcion(InscripcionEntity entity) throws BusinessLogicException {
+        verificarReglasNegocio(entity);
         return persistence.update(entity);
     }
     
@@ -90,10 +89,20 @@ public class InscripcionLogic
      * @param id Identificador de la instancia a eliminar.
      *
      */
-   
-    public void deleteInscripcion(Long caminanteid, Long id)
-    {
+    public void deleteInscripcion(Long caminanteid, Long id) {
         InscripcionEntity old  = getInscripcion(caminanteid, id);
         persistence.delete(old.getId());
+    }
+    
+    public void verificarReglasNegocio(InscripcionEntity entity) throws BusinessLogicException
+    {
+       boolean id = entity.getId() == null;
+       Date actual = new Date();
+       boolean fecha = entity.getFechaDelPaseo().compareTo(actual)<0;
+       boolean costo = entity.getCosto()<0;   
+       if (id || fecha || costo)
+       {
+           throw new BusinessLogicException("No se están cumpliendo las reglas de negocio.");
+       }
     }
 }
