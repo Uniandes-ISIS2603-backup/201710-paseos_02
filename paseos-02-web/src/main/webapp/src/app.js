@@ -2,15 +2,16 @@
     var app = angular.module('mainApp', [
         // External dependencies
         'ui.router',
-        // Internal modules dependencies       
+        // Internal modules dependencies
+
         'caminanteModule',
         'guiaModule',
-        'paseosModule',
         'inscripcionModule',
         'calificacionModule',
         'lugaresModule',
         'actividadModule',
-        'opinionesModule'
+        'opinionesModule',
+        'paseosModule'
     ]);
     // Resuelve problemas de las promesas. Presenta error al desplegar. No se incluye por ahora.
     //

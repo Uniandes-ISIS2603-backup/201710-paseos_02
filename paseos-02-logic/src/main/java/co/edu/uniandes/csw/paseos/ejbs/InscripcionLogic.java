@@ -60,7 +60,7 @@ public class InscripcionLogic
     /**
      * Obtiene los datos de una instancia de Inscripcion a partir de su ID.
      *
-     * @param id Identificador de la instancia a consultar
+     * @param caminanteid Identificador de la instancia a consultar
      * @return Instancia de InscripcionEntity con los datos de la Inscripcion consultada.
      *
      */

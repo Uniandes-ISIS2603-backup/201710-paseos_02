@@ -1,5 +1,6 @@
 (function (ng) {
     var mod = ng.module('guiaModule', ['ui.router'])
+
     mod.constant('guiasContext', 'api/guias')
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         var basePath = 'src/modules/guias/'
@@ -11,8 +12,7 @@
                 abstract: true,
                 resolve: {
                     guias: ['$http', function ($http) {
-                        //  return $http.get( guiasContext )
-                        return $http.get('data/guias.json')
+                        return $http.get(guiasContext)
                     }]
                 },
                 views: {

@@ -1,5 +1,7 @@
 (function (ng) {
     var mod = ng.module('opinionesModule', ['ui.router']);
+
+    mod.constant("paseosContext", "api/paseos");
     mod.constant('opinionesContext', 'api/opiniones');
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         var basePath = 'src/modules/opiniones/';
@@ -13,10 +15,10 @@
                     childrenView: {
                         resolve: {
                             paseos: ['$http', function ($http) {
-                                return $http.get('data/paseos.json');
+                                return $http.get(paseosContext);
                             }],
                             opiniones: ['$http', function ($http) {
-                                return $http.get('data/opiniones.json');
+                                return $http.get( opinionesContext );
                             }]
                         },
                         templateUrl: basePath + 'opiniones.html',
