@@ -98,8 +98,8 @@ public class InscripcionLogic
     {
        boolean id = entity.getId() == null;
        Date actual = new Date();
-       boolean fecha = entity.getFechaDelPaseo().compareTo(actual)<0;
-       boolean costo = entity.getCosto()<0;   
+       boolean fecha = entity.getInstanciaPaseo().getFechaRealizacion().compareTo(actual)<0;
+       boolean costo = entity.getInstanciaPaseo().getPaseoEcologico().getCosto()<0;   
        if (id || fecha || costo)
        {
            throw new BusinessLogicException("No se están cumpliendo las reglas de negocio.");

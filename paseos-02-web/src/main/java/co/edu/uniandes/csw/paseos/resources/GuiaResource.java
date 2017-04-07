@@ -85,7 +85,7 @@ public class GuiaResource
      * @return nueva instancia creada.
      */
     @POST
-    public GuiaDetailDTO createGuia(GuiaDetailDTO dto)
+    public GuiaDetailDTO createGuia(GuiaDetailDTO dto) throws Exception
     {
         return new GuiaDetailDTO(guiaLogic.createGuia(dto.toEntity()));
     }

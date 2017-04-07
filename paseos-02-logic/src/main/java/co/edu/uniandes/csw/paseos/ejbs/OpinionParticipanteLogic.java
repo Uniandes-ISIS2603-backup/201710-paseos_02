@@ -49,7 +49,7 @@ public class OpinionParticipanteLogic {
            List<InscripcionEntity> list = inscrp.getInscripciones(idCam);
             for (InscripcionEntity inscripcion: list)
             {
-                if(inscripcion.getCaminante().getId().equals(idCam) && inscripcion.getPaseoEcologico().getId().equals(idPaseo))
+                if(inscripcion.getCaminante().getId().equals(idCam) && inscripcion.getInstanciaPaseo().getPaseoEcologico().getId().equals(idPaseo))
                 {
                     persistence.create(entity);
                 }
