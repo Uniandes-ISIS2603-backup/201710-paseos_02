@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.paseos.dtos;
 
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -15,7 +16,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class CaminanteDTO extends UsuarioDTO
 {
-    private String condicionesFisicas; // TODO qué modela este atributo para que su valor sea un string?
+     /**
+     * Atributo que representa las condiciones fisicas del caminante. 
+     * Se consideran 5 condiciones basicas y a cada una se asigna un valor en el rango (0 <= i <= 10). 
+     * Este valor representa el nivel de rendimiento estimado del caminante.
+     * A continuación se muestra la convencion seguida para almacenar los valores:
+     * condicionesFisicas(0) --> Fuerza
+     * condicionesFisicas(1) --> Velocidad
+     * condicionesFisicas(2) --> Resistencia
+     * condicionesFisicas(3) --> Flexibilidad
+     * condicionesFisicas(4) --> Coordinacion
+     */
+    private List<Integer> condicionesFisicas;
     
     public CaminanteDTO( )
     {
@@ -35,7 +47,6 @@ public class CaminanteDTO extends UsuarioDTO
             this.direccion = entity.getDireccion();
             this.correoElectronico = entity.getCorreoElectronico();
             this.condicionesFisicas = entity.getCondicionesFisicas();
-            this.estado = entity.getEstado();
         }
     }
     public CaminanteEntity toEntity( )
@@ -50,15 +61,15 @@ public class CaminanteDTO extends UsuarioDTO
         caminante.setDireccion(this.getDireccion());
         caminante.setCorreoElectronico(this.getCorreoElectronico());
         caminante.setCondicionesFisicas(this.getCondicionesFisicas());
-        caminante.setEstado(this.getEstado());
         return caminante;
     }
 
-    public String getCondicionesFisicas() {
+    public List<Integer> getCondicionesFisicas() {
         return condicionesFisicas;
     }
 
-    public void setCondicionesFisicas(String condicionesFisicas) {
+    public void setCondicionesFisicas(List<Integer> condicionesFisicas) {
         this.condicionesFisicas = condicionesFisicas;
-    }     
+    }
+    
 }

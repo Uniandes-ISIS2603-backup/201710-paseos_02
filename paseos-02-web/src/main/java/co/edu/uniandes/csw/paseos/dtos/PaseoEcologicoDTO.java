@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.paseos.dtos;
 
 import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
 import java.io.Serializable;
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,10 +37,18 @@ public class PaseoEcologicoDTO implements Serializable
      */
     private Integer nMaxCaminantes;
 
-    /**
-     * Atributo que representa las condiciones fisicas requeridas para realizar el paseo
+     /**
+     * Atributo que representa las condiciones fisicas necesarias para participar en una paseo. 
+     * Se consideran 5 condiciones basicas y a cada una se asigna un valor en el rango (0 <= i <= 10). 
+     * Este valor representa el nivel de rendimiento requerido para participar en el paseo.
+     * A continuación se muestra la convencion seguida para almacenar los valores:
+     * condicionesFisicas(0) --> Fuerza
+     * condicionesFisicas(1) --> Velocidad
+     * condicionesFisicas(2) --> Resistencia
+     * condicionesFisicas(3) --> Flexibilidad
+     * condicionesFisicas(4) --> Coordinacion
      */
-    private String condicionesFisicas;
+    private List<Integer> condicionesFisicas;
 
     /**
      * Atributo que representa si hay transporte en el paseo ecologico
@@ -173,24 +182,6 @@ public class PaseoEcologicoDTO implements Serializable
     }
 
     /**
-     * Obtiene condicionesFisicas de class org.jetbrains.java.generate.element.FieldElement
-     *
-     * @return condicionesFisicas java.lang.String
-     */
-    public String getCondicionesFisicas() {
-        return condicionesFisicas;
-    }
-
-    /**
-     * Modifica condicionesFisicas de la clase PaseoEcologicoDTO por el dado por parámetro
-     *
-     * @param condicionesFisicas el nuevo condicionesFisicas de la clase PaseoEcologicoDTO
-     */
-    public void setCondicionesFisicas(String condicionesFisicas) {
-        this.condicionesFisicas = condicionesFisicas;
-    }
-
-    /**
      * Obtiene hayTransporte de class org.jetbrains.java.generate.element.FieldElement
      *
      * @return hayTransporte java.lang.Boolean
@@ -242,5 +233,13 @@ public class PaseoEcologicoDTO implements Serializable
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<Integer> getCondicionesFisicas() {
+        return condicionesFisicas;
+    }
+
+    public void setCondicionesFisicas(List<Integer> condicionesFisicas) {
+        this.condicionesFisicas = condicionesFisicas;
     }
 }

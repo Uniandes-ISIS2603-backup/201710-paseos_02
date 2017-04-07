@@ -5,40 +5,33 @@
  */
 package co.edu.uniandes.csw.paseos.persistence;
 
-import co.edu.uniandes.csw.paseos.entities.FechaEntity;
+import co.edu.uniandes.csw.paseos.entities.PaseoInstanciaEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  * @author Juan David Vega
  */
 @Stateless
-public class FechaPersistence 
+public class PaseoInstanciaPersistence 
 {
     @PersistenceContext(unitName="paseosPU")
     protected EntityManager em;
 
-    /**
-     * Obtiene un Fecha según el id dado por parámetro.
-     * @param id id de la fecha buscada.
-     * @return Fecha buscada.
-     */
-    public FechaEntity find(Long id)
-    {
-        return em.find(FechaEntity.class, id);
+     public PaseoInstanciaEntity find(Long paseoId, Long instanciaId) {
+        TypedQuery<PaseoInstanciaEntity> q = em.createQuery("select p from PaseoInstanciaEntity p where (p.paseoEcologico.id = :paseoid) and (p.id = :instanciaid)", PaseoInstanciaEntity.class);
+        q.setParameter("paseoid", paseoId);
+        q.setParameter("instanciaid", instanciaId);
+        return q.getSingleResult();
     }
 
-    /**
-     * Obtiene todos las fechas.
-     * @return Lista con todas las fechas.
-     */
-    public List<FechaEntity> findAll( )
-    {
-        Query solicitud = em.createQuery("select u from FechaEntity u");
-        return solicitud.getResultList();
+    public List<PaseoInstanciaEntity> findAll(Long paseoId) {
+        TypedQuery<PaseoInstanciaEntity> q = em.createQuery("select p from PaseoInstanciaEntity p where (p.paseoEcologico.id = :paseoid)", PaseoInstanciaEntity.class);
+        q.setParameter("paseoid", paseoId);
+        return q.getResultList();
     }
 
     /**
@@ -46,7 +39,7 @@ public class FechaPersistence
      * @param entity fecha que se desea crear.
      * @return fecha que se creo.
      */
-    public FechaEntity create(FechaEntity entity)
+    public PaseoInstanciaEntity create(PaseoInstanciaEntity entity)
     {
         em.persist(entity);
         return entity;
@@ -57,7 +50,7 @@ public class FechaPersistence
      * @param entity fecha con la nueva informaciión.
      * @return fecha con la información actualizada.
      */
-    public FechaEntity update(FechaEntity entity)
+    public PaseoInstanciaEntity update(PaseoInstanciaEntity entity)
     {
         return em.merge(entity);
     }
@@ -68,7 +61,7 @@ public class FechaPersistence
      */
     public void delete(Long id)
     {
-        FechaEntity eliminado = em.find(FechaEntity.class, id);
+        PaseoInstanciaEntity eliminado = em.find(PaseoInstanciaEntity.class, id);
         em.remove(eliminado);
     }
     

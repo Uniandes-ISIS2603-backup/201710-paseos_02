@@ -50,7 +50,7 @@ public class InscripcionLogic
     public InscripcionEntity createInscripcion(InscripcionEntity entity) throws BusinessLogicException {
         
         Date actual = new Date();
-        if(entity.getFechaDelPaseo().compareTo(actual)<0)
+        if(entity.getInstanciaPaseo().getFechaRealizacion().compareTo(actual)<0)
         {
             throw new BusinessLogicException("No cumple con las reglas del negocio");
         }
@@ -91,7 +91,8 @@ public class InscripcionLogic
      *
      */
    
-    public void deleteInscripcion(Long caminanteid, Long id) {
+    public void deleteInscripcion(Long caminanteid, Long id)
+    {
         InscripcionEntity old  = getInscripcion(caminanteid, id);
         persistence.delete(old.getId());
     }

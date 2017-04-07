@@ -4,20 +4,14 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.paseos.resources;
-    // TODO borrar los imports  que no se necesitan
-import co.edu.uniandes.csw.paseos.dtos.FechaDTO;
-import co.edu.uniandes.csw.paseos.dtos.FechaDetailDTO;
-import co.edu.uniandes.csw.paseos.dtos.PaseoEcologicoDTO;
+
 import co.edu.uniandes.csw.paseos.dtos.PaseoEcologicoDetailDTO;
-import co.edu.uniandes.csw.paseos.ejbs.FechaLogic;
 import co.edu.uniandes.csw.paseos.ejbs.PaseoEcologicoLogic;
-import co.edu.uniandes.csw.paseos.entities.FechaEntity;
 import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,9 +20,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * @author Juan David Vega
@@ -39,14 +33,7 @@ import javax.ws.rs.PathParam;
 public class PaseoEcologicoResource 
 {
     @Inject private PaseoEcologicoLogic paseoEcologicoLogic;
- 
-    // TODO eliminar los atributos que no se necesitan
-    @Inject private FechaLogic fechaLogic;
     
-    @Context private HttpServletResponse response;
-    @QueryParam("page") private Integer page; 
-    @QueryParam("limit") private Integer maxRecords;
-
     /**
      * Convierte una lista de PaseosEcologicosEntity a una lista de PaseosEcologicosDTO
      * @param listaEntrada
@@ -80,12 +67,16 @@ public class PaseoEcologicoResource
     @GET
     @Path("{id: \\d+}")
     public PaseoEcologicoDetailDTO getPaseoEcologico(@PathParam("id") Long id) 
-    { // TODO si el paseo con el id dado no existe debe disparar una exception WebApplicationException 404
-        return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.getPaseo(id));
+    { 
+        PaseoEcologicoEntity entity = paseoEcologicoLogic.getPaseo(id);
+        if (entity == null) {
+            throw new WebApplicationException("El paseo con id dado no existe", 404);
+        }
+        return new PaseoEcologicoDetailDTO(entity);
     }
     
     @GET
-    @Path("/tematica") // TODO revisar si se necesita el path tematica y el queryparam al mismo tiempo
+    @Path("/tematica") 
     public List<PaseoEcologicoDetailDTO> getPaseosPorTematica(@QueryParam("tematica") String tematica) 
     {
         return listEntity2DTO(paseoEcologicoLogic.darPaseosSegunTematica(tematica));
@@ -117,6 +108,7 @@ public class PaseoEcologicoResource
      * Crea un paseo ecológico
      * @param dto instancia de paseo ecologico que se quiere crear.
      * @return nueva instancia creada.
+     * @throws BusinessLogicException Si hay problemas al validar las reglas de negocio
      */
     @POST
     public PaseoEcologicoDetailDTO createPaseoEcologico(PaseoEcologicoDetailDTO dto) throws BusinessLogicException 
@@ -129,26 +121,44 @@ public class PaseoEcologicoResource
      * @param id id del paseo ecologico que se quiere modificar
      * @param dto Paseo ecológico que se quiere modificar
      * @return Paseo con la información actualizada
+     * @throws BusinessLogicException si hay problemas al validar las reglas de negocio
      */
     @PUT
     @Path("{id: \\d+}")
-    public PaseoEcologicoDetailDTO updatePaseoEcologico(@PathParam("id") Long id, PaseoEcologicoDetailDTO dto) 
-    {// TODO si el paseo con el id dado no existe debe disparar una exception WebApplicationException 404
-        PaseoEcologicoEntity paseo = dto.toEntity();
-        paseo.setId(id);
-        return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.updatePaseo(paseo));
+    public PaseoEcologicoDetailDTO updatePaseoEcologico(@PathParam("id") Long id, PaseoEcologicoDetailDTO dto) throws BusinessLogicException 
+    {
+        PaseoEcologicoEntity entity = paseoEcologicoLogic.getPaseo(id);
+        if (entity == null) {
+            throw new WebApplicationException("El paseo con id dado no existe", 404);
+        }
+        PaseoEcologicoEntity paseoUpdate = dto.toEntity();
+        dto.setId(id);
+        return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.updatePaseo(paseoUpdate));
     }
 
     /**
      * Elimina un paseo ecológico dado por parametro.
      * @param id del paseo a borrar.
+     * @throws BusinessLogicException si hay problemas al validar las reglas de negocio
      */
     @DELETE
     @Path("{id: \\d+}")
     public void deletePaseoEcologico(@PathParam("id") Long id) throws BusinessLogicException
-    {// TODO si el paseo con el id dado no existe debe disparar una exception WebApplicationException 404
-       paseoEcologicoLogic.deletePaseo(id);
+    {
+        PaseoEcologicoEntity entity = paseoEcologicoLogic.getPaseo(id);
+        if (entity == null) {
+            throw new WebApplicationException("El paseo con id dado no existe", 404);
+        }
+        paseoEcologicoLogic.deletePaseo(id);
     }
     
-    
+    @Path("{idPaseo: \\d+}/instancias")
+    public Class<PaseoInstanciaResource> getArtesaniasResource(@PathParam("idPaseo") Long paseoId) {
+        PaseoEcologicoEntity entity = paseoEcologicoLogic.getPaseo(paseoId);
+        if (entity == null) {
+            throw new WebApplicationException("El paseo con id dado no existe", 404);
+        }
+        return PaseoInstanciaResource.class;
+    }
+
 }

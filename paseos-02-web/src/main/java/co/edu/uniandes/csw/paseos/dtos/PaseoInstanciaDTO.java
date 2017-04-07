@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.paseos.dtos;
 
-import co.edu.uniandes.csw.paseos.entities.FechaEntity;
+import co.edu.uniandes.csw.paseos.entities.PaseoInstanciaEntity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Juan David Vega
  */
 @XmlRootElement
-public class FechaDTO implements Serializable
+public class PaseoInstanciaDTO implements Serializable
 {
     /**
      * Atributo que representa el id de la fecha
@@ -28,14 +28,9 @@ public class FechaDTO implements Serializable
     private Date fechaRealizacion;
 
     /**
-     * Atributo que representa las observaciones de la fecha
-     */
-    private String observaciones;
-
-    /**
      * Constructor de la clase
      */
-    public FechaDTO( )
+    public PaseoInstanciaDTO( )
     {
         
     }
@@ -43,13 +38,12 @@ public class FechaDTO implements Serializable
     /**
      * Constructor de la clase
      */
-    public FechaDTO(FechaEntity entity)
+    public PaseoInstanciaDTO(PaseoInstanciaEntity entity)
     {
         if(entity != null)
         {
             this.id = entity.getId();
             this.fechaRealizacion = entity.getFechaRealizacion();
-            this.observaciones = entity.getObservaciones();
         }
     }
 
@@ -57,12 +51,11 @@ public class FechaDTO implements Serializable
      * Método que convierte un DTO en Entity
      * @return Instancia de OpinionParticipanteEntity
      */
-    public FechaEntity toEntity( )
+    public PaseoInstanciaEntity toEntity( )
     {
-        FechaEntity entity = new FechaEntity();
+        PaseoInstanciaEntity entity = new PaseoInstanciaEntity();
         entity.setId(this.getId());
         entity.setFechaRealizacion(this.getFechaRealizacion());
-        entity.setObservaciones(this.getObservaciones());
         return entity;        
     }
 
@@ -100,23 +93,5 @@ public class FechaDTO implements Serializable
      */
     public void setFechaRealizacion(Date fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
-    }
-
-    /**
-     * Obtiene observaciones de class org.jetbrains.java.generate.element.FieldElement
-     *
-     * @return observaciones java.lang.String
-     */
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    /**
-     * Modifica observaciones de la clase FechaDTO por el dado por parámetro
-     *
-     * @param observaciones el nuevo observaciones de la clase FechaDTO
-     */
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
     }
 }

@@ -33,20 +33,10 @@ public class InscripcionDTO implements Serializable
     private Date fechaInscripcion;
     
     /**
-     * Atributo que representa la fecha del paseo
-     */
-    private Date fechaDelPaseo; // TODO por qué esto e sun atributo de la inscripción y no del paseo?
-    
-    /**
      * Atributo que representa las observaciones de la inscripción
      */
     private String observaciones;
-    
-    /**
-     * Atributo que representa el costo de la inscripción
-     */
-    private double costo;
-    
+   
     /**
      * Constructor de la clase
      */
@@ -63,8 +53,6 @@ public class InscripcionDTO implements Serializable
     {
         if(entity != null)
         {
-            this.costo = entity.getCosto();
-            this.fechaDelPaseo = entity.getFechaDelPaseo();
             this.fechaInscripcion = entity.getFechaInscripcion();
             this.id = entity.getId();
             this.observaciones = entity.getObservaciones();
@@ -79,8 +67,6 @@ public class InscripcionDTO implements Serializable
      public InscripcionEntity toEntity( )
     {
        InscripcionEntity entity = new InscripcionEntity();
-       entity.setCosto(this.getCosto());
-       entity.setFechaDelPaseo(this.getFechaDelPaseo());
        entity.setFechaInscripcion(this.getFechaInscripcion());
        entity.setId(this.getId());
        entity.setObservaciones(this.getObservaciones());
@@ -137,22 +123,6 @@ public class InscripcionDTO implements Serializable
     }
 
     /**
-     * Obtiene la fecha en la que se hará el paseo.
-     * @return Fecha del paseo
-     */
-    public Date getFechaDelPaseo() {
-        return fechaDelPaseo;
-    }
-
-    /**
-     * Modifica la fecha en la que se hará el paseo.
-     * @param fechaDelPaseo
-     */
-    public void setFechaDelPaseo(Date fechaDelPaseo) {
-        this.fechaDelPaseo = fechaDelPaseo;
-    }
-
-    /**
      * Obtiene las observaciones de la insripcion.
      * @return Las observaciones
      */
@@ -166,21 +136,5 @@ public class InscripcionDTO implements Serializable
      */
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
-    }
-
-    /**
-     * Obtiene el costo de la insripcion.
-     * @return Costo inscripción
-     */
-    public double getCosto() {
-        return costo;
-    }
-
-    /**
-     * Modifica el costo de la inscrpción.
-     * @param costo
-     */
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }     
+    }   
 }

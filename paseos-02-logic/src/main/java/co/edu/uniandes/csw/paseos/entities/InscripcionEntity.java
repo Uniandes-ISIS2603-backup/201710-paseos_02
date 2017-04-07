@@ -41,20 +41,9 @@ public class InscripcionEntity implements Serializable
     private Date fechaInscripcion;
     
     /**
-     * Atributo que representa la fecha del paseo
-     */
-    @Temporal(TemporalType.DATE)
-    private Date fechaDelPaseo;
-    
-    /**
      * Atributo que representa las observaciones de la inscripción
      */
     private String observaciones;
-    
-    /**
-     * Atributo que representa el costo de la inscripción
-     */
-    private double costo;
     
     /**
      * Caminante que realiza la inscripción.
@@ -63,10 +52,10 @@ public class InscripcionEntity implements Serializable
     private CaminanteEntity caminante;
     
     /**
-     * Paseo sobre el que se realiza la inscripción.
+     * Instancia del paseo sobre el que se realiza la inscripción.
      */
     @ManyToOne
-    private PaseoEcologicoEntity paseoEcologico;
+    private PaseoInstanciaEntity instanciaPaseo;
 
     /**
      * Obtiene el id de la insripcion.
@@ -98,22 +87,6 @@ public class InscripcionEntity implements Serializable
      */
     public void setCaminante(CaminanteEntity caminante) {
         this.caminante = caminante;
-    }
-
-    /**
-     * Obtiene el paseo sobre el que se realizo la inscrpción.
-     * @return paseo.
-     */
-    public PaseoEcologicoEntity getPaseoEcologico() {
-        return paseoEcologico;
-    }
-
-    /**
-     * Modifica el paseo sobre el que se realizo la inscrpción
-     * @param paseoEcologico
-     */
-    public void setPaseoEcologico(PaseoEcologicoEntity paseoEcologico) {
-        this.paseoEcologico = paseoEcologico;
     }
 
     /**
@@ -149,22 +122,6 @@ public class InscripcionEntity implements Serializable
     }
 
     /**
-     * Obtiene la fecha en la que se hará el paseo.
-     * @return Fecha del paseo
-     */
-    public Date getFechaDelPaseo() {
-        return fechaDelPaseo;
-    }
-
-    /**
-     * Modifica la fecha en la que se hará el paseo.
-     * @param fechaDelPaseo
-     */
-    public void setFechaDelPaseo(Date fechaDelPaseo) {
-        this.fechaDelPaseo = fechaDelPaseo;
-    }
-
-    /**
      * Obtiene las observaciones de la insripcion.
      * @return Las observaciones
      */
@@ -180,20 +137,12 @@ public class InscripcionEntity implements Serializable
         this.observaciones = observaciones;
     }
 
-    /**
-     * Obtiene el costo de la insripcion.
-     * @return Costo inscripción
-     */
-    public double getCosto() {
-        return costo;
+    public PaseoInstanciaEntity getInstanciaPaseo() {
+        return instanciaPaseo;
     }
 
-    /**
-     * Modifica el costo de la inscrpción.
-     * @param costo
-     */
-    public void setCosto(double costo) {
-        this.costo = costo;
+    public void setInstanciaPaseo(PaseoInstanciaEntity instanciaPaseo) {
+        this.instanciaPaseo = instanciaPaseo;
     }
     
     @Override

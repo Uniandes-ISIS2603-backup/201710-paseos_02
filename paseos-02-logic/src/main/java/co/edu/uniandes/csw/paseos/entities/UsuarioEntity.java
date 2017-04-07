@@ -62,11 +62,6 @@ public  class UsuarioEntity implements Serializable
      * Atributo que representa el correo electronico de l usuario.
      */
     private String correoElectronico;
-    
-    /**
-     * Atributo que representa el estado (activo-inactivo) del usuario.
-     */
-    private Boolean estado;
 
     /**
      * Obtiene el id del usuario.
@@ -195,18 +190,7 @@ public  class UsuarioEntity implements Serializable
     public void setCorreoElectronico(String correoElectronico) 
     {
         this.correoElectronico = correoElectronico;
-    }
-
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
-    
-    
+    }    
     
      @Override
     public boolean equals(Object obj)

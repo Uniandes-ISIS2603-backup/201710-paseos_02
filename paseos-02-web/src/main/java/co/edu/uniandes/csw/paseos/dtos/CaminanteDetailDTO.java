@@ -18,7 +18,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Juan David Vega
  */
 
-// TODO revisar los warnings y arreglar los problemas
 @XmlRootElement
 public class CaminanteDetailDTO extends CaminanteDTO
 {
@@ -47,6 +46,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
 
     /**
      * Constructor de la clase
+     * @param entity
      */
     public CaminanteDetailDTO(CaminanteEntity entity)
     {
@@ -55,8 +55,8 @@ public class CaminanteDetailDTO extends CaminanteDTO
         {
             
             if(entity.getPaseosInscritos( ) != null)
-            {  // TODO cambiar ArrayList<InscripcionDTO>() por ArrayList<>() y en todos los demás
-                 inscripciones = new ArrayList<InscripcionDTO>();
+            {  
+                inscripciones = new ArrayList<>();
                 for (InscripcionEntity inscripcion : entity.getPaseosInscritos()) 
                 {
                     inscripciones.add(new InscripcionDTO(inscripcion));
@@ -65,7 +65,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
             
             if(entity.getCalificacionesGuia( )!= null)
             {
-                calificaciones = new ArrayList<CalificacionDTO>();
+                calificaciones = new ArrayList<>();
                 for (CalificacionEntity calificacion : entity.getCalificacionesGuia()) {
                     calificaciones.add(new CalificacionDTO(calificacion));
                 }
@@ -74,7 +74,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
             
             if(entity.getOpiniones( ) != null)
             {
-                opiniones = new ArrayList<OpinionParticipanteDTO>();
+                opiniones = new ArrayList<>();
                 for (OpinionParticipanteEntity opinion : entity.getOpiniones()) 
                 {
                     opiniones.add(new OpinionParticipanteDTO(opinion));
@@ -94,7 +94,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
         
         if(this.getInscripciones() != null)
         {            
-            List<InscripcionEntity> inscripcionesE = new ArrayList<InscripcionEntity>( );
+            List<InscripcionEntity> inscripcionesE = new ArrayList<>( );
             for(InscripcionDTO inscripcion : this.getInscripciones())
             {
                 inscripcionesE.add(inscripcion.toEntity());
@@ -104,7 +104,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
         
         if(this.getCalificaciones() != null)
         {
-            List<CalificacionEntity> calificacionesE = new ArrayList<CalificacionEntity>( );
+            List<CalificacionEntity> calificacionesE = new ArrayList<>( );
             for(CalificacionDTO calificacion: this.getCalificaciones())
             {
                 calificacionesE.add(calificacion.toEntity());
@@ -114,7 +114,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
         
         if(this.getOpiniones() != null)
         {
-            List<OpinionParticipanteEntity> opinionesE = new ArrayList<OpinionParticipanteEntity>( );
+            List<OpinionParticipanteEntity> opinionesE = new ArrayList<>( );
             for(OpinionParticipanteDTO opinion: this.getOpiniones())
             {
                 opinionesE.add(opinion.toEntity());
@@ -162,7 +162,7 @@ public class CaminanteDetailDTO extends CaminanteDTO
 
     /**
      * Modifica la lista de calificaciones dadas por un caminante.
-     * @return Lista de calificaciones dadas por un caminante.
+     * @param calificaciones
      */
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;

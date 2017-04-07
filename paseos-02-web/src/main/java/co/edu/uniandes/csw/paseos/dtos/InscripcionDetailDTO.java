@@ -23,7 +23,7 @@ public class InscripcionDetailDTO extends InscripcionDTO
     /**
      * Paseo sobre el que se realiza la inscripción.
      */
-    private PaseoEcologicoDTO paseoEcologico;
+    private PaseoInstanciaDTO instanciaPaseo;
     
     /**
      * Constructor de la clase
@@ -43,7 +43,7 @@ public class InscripcionDetailDTO extends InscripcionDTO
         if(entity != null)
         {
             if(entity.getCaminante() != null) this.caminante = new CaminanteDTO(entity.getCaminante());
-            if(entity.getPaseoEcologico() != null) this.paseoEcologico = new PaseoEcologicoDTO(entity.getPaseoEcologico());
+            if(entity.getInstanciaPaseo() != null) this.instanciaPaseo = new PaseoInstanciaDTO(entity.getInstanciaPaseo());
         }
     }
     
@@ -56,7 +56,7 @@ public class InscripcionDetailDTO extends InscripcionDTO
     {
         InscripcionEntity entity = super.toEntity();
         if(this.getCaminante() != null) entity.setCaminante(this.getCaminante().toEntity());
-        if(this.getPaseoEcologico() != null) entity.setPaseoEcologico(this.getPaseoEcologico().toEntity());
+        if(this.getInstanciaPaseo() != null) entity.setInstanciaPaseo(this.getInstanciaPaseo().toEntity());
         return entity;
     }
 
@@ -76,20 +76,12 @@ public class InscripcionDetailDTO extends InscripcionDTO
         this.caminante = caminante;
     }
 
-    /**
-     * Obtiene el paseo sobre el que se realizo la inscrpción.
-     * @return paseo.
-     */
-    public PaseoEcologicoDTO getPaseoEcologico() {
-        return paseoEcologico;
+    public PaseoInstanciaDTO getInstanciaPaseo() {
+        return instanciaPaseo;
     }
 
-    /**
-     * Modifica el paseo sobre el que se realizo la inscrpción
-     * @param paseoEcologico
-     */
-    public void setPaseoEcologico(PaseoEcologicoDTO paseoEcologico) {
-        this.paseoEcologico = paseoEcologico;
+    public void setInstanciaPaseo(PaseoInstanciaDTO instanciaPaseo) {
+        this.instanciaPaseo = instanciaPaseo;
     }
     
 }

@@ -7,12 +7,13 @@ package co.edu.uniandes.csw.paseos.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,7 +22,7 @@ import javax.persistence.TemporalType;
  * @author Juan David Vega 
  */
 @Entity
-public class FechaEntity implements Serializable
+public class PaseoInstanciaEntity implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,19 +30,18 @@ public class FechaEntity implements Serializable
     
     @Temporal(TemporalType.DATE)
     private Date fechaRealizacion;
-
+    
     /**
-     * Atributo que representa las observaciones.
-     */
-    private String observaciones;
-
-
-    /**
-     * Atributo que representa un paseo ecológico.
+     * Atributo que representa el paseo ecológico al que pertenece la instancia
      */
     @ManyToOne
     private PaseoEcologicoEntity paseoEcologico;
 
+     /**
+     * Atributo que representa la lista de inscripciones a un paseo
+     */
+    @OneToMany(mappedBy = "instanciaPaseo")
+    private List<InscripcionEntity> inscripciones;
 
     /**
      * Obtiene el id de la instancia.
@@ -90,28 +90,30 @@ public class FechaEntity implements Serializable
     public void setFechaRealizacion(Date fechaRealizacion) {
         this.fechaRealizacion = fechaRealizacion;
     }
-
+    
     /**
-     * Obtiene las observaciones.
-     * @return las observaciones.
+     * Obtiene las inscripciones a esta instancia del paseo
+     *
+     * @return inscripciones 
      */
-    public String getObservaciones() {
-        return observaciones;
+    public List<InscripcionEntity> getInscripciones() {
+        return inscripciones;
     }
 
     /**
-     * Modifica las observaciones.
-     * @param observaciones Nuevas observaciones.
+     * Modifica la lista de inscripciones 
+     *
+     * @param inscripciones el nuevo inscripciones de la clase PaseoEcologicoEntity
      */
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
+    public void setInscripciones(List<InscripcionEntity> inscripciones) {
+        this.inscripciones = inscripciones;
     }
     
     @Override
     public boolean equals(Object obj)
     {
         if (this.getId() != null) {
-            return this.getId().equals(((FechaEntity) obj).getId());
+            return this.getId().equals(((PaseoInstanciaEntity) obj).getId());
         }
         return super.equals(obj);
     }

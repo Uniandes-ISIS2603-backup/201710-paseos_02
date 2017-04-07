@@ -7,7 +7,7 @@ package co.edu.uniandes.csw.paseos.dtos;
 
 import co.edu.uniandes.csw.paseos.entities.ActividadEntity;
 import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
-import co.edu.uniandes.csw.paseos.entities.FechaEntity;
+import co.edu.uniandes.csw.paseos.entities.PaseoInstanciaEntity;
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import co.edu.uniandes.csw.paseos.entities.OpinionParticipanteEntity;
 import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
@@ -33,9 +33,9 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
     private LugarDTO lugarDeDestino;
 
     /**
-     * Atributo que representa la fecha del paseo
+     * Atributo que representa la instancia del paseo
      */
-    private List<FechaDTO> fechas;
+    private List<PaseoInstanciaDTO> instancias;
 
     /**
      * Atributo que representa la lista de actividades del paseo
@@ -51,11 +51,6 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
      * Atributo que representa la calificacion del guia del paseo
      */
     private List<CalificacionDTO> calificacionesGuia;
-
-    /**
-     * Atributo que representa la lista de inscripciones del paseo
-     */
-    private List<InscripcionDTO> inscripciones;
 
     /**
      * Atributo que representa la lista de opiniones del paseo
@@ -89,22 +84,15 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
                 this.guia = new GuiaDTO(entity.getGuia());
             }
             
-            if (entity.getFechas() != null) {
-                fechas = new ArrayList<FechaDTO>();
-                for (FechaEntity fecha : entity.getFechas()) {
-                    fechas.add(new FechaDTO(fecha));
-                }
-            }
-
-            if (entity.getInscripciones() != null) {
-                inscripciones = new ArrayList<InscripcionDTO>();
-                for (InscripcionEntity inscripcion : entity.getInscripciones()) {
-                    inscripciones.add(new InscripcionDTO(inscripcion));
+            if (entity.getInstancias() != null) {
+                instancias = new ArrayList<>();
+                for (PaseoInstanciaEntity instancia : entity.getInstancias()) {
+                    instancias.add(new PaseoInstanciaDTO(instancia));
                 }
             }
 
             if (entity.getCalificacionesGuia() != null) {
-                calificacionesGuia = new ArrayList<CalificacionDTO>();
+                calificacionesGuia = new ArrayList<>();
                 for (CalificacionEntity calificacion : entity.getCalificacionesGuia()) {
                     calificacionesGuia.add(new CalificacionDTO(calificacion));
                 }
@@ -112,7 +100,7 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
 
             if (entity.getActividades() != null) {
 
-                actividades = new ArrayList<ActividadDTO>();
+                actividades = new ArrayList<>();
                 for (ActividadEntity actividad : entity.getActividades()) {
                     actividades.add(new ActividadDTO(actividad));
                 }
@@ -120,7 +108,7 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
 
             if(entity.getOpiniones( ) != null)
             {
-                opiniones = new ArrayList<OpinionParticipanteDTO>();
+                opiniones = new ArrayList<>();
                 for(OpinionParticipanteEntity opinion : entity.getOpiniones()) 
                 {
                     opiniones.add(new OpinionParticipanteDTO(opinion));
@@ -148,25 +136,17 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
             paseo.setGuia(this.getGuia().toEntity());
         }
 
-        if (this.getFechas() != null) {
-            List<FechaEntity> fechas = new ArrayList<FechaEntity>();
-            for (FechaDTO fecha : this.getFechas()) {
-                fechas.add(fecha.toEntity());
+        if (this.getInstancias() != null) {
+            List<PaseoInstanciaEntity> instancias = new ArrayList<>();
+            for (PaseoInstanciaDTO instancia : this.getInstancias()) {
+                instancias.add(instancia.toEntity());
             }
-            paseo.setFechas(fechas);
-        }
-
-        if (this.getInscripciones() != null) {
-            List<InscripcionEntity> inscripciones = new ArrayList<InscripcionEntity>();
-            for (InscripcionDTO inscripcion : this.getInscripciones()) {
-                inscripciones.add(inscripcion.toEntity());
-            }
-            paseo.setInscripciones(inscripciones);
+            paseo.setInstancias(instancias);
         }
 
         if (this.getCalificacionesGuia() != null) {
 
-            List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+            List<CalificacionEntity> calificaciones = new ArrayList<>();
             for (CalificacionDTO calificacion : this.getCalificacionesGuia()) {
                 calificaciones.add(calificacion.toEntity());
             }
@@ -174,7 +154,7 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
         }
 
         if (this.getActividades() != null) {
-            List<ActividadEntity> actividades = new ArrayList<ActividadEntity>();
+            List<ActividadEntity> actividades = new ArrayList<>();
             for (ActividadDTO actividad : this.getActividades()) {
 
                 actividades.add(actividad.toEntity());
@@ -185,7 +165,7 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
         
         if(this.getOpiniones() != null)
         {
-            List<OpinionParticipanteEntity> opinionesE = new ArrayList<OpinionParticipanteEntity>();
+            List<OpinionParticipanteEntity> opinionesE = new ArrayList<>();
             for(OpinionParticipanteDTO opinion : this.getOpiniones()) {
                 opinionesE.add(opinion.toEntity());
             }
@@ -196,19 +176,19 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
     }
 
     /**
-     * Obtiene las fechas del paseo.
-     * @return lista de fechas.
+     * Obtiene las instancias del paseo.
+     * @return lista de instancias.
      */
-    public List<FechaDTO> getFechas() {
-        return fechas;
+    public List<PaseoInstanciaDTO> getInstancias() {
+        return instancias;
     }
 
     /**
-     * Modifica la lista de fechas del paseo
-     * @param fechas nueva lista del paseo
+     * Modifica la lista de instancias del paseo
+     * @param instancias nueva lista del paseo
      */
-    public void setFechas(List<FechaDTO> fechas) {
-        this.fechas = fechas;
+    public void setInstancias(List<PaseoInstanciaDTO> instancias) {
+        this.instancias = instancias;
     }
 
     /**
@@ -277,8 +257,8 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
 
 
     /**
-     * Obtiene las fechas del paseo.
-     * @return lista de fechas.
+     * Obtiene las instancias del paseo.
+     * @return lista de instancias.
      */
     public List<CalificacionDTO> getCalificacionesGuia() {
         return calificacionesGuia;
@@ -290,22 +270,6 @@ public class PaseoEcologicoDetailDTO extends PaseoEcologicoDTO {
      */
     public void setCalificacionesGuia(List<CalificacionDTO> calificacionesGuia) {
         this.calificacionesGuia = calificacionesGuia;
-    }
-
-    /**
-     * Obtiene las inscripciones del paseo.
-     * @return lista de inscripciones.
-     */
-    public List<InscripcionDTO> getInscripciones() {
-        return inscripciones;
-    }
-
-    /**
-     * Modifica las inscripciones del paseo
-     * @param inscripciones nueva lista del paseo
-     */
-    public void setInscripciones(List<InscripcionDTO> inscripciones) {
-        this.inscripciones = inscripciones;
     }
 
     /**

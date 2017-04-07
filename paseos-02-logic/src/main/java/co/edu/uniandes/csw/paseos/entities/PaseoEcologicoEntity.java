@@ -6,19 +6,14 @@
 package co.edu.uniandes.csw.paseos.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -35,10 +30,10 @@ public class PaseoEcologicoEntity implements Serializable
     private Long id;
 
     /**
-     * Atributo que representa la lista de fechas de un paseo
+     * Atributo que representa la lista de instancias del paseo
      */
     @OneToMany(mappedBy = "paseoEcologico", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FechaEntity> fechas;
+    private List<PaseoInstanciaEntity> instancias;
 
     /**
      * Atributo que representa la tematica de un paseo
@@ -56,9 +51,17 @@ public class PaseoEcologicoEntity implements Serializable
     private Integer nMaxCaminantes;
 
     /**
-     * Atributo que representa las condiciones fisicas necesarias para participar en una paseo
+     * Atributo que representa las condiciones fisicas necesarias para participar en una paseo. 
+     * Se consideran 5 condiciones basicas y a cada una se asigna un valor en el rango (0 <= i <= 10). 
+     * Este valor representa el nivel de rendimiento requerido para participar en el paseo.
+     * A continuación se muestra la convencion seguida para almacenar los valores:
+     * condicionesFisicas(0) --> Fuerza
+     * condicionesFisicas(1) --> Velocidad
+     * condicionesFisicas(2) --> Resistencia
+     * condicionesFisicas(3) --> Flexibilidad
+     * condicionesFisicas(4) --> Coordinacion
      */
-    private String condicionesFisicas;
+    private List<Integer> condicionesFisicas;
 
     /**
      * Atributo que representa si hay transporte en el paseo
@@ -106,12 +109,6 @@ public class PaseoEcologicoEntity implements Serializable
     private List<CalificacionEntity> calificacionesGuia;
 
     /**
-     * Atributo que representa la lista de inscripciones a un paseo
-     */
-    @OneToMany(mappedBy = "paseoEcologico")
-    private List<InscripcionEntity> inscripciones;
-
-    /**
      * Atributo que representa la lista de opiniones sobre un paseo
      */
     @OneToMany(mappedBy = "paseoEcologico")
@@ -136,21 +133,21 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene fechas de class 
+     * Obtiene instancias de class 
      *
-     * @return fechas
+     * @return instancias
      */
-    public List<FechaEntity> getFechas() {
-        return fechas;
+    public List<PaseoInstanciaEntity> getInstancias() {
+        return instancias;
     }
 
     /**
-     * Modifica fechas de la clase PaseoEcologicoEntity por el dado por parámetro
+     * Modifica instancias de la clase PaseoEcologicoEntity por el dado por parámetro
      *
-     * @param fechas el nuevo fechas de la clase PaseoEcologicoEntity
+     * @param instancias el nuevo instancias de la clase PaseoEcologicoEntity
      */
-    public void setFechas(List<FechaEntity> fechas) {
-        this.fechas = fechas;
+    public void setInstancias(List<PaseoInstanciaEntity> instancias) {
+        this.instancias = instancias;
     }
 
     /**
@@ -205,24 +202,6 @@ public class PaseoEcologicoEntity implements Serializable
      */
     public void setnMaxCaminantes(Integer nMaxCaminantes) {
         this.nMaxCaminantes = nMaxCaminantes;
-    }
-
-    /**
-     * Obtiene condicionesFisicas de class 
-     *
-     * @return condicionesFisicas 
-     */
-    public String getCondicionesFisicas() {
-        return condicionesFisicas;
-    }
-
-    /**
-     * Modifica condicionesFisicas de la clase PaseoEcologicoEntity por el dado por parámetro
-     *
-     * @param condicionesFisicas el nuevo condicionesFisicas de la clase PaseoEcologicoEntity
-     */
-    public void setCondicionesFisicas(String condicionesFisicas) {
-        this.condicionesFisicas = condicionesFisicas;
     }
 
     /**
@@ -370,25 +349,7 @@ public class PaseoEcologicoEntity implements Serializable
     }
 
     /**
-     * Obtiene inscripciones de class org.jetbrains.java.generate.element.FieldElement
-     *
-     * @return inscripciones 
-     */
-    public List<InscripcionEntity> getInscripciones() {
-        return inscripciones;
-    }
-
-    /**
-     * Modifica inscripciones de la clase PaseoEcologicoEntity por el dado por parámetro
-     *
-     * @param inscripciones el nuevo inscripciones de la clase PaseoEcologicoEntity
-     */
-    public void setInscripciones(List<InscripcionEntity> inscripciones) {
-        this.inscripciones = inscripciones;
-    }
-
-    /**
-     * Obtiene opiniones de class org.jetbrains.java.generate.element.FieldElement
+     * Obtiene las opiniones que hicieron los caminantes sobre el paseo
      *
      * @return opiniones 
      */
@@ -403,6 +364,14 @@ public class PaseoEcologicoEntity implements Serializable
      */
     public void setOpiniones(List<OpinionParticipanteEntity> opiniones) {
         this.opiniones = opiniones;
+    }
+
+    public List<Integer> getCondicionesFisicas() {
+        return condicionesFisicas;
+    }
+
+    public void setCondicionesFisicas(List<Integer> condicionesFisicas) {
+        this.condicionesFisicas = condicionesFisicas;
     }
 
     @Override

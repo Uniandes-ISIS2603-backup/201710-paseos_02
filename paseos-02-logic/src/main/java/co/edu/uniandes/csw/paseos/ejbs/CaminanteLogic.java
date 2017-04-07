@@ -49,7 +49,6 @@ public class CaminanteLogic {
      */
     public CaminanteEntity createCaminante(CaminanteEntity caminante) throws BusinessLogicException 
     {
-        caminante.setEstado(Boolean.TRUE); // TODO qué modela esto?
         verificarDatos(caminante);
         if(!existeCaminanteConMismaIdentificacion(caminante.getIdentificacion()))
         {
