@@ -35,16 +35,12 @@ import javax.ws.rs.core.Response;
  * @author Juan Diego Chaves
  */
 
-// TODO Segun el diagrama de clases actividades es un subrecurso de paseo ecológico. 
-// TODO entonces o se llama desde paseos ecologicos o se define el path que lo incluya: @Path("/paseos/{idPaseo \\d+}/actividades")
-// TODO los métodos deben recibir el idPaseo y verificar que efectivamente este exista
 @Consumes(MediaType.APPLICATION_JSON) 
 @Produces(MediaType.APPLICATION_JSON)
 public class ActividadResource
 {
     @Inject private ActividadLogic actividadLogic;
     @Inject private PaseoEcologicoLogic paseoLogic;
-    // TODO eliminar los atributos que no se necesitan
     @Context private HttpServletResponse response;
     /**
      * Convierte una lista de AcctividadEntity a una lista de ActividadDTO
@@ -74,8 +70,8 @@ public class ActividadResource
     {
         if(paseoLogic.getPaseo(idPaseo) == null)
                    throw new WebApplicationException(Response.Status.NOT_FOUND);
-//        return listEntity2DTO(actividadLogic.getActividades(idPaseo));
-            return null;
+      return listEntity2DTO(actividadLogic.getActividades(idPaseo));
+             
     }
     /**
      * Metodo que retorna una actividad cuyo id sea el pasado por parametro
@@ -89,9 +85,8 @@ public class ActividadResource
            {
                if(paseoLogic.getPaseo(idPaseo) == null)
                    throw new WebApplicationException(Response.Status.NOT_FOUND);
-//                ActividadDetailDTO ans = new ActividadDetailDTO(actividadLogic.getActividad(idPaseo, id));
-//                return ans;
-               return null;
+                  ActividadDetailDTO ans = new ActividadDetailDTO(actividadLogic.getActividad(idPaseo, id));
+                    return ans;
             }
         catch(IllegalArgumentException e)
             {
@@ -153,9 +148,14 @@ public class ActividadResource
     @Path("paseos/{idPaseo}/actividades/{id: \\d+}")
     public void deleteActividad(@PathParam("idPaseo") Long idPaseo,@PathParam("id") Long id)
     {
+        try{
          if(getActividad(idPaseo, id)==null)
             throw new WebApplicationException(Response.Status.NOT_FOUND);
-        
+        }
+        catch(Exception e)
+        {
+             throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
        actividadLogic.deleteActividad(id);
     }
     

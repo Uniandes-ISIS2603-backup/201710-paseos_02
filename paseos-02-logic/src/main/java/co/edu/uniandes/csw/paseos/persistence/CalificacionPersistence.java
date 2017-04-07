@@ -6,11 +6,13 @@
 package co.edu.uniandes.csw.paseos.persistence;
 
 import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
+import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -22,24 +24,38 @@ public class CalificacionPersistence
     @PersistenceContext(unitName="paseosPU")
     protected EntityManager em;
     
+     protected EntityManager getEntityManager()
+   {
+       return em;
+   }
+    
+    protected Class<CalificacionEntity> getEntityClass()
+   {
+       return CalificacionEntity.class;
+   }
+    
     /**
      * Obtiene una Calificacion según el id dado por parámetro.
      * @param id id de la calificación buscada.
      * @return calificación buscada.
      */
-    public CalificacionEntity find(Long id)
+    public CalificacionEntity find(Long guiaid, Long calificacionid)
     {
-        return em.find(CalificacionEntity.class, id);
+        TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.guia.id = :guiaid) and (p.id = :calificacionid)", CalificacionEntity.class);
+        q.setParameter("guiaid", guiaid);
+        q.setParameter("calificacionid", calificacionid);
+        return q.getSingleResult();
     }
     
     /**
      * Obtiene todas las calificaciones de los participantes.
      * @return Lista con todas las calificaciones de los participantes.
      */
-    public List<CalificacionEntity> findAll( )
+    public List<CalificacionEntity> findAll(Long guiaid)
     {
-        Query solicitud = em.createQuery("select u from CalificacionEntity u");
-        return solicitud.getResultList();
+         TypedQuery<CalificacionEntity> q = em.createQuery("select p from CalificacionEntity p where (p.guia.id = :guiaid)", CalificacionEntity.class);
+        q.setParameter("guiaid", guiaid);
+        return q.getResultList();
     }
     
     /**

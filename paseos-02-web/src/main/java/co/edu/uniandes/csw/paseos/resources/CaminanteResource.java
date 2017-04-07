@@ -24,6 +24,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -54,6 +55,15 @@ public class CaminanteResource
     public List<CaminanteDetailDTO> getCaminantes( )
     {
         return listEntity2DTO(caminanteLogic.getCaminantes());
+    }
+    
+    @Path("caminantes/{idCaminante: \\d+}/inscripciones")
+    public InscripcionResource getInscripcionResource(@PathParam("caminantesId") Long caminantesId) {
+         CaminanteEntity entity = caminanteLogic.getCaminante(caminantesId);
+        if (entity == null) {
+            throw new WebApplicationException("La inscripción no existe", 404);
+        }
+        return new InscripcionResource();
     }
     
     @GET
