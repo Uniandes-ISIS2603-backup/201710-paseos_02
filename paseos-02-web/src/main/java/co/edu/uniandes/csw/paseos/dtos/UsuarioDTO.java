@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.paseos.dtos;
 
-import co.edu.uniandes.csw.paseos.entities.UsuarioEntity;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -56,7 +55,7 @@ public class UsuarioDTO implements Serializable
      */
     protected String correoElectronico;
     
-    protected Boolean estado;  // TODO qu{e modela la variable estado?
+    protected String imagen;
 
     /**
      * Constructor de la clase
@@ -194,11 +193,11 @@ public class UsuarioDTO implements Serializable
         this.correoElectronico = correoElectronico;
     }
 
-    public Boolean getEstado() {
-        return estado;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

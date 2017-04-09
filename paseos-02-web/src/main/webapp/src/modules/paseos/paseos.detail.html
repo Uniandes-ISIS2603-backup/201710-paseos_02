@@ -9,17 +9,14 @@
                 <li role="presentation" class="active"> <a ui-sref="paseoFicha({paseoId: currentPaseo.id})">Ficha Tecnica</a></li>
                 <li role="presentation" class="active"> <a ui-sref="actividadesList({paseoId: currentPaseo.id})">Actividades</a></li>
                 <li role="presentation" class="active"> <a ui-sref="opinionesList({paseoId: currentPaseo.id})">Opiniones</a></li> 
-                <li role="presentation" class="active"> <a ui-sref="paseoGuia({paseoId: currentPaseo.id})">Guia</a></li>
+                <li role="presentation" class="active"> <a ui-sref="guiaDetail({guiaId: currentPaseo.guia.id})">Guia</a></li>
             </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-           <div ui-view="guiaView"></div>
-        </div>
-    </div>
-     <div ui-view="fichaTecnicaView"></div>
-    
+
+    <div ui-view="detailView"></div>
+
+    <div ui-view="fichaTecnicaView"></div>
+
     <div ui-view="childrenView"></div>
 </div>

@@ -8,10 +8,14 @@ package co.edu.uniandes.csw.paseos.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -61,6 +65,9 @@ public class PaseoEcologicoEntity implements Serializable
      * condicionesFisicas(3) --> Flexibilidad
      * condicionesFisicas(4) --> Coordinacion
      */
+    @ElementCollection
+    @CollectionTable(name="CONDFISICASPASEO", joinColumns=@JoinColumn(name="PASEO_ID"))
+    @Column(name="VALOR")
     private List<Integer> condicionesFisicas;
 
     /**

@@ -18,7 +18,7 @@
                     reviews: ['$http', 'lugaresContext', 'reviewsContext', '$stateParams', function ($http, lugaresContext, reviewsContext, $params) {
                             return $http.get(lugaresContext + '/' + $params.lugarId + '/' + reviewsContext);
                         }]
-                }; 
+                }}),
             $stateProvider.state('lugares', {
                 url: '/lugares',
                 abstract: true,

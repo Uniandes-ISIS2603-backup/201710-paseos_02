@@ -62,6 +62,8 @@ public  class UsuarioEntity implements Serializable
      * Atributo que representa el correo electronico de l usuario.
      */
     private String correoElectronico;
+    
+    private String imagen;
 
     /**
      * Obtiene el id del usuario.
@@ -191,6 +193,16 @@ public  class UsuarioEntity implements Serializable
     {
         this.correoElectronico = correoElectronico;
     }    
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+    
+    
     
      @Override
     public boolean equals(Object obj)

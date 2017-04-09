@@ -50,6 +50,7 @@ public class GuiaDTO extends UsuarioDTO
             this.correoElectronico = entity.getCorreoElectronico();
             this.experiencia = entity.getExperiencia();
             this.formacion = entity.getFormacion();
+            this.imagen = entity.getImagen();
         }
     }
 
@@ -70,6 +71,7 @@ public class GuiaDTO extends UsuarioDTO
         guia.setCorreoElectronico(this.getCorreoElectronico());
         guia.setExperiencia(this.getExperiencia());
         guia.setFormacion(this.getFormacion());
+        guia.setImagen(this.getImagen());
         return guia;
     }
 

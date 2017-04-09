@@ -7,7 +7,11 @@ package co.edu.uniandes.csw.paseos.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
@@ -22,7 +26,7 @@ public class CaminanteEntity extends UsuarioEntity
 {
     /**
      * Atributo que representa las condiciones fisicas del caminante. 
-     * Se consideran 5 condiciones basicas y a cada una se asigna un valor en el rango (0 <= i <= 10). 
+     * Se consideran 5 condiciones basicas y a cada una se asigna un valor i en el rango (0 <= i <= 10). 
      * Este valor representa el nivel de rendimiento estimado del caminante.
      * A continuación se muestra la convencion seguida para almacenar los valores:
      * condicionesFisicas(0) --> Fuerza
@@ -31,6 +35,9 @@ public class CaminanteEntity extends UsuarioEntity
      * condicionesFisicas(3) --> Flexibilidad
      * condicionesFisicas(4) --> Coordinacion
      */
+    @ElementCollection
+    @CollectionTable(name="CONDFISICASCAMINANTE", joinColumns=@JoinColumn(name="CAMINANTE_ID"))
+    @Column(name="VALOR")
     private List<Integer> condicionesFisicas;
 
     /**
