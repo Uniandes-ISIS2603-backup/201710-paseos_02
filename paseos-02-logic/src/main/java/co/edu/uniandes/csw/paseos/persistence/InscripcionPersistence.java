@@ -96,7 +96,7 @@ public class InscripcionPersistence
      */
     public List<InscripcionEntity> inscripcionesPorPaseo(Long id)
     {
-        TypedQuery<InscripcionEntity> q = em.createQuery("SELECT A FROM InscripcionEntity A WHERE A.paseoEcologico.id = :id", InscripcionEntity.class);
+        TypedQuery<InscripcionEntity> q = em.createQuery("SELECT A FROM InscripcionEntity A WHERE A.instanciaPaseo.paseoEcologico.id = :id", InscripcionEntity.class);
 
         q.setParameter("id", id);
 
