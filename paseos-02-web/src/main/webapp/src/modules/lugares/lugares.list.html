@@ -18,8 +18,8 @@ and open the template in the editor.
                 </thead>
                 <tbody>
                 <tr ng-repeat="lugar in lugaresRecords">
-                    <td id="{{$index}}-nombre"> <a ui-sref="lugaresDetail({lugarId: lugar.identificacion})">{{lugar.nombre}}</a></td>
-                    <td id="{{$index}}-identificacion">{{lugar.identificacion}}</td>
+                    <td id="{{$index}}-nombre"> <a ui-sref="lugarDetail({lugarId: lugar.id})">{{lugar.nombre}}</a></td>
+                    <td id="{{$index}}-identificacion">{{lugar.id}}</td>
                     <td id="{{$index}}-direccion">{{lugar.direccion}}</td>
                 </tr>
                 </tbody>

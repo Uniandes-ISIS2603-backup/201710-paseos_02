@@ -8,11 +8,11 @@ and open the template in the editor.
     <div class="row">
         <div ng-repeat="paseo in paseosRecords">
 
-            <div class="col-lg-2 " style="padding-top: 20px; min-height: 350px" >
+            <div class="col-lg-2">
                 <center><a ui-sref="paseoDetail({paseoId: paseo.id})">
-                        <img class="img-responsive" ng-src="{{paseo.lugarDeEncuentro.imagen}}" height="220px" width="220px" style="min-height: 220px">
-                    <!--<p > Tematica: {{paseo.tematica}} </p>-->
-                    <p> Precio: {{paseo.costo}} </p>
+                        <img class="img-responsive" ng-src="{{paseo.lugarDeEncuentro.imagen}}" height="220px" width="220px">
+                    <p> Tematica: {{paseo.tematica}} </p>
+                    <p> Precio: ${{paseo.costo}} </p>
                 </a></center>
             </div>
         </div>

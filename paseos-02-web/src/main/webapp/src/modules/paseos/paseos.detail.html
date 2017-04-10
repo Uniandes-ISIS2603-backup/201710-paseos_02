@@ -10,9 +10,12 @@
                 <li role="presentation"> <a ui-sref="actividadesList({paseoId: currentPaseo.id})">Actividades</a></li>
                 <li role="presentation"> <a ui-sref="opinionesList({paseoId: currentPaseo.id})">Opiniones</a></li> 
                 <li role="presentation"> <a ui-sref="paseoGuia({paseoId: currentPaseo.id})">Guia</a></li>
+                <li role="presentation"> <a ui-sref="paseoLugar({paseoId: currentPaseo.id})">Lugar</a></li>
             </ul>
         </div>
     </div>
+    
+    <div ui-view="paseoLugarView"></div>
 
     <div ui-view="paseoGuiaView"></div>
 

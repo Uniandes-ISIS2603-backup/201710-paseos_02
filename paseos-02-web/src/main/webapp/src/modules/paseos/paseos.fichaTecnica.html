@@ -20,7 +20,7 @@
 
                                 <hr>
                                 <dt>Numero maximo de caminantes</dt>
-                                <dd>{{currentPaseo.nMaximCaminantes}}</dd>
+                                <dd>{{currentPaseo.nMaxCaminantes}}</dd>
 
                             </dl>
                         </div>
@@ -35,23 +35,23 @@
                                 <tbody>
                                     <tr>
                                         <td>Fuerza</td>
-                                        <td>{{currentPaseo.condicionesFisicas.fuerza}}</td>
+                                        <td>{{currentPaseo.condicionesFisicas[0]}}</td>
                                     </tr>
                                     <tr>
                                         <td>Velocidad</td>
-                                        <td>{{currentPaseo.condicionesFisicas.velocidad}}</td>
+                                        <td>{{currentPaseo.condicionesFisicas[1]}}</td>
                                     </tr>
                                     <tr>
                                         <td>Resistencia</td>
-                                        <td>{{currentPaseo.condicionesFisicas.resistencia}}</td>
+                                        <td>{{currentPaseo.condicionesFisicas[2]}}</td>
                                     </tr>
                                     <tr>
                                         <td>Flexibilidad</td>
-                                        <td>{{currentPaseo.condicionesFisicas.flexibilidad}}</td>
+                                        <td>{{currentPaseo.condicionesFisicas[3]}}</td>
                                     </tr>
                                     <tr>
                                         <td>Coordinacion</td>
-                                        <td>{{currentPaseo.condicionesFisicas.coordinacion}}</td>
+                                        <td>{{currentPaseo.condicionesFisicas[4]}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -64,15 +64,10 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <h4> Costo: $ {{currentPaseo.costo}} por persona. Incluye:</h4>
-                                        </div>
+                                        </div>                                       
                                         <div class="col-md-2">
                                             <form>
-                                                <h5><input type="radio" name="Almuerzo" value="Almuerzo" checked='{{currentPaseo.hayAlmuerzo}}'> Almuerzo </h5>
-                                            </form>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <form>
-                                                <h5><input type="radio" name="Transporte" value="Transporte" checked='{{currentPaseo.hayTransporte}}'> Transporte </h5>
+                                                <h5><input type="radio" name="Transporte" value="Transporte" checked="{{currentPaseo.hayTransporte}}"> Transporte </h5>
                                             </form>
                                         </div>
                                     </div>
