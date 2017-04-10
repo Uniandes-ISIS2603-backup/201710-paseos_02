@@ -1,57 +1,59 @@
 (function (ng) {
-    var mod = ng.module('opinionesModule', ['ui.router']);
+    var mod = ng.module("opinionesModule", ['ui.router']);
 
     mod.constant("paseosContext", "api/paseos");
-    mod.constant('opinionesContext', 'api/opiniones');
+
+    mod.constant("opinionesContext", "api/opiniones");
+
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        var basePath = 'src/modules/opiniones/';
-        $urlRouterProvider.otherwise('/opinionesList');
-        $stateProvider
-            .state('opiniones', {
+            var basePath = 'src/modules/opiniones/';
+            $urlRouterProvider.otherwise("/opinionesList");
+
+            $stateProvider.state('opiniones', {
                 url: '/opiniones',
                 abstract: true,
                 parent: 'paseoDetail',
                 views: {
-                    childrenView: {
-                        resolve: {
-                            paseos: ['$http', function ($http) {
-                                return $http.get(paseosContext);
-                            }],
-                            opiniones: ['$http', function ($http) {
-                                return $http.get( opinionesContext );
-                            }]
-                        },
-                        templateUrl: basePath + 'opiniones.html',
-                        controller: ['$scope', 'paseos', 'opiniones', '$stateParams', function ($scope, paseos, opiniones, $params) {
-                            $scope.currentPaseo = paseos.data[$params.paseoId - 1];
-                            $scope.opinionesRecords = opiniones.data;
-                        }]
+                    'childrenView': {
+                        templateUrl: basePath + 'opiniones.html'
                     }
                 }
-
-            })
-            .state('opinionesList', {
+            }).state('opinionesList', {
                 url: '/list',
                 parent: 'opiniones',
                 views: {
                     'listView': {
-                        templateUrl: basePath + 'opiniones.list.html'
+                        templateUrl: basePath + 'opiniones.list.html',
+                        controller: ['$scope', 'currentPaseo',function ($scope,currentPaseo) {
+                                $scope.opinionesRecords = currentPaseo.data.opiniones;
+                            }]
                     }
                 }
-            })
-            .state('opinionDetail', {
+            }).state('opinionDetail', {
                 url: '/{opinionId:int}/detail',
                 parent: 'opiniones',
+                param: {
+                    opinionId: null
+                },
+                resolve:  {
+                    currentOpinion: ['$http', 'opinionesContext', '$stateParams', function ($http, opinionesContext, $params) {
+                            return $http.get(opinionesContext+'/'+$params.opinionId);
+                        }]
+                },
                 views: {
-                    'listView': {
-                                templateUrl: basePath + 'opiniones.list.html'
-                            },
                     'detailView': {
                         templateUrl: basePath + 'opiniones.detail.html',
-                        controller: ['$scope', '$stateParams', function ($scope, $params) {
-                            $scope.currentOpinion = $scope.opinionesRecords[$params.opinionId - 1];
-                        }]
+                        controller: ['$scope', 'currentOpinion', function ($scope,  currentOpinion) {
+                                $scope.currentOpinion = currentOpinion.data;
+                            }]
+                    },
+                    'listView': {
+                        templateUrl: basePath + 'opiniones.list.html',
+                        controller: ['$scope', 'currentPaseo',function ($scope,currentPaseo) {
+                                $scope.opinionesRecords = currentPaseo.data.opiniones;
+                            }]
                     }
-                }});
-    }]);
+                }
+            });
+        }]);
 })(window.angular);

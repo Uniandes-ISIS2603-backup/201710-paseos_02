@@ -122,19 +122,11 @@ public class OpinionParticipanteDTO implements Serializable
         this.imagen = imagen;
     }
 
-    /**
-     * Obtiene la fecha en que fue hecha la opinion.
-     * @return fecha
-     */
     public Date getFecha() {
         return fecha;
     }
 
-    /**
-     * Modifica la fecha de la opinion.
-     * @param fecha
-     */
-    public void setFechaDelPaseo(Date fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 }

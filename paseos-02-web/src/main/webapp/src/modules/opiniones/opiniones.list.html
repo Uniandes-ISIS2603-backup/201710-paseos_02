@@ -1,18 +1,17 @@
 <div class="container-fluid">
-        <table class="table table-striped">
-            <thead>
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <th> Nombre del participante  </th>
-                <th> Fecha del comentario  </th>
+                <th> Fecha </th>
+                <th> Comentario </th>
             </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="opinion in opinionesRecords | filter:currentPaseo.id">
-                <td id="{{$index}}-nombre">   <a ui-sref="opinionDetail({opinionId: opinion.id})">{{opinion.caminante.nombre}}</a></td>
-                <td id="{{$index}}-id">{{opinion.fecha}}</td>
+        </thead>
+        <tbody>
+            <tr ng-repeat="opinion in opinionesRecords ">
+                <td id="{{$index}}-fecha"><a ui-sref="opinionDetail({opinionId: opinion.id})">{{opinion.fecha}}</a></td>
+                <td id="{{$index}}-comentario">{{opinion.comentario}}</td>
             </tr>
-            </tbody>
-        </table>
-    </div>
-    <!--| filter:currentPaseo.id-->
+        </tbody>
+    </table>
 </div>
+

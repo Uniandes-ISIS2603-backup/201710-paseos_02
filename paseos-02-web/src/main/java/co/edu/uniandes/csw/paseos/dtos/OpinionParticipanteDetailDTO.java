@@ -75,20 +75,12 @@ public class OpinionParticipanteDetailDTO extends OpinionParticipanteDTO
         this.caminante = caminante;
     }
 
-    /**
-     * Obtiene el paseo sobre el que se realizo la opinion.
-     * @return paseo.
-     */
     public PaseoEcologicoDTO getPaseoEcologico() {
         return paseoEcologico;
     }
 
-    /**
-     * Modifica el paseo sobre el que se realizo la opinion
-     * @param paseo
-     */
-    public void setPaseo(PaseoEcologicoDTO paseo) {
-        this.paseoEcologico = paseo;
+    public void setPaseoEcologico(PaseoEcologicoDTO paseoEcologico) {
+        this.paseoEcologico = paseoEcologico;
     }
     
 }
