@@ -9,17 +9,16 @@
     mod.constant('paseosContext', 'api/paseos');
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         var basePath = 'src/modules/paseos/';
-        $urlRouterProvider.otherwise('/paseos/list');
+        $urlRouterProvider.otherwise('/paseosList');
 
         $stateProvider
             .state('paseos', {
                 url: '/paseos',
                 abstract: true,
                 resolve: {
-                    paseos: ['$http', function ($http) {
-                        //  return $http.get( paseosContext )
-                        return $http.get('data/paseos.json');
-                    }]
+                    paseos: ['$http', 'paseosContext', function ($http, paseosContext) {
+                            return $http.get(paseosContext);
+                        }]
                 },
                 views: {
                     'mainView': {
@@ -45,13 +44,19 @@
                 param: {
                     paseoId: null
                 },
+                resolve:  {
+                    currentPaseo: ['$http', 'paseosContext', '$stateParams', function ($http, paseosContext, $params) {
+                            return $http.get(paseosContext+'/'+$params.paseoId);
+                        }]
+                },
                 views: {
                     'detailView': {
                         templateUrl: basePath + 'paseos.detail.html',
-                        controller: ['$scope', '$stateParams', function ($scope, $params) {
-                            $scope.currentPaseo = $scope.paseosRecords[$params.paseoId - 1];
-                        }]
-                    }                   
+                        controller: ['$scope', 'currentPaseo', function ($scope,  currentPaseo) {
+                                $scope.currentPaseo = currentPaseo.data;
+                            }]
+                    }
+
                 }
             }).state('paseoFicha', {
                 url: '/{paseoId:int}/fichaTecnica',
@@ -62,24 +67,11 @@
                 views: {
                     'fichaTecnicaView': {
                         templateUrl: basePath + 'paseos.fichaTecnica.html',
-                        controller: ['$scope', '$stateParams', function ($scope, $params) {
-                            $scope.currentPaseo = $scope.paseosRecords[$params.paseoId - 1];
-                        }]
-                    }                   
-                }
-            }).state('paseoGuia', {
-                url: '/{paseoId:int}/guia',
-                parent: 'paseoDetail',
-                param: {
-                    paseoId: null
-                },
-                views: {
-                    'guiaView': {
-                        templateUrl: basePath + 'paseos.guia.html',
-                        controller: ['$scope', '$stateParams', function ($scope, $params) {
-                            $scope.currentPaseo = $scope.paseosRecords[$params.paseoId - 1];
-                        }]
-                    }                   
+                        controller: ['$scope', 'currentPaseo', function ($scope,  currentPaseo) {
+                                $scope.currentPaseo = currentPaseo.data;
+                            }]
+                    }
+
                 }
             });
     }]);

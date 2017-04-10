@@ -1,17 +1,16 @@
 <div class="container-fluid">   
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th> Actividades  </th>   
-                    <th> Duracion  </th>   
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="actividad in actividadesRecords | filter:currentPaseo.id">
-                    <td id="{{$index}}-nombre">   <a ui-sref="actividadDetail({actividadId: actividad.id})">{{actividad.nombre}}</a></td>                    
-                    <td id="{{$index}}-duracion">{{actividad.duracion}}</td>                               
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Actividades  </th>   
+                <th> Duracion (min)  </th>   
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="actividad in actividadesRecords ">
+                <td id="{{$index}}-nombre"><a ui-sref="actividadDetail({actividadId: actividad.id})">{{actividad.nombre}}</a></td>                    
+                <td id="{{$index}}-duracion">{{actividad.duracion}}</td>                               
+            </tr>
+        </tbody>
+    </table>
 </div>

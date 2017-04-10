@@ -153,12 +153,21 @@ public class PaseoEcologicoResource
     }
     
     @Path("{idPaseo: \\d+}/instancias")
-    public Class<PaseoInstanciaResource> getArtesaniasResource(@PathParam("idPaseo") Long paseoId) {
+    public Class<PaseoInstanciaResource> getInstanciasResource(@PathParam("idPaseo") Long paseoId) {
         PaseoEcologicoEntity entity = paseoEcologicoLogic.getPaseo(paseoId);
         if (entity == null) {
             throw new WebApplicationException("El paseo con id dado no existe", 404);
         }
         return PaseoInstanciaResource.class;
+    }
+    
+    @Path("{idPaseo: \\d+}/actividades")
+    public Class<ActividadResource> getActividadesResource(@PathParam("idPaseo") Long paseoId) {
+        PaseoEcologicoEntity entity = paseoEcologicoLogic.getPaseo(paseoId);
+        if (entity == null) {
+            throw new WebApplicationException("El paseo con id dado no existe", 404);
+        }
+        return ActividadResource.class;
     }
 
 }

@@ -41,7 +41,6 @@ public class ActividadResource
 {
     @Inject private ActividadLogic actividadLogic;
     @Inject private PaseoEcologicoLogic paseoLogic;
-    @Context private HttpServletResponse response;
     /**
      * Convierte una lista de AcctividadEntity a una lista de ActividadDTO
      * @param listaEntrada
@@ -61,11 +60,9 @@ public class ActividadResource
     /**
      * Metodo que retorna una lista con todas las actividades
      * @param idPaseo
-     * @param 
      * @return lista de actividades
      */
     @GET
-    @Path("paseos/{idPaseo}/actividades")
     public List<ActividadDetailDTO> getActividades( @PathParam( "idPaseo" ) Long idPaseo  )  
     {
         if(paseoLogic.getPaseo(idPaseo) == null)
@@ -78,20 +75,18 @@ public class ActividadResource
      * @param id
      */
     @GET
-    @Path("paseos/{idPaseo}/actividades/{id: \\d+}")
+    @Path("{id: \\d+}")
     public ActividadDetailDTO getActividad(@PathParam("idPaseo") Long idPaseo,@PathParam("id") Long id) 
     {
-        try
-           {
-               if(paseoLogic.getPaseo(idPaseo) == null)
-                   throw new WebApplicationException(Response.Status.NOT_FOUND);
-                  ActividadDetailDTO ans = new ActividadDetailDTO(actividadLogic.getActividad(idPaseo, id));
-                    return ans;
+        try {
+            if (paseoLogic.getPaseo(idPaseo) == null) {
+                throw new WebApplicationException(Response.Status.NOT_FOUND);
             }
-        catch(IllegalArgumentException e)
-            {
-            throw new WebApplicationException(404); 
-        }  
+            ActividadDetailDTO ans = new ActividadDetailDTO(actividadLogic.getActividad(idPaseo, id));
+            return ans;
+        } catch (IllegalArgumentException e) {
+            throw new WebApplicationException(404);
+        }
     }
     /**
      * Metodo que crea una actividad con el dto pasado por parametro
@@ -100,7 +95,6 @@ public class ActividadResource
      */
    
     @POST
-    @Path("paseos/{idPaseo}/actividades")
     public ActividadDetailDTO createActividad(@PathParam("idPaseo") Long idPaseo,ActividadDetailDTO dto) throws BusinessLogicException
     { 
         try
@@ -126,7 +120,7 @@ public class ActividadResource
      * @return la actividad actualizada
      */
     @PUT
-    @Path("paseos/{idPaseo}/actividades/{id: \\d+}")
+    @Path("{id: \\d+}")
     public ActividadDetailDTO updateActividad(@PathParam("idPaseo") Long idPaseo, @PathParam("id") Long id, ActividadDetailDTO dto) 
     { 
         if(getActividad(idPaseo, id)==null)
@@ -145,7 +139,7 @@ public class ActividadResource
      * @param id el id de la actividad a eliminar
      */
     @DELETE
-    @Path("paseos/{idPaseo}/actividades/{id: \\d+}")
+    @Path("{id: \\d+}")
     public void deleteActividad(@PathParam("idPaseo") Long idPaseo,@PathParam("id") Long id)
     {
         try{

@@ -1,25 +1,12 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templat
- * and open the template in the editor.
- */
-(function (ng) {
+(function (ng){
     var mod = ng.module("lugaresModule", ['ui.router']);
-    mod.constant("lugaresContext", "api/lugares");
-   
+
+    mod.constant('lugaresContext', 'api/lugares');
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-            var basePath = 'src/modules/lugares/';
-            $urlRouterProvider.otherwise("/lugaresList");
-            $stateProvider.state('reviews', {
-                url: '/reviews',
-                abstract: true,
-                parent: 'lugaresDetail',
-                resolve: {
-                    reviews: ['$http', 'lugaresContext', 'reviewsContext', '$stateParams', function ($http, lugaresContext, reviewsContext, $params) {
-                            return $http.get(lugaresContext + '/' + $params.lugarId + '/' + reviewsContext);
-                        }]
-                }}),
-            $stateProvider.state('lugares', {
+        var basePath = 'src/modules/lugares/';
+        $urlRouterProvider.otherwise('/lugaresList');
+        $stateProvider
+            .state('lugares', {
                 url: '/lugares',
                 abstract: true,
                 resolve: {
@@ -31,11 +18,12 @@
                     'mainView': {
                         templateUrl: basePath + 'lugares.html',
                         controller: ['$scope', 'lugares', function ($scope, lugares) {
-                                $scope.lugaresRecords = lugares.data;
-                            }]
+                            $scope.lugaresRecords = lugares.data;
+                        }]
                     }
                 }
-            }).state('lugaresList', {
+            })
+            .state('lugaresList', {
                 url: '/list',
                 parent: 'lugares',
                 views: {
@@ -43,7 +31,8 @@
                         templateUrl: basePath + 'lugares.list.html'
                     }
                 }
-            }).state('lugaresDetail', {
+            })
+            .state('lugarDetail', {
                 url: '/{lugarId:int}/detail',
                 parent: 'lugares',
                 param: {
@@ -60,18 +49,12 @@
                     },
                     'detailView': {
                         templateUrl: basePath + 'lugares.detail.html',
-                        controller: ['$scope', '$stateParams', '$sce', function ($scope, $params, $sce) {
-                              $scope.trust = function(data) {
-                                  return $sce.trustAsResourceUrl(data);
-                              },
-                                $scope.currentLugar = $scope.lugaresRecords[$params.lugarId];
+                        controller: ['$scope', 'currentLugar', function ($scope,  currentLugar) {
+                                $scope.currentLugar = currentLugar.data;
                             }]
                     }
-
                 }
-
             });
-        }]);
+    }]);
 })(window.angular);
-
 

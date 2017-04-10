@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.paseos.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,13 +37,12 @@ public class LugarEntity implements Serializable
     *Atributo de la dirreccion
     */
     private String direccion;
-    /*
-    *Atributo del info ACCESO
-    */
+    
+    
+    @Column(length = 512)
     private String linkGoogleMaps;
-    /*
-    *Atributo de la imagen
-    */
+   
+    @Column(length = 512)
     private String imagen;
     
     /*

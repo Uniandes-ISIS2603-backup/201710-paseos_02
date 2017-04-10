@@ -23,13 +23,14 @@ public class ActividadPersistence
     protected EntityManager em;
     /**
      * Obtiene una actividad según el id dado por parámetro.
-     * @param id id de la actividad buscada.
+     * @param paseoId
+     * @param actividadId
      * @return actividad buscada.
      */
-     public ActividadEntity find(Long paseoEcologicoid, Long actividadid) {
-        TypedQuery<ActividadEntity> q = em.createQuery("select p from ActividadEntity p where (p.paseoEcologico.id = :paseoEcologicoid) and (p.id = actividadid)", ActividadEntity.class);
-        q.setParameter("paseoEcologicoid", paseoEcologicoid);
-        q.setParameter("actividadid", actividadid);
+     public ActividadEntity find(Long paseoId, Long actividadId) {
+       TypedQuery<ActividadEntity> q = em.createQuery("select p from ActividadEntity p where (p.paseoEcologico.id = :paseoid) and (p.id = :actividadid)", ActividadEntity.class);
+        q.setParameter("paseoid", paseoId);
+        q.setParameter("actividadid", actividadId);
         return q.getSingleResult();
     }
 
