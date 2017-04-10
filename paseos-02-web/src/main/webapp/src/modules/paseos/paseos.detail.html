@@ -6,16 +6,14 @@
         </div>
         <div class="col-md-8">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"> <a ui-sref="paseoFicha({paseoId: currentPaseo.id})">Ficha Tecnica</a></li>
-                <li role="presentation" class="active"> <a ui-sref="actividadesList({paseoId: currentPaseo.id})">Actividades</a></li>
-                <li role="presentation" class="active"> <a ui-sref="opinionesList({paseoId: currentPaseo.id})">Opiniones</a></li> 
-                <li role="presentation" class="active"> <a ui-sref="guiaDetail({guiaId: currentPaseo.guia.id})">Guia</a></li>
+                <li role="navigation"> <a ui-sref="paseoFicha({paseoId: currentPaseo.id})">Ficha Tecnica</a></li>
+                <li role="presentation"> <a ui-sref="actividadesList({paseoId: currentPaseo.id})">Actividades</a></li>
+                <li role="presentation"> <a ui-sref="opinionesList({paseoId: currentPaseo.id})">Opiniones</a></li> 
+                <li role="presentation"> <a ui-sref="guiaDetail({guiaId: currentPaseo.guia.id})">Guia</a></li>
             </ul>
         </div>
     </div>
-
-    <div ui-view="detailView"></div>
-
+    
     <div ui-view="fichaTecnicaView"></div>
 
     <div ui-view="childrenView"></div>

@@ -26,7 +26,7 @@
                     'childrenView': {
                         templateUrl: basePath + 'inscripciones.html'
                     }
-                },
+                }
             }).state('inscripcionesList', {
                 url: '/list',
                 parent: 'inscripciones',
