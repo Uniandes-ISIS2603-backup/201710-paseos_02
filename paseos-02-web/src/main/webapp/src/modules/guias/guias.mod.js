@@ -58,6 +58,22 @@
                             }]
                     }
                 }
+            }).state('paseoGuia', {
+                url: '/guia',
+                parent: 'paseoDetail',
+                resolve: {
+                    currentGuia: ['$http', 'guiasContext', 'currentPaseo', function ($http, guiasContext, currentPaseo) {
+                            return $http.get(guiasContext + '/' + currentPaseo.data.guia.id);
+                        }]
+                },
+                views: {
+                    'paseoGuiaView': {
+                        templateUrl: basePath + 'guias.detail.html',
+                        controller: ['$scope', 'currentGuia', function ($scope, currentGuia) {
+                                $scope.currentGuia = currentGuia.data;
+                            }]
+                    }
+                }
             });
         }]);
 })(window.angular);
