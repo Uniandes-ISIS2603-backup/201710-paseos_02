@@ -32,6 +32,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -66,6 +67,7 @@ public class InscripcionEntity implements Serializable
     /**
      * Caminante que realiza la inscripción.
      */
+    @PodamExclude
     @ManyToOne
     private CaminanteEntity caminante;
     

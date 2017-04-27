@@ -32,6 +32,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import uk.co.jemos.podam.common.PodamExclude;
 
 
 
@@ -74,6 +75,7 @@ public class OpinionParticipanteEntity implements Serializable
     /**
      * Caminante que realiza la opinion.
      */
+    @PodamExclude
     @ManyToOne
     private CaminanteEntity caminante;
 

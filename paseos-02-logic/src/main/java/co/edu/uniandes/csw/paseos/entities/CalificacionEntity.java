@@ -33,6 +33,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -61,6 +62,7 @@ public class CalificacionEntity implements Serializable
     /**
      * Caminante que realiza la calificación.
      */
+    @PodamExclude
     @ManyToOne
     private CaminanteEntity caminante;
     

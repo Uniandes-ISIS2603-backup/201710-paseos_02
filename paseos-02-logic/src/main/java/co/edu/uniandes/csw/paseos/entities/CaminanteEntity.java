@@ -32,6 +32,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import uk.co.jemos.podam.common.PodamCollection;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -53,26 +55,30 @@ public class CaminanteEntity extends UsuarioEntity
      * condicionesFisicas(3) --> Flexibilidad
      * condicionesFisicas(4) --> Coordinacion
      */
+    @PodamCollection(nbrElements = 5)
     @ElementCollection
     @CollectionTable(name="CONDFISICASCAMINANTE", joinColumns=@JoinColumn(name="CAMINANTE_ID"))
     @Column(name="VALOR")
     private List<Integer> condicionesFisicas;
 
     /**
-     * Lista de paseos a los que un caminante se a inscrito.
+     * Lista de paseos a los que un caminante se ha inscrito.
      */
+    @PodamExclude
     @OneToMany(mappedBy = "caminante")
     private List<InscripcionEntity> paseosInscritos = new ArrayList<InscripcionEntity>();
 
     /**
      * Lista de calificaciones dadas a los guias por un caminate.
      */
+    @PodamExclude
     @OneToMany(mappedBy = "caminante")
     private List<CalificacionEntity> calificacionesGuia;
 
     /**
      * Lista de opiniones dadas por un caminante.
      */
+    @PodamExclude
     @OneToMany(mappedBy = "caminante")
     private List<OpinionParticipanteEntity> opiniones;
 

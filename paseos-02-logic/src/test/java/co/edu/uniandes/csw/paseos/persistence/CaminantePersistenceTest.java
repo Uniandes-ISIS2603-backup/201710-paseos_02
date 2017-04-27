@@ -34,8 +34,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -48,6 +48,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class CaminantePersistenceTest 
 {
+    /**
+     * @return el jar que va a desplegar para la prueba
+     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -109,7 +112,21 @@ public class CaminantePersistenceTest
             data.add(entity);
         }
     }
-
-    public CaminantePersistenceTest() {
+    
+    @Test
+    public void createCaminanteTest( )
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+        CaminanteEntity entityParaPrueba = factory.manufacturePojo(CaminanteEntity.class);
+        
+        CaminanteEntity entityPersistido = caminantePersistence.create(entityParaPrueba);
+        
+        Assert.assertNotNull("No deberia retornar null al persistir un caminante", entityPersistido);
+        
+        CaminanteEntity entityEncontrado = em.find(CaminanteEntity.class, entityPersistido.getId());
+        Assert.assertNotNull("El caminante deberia existir en la base de datos",entityEncontrado);
+        Assert.assertEquals(entityParaPrueba.getNombre(), entityEncontrado.getNombre());
     }
+
+   
 }
