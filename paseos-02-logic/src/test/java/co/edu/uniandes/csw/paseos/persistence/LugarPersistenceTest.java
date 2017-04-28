@@ -24,8 +24,6 @@
 package co.edu.uniandes.csw.paseos.persistence;
 
 import co.edu.uniandes.csw.paseos.entities.LugarEntity;
-import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
-import co.edu.uniandes.csw.paseos.persistence.LugarPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -117,7 +115,7 @@ public class LugarPersistenceTest
     }
     
     @Test
-    public void createPaseoTest( )
+    public void createLugarTest( )
     {
         PodamFactory factory = new PodamFactoryImpl();
        LugarEntity entityParaPrueba = factory.manufacturePojo(LugarEntity.class);
@@ -134,7 +132,7 @@ public class LugarPersistenceTest
     }
     
     @Test
-    public void getPaseosTest( )
+    public void getLugarTest( )
     {
         List<LugarEntity> encontrados = lugarPersistence.findAll();
         Assert.assertEquals(data.size(), encontrados.size());
@@ -157,7 +155,7 @@ public class LugarPersistenceTest
     
     //Escenario 1: El paseo buscado existe en la base de datos
     @Test
-    public void getPaseoTest1( )
+    public void getLugarTest1( )
     {
         LugarEntity esperado = data.get(0);
         LugarEntity encontrado = lugarPersistence.find(esperado.getId());
@@ -167,7 +165,7 @@ public class LugarPersistenceTest
     
     //Escenario 2: No existe un paseo con el id dado 
     @Test
-    public void getPaseoTest2( )
+    public void getLugarTest2( )
     {
         LugarEntity respuesta = lugarPersistence.find(Long.MAX_VALUE);
         Assert.assertNull(respuesta);      
@@ -176,7 +174,7 @@ public class LugarPersistenceTest
     
     //Escenario 1: Se va a actualizar un paseo que existe en la base de datos.
     @Test 
-    public void updatePaseoTest1( )
+    public void updateLugarTest1( )
     {
        LugarEntity original = data.get(0);
         
@@ -192,7 +190,7 @@ public class LugarPersistenceTest
         verificarConsistenciaAtributos(actualizado, encontrada);
     }
     @Test
-    public void deletePaseoTest( )
+    public void deleteLugarTest( )
     {
        LugarEntity entity = data.get(0);
         lugarPersistence.delete(entity.getId());
