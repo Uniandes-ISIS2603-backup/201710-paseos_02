@@ -36,6 +36,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamCollection;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -54,6 +56,7 @@ public class PaseoEcologicoEntity implements Serializable
     /**
      * Atributo que representa la lista de instancias del paseo
      */
+    @PodamExclude
     @OneToMany(mappedBy = "paseoEcologico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PaseoInstanciaEntity> instancias;
 
@@ -83,6 +86,7 @@ public class PaseoEcologicoEntity implements Serializable
      * condicionesFisicas(3) --> Flexibilidad
      * condicionesFisicas(4) --> Coordinacion
      */
+    @PodamCollection(nbrElements = 5)
     @ElementCollection
     @CollectionTable(name="CONDFISICASPASEO", joinColumns=@JoinColumn(name="PASEO_ID"))
     @Column(name="VALOR")
@@ -106,36 +110,42 @@ public class PaseoEcologicoEntity implements Serializable
     /**
      * Atributo que representa el lugar de encuentro del paseo
      */
+    @PodamExclude
     @ManyToOne
     private LugarEntity lugarDeEncuentro;
 
     /**
      * Atributo que representa el lugar de destino del paseo
      */
+    @PodamExclude
     @ManyToOne
     private LugarEntity lugarDeDestino;
 
     /**
      * Atributo que representa la lista de actividades del paseo
      */
+    @PodamExclude
     @OneToMany(mappedBy = "paseoEcologico", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ActividadEntity> actividades;
 
     /**
      * Atributo que representa el guía de un paseo
      */
+    @PodamExclude
     @ManyToOne
     private GuiaEntity guia;
 
     /**
      * Atributo que representa la lista de calificaciones del guia del paseo
      */
+    @PodamExclude
     @OneToMany(mappedBy = "paseoEcologico")
     private List<CalificacionEntity> calificacionesGuia;
 
     /**
      * Atributo que representa la lista de opiniones sobre un paseo
      */
+    @PodamExclude
     @OneToMany(mappedBy = "paseoEcologico")
     private List<OpinionParticipanteEntity> opiniones;
 
