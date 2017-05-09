@@ -32,6 +32,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 
 /**
@@ -66,12 +67,14 @@ public class LugarEntity implements Serializable
     /*
     *Atributo de la conexion con otra clase
     */
+     @PodamExclude
     @OneToMany(mappedBy = "lugarDeEncuentro")
     private List<PaseoEcologicoEntity> paseosEcologicosSalida;
 
     /*
     *Atributo de la conexion con otra clase
     */
+      @PodamExclude
     @OneToMany(mappedBy = "lugarDeDestino")
     private List<PaseoEcologicoEntity> paseosEcologicosLlegada;
     
