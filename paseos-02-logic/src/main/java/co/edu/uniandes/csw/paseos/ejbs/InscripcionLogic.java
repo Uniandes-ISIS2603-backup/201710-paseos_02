@@ -66,7 +66,7 @@ public class InscripcionLogic
      * @generated
      */
     public InscripcionEntity createInscripcion(InscripcionEntity entity) throws BusinessLogicException {
-        
+        System.out.println("Create ");
         verificarReglasNegocio(entity);
         return persistence.create(entity);
     }
@@ -114,11 +114,11 @@ public class InscripcionLogic
     
     public void verificarReglasNegocio(InscripcionEntity entity) throws BusinessLogicException
     {
-       boolean id = entity.getId() == null;
+        System.out.println("holi holi");
        Date actual = new Date();
        boolean fecha = entity.getInstanciaPaseo().getFechaRealizacion().compareTo(actual)<0;
        boolean costo = entity.getInstanciaPaseo().getPaseoEcologico().getCosto()<0;   
-       if (id || fecha || costo)
+       if (fecha || costo)
        {
            throw new BusinessLogicException("No se están cumpliendo las reglas de negocio.");
        }

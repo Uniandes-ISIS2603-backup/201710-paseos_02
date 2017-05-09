@@ -59,10 +59,7 @@ public class InscripcionPersistence
      */
     public InscripcionEntity find(Long caminanteid, Long inscripcionid)
     {
-        TypedQuery<InscripcionEntity> q = em.createQuery("select p from InscripionEntity p where (p.caminante.id = :caminanteid) and (p.id = :inscripcionid)", InscripcionEntity.class);
-        q.setParameter("caminanteid", caminanteid);
-        q.setParameter("inscripcionid", inscripcionid);
-        return q.getSingleResult();
+        return em.find(InscripcionEntity.class, inscripcionid);
     }
     
     /**

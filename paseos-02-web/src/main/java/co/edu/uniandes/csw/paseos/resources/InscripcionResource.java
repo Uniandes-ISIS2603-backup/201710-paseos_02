@@ -82,9 +82,11 @@ public class InscripcionResource
     @GET
     public List<InscripcionDetailDTO> getInscripciones(@PathParam("idCaminante") Long idCaminante) throws BusinessLogicException
     {
+        //System.out.println("todo bien");
         CaminanteEntity caminante = caminanteLogic.getCaminante(idCaminante);
         if(caminante==null)
         {
+            System.err.println("Excep");
             throw new WebApplicationException("El caminante no existe",404);
         }
         return listEntity2DTO(inscripcionLogic.getInscripciones(idCaminante));
@@ -100,6 +102,7 @@ public class InscripcionResource
     @Path("{id: \\d+}")
     public InscripcionDetailDTO getInscripcion(@PathParam("idCaminante") Long idCaminante, @PathParam("id") Long id) throws BusinessLogicException 
     {// TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
+        //System.out.println("Voy aca");
         CaminanteEntity caminante = caminanteLogic.getCaminante(idCaminante);
         if(caminante==null)
         {
@@ -122,12 +125,16 @@ public class InscripcionResource
     @POST
     public InscripcionDetailDTO createInscripcion(@PathParam("idCaminante") Long idCaminante,InscripcionDetailDTO dto) throws BusinessLogicException 
     {
+        
         CaminanteEntity caminante = caminanteLogic.getCaminante(idCaminante);
         if(caminante==null)
         {
             throw new WebApplicationException("El caminante no existe",404);
         }
-        return new InscripcionDetailDTO(inscripcionLogic.createInscripcion(dto.toEntity()));
+        System.out.println("Create recurso pre");
+        InscripcionEntity nueva= inscripcionLogic.createInscripcion(dto.toEntity());
+        System.out.println("Create recurso post");
+        return new InscripcionDetailDTO(nueva);
     }
     
     /**

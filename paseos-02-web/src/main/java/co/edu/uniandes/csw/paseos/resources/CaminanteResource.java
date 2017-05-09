@@ -68,13 +68,16 @@ public class CaminanteResource
         return listEntity2DTO(caminanteLogic.getCaminantes());
     }
     
-    @Path("caminantes/{idCaminante: \\d+}/inscripciones")
-    public InscripcionResource getInscripcionResource(@PathParam("caminantesId") Long caminantesId) {
-         CaminanteEntity entity = caminanteLogic.getCaminante(caminantesId);
+    @Path("{idCaminante: \\d+}/inscripciones")
+    public Class<InscripcionResource> getInscripcionResource(@PathParam("idCaminante") Long idCaminante) {
+        System.out.print("Entre aqui");
+        CaminanteEntity entity = caminanteLogic.getCaminante(idCaminante);
         if (entity == null) {
+            System.out.print("Pro aqui");
             throw new WebApplicationException("La inscripción no existe", 404);
         }
-        return new InscripcionResource();
+        System.out.print("sali de aqui");
+        return InscripcionResource.class;
     }
     
     @GET
