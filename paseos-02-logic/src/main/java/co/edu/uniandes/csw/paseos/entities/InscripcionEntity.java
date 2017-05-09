@@ -74,6 +74,7 @@ public class InscripcionEntity implements Serializable
     /**
      * Instancia del paseo sobre el que se realiza la inscripción.
      */
+    @PodamExclude
     @ManyToOne
     private PaseoInstanciaEntity instanciaPaseo;
 
@@ -91,6 +92,7 @@ public class InscripcionEntity implements Serializable
      */
     public void setId(Long id) {
         this.id = id;
+        
     }
     
     /**

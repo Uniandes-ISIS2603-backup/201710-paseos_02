@@ -57,6 +57,7 @@ public class CaminanteLogic {
      */
     public CaminanteEntity getCaminante(Long id) 
     {
+        System.out.println("busque al cami");
         return caminantePersistence.find(id);
     }
 

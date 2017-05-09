@@ -68,6 +68,7 @@ public class CaminanteEntity extends UsuarioEntity
     @OneToMany(mappedBy = "caminante")
     private List<InscripcionEntity> paseosInscritos = new ArrayList<InscripcionEntity>();
 
+    
     /**
      * Lista de calificaciones dadas a los guias por un caminate.
      */
@@ -88,6 +89,7 @@ public class CaminanteEntity extends UsuarioEntity
      */
     public List<InscripcionEntity> getPaseosInscritos() {
         return paseosInscritos;
+        
     }
 
     /**

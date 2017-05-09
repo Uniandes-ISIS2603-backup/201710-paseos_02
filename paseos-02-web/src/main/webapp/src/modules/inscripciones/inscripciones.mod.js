@@ -38,6 +38,31 @@
                             }]
                     }
                 }
-            });
+            }).state('inscripcionDetail', {
+                url: '/{inscripcionId:int}/detail',
+                parent: 'inscripciones',
+                param: {
+                    inscripcionId: null
+                },
+                resolve: {
+                    currentInscripcion: ['$http', 'caminantesContext', '$stateParams', function ($http, caminantesContext, $params) {
+                            return $http.get(caminantesContext + '/' + $params.caminanteId);
+                        }]
+                },
+                views: {
+                    'detailView': {
+                        templateUrl: basePath + 'caminantes.detail.html',
+                        controller: ['$scope', 'currentCaminante', function ($scope, currentCaminante) {
+                                $scope.currentCaminante = currentCaminante.data;
+                            }]
+                    },
+                    'listView': {
+                        templateUrl: basePath + 'caminantes.list.html',
+                        controller: ['$scope', 'caminantes', function ($scope, caminantes) {
+                                $scope.caminantesRecords = caminantes.data;
+                            }]
+                    }
+                }
+            });;
         }]);
 })(window.angular);
