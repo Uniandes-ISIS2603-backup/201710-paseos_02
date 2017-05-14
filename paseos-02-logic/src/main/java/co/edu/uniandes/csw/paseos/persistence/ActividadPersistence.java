@@ -56,13 +56,9 @@ public class ActividadPersistence
      * Obtiene una lista de todas las actividades.
      * @return lista de todas las actividades.
      */
-     public List<ActividadEntity> findAll(Integer page, Integer maxRecords, Long paseoEcologicoid) {
+     public List<ActividadEntity> findAll(Long paseoEcologicoid) {
         TypedQuery<ActividadEntity> q = em.createQuery("select p from ActividadEntity p where (p.paseoEcologico.id = :paseoEcologicoid)", ActividadEntity.class);
         q.setParameter("paseoEcologicoid", paseoEcologicoid);
-        if (page != null && maxRecords != null) {
-            q.setFirstResult((page - 1) * maxRecords);
-            q.setMaxResults(maxRecords);
-        }
         return q.getResultList();
     }
     
