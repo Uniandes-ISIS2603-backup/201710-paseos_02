@@ -4,7 +4,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div class="container-fluid">
-       <div class="panel panel-default">
+       <div class="container-fluid p">
             <div class="panel-body">
                 <div class="row">
                 </div>
@@ -15,13 +15,16 @@ and open the template in the editor.
 
 
                             <img class="img-responsive" ng-src="{{currentLugar.imagen}}" height="350" width="350"/>
+                            <p> </p>
                         
 
                     </div>
                         </div>
 <div class="col-md-6">
                         <dl>
+                            <font color="white">
                             <hr>
+                            
                             <dt>Identificacion</dt>
 
                             <dd>{{currentLugar.id}}</dd>
@@ -31,11 +34,13 @@ and open the template in the editor.
                             <hr>
                             <dt>Direccion</dt>
                             <dd>{{currentLugar.direccion}}</dd>
+                             </font>
                         </dl>
                         </div>
                     <dl>
                             <hr>
                             <dt> </dt>
+               
                             <iframe src= '{{trust(currentLugar.linkGoogleMaps)}}' width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
                         </dl>

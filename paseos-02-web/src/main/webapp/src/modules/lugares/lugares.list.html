@@ -2,28 +2,26 @@
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
+pailas
 -->
-<div class="container-fluid">
+<style type="text/css">
+body {  
+        background:url(http://static5.depositphotos.com/1000167/451/i/950/depositphotos_4514476-stock-photo-weathered-white-wood.jpg) repeat 0 0;                   
+ }
+</style>
+<div class="container-fluid pailas">
+   <!-- http://static5.depositphotos.com/1000167/451/i/950/depositphotos_4514476-stock-photo-weathered-white-wood.jpg
+   -->
+    <!--Header-->
     <div class="row">
-        <div class="col-md-3">
-            <!-- caminantesRecords fue inicializada en el controlador del estado caminantesList -->
-            <!-- Itera sobre cada uno de los caminantes en la colección caminantesRecords -->
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Identificacion</th>
-                    <th>Direccion</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="lugar in lugaresRecords">
-                    <td id="{{$index}}-nombre"> <a ui-sref="lugarDetail({lugarId: lugar.id})">{{lugar.nombre}}</a></td>
-                    <td id="{{$index}}-identificacion">{{lugar.id}}</td>
-                    <td id="{{$index}}-direccion">{{lugar.direccion}}</td>
-                </tr>
-                </tbody>
-            </table>
+        <div ng-repeat="lugar in lugaresRecords">
+            <div class="col-lg-6">
+                <center><a ui-sref="lugarDetail({lugarId: lugar.id})">
+                        <img class="img-responsive" ng-src="{{lugar.imagen}}" height="220px" width="220px">
+                    <p> </p>
+                    <p> ... </p>
+                </a></center>
+            </div>
         </div>
     </div>
 </div>
