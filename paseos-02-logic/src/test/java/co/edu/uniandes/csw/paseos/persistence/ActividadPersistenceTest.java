@@ -75,39 +75,7 @@ public class ActividadPersistenceTest {
     private List<ActividadEntity> data = new ArrayList<ActividadEntity>();
     
     private PaseoEcologicoEntity paseoActual;
-    @Test
-    public void createActividadTest() {
-        PodamFactory factory = new PodamFactoryImpl();
-        ActividadEntity newEntity = factory.manufacturePojo(ActividadEntity.class);
-
-        ActividadEntity result = actividadPersistence.create(newEntity);
-
-        Assert.assertNotNull(result);
-        ActividadEntity entity = em.find(ActividadEntity.class, result.getId());
-        Assert.assertNotNull(entity);
-        verificarConsistenciaAtributos(entity, newEntity);
-    }
-    @Test
-    public void getActividadesTest() {
-        List<ActividadEntity> list = actividadPersistence.findAll(paseoActual.getId());
-        Assert.assertEquals(data.size(), list.size());
-        for (ActividadEntity ent : list) {
-            boolean found = false;
-            for (ActividadEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
-    @Test
-    public void getCompanyTest() {
-        ActividadEntity entity = data.get(0);
-        ActividadEntity newEntity = actividadPersistence.find(entity.getPaseoEcologico().getId(),entity.getId());
-        Assert.assertNotNull(newEntity);
-        verificarConsistenciaAtributos(entity, newEntity);
-    }
+   
     public ActividadPersistenceTest() {
     }
     
@@ -140,50 +108,61 @@ public class ActividadPersistenceTest {
         }
     }
     
-    @After
-    public void tearDown() {
-    }
+     @Test
+    public void createActividadTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+        ActividadEntity newEntity = factory.manufacturePojo(ActividadEntity.class);
 
-    /**
-     * Test of find method, of class ActividadPersistence.
-     */
+        ActividadEntity result = actividadPersistence.create(newEntity);
+
+        Assert.assertNotNull(result);
+        ActividadEntity entity = em.find(ActividadEntity.class, result.getId());
+        Assert.assertNotNull(entity);
+        verificarConsistenciaAtributos(entity, newEntity);
+    }
     @Test
-    public void testFind() throws Exception {
-        fail("testFind");
+    public void getActividadesTest() {
+        List<ActividadEntity> list = actividadPersistence.findAll(paseoActual.getId());
+        Assert.assertEquals(data.size(), list.size());
+        for (ActividadEntity ent : list) {
+            boolean found = false;
+            for (ActividadEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
-
-    /**
-     * Test of findAll method, of class ActividadPersistence.
-     */
     @Test
-    public void testFindAll() throws Exception {
-        fail("testFindAll");
+    public void getActividadTest() {
+        ActividadEntity entity = data.get(0);
+        ActividadEntity newEntity = actividadPersistence.find(entity.getPaseoEcologico().getId(),entity.getId());
+        Assert.assertNotNull(newEntity);
+        verificarConsistenciaAtributos(entity, newEntity);
     }
-
-    /**
-     * Test of create method, of class ActividadPersistence.
-     */
+    
     @Test
-    public void testCreate() throws Exception {
-        fail("testCreate");
-    }
+    public void updateActividadTest() {
+        ActividadEntity entity = data.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        ActividadEntity newEntity = factory.manufacturePojo(ActividadEntity.class);
 
-    /**
-     * Test of update method, of class ActividadPersistence.
-     */
+        newEntity.setId(entity.getId());
+
+        actividadPersistence.update(newEntity);
+
+        ActividadEntity resp = em.find(ActividadEntity.class, entity.getId());
+
+        verificarConsistenciaAtributos(resp, newEntity);
+    }
     @Test
-    public void testUpdate() throws Exception {
-        fail("testUpdate");
+    public void deleteCompanyTest() {
+        ActividadEntity entity = data.get(0);
+        actividadPersistence.delete(entity.getId());
+        ActividadEntity deleted = em.find(ActividadEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
-
-    /**
-     * Test of delete method, of class ActividadPersistence.
-     */
-    @Test
-    public void testDelete() throws Exception {
-        fail("testDelete");
-    }
-
     private void clearData() {
         em.createQuery("delete from ActividadEntity").executeUpdate();
     }
