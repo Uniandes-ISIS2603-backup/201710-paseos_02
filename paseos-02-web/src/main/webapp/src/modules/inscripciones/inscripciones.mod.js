@@ -1,6 +1,6 @@
 (function (ng) {
     // Definición del módulo
-    var mod = ng.module("inscripcionModule", ['caminanteModule', 'ui.router']);
+    var mod = ng.module("inscripcionModule", ['ui.router']);
  
    // Configuración de los estados del módulo
     mod.constant("caminantesContext", "api/caminantes");
@@ -18,12 +18,12 @@
                 abstract: true,
                 parent: 'caminanteDetail',
                 resolve: {
-                    inscripciones: ['$http', 'caminantesContext', 'inscripcionesContext', '$stateParams', function ($http, caminantesContext, inscripcionesContext, $params) {
+                    inscripciones: ['$http', 'caminantesContext', 'inscripcionesContext', '$stateParams', function ($http,  caminantesContext, inscripcionesContext, $params) {
                             return $http.get(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext);
                         }]
                 },
                 views: {
-                    'childrenView': {
+                    'mainView': {
                         templateUrl: basePath + 'inscripciones.html'
                     }
                 }
@@ -31,7 +31,7 @@
                 url: '/list',
                 parent: 'inscripciones',
                 views: {
-                    'listView': {
+                    'childrenView': {
                         templateUrl: basePath + 'inscripciones.list.html',
                         controller: ['$scope', 'inscripciones', function ($scope, inscripciones) {
                                 $scope.inscripcionesRecords = inscripciones.data;
@@ -45,24 +45,19 @@
                     inscripcionId: null
                 },
                 resolve: {
-                    currentInscripcion: ['$http', 'caminantesContext', '$stateParams', function ($http, caminantesContext, $params) {
-                            return $http.get(caminantesContext + '/' + $params.caminanteId);
+                    currentInscripcion: ['$http', 'caminantesContext', 'inscripcionesContext', '$stateParams', function ($http, caminantesContext,inscripcionesContext, $params) {
+                            return $http.get(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext + '/' + $params.inscripcionId);
                         }]
                 },
                 views: {
                     'detailView': {
-                        templateUrl: basePath + 'caminantes.detail.html',
-                        controller: ['$scope', 'currentCaminante', function ($scope, currentCaminante) {
-                                $scope.currentCaminante = currentCaminante.data;
-                            }]
-                    },
-                    'listView': {
-                        templateUrl: basePath + 'caminantes.list.html',
-                        controller: ['$scope', 'caminantes', function ($scope, caminantes) {
-                                $scope.caminantesRecords = caminantes.data;
+                        templateUrl: basePath + 'inscripciones.detail.html',
+                        controller: ['$scope', 'currentInscripcion', function ($scope,currentInscripcion) {
+                               $scope.currentInscripcion = currentInscripcion.data;
                             }]
                     }
+                   
                 }
-            });;
+            });
         }]);
 })(window.angular);
