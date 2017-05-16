@@ -106,7 +106,7 @@ public class CaminantePersistenceTest
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             CaminanteEntity entity = factory.manufacturePojo(CaminanteEntity.class);
             em.persist(entity);
             data.add(entity);
