@@ -76,6 +76,12 @@ public class CalificacionPersistence
         return q.getResultList();
     }
     
+    public List<CalificacionEntity> findAll()
+    {
+        Query solicitud = em.createQuery("select u from CalificacionEntity u");
+        return solicitud.getResultList();
+    }
+    
     /**
      * Crea una nueva calificacion.
      * @param entity calificacion que se desea crear.

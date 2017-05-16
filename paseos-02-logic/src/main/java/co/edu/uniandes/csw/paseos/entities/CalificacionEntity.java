@@ -69,12 +69,14 @@ public class CalificacionEntity implements Serializable
     /**
      * Guía que recibe la calificación.
      */
+    @PodamExclude
     @ManyToOne
     private GuiaEntity guia;
     
     /**
      * Paseo sobre el que se realiza la calificación.
      */
+    @PodamExclude
     @ManyToOne
     private PaseoEcologicoEntity paseoEcologico;
     
