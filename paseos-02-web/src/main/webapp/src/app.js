@@ -3,7 +3,7 @@
         // External dependencies
         'ui.router',
         'ui.bootstrap',
-        'ui.select',
+        //'ui.select',
         
         // Internal modules dependencies
 

@@ -1,19 +1,21 @@
 <div class="container-fluid">   
+    <div class="panel panel-default">
+        <div class="panel-body">
     <div class="col-sm-12">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th> Inscripcione </th>                      
+                    <th> Lista de Inscripciones </th>                      
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="inscripcion in inscripcionesRecords ">
                     <td id="{{$index}}-fechaDeInscripcion">{{inscripcion.fechaInscripcion}}</td>
-                    <td id="{{$index}}-observaciones">{{inscripcion.observaciones}}</td>                                  
-                    <td id="{{$index}}-idPaseo">{{inscripcion.id}}</td>                                     
+                    <td id="{{$index}}-idInscripcion">{{inscripcion.id}}</td>                                     
                 </tr>
             </tbody>
         </table>
     </div>
-
+</div>
+        </div>
 </div>

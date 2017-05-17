@@ -42,7 +42,7 @@
                         
                         <hr>
                         <dt>inscripcionesList</dt>
-                        <dd><a ui-sref="inscripcionesList({caminanteId: currentCaminante.id})">Inscripciones</a></dd>
+                        <dd><a ui-sref="inscripcionesList({caminanteId: currentRecord.id})">Inscripciones</a></dd>
                         
                         
                     </dl>
@@ -90,7 +90,7 @@
             </div>
                 <div class="col-md-12">
                 <div class="panel-group" id="accordion">
-                    <div ng-repeat="inscripcion in records.inscripciones" class="panel panel-default">
+                    <div ng-repeat="inscripcion in currentRecord.inscripciones" class="panel panel-default">
                         <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{inscripcion.id}}">>>>>>>>></a>
@@ -102,7 +102,7 @@
                                     <li class="list-group-item"><strong>Fecha de Inscripción: </strong>{{inscripcion.fechaInscripcion}}</li>
                                     <li class="list-group-item"><strong>Realizo Pago: </strong>{{inscripcion.realizoPago}}</li>
                                     <li class="list-group-item"><strong>Observaciones: </strong>{{inscripcion.observaciones}}</li>
-                                    <li class="list-group-item"><a ui-sref="inscripcionDetail({inscripcionId: inscripcion.id, caminanteId: currentCaminante.id})">Información Adicional</a></li>
+                                    <li class="list-group-item"><a ui-sref="inscripcionDetail({inscripcionId: inscripcion.id, caminanteId: currentRecord.id})">Información Adicional</a></li>
                                 </ul>
                             <div class="col-md-2">
                             <a ui-sref="inscripcionesCreate()" type="button" class="btn btn-warning">Modificar Inscripcion</a>

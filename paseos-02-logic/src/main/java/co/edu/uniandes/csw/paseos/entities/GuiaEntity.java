@@ -30,6 +30,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -53,12 +54,14 @@ public class GuiaEntity extends UsuarioEntity
     /**
      * Lista de paseos ecologicos de un guía.
      */
+    @PodamExclude
     @OneToMany(mappedBy = "guia")
     private List<PaseoEcologicoEntity> paseosEcologico;
 
     /**
      * Lista de calificaciones de un guía.
      */
+    @PodamExclude
     @OneToMany(mappedBy = "guia")
     private List<CalificacionEntity> calificaciones;
 

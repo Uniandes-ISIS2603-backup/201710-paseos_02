@@ -107,9 +107,6 @@ public class GuiaPersistenceTest {
         }
     }
     
-    public GuiaPersistenceTest()
-    {
-    }
 
     @Test
     public void createGuiaTest() 

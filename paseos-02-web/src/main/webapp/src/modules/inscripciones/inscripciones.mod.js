@@ -31,7 +31,7 @@
                     'mainView': {
                         templateUrl: basePath + 'inscripciones.html',
                         controller:['$scope', 'inscripciones', 'currentCaminante', function ($scope, inscripciones, currentCaminante){
-                                $scope.currentCaminante= currentCaminante.data;
+                                $scope.currentCaminante = currentCaminante.data;
                                 $scope.inscripcionesRecords = inscripciones.data;
                         }]
                     }
@@ -62,17 +62,11 @@
                         controller: ['$scope', 'currentInscripcion', function ($scope,currentInscripcion) {
                                $scope.currentInscripcion = currentInscripcion.data;
                             }]
+                    },
+                   'listView': {
+                        templateUrl: basePath + 'inscripciones.list.html'
+                        
                     }
-                   
-                }
-            }).state('inscripcionCreate', {
-                url: '/create',
-                parent: 'inscripciones',
-                views: {
-                    'createView': {
-                        templateUrl: basePath + 'inscripciones.detail.html'  
-                    }
-                   
                 }
             });
         }]);
