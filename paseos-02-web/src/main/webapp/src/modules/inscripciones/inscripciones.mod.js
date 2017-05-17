@@ -54,6 +54,15 @@
                             }]
                     }
                 }
+            }).state('inscripcionesCreate', {
+                url: '/create',
+                parent: 'inscripciones',
+                views: {
+                    'mainView': {
+                        templateUrl: basePath + 'inscripciones.create.html',
+                        
+                    }
+                }
             });;
         }]);
 })(window.angular);

@@ -40,10 +40,10 @@
                         <dt>Correo Electronico</dt>
                         <dd>{{currentCaminante.correoElectronico}}</dd>
                         
-                        <!--<hr>
+                        <hr>
                         <dt>inscripcionesList</dt>
                         <dd><a ui-sref="inscripcionesList({caminanteId: currentCaminante.id})">Inscripciones</a></dd>
-                        -->
+                        
                         
                     </dl>
                 </div>
@@ -102,14 +102,21 @@
                                     <li class="list-group-item"><strong>Observaciones: </strong>{{inscripcion.observaciones}}</li>
                                     <li class="list-group-item"><a ui-sref="inscripcionDetail({inscripcionId: inscripcion.id, caminanteId: currentCaminante.id})">Información Adicional</a></li>
                                 </ul>
+                                
                             </div>
+                            <a ui-sref="inscripcionesCreate()" type="button" class="btn btn-primary">Modificar Inscripcion</a>
                         </div>
                         
                     </div>
-                 </div>  
+                    
+                 </div>
+                    
                 </div>
+
+            <div class="col-md-2">
+                <a ui-sref="inscripcionesCreate()" type="button" class="btn btn-primary">Nueva Inscripcion</a>
             </div>
-        <div ui-view="childrenView"></div>
+            </div>
     </div>    
 </div>
 
