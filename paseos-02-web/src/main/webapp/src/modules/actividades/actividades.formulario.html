@@ -1,0 +1,22 @@
+<form method="post">
+    <table>
+        <thead colspan="2" style="align-content: center;">Agregar actividad</thead>
+        <tr>
+            <td> Nombre: </td>
+            <td><input type="text" name="nombreActividad" id ="nombreActividad"><br></td>
+        </tr>
+        <tr>
+            <td> Descripcion: </td>
+            <td><input type="text" name="descripcionActividad" id ="descripcionActividad"><br></td>
+        </tr>
+        <tr>
+            <td> Duracion: </td>
+            <td><input type="number" min="1" style="height: 35px; width: 35px" name="duracionActividad" id ="duracionActividad" <br></td>
+        </tr>
+        <tr>
+            <td> Equipamiento </td>
+            <td><input type="text" name="equipamientoActividad" id ="equipamientoActividad"><br></td>
+        </tr>
+    </table>
+    <button value="Agregar" ng-click="agregarActividad()" style="width: 62px; height: 26px">Agregar</button>
+    </form>
