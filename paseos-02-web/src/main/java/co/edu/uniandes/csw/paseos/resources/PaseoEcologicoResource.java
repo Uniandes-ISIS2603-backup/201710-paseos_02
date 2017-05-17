@@ -149,8 +149,8 @@ public class PaseoEcologicoResource
         if (entity == null) {
             throw new WebApplicationException("El paseo con id dado no existe", 404);
         }
-        PaseoEcologicoEntity paseoUpdate = dto.toEntity();
         dto.setId(id);
+        PaseoEcologicoEntity paseoUpdate = dto.toEntity();
         return new PaseoEcologicoDetailDTO(paseoEcologicoLogic.updatePaseo(paseoUpdate));
     }
 

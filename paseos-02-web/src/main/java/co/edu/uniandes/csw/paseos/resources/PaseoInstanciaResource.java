@@ -130,8 +130,8 @@ public class PaseoInstanciaResource
             throw new WebApplicationException("La instancia con id dado no existe", 404);
         }
         
-        PaseoInstanciaEntity instancia = dto.toEntity();
-        instancia.setId(id);
+        dto.setId(id);
+        PaseoInstanciaEntity instancia = dto.toEntity();    
         return new PaseoInstanciaDetailDTO(instanciaLogic.updateInstancia(instancia));
     }
 
