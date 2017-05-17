@@ -62,7 +62,7 @@
                     correoElectronico: '' /*Tipo String*/,
                     contrasenia: '' /*Tipo String*/,  
                     imagen: '' /*Tipo String*/,
-                    condicionesFisicas:{}
+                    condicionesFisicas:[]
                 };
 
                 $scope.alerts = [];
