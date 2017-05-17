@@ -16,3 +16,22 @@ background: url(http://k34.kn3.net/taringa/3/1/B/5/5/0/Jeymisummer/161.jpg);
 .hola1{
     background: url(http://s1.1zoom.me/big3/796/Sunrises_and_sunsets_Ear_510886.jpg);
 }
+
+.jumbotron { 
+    background-color: #0ca20b;
+    color: #ffffff;
+    padding-top: 10px;
+    height: 150px;
+}
+
+#verde{
+    color: #0ca20b;
+}
+a:hover, a:focus{
+   color: grey; 
+}
+
+
+
+
+
