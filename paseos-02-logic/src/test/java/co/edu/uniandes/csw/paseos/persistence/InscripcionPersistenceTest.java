@@ -33,12 +33,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
@@ -46,6 +48,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author js.millan10
  */
+
+@RunWith(Arquillian.class)
 public class InscripcionPersistenceTest {
     
     @Deployment
@@ -53,6 +57,8 @@ public class InscripcionPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(InscripcionEntity.class.getPackage())
                 .addPackage(InscripcionPersistence.class.getPackage())
+                .addPackage(CaminanteEntity.class.getPackage())
+                .addPackage(CaminantePersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }    
@@ -68,6 +74,7 @@ public class InscripcionPersistenceTest {
     
     private List<InscripcionEntity> data = new ArrayList<InscripcionEntity>();
     
+    @Inject
     private CaminanteEntity caminanteActual;
     /**
      * Configuración inicial de la prueba.
@@ -105,8 +112,7 @@ public class InscripcionPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-            caminanteActual = factory.manufacturePojo(CaminanteEntity.class);
-            caminanteActual.setId((long)1);
+          
         for (int i = 0; i < 3; i++) {
             InscripcionEntity entity = factory.manufacturePojo(InscripcionEntity.class);
             //entity.setGuia(guiaActual);   Problema al asignarle un guía
@@ -115,17 +121,17 @@ public class InscripcionPersistenceTest {
         }
     }
     @Test
-    public void createCalificacionTest( )
+    public void createInscripcionTest( )
     {
         PodamFactory factory = new PodamFactoryImpl();
         InscripcionEntity entityParaPrueba = factory.manufacturePojo(InscripcionEntity.class);
         
         InscripcionEntity entityPersistido = inscripcionPersistence.create(entityParaPrueba);
         
-        Assert.assertNotNull("No deberia retornar null al persistir un caminante", entityPersistido);
+        Assert.assertNotNull("No deberia retornar null al persistir una inscripción", entityPersistido);
         
         InscripcionEntity entityEncontrado = em.find(InscripcionEntity.class, entityPersistido.getId());
-        Assert.assertNotNull("El caminante deberia existir en la base de datos",entityEncontrado);
+        Assert.assertNotNull("La inscripción deberia existir en la base de datos",entityEncontrado);
         
         
         //Se verifica que los valores persistidos sean correctos
@@ -138,21 +144,18 @@ public class InscripcionPersistenceTest {
         Assert.assertEquals(data.size(), encontrados.size());
         
     }
-    /*
-    //Escenario 1: El caminante buscado existe en la base de datos
+    
     @Test
-    public void getCalificacionesTestId( )
+    public void getInscripcionesCaminanteTest( )
     {
-        CaminanteEntity esperado = data.get(0);
-        CaminanteEntity encontrado = caminantePersistence.find(esperado.getId());
-        Assert.assertNotNull(encontrado);
-        verificarConsistenciaAtributos(esperado, encontrado);
+        Assert.assertNotNull(caminanteActual);
+        List<InscripcionEntity> encontrados = inscripcionPersistence.findAll(caminanteActual.getId());
+        Assert.assertEquals(data.size(), encontrados.size());   
+        
     }
     
-    */
-    //Escenario 1: Se va a actualizar un caminante que existe en la base de datos.
     @Test 
-    public void updateCalificacionTest( )
+    public void updateInscripcionTest( )
     {
         InscripcionEntity original = data.get(0);
         
@@ -169,7 +172,7 @@ public class InscripcionPersistenceTest {
     
     
     @Test
-    public void deleteCalificacionTest( )
+    public void deleteInscripcionTest( )
     {
         InscripcionEntity entity = data.get(0);
         inscripcionPersistence.delete(entity.getId());

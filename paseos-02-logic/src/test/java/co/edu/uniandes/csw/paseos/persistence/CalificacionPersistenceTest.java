@@ -85,7 +85,10 @@ public class CalificacionPersistenceTest {
     @Before
     public void setUp() {
         try {
-             
+            PodamFactory factory = new PodamFactoryImpl();
+            GuiaEntity nuevo = factory.manufacturePojo(GuiaEntity.class);
+            guiaActual = nuevo;
+            //em.persist(nuevo);
             utx.begin();
             em.joinTransaction();
             clearData(); 
@@ -118,30 +121,28 @@ public class CalificacionPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-            GuiaEntity nuevoGuia = factory.manufacturePojo(GuiaEntity.class);
-            em.persist(nuevoGuia);
-            guiaActual = em.find(GuiaEntity.class, 1);
-            PodamFactory factory1 = new PodamFactoryImpl();
+        
         for (int i = 0; i < 3; i++) {
-            CalificacionEntity entity = factory1.manufacturePojo(CalificacionEntity.class); 
-            //entity.setGuia(guiaActual);
+            CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class); 
+            guiaActual = entity.getGuia();
             em.persist(entity);
+            
             data.add(entity);
         }
     }
     @Test
     public void createCalificacionTest( )
     {
-        
+       
         PodamFactory factory = new PodamFactoryImpl();
         CalificacionEntity entityParaPrueba = factory.manufacturePojo(CalificacionEntity.class);
         
         CalificacionEntity entityPersistido = calificacionPersistence.create(entityParaPrueba);
         
-        Assert.assertNotNull("No deberia retornar null al persistir un caminante", entityPersistido);
+        Assert.assertNotNull("No deberia retornar null al persistir una calificación", entityPersistido);
         
         CalificacionEntity entityEncontrado = em.find(CalificacionEntity.class, entityPersistido.getId());
-        Assert.assertNotNull("El caminante deberia existir en la base de datos",entityEncontrado);
+        Assert.assertNotNull("La calificación deberia existir en la base de datos",entityEncontrado);
         
         
         //Se verifica que los valores persistidos sean correctos
@@ -150,27 +151,24 @@ public class CalificacionPersistenceTest {
     @Test
     public void getCalificacionesTest( )
     {
-        List<CalificacionEntity> encontrados = calificacionPersistence.findAll(guiaActual.getId());
+        List<CalificacionEntity> encontrados = calificacionPersistence.findAll();
         Assert.assertEquals(data.size(), encontrados.size());
         
     }
-    /*
-    //Escenario 1: El caminante buscado existe en la base de datos
+    
     @Test
-    public void getCalificacionesTestId( )
+    public void getCalificacionesGuiaTest( )
     {
-        CaminanteEntity esperado = data.get(0);
-        CaminanteEntity encontrado = caminantePersistence.find(esperado.getId());
-        Assert.assertNotNull(encontrado);
-        verificarConsistenciaAtributos(esperado, encontrado);
+        Assert.assertNotNull(guiaActual);
+        List<CalificacionEntity> encontrados = calificacionPersistence.findAll(guiaActual.getId());
+        Assert.assertEquals(data.size(), encontrados.size());   
     }
     
-    */
-    //Escenario 1: Se va a actualizar un caminante que existe en la base de datos.
+    
     @Test 
     public void updateCalificacionTest( )
     {
-        Assert.assertEquals(data.size(), 3);
+        
         CalificacionEntity original = data.get(0);
         
         PodamFactory podam = new PodamFactoryImpl();        
@@ -181,7 +179,7 @@ public class CalificacionPersistenceTest {
         Assert.assertNotNull(mergeResult);
         
         CalificacionEntity encontrada = em.find(CalificacionEntity.class, original.getId());
-        Assert.assertNotNull("El caminante se elimino en lugar de actualizarse", encontrada);
+        Assert.assertNotNull("La calificación se elimino en lugar de actualizarse", encontrada);
     }
     
     

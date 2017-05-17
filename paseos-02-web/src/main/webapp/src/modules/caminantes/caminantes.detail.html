@@ -86,7 +86,7 @@
                     <h3>Inscripciones</h3>
                 </div>
             </div>
-                <div class="col-md-10">
+                <div class="col-md-12">
                 <div class="panel-group" id="accordion">
                     <div ng-repeat="inscripcion in currentCaminante.inscripciones" class="panel panel-default">
                         <div class="panel-heading">
@@ -102,9 +102,11 @@
                                     <li class="list-group-item"><strong>Observaciones: </strong>{{inscripcion.observaciones}}</li>
                                     <li class="list-group-item"><a ui-sref="inscripcionDetail({inscripcionId: inscripcion.id, caminanteId: currentCaminante.id})">Información Adicional</a></li>
                                 </ul>
-                                
+                            <div class="col-md-2">
+                            <a ui-sref="inscripcionesCreate()" type="button" class="btn btn-warning">Modificar Inscripcion</a>
+                            </div>    
                             </div>
-                            <a ui-sref="inscripcionesCreate()" type="button" class="btn btn-primary">Modificar Inscripcion</a>
+                            
                         </div>
                         
                     </div>
