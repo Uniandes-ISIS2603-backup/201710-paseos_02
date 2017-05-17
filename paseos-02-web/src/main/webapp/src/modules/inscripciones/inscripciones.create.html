@@ -1,35 +1,37 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<div class="container-fluid">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-3">
-                    <h2>Nueva inscripcion</h2>
+<div class="col-md-8 well">
+    <form novalidate name="form" id="inscripcion-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+
+            <!-- Fecha de inscripción -->
+            <div class="form-group col-md-12" ng-class="{'has-success': form.fechaInscripcion.$valid && form.fechaInscripcion.$dirty, 'has-error': form.fechaInscripcion.$invalid && (form.fechaInscripcion.$dirty || form.$submitted)}" >
+                <label for="fechaInscripcion" class="col-md-4 control-label">Fecha de la inscripción</label>
+                <div class="col-md-8">
+                    <input id="fechaInscripcion" name="fechaInscripcion" class="form-control" type="date" ng-model="currentRecord.fechaInscripcion" ng-init="currentRecord.fechaInscripcion" required />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <dl>
-                        <hr>
-                        <dt>Caminantesssss</dt>
-                        <dd></dd>
-
-                        <hr>
-                        <dt>Observacion</dt>
-                        <dd></dd>
-
-                        <hr>
-                        <dt>Paseo</dt>
-                        <dd></dd>
-
-                    </dl>
+            
+            <!-- Observaciones -->
+            <div class="form-group col-md-12" ng-class="{'has-success': form.observaciones.$valid && form.observaciones.$dirty, 'has-error': form.observaciones.$invalid && (form.observaciones.$dirty || form.$submitted)}" >
+                <label for="observaciones" class="col-md-4 control-label">Observaciones</label>
+                <div class="col-md-8">
+                    <input id="observaciones" name="observaciones" class="form-control" type="text" ng-model="currentRecord.observaciones" ng-init="currentRecord.observaciones" required />
                 </div>
             </div>
+
+            <!-- Realizo Pago -->
+            <div class="form-group col-md-12" ng-class="{'has-success': form.realizoPago.$valid && form.realizoPago.$dirty, 'has-error': form.realizoPago.$invalid && (form.realizoPago.$dirty || form.$submitted)}" >
+                <label for="realizoPago" class="col-md-4 control-label">Realizo el Pago</label>
+                <div class="col-md-8">
+                    <input id="realizoPago" name="realizoPago" class="form-control" type="text" ng-model="currentRecord.realizoPago" ng-init="currentRecord.realizoPago" required />
+                </div>
+            </div>
+
+
+        </fieldset>
+        <div class="form-group col-md-12">
+            <button type="button" ui-sref='inscripcionesList'>Cancel</button>
+            <button type="submit" >Save</button>   
         </div>
-    </div>
+    </form>
 </div>

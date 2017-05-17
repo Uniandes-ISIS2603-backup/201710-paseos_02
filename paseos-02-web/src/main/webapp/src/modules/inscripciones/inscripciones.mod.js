@@ -14,18 +14,35 @@
             $urlRouterProvider.otherwise("/inscripcionesList");
             // Definición del estado 'caminantesList' donde se listan los caminantes
             $stateProvider.state('inscripciones', {
-                url: '/inscripciones',
+                url: 'caminantes/{caminanteId:int}/inscripciones',
                 abstract: true,
-                parent: 'caminanteDetail',
+                param:{
+                    caminanteId: null
+                },
+                resolve: {
+                    currentCaminante:['$http', 'caminantesContext', '$stateParams', function($http, caminantesContext, $params){
+                                return $http.get(caminantesContext + '/' + $params.caminanteId);
+                            }],
+                    inscripciones: ['$http', 'caminantesContext', 'inscripcionesContext', '$stateParams', function ($http, caminantesContext, inscripcionesContext, $params) {
+                            return $http.get(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext);
+                        }]
+                },
+                views: {
+                    'mainView': {
+                        templateUrl: basePath + 'inscripciones.html',
+                        controller:['$scope', 'inscripciones', 'currentCaminante', function ($scope, inscripciones, currentCaminante){
+                                $scope.currentCaminante = currentCaminante.data;
+                                $scope.inscripcionesRecords = inscripciones.data;
+                        }]
+                    }
+                }
             }).state('inscripcionesList', {
                 url: '/list',
                 parent: 'inscripciones',
                 views: {
-                    'listView@caminantes': {
-                        templateUrl: basePath + 'inscripciones.list.html',
-                        controller: ['$scope', 'currentCaminante', function ($scope, currentCaminante) {
-                                $scope.inscripcionesRecords = currentCaminante.data.inscripciones;
-                            }]
+                    'listView': {
+                        templateUrl: basePath + 'inscripciones.list.html'
+                        
                     }
                 }
             }).state('inscripcionDetail', {
@@ -34,35 +51,32 @@
                 param: {
                     inscripcionId: null
                 },
+                resolve: {
+                    currentInscripcion: ['$http', 'caminantesContext', 'inscripcionesContext', '$stateParams', function ($http, caminantesContext,inscripcionesContext, $params) {
+                            return $http.get(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext + '/' + $params.inscripcionId);
+                        }]
+                },
                 views: {
-                    'detailView@caminantes': {
+                    'detailView': {
                         templateUrl: basePath + 'inscripciones.detail.html',
-                        controller: ['$scope', '$stateParams', '$filter', 'currentCaminante', function ($scope, $params, $filter,currentCaminante) {
-                               $scope.inscripcionesRecords = currentCaminante.data.inscripciones;
-                               var found = $filter('filter')( $scope.inscripcionesRecords, {id: $params.inscripcionId}, true);
-                                if (found.length) {
-                                    $scope.currentInscripcion = found[0];
-                                } else {
-                                    $scope.currentInscripcion = '';
-                                }
+                        controller: ['$scope', 'currentInscripcion', function ($scope,currentInscripcion) {
+                               $scope.currentInscripcion = currentInscripcion.data;
                             }]
                     },
-                    'listView@caminantes': {
-                        templateUrl: basePath + 'inscripciones.list.html',
-                        controller: ['$scope', 'currentCaminante', function ($scope, currentCaminante) {
-                                $scope.inscripcionesRecords = currentCaminante.data.inscripciones;
-                            }]
+                   'listView': {
+                        templateUrl: basePath + 'inscripciones.list.html'
+                        
                     }
                 }
             }).state('inscripcionesCreate', {
                 url: '/create',
                 parent: 'inscripciones',
                 views: {
-                    'mainView': {
-                        templateUrl: basePath + 'inscripciones.create.html',
+                    'listView': {
+                        templateUrl: basePath + 'inscripciones.create.html'
                         
                     }
                 }
-            });;
+            });
         }]);
 })(window.angular);
