@@ -62,7 +62,7 @@
                     correoElectronico: '' /*Tipo String*/,
                     contrasenia: '' /*Tipo String*/,  
                     imagen: '' /*Tipo String*/,
-                    condicionesFisicas:[]
+                    condicionesFisicas:[0,0,0,0,0]
                 };
 
                 $scope.alerts = [];
@@ -79,7 +79,8 @@
                             .then(function () {
                                 // $http.post es una promesa
                                 // cuando termine bien, cambie de estado
-                                $state.go('caminantesList');
+                                //$scope.records = $http.get(caminantesContext);
+                                $state.go('caminantesList', null, {reload: true});
                             }, responseError);
 
                     // si el id no es null, es un registro existente entonces lo actualiza
@@ -96,7 +97,16 @@
                 ;
             };
            
-
+           this.deleteRecord = function(recordR)
+           {
+                return $http.delete(caminantesContext + "/" + recordR.id)
+                            .then(function () {
+                                // $http.post es una promesa
+                                // cuando termine bien, cambie de estado
+                                //$scope.records = $http.get(caminantesContext);
+                                $state.go('caminantesList', null, {reload: true});
+                            }, responseError);
+           };
 
             // -----------------------------------------------------------------
             // Funciones para manejra los mensajes en la aplicación

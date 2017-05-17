@@ -1,4 +1,10 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
+
 <div ui-view="detailView"></div>
  
 <div ui-view="listView"></div>
+
+ <div ui-view="paseoView"></div>
+ 
+ <div ui-view="childView"></div>
 
