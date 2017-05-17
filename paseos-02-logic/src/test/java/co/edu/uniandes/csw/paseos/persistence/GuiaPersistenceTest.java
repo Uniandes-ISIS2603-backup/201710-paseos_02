@@ -119,10 +119,10 @@ public class GuiaPersistenceTest {
 
         GuiaEntity entityPersistido = guiaPersistence.create(entityParaPrueba);
 
-        Assert.assertNotNull("No deberia retornar null al persistir un caminante", entityPersistido);
+        Assert.assertNotNull("No deberia retornar null al persistir un guía", entityPersistido);
 
         GuiaEntity entityEncontrado = em.find(GuiaEntity.class, entityPersistido.getId());
-        Assert.assertNotNull("El caminante deberia existir en la base de datos",entityEncontrado);
+        Assert.assertNotNull("El guía deberia existir en la base de datos",entityEncontrado);
 
         //Se verifica que los valores persistidos sean correctos
         verificarConsistenciaAtributos(entityParaPrueba, entityEncontrado);
