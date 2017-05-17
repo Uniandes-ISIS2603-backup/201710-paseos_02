@@ -90,7 +90,7 @@
             </div>
                 <div class="col-md-12">
                 <div class="panel-group" id="accordion">
-                    <div ng-repeat="inscripcion in currentRecord.inscripciones" class="panel panel-default">
+                    <div ng-repeat="inscripcion in records.inscripciones" class="panel panel-default">
                         <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{inscripcion.id}}">>>>>>>>></a>
@@ -107,14 +107,10 @@
                             <div class="col-md-2">
                             <a ui-sref="inscripcionesCreate()" type="button" class="btn btn-warning">Modificar Inscripcion</a>
                             </div>    
-                            </div>
-                            
+                            </div> 
                         </div>
-                        
                     </div>
-                    
-                 </div>
-                    
+                 </div> 
                 </div>
 
             <div class="col-md-2">
