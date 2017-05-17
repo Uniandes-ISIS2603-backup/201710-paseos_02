@@ -151,7 +151,7 @@ public class GuiaPersistenceTest {
     {
         GuiaEntity esperado = data.get(0);
         GuiaEntity encontrado = guiaPersistence.find(esperado.getId());
-        Assert.assertNull(encontrado);
+        Assert.assertNotNull(encontrado);
         verificarConsistenciaAtributos(esperado, encontrado);
     }
 
@@ -206,7 +206,7 @@ public class GuiaPersistenceTest {
     }
 
     private void verificarConsistenciaAtributos(GuiaEntity entityParaPrueba, GuiaEntity entityEncontrado) {
-        Assert.assertEquals(entityParaPrueba.getId(), entityEncontrado.getId());
+        
         Assert.assertEquals(entityParaPrueba.getIdentificacion(), entityEncontrado.getIdentificacion());
         Assert.assertEquals(entityParaPrueba.getTipoIdentificacion(), entityEncontrado.getTipoIdentificacion());
         Assert.assertEquals(entityParaPrueba.getNombre(), entityEncontrado.getNombre());
