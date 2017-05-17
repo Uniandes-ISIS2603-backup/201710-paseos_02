@@ -1,0 +1,19 @@
+<form method="post">
+    <div class="form-group">
+    <label for="nombreActividadPut">Nombre:</label>
+    <br><input type="text" name="nombreActividadPut" placeholder="Ingrese el nombre" id ="nombreActividadPut">
+  </div>
+  <div class="form-group">
+    <label for="descripcionActividadPut">Descripcion:</label>
+    <br><input type="text" name="descripcionActividadPut" placeholder="Ingrese la descripcion" id ="descripcionActividadPut">
+  </div>
+  <div class="form-group">
+    <label for="duracionActividadPut">Duracion:</label>
+    <br><input type="number" min="1" name="descripcionActividadPut" id ="descripcionActividadPut">
+  </div>
+    <div class="form-group">
+    <label for="equipamientoActividadPut">Equipamiento:</label>
+    <br><input type="text" name="equipamientoActividadPut" placeholder="Separado por comas" id ="equipamientoActividadPut">
+  </div>
+    <button value="Actualizar" class="glyphicon glyphicon-refresh" ng-click="actualizarActividad()" style="color: darkgreen;width: 30px; height: 26px"></button>
+    </form>

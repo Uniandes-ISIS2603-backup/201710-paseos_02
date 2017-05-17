@@ -105,8 +105,8 @@ public class CaminanteResource
         if (entity == null) {
             throw new WebApplicationException("El caminante con id dado no existe", 404);
         }
-        CaminanteEntity caminanteUpdate = dto.toEntity();
-        entity.setId(id);
+        dto.setId(id);
+        CaminanteEntity caminanteUpdate = dto.toEntity();        
         return new CaminanteDetailDTO(caminanteLogic.updateCaminante(caminanteUpdate));
     }
     

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="thumb">
-                <img class="img-responsive" ng-src="{{currentPaseo.lugarDeEncuentro.imagen}}"/>
+                <img class="img-responsive" ng-src="{{currentRecord.lugarDeEncuentro.imagen}}"/>
             </div>
         </div>
         <div class="col-md-8">
@@ -12,15 +12,15 @@
                         <div class="col-md-8">
                             <dl>
                                 <dt>Descripción</dt>
-                                <dd>{{currentPaseo.descripcion}}</dd>
+                                <dd>{{currentRecord.descripcion}}</dd>
 
                                 <hr>
                                 <dt>Numero minimo de caminantes</dt>
-                                <dd>{{currentPaseo.nMinimCaminantes}}</dd>
+                                <dd>{{currentRecord.nMinimCaminantes}}</dd>
 
                                 <hr>
                                 <dt>Numero maximo de caminantes</dt>
-                                <dd>{{currentPaseo.nMaxCaminantes}}</dd>
+                                <dd>{{currentRecord.nMaxCaminantes}}</dd>
 
                             </dl>
                         </div>
@@ -35,23 +35,23 @@
                                 <tbody>
                                     <tr>
                                         <td>Fuerza</td>
-                                        <td>{{currentPaseo.condicionesFisicas[0]}}</td>
+                                        <td>{{currentRecord.condicionesFisicas[0]}}</td>
                                     </tr>
                                     <tr>
                                         <td>Velocidad</td>
-                                        <td>{{currentPaseo.condicionesFisicas[1]}}</td>
+                                        <td>{{currentRecord.condicionesFisicas[1]}}</td>
                                     </tr>
                                     <tr>
                                         <td>Resistencia</td>
-                                        <td>{{currentPaseo.condicionesFisicas[2]}}</td>
+                                        <td>{{currentRecord.condicionesFisicas[2]}}</td>
                                     </tr>
                                     <tr>
                                         <td>Flexibilidad</td>
-                                        <td>{{currentPaseo.condicionesFisicas[3]}}</td>
+                                        <td>{{currentRecord.condicionesFisicas[3]}}</td>
                                     </tr>
                                     <tr>
                                         <td>Coordinacion</td>
-                                        <td>{{currentPaseo.condicionesFisicas[4]}}</td>
+                                        <td>{{currentRecord.condicionesFisicas[4]}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -63,11 +63,11 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <h4> Costo: $ {{currentPaseo.costo}} por persona. Incluye:</h4>
+                                            <h4> Costo: $ {{currentRecord.costo}} por persona. Incluye:</h4>
                                         </div>                                       
                                         <div class="col-md-2">
                                             <form>
-                                                <h5><input type="radio" name="Transporte" value="Transporte" checked="{{currentPaseo.hayTransporte}}"> Transporte </h5>
+                                                <h5><input type="radio" name="Transporte" value="Transporte" checked="{{currentRecord.hayTransporte}}"> Transporte </h5>
                                             </form>
                                         </div>
                                     </div>

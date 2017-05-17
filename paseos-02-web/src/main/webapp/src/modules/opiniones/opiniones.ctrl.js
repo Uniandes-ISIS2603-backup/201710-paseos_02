@@ -22,30 +22,30 @@
  * THE SOFTWARE.
  */
 (function (ng) {
-    var mod = ng.module("caminanteModule");
-    
+    var mod = ng.module("opinionesModule");
 
-    mod.controller("caminantesCtrl", ['$scope', '$state', '$stateParams', '$http', 'caminantesContext', 'caminantes', '$filter',
-        function ($scope, $state, $stateParams, $http, caminantesContext, caminantes, $filter) {
 
-            // inicialmente el listado de caminantes está vacio
-            $scope.records = caminantes.data;
-                      
+    mod.controller("opinionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'opinionesContext', 'opiniones', '$filter',
+        function ($scope, $state, $stateParams, $http, opinionesContext, opiniones, $filter) {
 
-            // el controlador recibió un caminanteId ??
-            // revisa los parámetros (ver el :caminanteId en la definición de la ruta)
-            if ($stateParams.caminanteId !== null && $stateParams.caminanteId !== undefined) {
+            // inicialmente el listado de opiniones está vacio
+            $scope.records = opiniones.data;
+
+
+            // el controlador recibió un opinionId ??
+            // revisa los parámetros (ver el :opinionId en la definición de la ruta)
+            if ($stateParams.opinionId !== null && $stateParams.opinionId !== undefined) {
 
                 // toma el id del parámetro
-                id = $stateParams.caminanteId;
+                id = $stateParams.opinionId;
                 // obtiene el dato del recurso REST
-                $http.get(caminantesContext + "/" + id)
-                        .then(function (response) {
-                            // $http.get es una promesa
-                            // cuando llegue el dato, actualice currentRecord
-                            $scope.currentRecord = response.data;                                        
-                           
-                        }, responseError);
+                $http.get(opinionesContext + "/" + id)
+                    .then(function (response) {
+                        // $http.get es una promesa
+                        // cuando llegue el dato, actualice currentRecord
+                        $scope.currentRecord = response.data;
+
+                    }, responseError);
 
                 // el controlador no recibió un caminanteId
             } else
@@ -53,21 +53,14 @@
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    nombre: '' /*Tipo String*/,
-                    identificacion: '' /*Tipo Integer*/,
-                    tipoIdentificacion: '' /*Tipo String*/,
-                    edad: '' /*Tipo Integer*/,
-                    telefono: '' /*Tipo Integer*/,
-                    direccion: '' /*Tipo String*/,
-                    correoElectronico: '' /*Tipo String*/,
-                    contrasenia: '' /*Tipo String*/,  
+                    comentario: '' /*Tipo String*/,
                     imagen: '' /*Tipo String*/,
-                    condicionesFisicas:[0,0,0,0,0]
+                    fechaComentario: '' /*Tipo Integer*/
                 };
 
                 $scope.alerts = [];
             }
-            
+
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
 
@@ -75,38 +68,28 @@
                 if (id == null) {
 
                     // ejecuta POST en el recurso REST
-                    return $http.post(caminantesContext, currentRecord)
-                            .then(function () {
-                                // $http.post es una promesa
-                                // cuando termine bien, cambie de estado
-                                //$scope.records = $http.get(caminantesContext);
-                                $state.go('caminantesList', null, {reload: true});
-                            }, responseError);
+                    return $http.post(opinionesContext, currentRecord)
+                        .then(function () {
+                            // $http.post es una promesa
+                            // cuando termine bien, cambie de estado
+                            $state.go('opinionesList');
+                        }, responseError);
 
                     // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
 
                     // ejecuta PUT en el recurso REST
-                    return $http.put(caminantesContext + "/" + currentRecord.id, currentRecord)
-                            .then(function () {
-                                // $http.put es una promesa
-                                // cuando termine bien, cambie de estado
-                                $state.go('caminantesList');
-                            }, responseError);
+                    return $http.put(opinionesContext + "/" + currentRecord.id, currentRecord)
+                        .then(function () {
+                            // $http.put es una promesa
+                            // cuando termine bien, cambie de estado
+                            $state.go('opinionesList');
+                        }, responseError);
                 }
                 ;
             };
-           
-           this.deleteRecord = function(recordR)
-           {
-                return $http.delete(caminantesContext + "/" + recordR.id)
-                            .then(function () {
-                                // $http.post es una promesa
-                                // cuando termine bien, cambie de estado
-                                //$scope.records = $http.get(caminantesContext);
-                                $state.go('caminantesList', null, {reload: true});
-                            }, responseError);
-           };
+
+
 
             // -----------------------------------------------------------------
             // Funciones para manejra los mensajes en la aplicación
@@ -121,8 +104,8 @@
             function showMessage(msg, type) {
                 var types = ["info", "danger", "warning", "success"];
                 if (types.some(function (rc) {
-                    return type === rc;
-                })) {
+                        return type === rc;
+                    })) {
                     $scope.alerts.push({type: type, msg: msg});
                 }
             }

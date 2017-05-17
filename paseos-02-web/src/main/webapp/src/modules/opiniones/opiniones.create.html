@@ -1,16 +1,45 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div ng-messages="form.$error" multiple>
+    <ng-message when="required">
+        <alert type="warning">Please, Fill the required fields!</alert>
+    </ng-message>
+</div>
+
+<div class="col-md-12 well">
+    <form novalidate name="form" id="opinion-form" role="form"
+          ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+
+            <!--comentario-->
+            <label class="control-label col-sm-3" for="comentario">Comentario sobre el paseo</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="comentario" placeholder="Comentario"
+                       ng-model="comentario sobre el paseo">
+            </div>
+
+            <!--Imagen-->
+            <label class="control-label col-sm-3" for="imagen">Imagen del paso</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="imagen" placeholder="Imagen" ng-model="Imagen del paseo">
+            </div>
+
+            <!--Fecha comentario-->
+            <label class="control-label col-sm-3" for="fechaComentario">Fecha del Comentario</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="fechaComentario" placeholder="Fecha del comentario"
+                       ng-model="fecha del comentario">
+            </div>
+
+            <!--Boton-->
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-default" ng-click="saveGuia()">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group col-md-12">
+            <button type="button" ui-sref='guiasList'>Cancel</button>
+            <button type="submit" >Save</button>
+        </div>
+    </form>
+</div>

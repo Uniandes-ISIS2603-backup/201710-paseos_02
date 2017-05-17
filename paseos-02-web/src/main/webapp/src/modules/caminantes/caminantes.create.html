@@ -86,20 +86,46 @@
             </div>
 
             
-            <h5> <b> Condiciones Fisicas </b> </h5>
+            
+            <h4>Condiciones Fisicas </h4>            
             <h5> Indica tu nivel estimado de  rendimiento/habilidad con respecto a los items que se muestran a continuacion: </h5>  
-           
 
+            <div class="row">
+                <div class="form-group col-md-2" ng-class="{'has-success': form.fuerza.$valid && form.fuerza.$dirty, 'has-error': form.fuerza.$invalid && (form.fuerza.$dirty || form.$submitted)}" >
+                    <label for="fuerza" class="col-md-6 control-label">Fuerza</label>
+                    <div class="col-md-6">
+                        <select id="fuerza" name="fuerza" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[0]" ></select>
+                    </div>
+                </div>
 
+                <div class="form-group col-md-2" ng-class="{'has-success': form.velocidad.$valid && form.velocidad.$dirty, 'has-error': form.velocidad.$invalid && (form.velocidad.$dirty || form.$submitted)}" >
+                    <label for="velocidad" class="col-md-6 control-label">Velocidad</label>
+                    <div class="col-md-6">
+                        <select id="velocidad" name="velocidad" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[1]" ></select>
+                    </div>
+                </div>
 
-            <div class="form-group col-md-6" ng-class="{'has-success': form.fuerza.$valid && form.fuerza.$dirty, 'has-error': form.fuerza.$invalid && (form.fuerza.$dirty || form.$submitted)}" >
-                <label for="fuerza" class="col-md-2 control-label">Fuerza</label>
-                <div class="col-md-10">
-                    <select id="fuerza" name="fuerza" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[0]" ></select>
+                <div class="form-group col-md-2" ng-class="{'has-success': form.resistencia.$valid && form.resistencia.$dirty, 'has-error': form.resistencia.$invalid && (form.resistencia.$dirty || form.$submitted)}" >
+                    <label for="resistencia" class="col-md-6 control-label">Resistencia</label>
+                    <div class="col-md-6">
+                        <select id="resistencia" name="resistencia" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[2]" ></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2" ng-class="{'has-success': form.flexibilidad.$valid && form.flexibilidad.$dirty, 'has-error': form.flexibilidad.$invalid && (form.flexibilidad.$dirty || form.$submitted)}" >
+                    <label for="flexibilidad" class="col-md-6 control-label">Flexibilidad</label>
+                    <div class="col-md-6">
+                        <select id="flexibilidad" name="flexibilidad" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[3]" ></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2" ng-class="{'has-success': form.coordinacion.$valid && form.coordinacion.$dirty, 'has-error': form.coordinacion.$invalid && (form.coordinacion.$dirty || form.$submitted)}" >
+                    <label for="coordinacion" class="col-md-6 control-label">Coordinacion</label>
+                    <div class="col-md-6">
+                        <select id="coordinacion" name="coordinacion" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[4]" ></select>
+                    </div>
                 </div>
             </div>
-
-
         </fieldset>
         <div class="form-group col-md-12">
             <button type="button" ui-sref='caminantesList'>Cancel</button>

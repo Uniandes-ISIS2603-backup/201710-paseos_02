@@ -1,17 +1,25 @@
 <div class="container-fluid">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th> Fecha </th>
-                <th> Comentario </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="opinion in opinionesRecords ">
-                <td id="{{$index}}-fecha"><a ui-sref="opinionDetail({opinionId: opinion.id})">{{opinion.fecha}}</a></td>
-                <td id="{{$index}}-comentario">{{opinion.comentario}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <button class="btn btn-default" ui-sref="guiaCreate">Registrar guia</button>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th> Fecha</th>
+                    <th> Comentario</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="opinion in opinionesRecords ">
+                    <td id="{{$index}}-fecha"><a ui-sref="opinionDetail({opinionId: opinion.id})">{{opinion.fecha}}</a>
+                    </td>
+                    <td id="{{$index}}-comentario">{{opinion.comentario}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 

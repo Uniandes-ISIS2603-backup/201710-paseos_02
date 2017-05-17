@@ -1,0 +1,127 @@
+<div ng-messages="form.$error" multiple>
+    <ng-message when="required">
+        <alert type="warning">Please, Fill the required fields!</alert>
+    </ng-message>
+</div>
+
+<div class="col-md-12 well">
+    <form novalidate name="form" id="paseo-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+
+            <!-- Tematica -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.tematica.$valid && form.tematica.$dirty, 'has-error': form.tematica.$invalid && (form.tematica.$dirty || form.$submitted)}" >
+                <label for="tematica" class="col-md-2 control-label">Tematica</label>
+                <div class="col-md-10">
+                    <input id="tematica" name="tematica" class="form-control" type="text" ng-model="currentRecord.tematica" ng-init="currentRecord.tematica" required />
+                </div>
+            </div>           
+
+            <!-- N minim -->
+            <div class="form-group col-md-3" ng-class="{'has-success': form.minim.$valid && form.minim.$dirty, 'has-error': form.minim.$invalid && (form.minim.$dirty || form.$submitted)}" >
+                <label for="minim" class="col-md-8 control-label">N° minimo de caminantes</label>
+                <div class="col-md-4">
+                    <input id="minim" name="minim" class="form-control" type="text" ng-model="currentRecord.nMinimCaminantes" ng-init="currentRecord.nMinimCaminantes" required />
+                </div>
+            </div>
+
+            <!-- N maxim -->
+            <div class="form-group col-md-3" ng-class="{'has-success': form.maxim.$valid && form.maxim.$dirty, 'has-error': form.maxim.$invalid && (form.maxim.$dirty || form.$submitted)}" >
+                <label for="maxim" class="col-md-8 control-label">N° maximo de caminantes</label>
+                <div class="col-md-4">
+                    <input id="maxim" name="maxim" class="form-control" type="text" ng-model="currentRecord.nMaxCaminantes" ng-init="currentRecord.nMaxCaminantes" required />
+                </div>
+            </div>           
+
+            <!-- Descripcion -->
+            <div class="form-group col-md-12" ng-class="{'has-success': form.descripcion.$valid && form.descripcion.$dirty, 'has-error': form.descripcion.$invalid && (form.descripcion.$dirty || form.$submitted)}" >
+                <label for="descripcion" class="col-md-2">Descripcion</label>
+                <div class="col-md-10">
+                    <textarea  id="descripcion" name="descripcion" class="form-control" rows="4" type="text" ng-model="currentRecord.descripcion" ng-init="currentRecord.descripcion" required>
+                    </textarea>
+                </div>
+            </div>
+
+            <!-- Costo -->
+            <div class="form-group col-md-4" ng-class="{'has-success': form.costo.$valid && form.costo.$dirty, 'has-error': form.costo.$invalid && (form.costo.$dirty || form.$submitted)}" >
+                <label for="costo" class="col-md-3 control-label">Costo</label>
+                <div class="col-md-9">
+                    <input id="costo" name="costo" class="form-control" type="text" ng-model="currentRecord.costo" ng-init="currentRecord.costo" required />
+                </div>
+            </div>
+
+            <!-- HayTransporte -->
+            <div class="checkbox col-md-4" ng-class="{'has-success': form.transporte.$valid && form.transporte.$dirty, 'has-error': form.transporte.$invalid && (form.transporte.$dirty || form.$submitted)}" >
+                <label class="col-md-4 control-label"> 
+                    <input id="transporte" name="transporte" type="checkbox" value="" ng-model="currentRecord.hayTransporte" ng-init="currentRecord.hayTransporte" required>
+                    ¿Hay transporte? 
+                </label>         
+            </div>           
+
+            <!-- Lugar de Encuentro -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.encuentro.$valid && form.encuentro.$dirty, 'has-error': form.encuentro.$invalid && (form.encuentro.$dirty || form.$submitted)}" >
+                <label for="encuentro" class="col-md-4 control-label">Lugar de encuentro</label>
+                <div class="col-md-8">
+                    <select id="encuentro" name="encuentro" ng-options="rc.nombre for rc in lugares track by rc.id" class="form-control" type="text" ng-model="currentRecord.lugarDeEncuentro" ></select>
+                </div>
+            </div>
+
+            <!-- Lugar de Destino -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.destino.$valid && form.destino.$dirty, 'has-error': form.destino.$invalid && (form.destino.$dirty || form.$submitted)}" >
+                <label for="destino" class="col-md-3 control-label">Lugar de destino</label>
+                <div class="col-md-9">
+                    <select id="destino" name="destino" ng-options="rc.nombre for rc in lugares track by rc.id" class="form-control" type="text" ng-model="currentRecord.lugarDeDestino" ></select>
+                </div>
+            </div>
+
+            <!-- Guia -->
+            <div class="form-group col-md-12" ng-class="{'has-success': form.guia.$valid && form.guia.$dirty, 'has-error': form.guia.$invalid && (form.guia.$dirty || form.$submitted)}" >
+                <label for="guia" class="col-md-1 control-label">Guia</label>
+                <div class="col-md-5">
+                    <select id="guia" name="guia" ng-options="rc.nombre for rc in guias track by rc.id" class="form-control" type="text" ng-model="currentRecord.guia" ></select>
+                </div>
+            </div>
+
+            <div class="row">
+                
+                <div class="form-group col-md-2" ng-class="{'has-success': form.fuerza.$valid && form.fuerza.$dirty, 'has-error': form.fuerza.$invalid && (form.fuerza.$dirty || form.$submitted)}" >
+                    <label for="fuerza" class="col-md-6 control-label">Fuerza</label>
+                    <div class="col-md-6">
+                        <select id="fuerza" name="fuerza" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[0]" ></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2" ng-class="{'has-success': form.velocidad.$valid && form.velocidad.$dirty, 'has-error': form.velocidad.$invalid && (form.velocidad.$dirty || form.$submitted)}" >
+                    <label for="velocidad" class="col-md-6 control-label">Velocidad</label>
+                    <div class="col-md-6">
+                        <select id="velocidad" name="velocidad" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[1]" ></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2" ng-class="{'has-success': form.resistencia.$valid && form.resistencia.$dirty, 'has-error': form.resistencia.$invalid && (form.resistencia.$dirty || form.$submitted)}" >
+                    <label for="resistencia" class="col-md-6 control-label">Resistencia</label>
+                    <div class="col-md-6">
+                        <select id="resistencia" name="resistencia" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[2]" ></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2" ng-class="{'has-success': form.flexibilidad.$valid && form.flexibilidad.$dirty, 'has-error': form.flexibilidad.$invalid && (form.flexibilidad.$dirty || form.$submitted)}" >
+                    <label for="flexibilidad" class="col-md-6 control-label">Flexibilidad</label>
+                    <div class="col-md-6">
+                        <select id="flexibilidad" name="flexibilidad" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[3]" ></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2" ng-class="{'has-success': form.coordinacion.$valid && form.coordinacion.$dirty, 'has-error': form.coordinacion.$invalid && (form.coordinacion.$dirty || form.$submitted)}" >
+                    <label for="coordinacion" class="col-md-6 control-label">Coordinacion</label>
+                    <div class="col-md-6">
+                        <select id="coordinacion" name="coordinacion" ng-options="i for i in [1,2,3,4,5,6,7,8,9,10]" class="form-control" type="text" ng-model="currentRecord.condicionesFisicas[4]" ></select>
+                    </div>
+                </div>
+        </fieldset>
+        <div class="form-group col-md-12">
+            <button type="button" ui-sref='paseosList'>Cancel</button>
+            <button type="button" ui-sref='paseosList' >Save</button>   
+        </div>
+    </form>
+</div>

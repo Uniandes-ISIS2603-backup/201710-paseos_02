@@ -87,8 +87,10 @@ public class CaminanteLogic {
      */
     public CaminanteEntity updateCaminante(CaminanteEntity caminante) throws BusinessLogicException
     {
-        verificarDatos(caminante);
-        if(!existeCaminanteConMismaIdentificacion(caminante.getIdentificacion()))
+        verificarDatos(caminante);        
+        CaminanteEntity original = caminantePersistence.find(caminante.getId());
+        boolean mismoIdentViejo = original.getIdentificacion().equals(caminante.getIdentificacion());
+        if(!existeCaminanteConMismaIdentificacion(caminante.getIdentificacion()) || mismoIdentViejo)
         {
             return caminantePersistence.update(caminante);
         }

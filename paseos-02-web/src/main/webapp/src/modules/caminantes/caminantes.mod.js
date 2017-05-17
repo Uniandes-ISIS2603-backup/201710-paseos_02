@@ -81,6 +81,19 @@
                         templateUrl: basePath + 'caminantes.create.html'
                     }
                 }
+            }).state('caminanteEdit', {
+                url: '/{caminanteId:int}/edit',
+                parent: 'caminantes',
+                views: {
+                    'caminanteView': {
+                        controller: 'caminantesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'caminantes.create.html'
+                    },
+                    'childView': {
+                        templateUrl: basePath + 'caminantes.detail.html'
+                    }
+                }
             });
         }]);
 })(window.angular);

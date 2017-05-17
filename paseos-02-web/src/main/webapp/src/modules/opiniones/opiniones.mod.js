@@ -54,6 +54,16 @@
                             }]
                     }
                 }
+            }).state('opinionesCreate', {
+                url: '/create',
+                parent: 'opiniones',
+                views: {
+                    'opinionView': {
+                        controller: 'opinionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'opiniones.create.html'
+                    }
+                }
             });
         }]);
 })(window.angular);
