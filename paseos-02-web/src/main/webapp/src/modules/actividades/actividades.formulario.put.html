@@ -1,22 +1,19 @@
 <form method="post">
-    <table>
-        <thead colspan="2" style="align-content: center;">Actualizar actividad</thead>
-        <tr>
-            <td> Nombre: </td>
-            <td><input type="text" name="nombreActividadPut" id ="nombreActividadPut"><br></td>
-        </tr>
-        <tr>
-            <td> Descripcion: </td>
-            <td><input type="text" name="descripcionActividadPut" id ="descripcionActividadPut"><br></td>
-        </tr>
-        <tr>
-            <td> Duracion: </td>
-            <td><input type="number" min="1" style="height: 35px; width: 35px" name="duracionActividadPut" id ="duracionActividadPut" <br></td>
-        </tr>
-        <tr>
-            <td> Equipamiento </td>
-            <td><input type="text" name="equipamientoActividadPut" id ="equipamientoActividadPut"><br></td>
-        </tr>
-    </table>
-    <button value="Actualizar" ng-click="actualizarActividad()" style="width: 62px; height: 26px">Actualizar</button>
+    <div class="form-group">
+    <label for="nombreActividadPut">Nombre:</label>
+    <br><input type="text" name="nombreActividadPut" placeholder="Ingrese el nombre" id ="nombreActividadPut">
+  </div>
+  <div class="form-group">
+    <label for="descripcionActividadPut">Descripcion:</label>
+    <br><input type="text" name="descripcionActividadPut" placeholder="Ingrese la descripcion" id ="descripcionActividadPut">
+  </div>
+  <div class="form-group">
+    <label for="duracionActividadPut">Duracion:</label>
+    <br><input type="number" min="1" name="descripcionActividadPut" id ="descripcionActividadPut">
+  </div>
+    <div class="form-group">
+    <label for="equipamientoActividadPut">Equipamiento:</label>
+    <br><input type="text" name="equipamientoActividadPut" placeholder="Separado por comas" id ="equipamientoActividadPut">
+  </div>
+    <button value="Actualizar" class="glyphicon glyphicon-refresh" ng-click="actualizarActividad()" style="color: darkgreen;width: 30px; height: 26px"></button>
     </form>

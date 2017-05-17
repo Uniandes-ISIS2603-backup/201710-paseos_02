@@ -2,6 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
+                <h1 class="center-block text-center">{{currentActividad.nombre}}</h1>
             </div>
             <div class="row">              
                 <div class="col-md-6">
@@ -12,10 +13,12 @@
                         <hr>
                         <dt>Duracion</dt>
                         <dd>{{currentActividad.duracion}}</dd>
+                        <hr>
                         <dt>Equipamiento</dt>
                         <dd ng-repeat="equip in currentActividad.equipamiento">
                         <li>{{equip}}</li>
                         </dd>
+                        <hr>
                         <dt>Descripcion</dt>
                         <dd>{{currentActividad.descripcion}}</dd>
                     </dl>
@@ -24,5 +27,3 @@
         </div>
     </div>
 </div>
-
-
