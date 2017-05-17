@@ -1,16 +1,37 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div class="col-md-8 well">
+    <form novalidate name="form" id="inscripcion-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+
+            <!-- Puntuación -->
+            <div class="form-group col-md-12" ng-class="{'has-success': form.puntuacion.$valid && form.puntuacion.$dirty, 'has-error': form.puntuacion.$invalid && (form.puntuacion.$dirty || form.$submitted)}" >
+                <label for="puntuacion" class="col-md-4 control-label">Puntuación</label>
+                <div class="col-md-8">
+                    <input id="puntuacion" name="puntuacion" class="form-control" type="date" ng-model="currentRecord.puntuacion" ng-init="currentRecord.puntuacion" required />
+                </div>
+            </div>
+            
+            <!-- Fecha -->
+            <div class="form-group col-md-12" ng-class="{'has-success': form.fecha.$valid && form.fecha.$dirty, 'has-error': form.observaciones.$invalid && (form.fecha.$dirty || form.$submitted)}" >
+                <label for="fecha" class="col-md-4 control-label">Fecha</label>
+                <div class="col-md-8">
+                    <input id="fecha" name="fecha" class="form-control" type="date" ng-model="currentRecord.observaciones" ng-init="currentRecord.fecha" required />
+                </div>
+            </div>
+
+            <!-- Comentarios -->
+            <div class="form-group col-md-12" ng-class="{'has-success': form.comentarios.$valid && form.comentarios.$dirty, 'has-error': form.comentarios.$invalid && (form.comentarios.$dirty || form.$submitted)}" >
+                <label for="comentarios" class="col-md-4 control-label">Realizo el Pago</label>
+                <div class="col-md-8">
+                    <input id="comentarios" name="comentarios" class="form-control" type="text" ng-model="currentRecord.comentarios" ng-init="currentRecord.comentarios" required />
+                </div>
+            </div>
+
+
+        </fieldset>
+        <div class="form-group col-md-12">
+            <button type="button" ui-sref='inscripcionesList'>Cancel</button>
+            <button type="submit" >Save</button>   
+        </div>
+    </form>
+</div>

@@ -1,16 +1,42 @@
-<style type="text/css">
+<!DOCTYPE html>
+<!--
+The MIT License
+
+Copyright 2017 Treamwork - Team software development - Los Andes University
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<html>
+   <style type="text/css">
 body {  
         background:url(http://static5.depositphotos.com/1000167/451/i/950/depositphotos_4514476-stock-photo-weathered-white-wood.jpg) repeat 0 0;                   
  }
 </style>
 
-<div class="container-fluid hola">
+<div class="container-fluid hola1">
     <form method="post">
         <div class="panel-body">
             <div class="row">
+                 <!--<form method="post">-->
                 <div class="col-md-3">
                     <font color="white">
-                    <h2>Nuevo destino ecologico</h2>
+                    <h2>Actualizar destino</h2>
                     </font>
                 </div>
             </div>
@@ -53,12 +79,11 @@ body {
                         <dd></dd>
                        
                         <hr>
-                        <button ui-sref="lugaresList" value="Agregar" ng-click="crearLugar()" style="width: 62px; height: 26px">Agregar</button>
+                        <button ui-sref="lugaresList" value="actualizar" ng-click="actualizarlugar()">Actualizar</button>
                     </dl>
                 </div>
+            <!--</form>-->
             </div>
         </div>
     </form>
-
-    </div>
 </div>

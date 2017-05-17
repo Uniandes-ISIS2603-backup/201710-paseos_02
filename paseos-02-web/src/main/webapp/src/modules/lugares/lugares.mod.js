@@ -28,7 +28,17 @@
                         parent: 'lugares',
                         views: {
                             'listView': {
-                                templateUrl: basePath + 'lugares.list.html'
+                                templateUrl: basePath + 'lugares.list.html',
+                                controller: ['$scope', 'lugares','$http', function ($scope, lugares, $http) {
+                                $scope.lugaresRecords = lugares.data;
+//                                
+//                                
+                                $scope.borrarlugar = function(id){
+                                    var act = $scope.actividadesRecords[id];
+                                    $http.delete('api/lugares/'+act.id);
+                                     }
+//                                
+                            }]
                             }
                         }
                     })
@@ -44,9 +54,9 @@
                                 }]
                         },
                         views: {
-                            'listView': {
-                                templateUrl: basePath + 'lugares.list.html'
-                            },
+//                            'listView': {
+//                                templateUrl: basePath + 'lugares.list.html'
+//                            },
                             'detailView': {
                                 templateUrl: basePath + 'lugares.detail.html',
                                 controller: ['$scope', '$sce', 'currentLugar', function ($scope, $sce, currentLugar) {
@@ -77,7 +87,97 @@
                                     }]
                             }
                         }
-                    });
+                    })
+                    .state('lugaresActualizar', {
+                url: '/{lugarId:int}/actualizar',
+                parent: 'lugares',
+                 param: {
+                    lugarId: null
+                },
+                views: {
+                    'listView': {
+                        templateUrl: basePath + 'lugares.Actualizar.html',
+                        controller: ['$http','$scope', '$stateParams','$state',
+                            function ($http,$scope, $params,$state) {
+                                                         
+                                $scope.actualizarlugar = function(){
+                                    
+                                    var nombreA = document.getElementById('nombre').value;
+                                    var descripcionA = document.getElementById('id').value;
+                                    var imagenA = document.getElementById('imagen').value;
+                                    var linkA = document.getElementById('linkMaps').value;
+                                    var direccionA = document.getElementById('direccion').value;
+                                    var objLugar = {
+                                        nombre: nombreA,
+                                        id: descripcionA,
+                                        imagen: imagenA,
+                                        linkGoogleMaps: linkA,
+                                        direccion:direccionA
+                                    };
+                                    
+                                    $http.put('api/lugares/'+$params.lugarId, objLugar);
+                                    $state.go('lugaresList',{},{reload:true});
+                                    
+                                };
+                                
+                                
+                            }]
+                    }
+                }
+            })
+                .state('lugaresCreate', {
+                url: '/create',
+                parent: 'lugares',
+                views: {
+                    'mainView': {
+                        templateUrl: basePath + 'lugares.create.html',
+                        controller: ['$http','$scope',
+                            function ($http,$scope) {
+                                                         
+                                $scope.cearlugar = function(){
+                                    
+                                    console.log('mae');
+                                    
+                                    var nombreA = document.getElementById('nombre').value;
+                                    var descripcionA = document.getElementById('id').value;
+                                    var imagenA = document.getElementById('imagen').value;
+                                    var linkA = document.getElementById('linkMaps').value;
+                                    var direccionA = document.getElementById('direccion').value;
+                                    var objLugar = {
+                                        nombre: nombreA,
+                                        id: descripcionA,
+                                        imagen: imagenA,
+                                        linkGoogleMaps: linkA,
+                                        direccion:direccionA
+                                    };
+                                    $http.post('api/lugares', objLugar);
+                                };
+                            }]
+                    }
+                }
+            });;      
         }]);
+//    mod.controller('createLugarCurrent'['$scope','$http','lugarContext'])
+//    {
+//        var data={
+//            "id":"2001",
+//            "nombre":"Plaza los ginazoles",
+//            "imagen":"http://www.1001consejos.com/wp-content/uploads/2012/05/canon-sumidero-chiapas.jpg",
+//            "linkGoogleMaps":"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.3916928254157!2d-74.3568116861062!3d4.52324899671349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf1901677fd6bfb2d!2sVarsana+Eco+Yoga+Village!5e0!3m2!1ses!2ses!4v1494984885840"
+//        }
+//        $scope.createLugar=funtion()
+//        {
+//            $http.post(lugarContext,data)
+//                    .then(funtion(response))
+//            {
+//                console.log("succes");
+//            },
+//                    funtion(response)
+//            {
+//                console.log("fallo");
+//                
+//            });
+//        }
+//    }
 })(window.angular);
 
