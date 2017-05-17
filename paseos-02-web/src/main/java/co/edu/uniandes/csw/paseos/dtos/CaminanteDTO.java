@@ -66,6 +66,7 @@ public class CaminanteDTO extends UsuarioDTO
             this.correoElectronico = entity.getCorreoElectronico();
             this.condicionesFisicas = entity.getCondicionesFisicas();
             this.imagen = entity.getImagen();
+            this.contrasenia = entity.getContrasenia();
         }
     }
     public CaminanteEntity toEntity( )
@@ -81,6 +82,7 @@ public class CaminanteDTO extends UsuarioDTO
         caminante.setCorreoElectronico(this.getCorreoElectronico());
         caminante.setCondicionesFisicas(this.getCondicionesFisicas());
         caminante.setImagen(this.getImagen());
+        caminante.setContrasenia(this.getContrasenia());
         return caminante;
     }
 

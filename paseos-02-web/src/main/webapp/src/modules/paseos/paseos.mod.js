@@ -56,10 +56,9 @@
                     'fichaTecnicaView': {
                         templateUrl: basePath + 'paseos.fichaTecnica.html',
                         controller: ['$scope', 'currentPaseo', function ($scope, currentPaseo) {
-                                $scope.currentPaseo = currentPaseo.data;
+                                $scope.currentPaseo = currentPaseo.data;                              
                             }]
                     }
-
                 }
             });
         }]);

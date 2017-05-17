@@ -69,6 +69,7 @@ public class GuiaDTO extends UsuarioDTO
             this.experiencia = entity.getExperiencia();
             this.formacion = entity.getFormacion();
             this.imagen = entity.getImagen();
+            this.contrasenia = entity.getContrasenia();
         }
     }
 
@@ -90,6 +91,7 @@ public class GuiaDTO extends UsuarioDTO
         guia.setExperiencia(this.getExperiencia());
         guia.setFormacion(this.getFormacion());
         guia.setImagen(this.getImagen());
+        guia.setContrasenia(this.getContrasenia());
         return guia;
     }
 

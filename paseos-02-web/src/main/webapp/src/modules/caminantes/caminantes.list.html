@@ -1,8 +1,11 @@
 <div class="container-fluid">
-    <div class="row">
+    
+    <div class="row">  
+        <button class="btn btn-default" ui-sref="caminanteCreate">Registrar caminante</button> 
+    </div>
+    <div class="row">        
         <div class="col-md-3">
-            <!-- caminantesRecords fue inicializada en el controlador del estado caminantesList -->
-            <!-- Itera sobre cada uno de los caminantes en la colección caminantesRecords -->
+           
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -14,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="caminante in caminantesRecords">
+                    <tr ng-repeat="caminante in records">
                         <td id="{{$index}}-nombre"> <a ui-sref="caminanteDetail({caminanteId: caminante.id})">{{caminante.nombre}}</a></td>
                         <td id="{{$index}}-identificacion">{{caminante.identificacion}}</td>
                         <td id="{{$index}}-tipoIdentificacion">{{caminante.tipoIdentificacion}}</td>                               
