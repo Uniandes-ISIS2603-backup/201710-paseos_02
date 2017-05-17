@@ -1,3 +1,4 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
@@ -8,6 +9,7 @@
         </div>
     </div>
 </div>
+ <div ui-view="caminanteView"></div>    
 
 
 

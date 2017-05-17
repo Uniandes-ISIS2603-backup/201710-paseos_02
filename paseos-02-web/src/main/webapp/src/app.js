@@ -2,6 +2,9 @@
     var app = angular.module('mainApp', [
         // External dependencies
         'ui.router',
+        'ui.bootstrap',
+        'ui.select',
+        
         // Internal modules dependencies
 
         'caminanteModule',

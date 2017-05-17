@@ -73,6 +73,8 @@ public class UsuarioDTO implements Serializable
      */
     protected String correoElectronico;
     
+    protected String contrasenia;
+    
     protected String imagen;
 
     /**
@@ -218,4 +220,14 @@ public class UsuarioDTO implements Serializable
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+    
+    
 }

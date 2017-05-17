@@ -77,9 +77,14 @@ public  class UsuarioEntity implements Serializable
     private String direccion;
 
     /**
-     * Atributo que representa el correo electronico de l usuario.
+     * Atributo que representa el correo electronico del usuario.
      */
     private String correoElectronico;
+    
+    /**
+     * Atributo que representa el correo electronico del usuario.
+     */
+    private String contrasenia;
     
     private String imagen;
 
@@ -219,7 +224,16 @@ public  class UsuarioEntity implements Serializable
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
     
+        
     
     
      @Override

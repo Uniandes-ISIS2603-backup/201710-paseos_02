@@ -3,13 +3,13 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-3">
-                    <h2>{{currentCaminante.nombre}}</h2>
+                    <h2>{{currentRecord.nombre}}</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2">
                     <div class="thumb">
-                        <img class="img-responsive" ng-src="{{currentCaminante.imagen}}"/>
+                        <img class="img-responsive" ng-src="{{currentRecord.imagen}}"/>
                     </div>
                     
                </div>     
@@ -17,15 +17,15 @@
                     <dl>
                         <hr>
                         <dt>Identificacion</dt>
-                        <dd>{{currentCaminante.identificacion}}</dd>
+                        <dd>{{currentRecord.identificacion}}</dd>
 
                         <hr>
                         <dt>Tipo Identificacion</dt>
-                        <dd>{{currentCaminante.tipoIdentificacion}}</dd>
+                        <dd>{{currentRecord.tipoIdentificacion}}</dd>
 
                         <hr>
                         <dt>Edad</dt>
-                        <dd>{{currentCaminante.edad}}</dd>
+                        <dd>{{currentRecord.edad}}</dd>
 
                     </dl>
                 </div>
@@ -34,11 +34,11 @@
 
                         <hr>
                         <dt>Telefono</dt>
-                        <dd>{{currentCaminante.telefono}}</dd>
+                        <dd>{{currentRecord.telefono}}</dd>
 
                         <hr>
                         <dt>Correo Electronico</dt>
-                        <dd>{{currentCaminante.correoElectronico}}</dd>
+                        <dd>{{currentRecord.correoElectronico}}</dd>
                         
                         <hr>
                         <dt>inscripcionesList</dt>
@@ -58,23 +58,25 @@
                         <tbody>
                             <tr>
                                 <td>Fuerza</td>
-                                <td>{{currentCaminante.condicionesFisicas.fuerza}}</td>
+                                <td>{{currentRecord.condicionesFisicas[0]}}</td>
                             </tr>
                             <tr>
                                 <td>Velocidad</td>
-                                <td>{{currentCaminante.condicionesFisicas.velocidad}}</td>
+                                <td>{{currentRecord.condicionesFisicas[1]}}</td>
                             </tr>
                             <tr>
                                 <td>Resistencia</td>
-                                <td>{{currentCaminante.condicionesFisicas.resistencia}}</td>
+                                <td>{{currentRecord.condicionesFisicas[2]}}</td>
                             </tr>
                             <tr>
                                 <td>Flexibilidad</td>
-                                <td>{{currentCaminante.condicionesFisicas.flexibilidad}}</td>
+                                <td>{{currentRecord.condicionesFisicas[3]}}</td>
                             </tr>
                             <tr>
-                                <td>Coordinaciones</td>
-                                <td>{{currentCaminante.condicionesFisicas.coordinacion}}</td>
+
+                                <td>Coordinacion</td>
+                                <td>{{currentRecord.condicionesFisicas[4]}}</td>
+
                             </tr>
                             
                         </tbody>
@@ -88,7 +90,7 @@
             </div>
                 <div class="col-md-12">
                 <div class="panel-group" id="accordion">
-                    <div ng-repeat="inscripcion in currentCaminante.inscripciones" class="panel panel-default">
+                    <div ng-repeat="inscripcion in currentRecord.inscripciones" class="panel panel-default">
                         <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{inscripcion.id}}">>>>>>>>></a>
