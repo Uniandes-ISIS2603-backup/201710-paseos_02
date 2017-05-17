@@ -23,9 +23,9 @@
  */
 package co.edu.uniandes.csw.paseos.persistence;
 
-import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
+
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
-import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
+import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -48,26 +48,23 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author js.millan10
  */
-@RunWith(Arquillian.class)
 
-public class CalificacionPersistenceTest {
+@RunWith(Arquillian.class)
+public class InscripcionPersistenceTest {
     
-     /**
-     * @return el jar que va a desplegar para la prueba
-     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(GuiaEntity.class.getPackage())
-                .addPackage(GuiaEntity.class.getPackage())
-                .addPackage(CalificacionEntity.class.getPackage())
-                .addPackage(CalificacionPersistence.class.getPackage())
+                .addPackage(InscripcionEntity.class.getPackage())
+                .addPackage(InscripcionPersistence.class.getPackage())
+                .addPackage(CaminanteEntity.class.getPackage())
+                .addPackage(CaminantePersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }    
     
     @Inject
-    private CalificacionPersistence calificacionPersistence;
+    private InscripcionPersistence inscripcionPersistence;
     
     @PersistenceContext
     private EntityManager em;
@@ -75,20 +72,16 @@ public class CalificacionPersistenceTest {
     @Inject
     UserTransaction utx;
     
-    private List<CalificacionEntity> data = new ArrayList<CalificacionEntity>();
+    private List<InscripcionEntity> data = new ArrayList<InscripcionEntity>();
     
     @Inject
-    private GuiaEntity guiaActual;
+    private CaminanteEntity caminanteActual;
     /**
      * Configuración inicial de la prueba.
      */
     @Before
     public void setUp() {
         try {
-            PodamFactory factory = new PodamFactoryImpl();
-            GuiaEntity nuevo = factory.manufacturePojo(GuiaEntity.class);
-            guiaActual = nuevo;
-            //em.persist(nuevo);
             utx.begin();
             em.joinTransaction();
             clearData(); 
@@ -108,10 +101,8 @@ public class CalificacionPersistenceTest {
         /**
      * Limpia las tablas que están implicadas en la prueba.
      */
-    
     private void clearData() {
-        em.createQuery("delete from CalificacionEntity").executeUpdate();
-        em.createQuery("delete from GuiaEntity").executeUpdate();
+        em.createQuery("delete from InscripcionEntity").executeUpdate();
     }
 
     /**
@@ -121,75 +112,71 @@ public class CalificacionPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        
+          
         for (int i = 0; i < 3; i++) {
-            CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class); 
-            guiaActual = entity.getGuia();
+            InscripcionEntity entity = factory.manufacturePojo(InscripcionEntity.class);
+            //entity.setGuia(guiaActual);   Problema al asignarle un guía
             em.persist(entity);
-            
             data.add(entity);
         }
     }
     @Test
-    public void createCalificacionTest( )
+    public void createInscripcionTest( )
     {
-       
         PodamFactory factory = new PodamFactoryImpl();
-        CalificacionEntity entityParaPrueba = factory.manufacturePojo(CalificacionEntity.class);
+        InscripcionEntity entityParaPrueba = factory.manufacturePojo(InscripcionEntity.class);
         
-        CalificacionEntity entityPersistido = calificacionPersistence.create(entityParaPrueba);
+        InscripcionEntity entityPersistido = inscripcionPersistence.create(entityParaPrueba);
         
-        Assert.assertNotNull("No deberia retornar null al persistir una calificación", entityPersistido);
+        Assert.assertNotNull("No deberia retornar null al persistir una inscripción", entityPersistido);
         
-        CalificacionEntity entityEncontrado = em.find(CalificacionEntity.class, entityPersistido.getId());
-        Assert.assertNotNull("La calificación deberia existir en la base de datos",entityEncontrado);
+        InscripcionEntity entityEncontrado = em.find(InscripcionEntity.class, entityPersistido.getId());
+        Assert.assertNotNull("La inscripción deberia existir en la base de datos",entityEncontrado);
         
         
         //Se verifica que los valores persistidos sean correctos
     }
     
     @Test
-    public void getCalificacionesTest( )
+    public void getInscripcionesTest( )
     {
-        List<CalificacionEntity> encontrados = calificacionPersistence.findAll();
+        List<InscripcionEntity> encontrados = inscripcionPersistence.findAll();
         Assert.assertEquals(data.size(), encontrados.size());
         
     }
     
     @Test
-    public void getCalificacionesGuiaTest( )
+    public void getInscripcionesCaminanteTest( )
     {
-        Assert.assertNotNull(guiaActual);
-        List<CalificacionEntity> encontrados = calificacionPersistence.findAll(guiaActual.getId());
+        Assert.assertNotNull(caminanteActual);
+        List<InscripcionEntity> encontrados = inscripcionPersistence.findAll(caminanteActual.getId());
         Assert.assertEquals(data.size(), encontrados.size());   
+        
     }
     
-    
     @Test 
-    public void updateCalificacionTest( )
+    public void updateInscripcionTest( )
     {
-        
-        CalificacionEntity original = data.get(0);
+        InscripcionEntity original = data.get(0);
         
         PodamFactory podam = new PodamFactoryImpl();        
-        CalificacionEntity actualizada = podam.manufacturePojo(CalificacionEntity.class);
+        InscripcionEntity actualizada = podam.manufacturePojo(InscripcionEntity.class);
         actualizada.setId(original.getId());
         
-        CalificacionEntity mergeResult = calificacionPersistence.update(actualizada);
+        InscripcionEntity mergeResult = inscripcionPersistence.update(actualizada);
         Assert.assertNotNull(mergeResult);
         
-        CalificacionEntity encontrada = em.find(CalificacionEntity.class, original.getId());
-        Assert.assertNotNull("La calificación se elimino en lugar de actualizarse", encontrada);
+        InscripcionEntity encontrada = em.find(InscripcionEntity.class, original.getId());
+        Assert.assertNotNull("La inscrpcion se elimino en lugar de actualizarse", encontrada);
     }
     
     
     @Test
-    public void deleteCalificacionTest( )
+    public void deleteInscripcionTest( )
     {
-        CalificacionEntity entity = data.get(0);
-        calificacionPersistence.delete(entity.getId());
+        InscripcionEntity entity = data.get(0);
+        inscripcionPersistence.delete(entity.getId());
         CaminanteEntity eliminado = em.find(CaminanteEntity.class, entity.getId());
         Assert.assertNull(eliminado);
     }
-    
 }

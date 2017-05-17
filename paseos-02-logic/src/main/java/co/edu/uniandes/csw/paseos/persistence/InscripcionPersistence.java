@@ -23,6 +23,7 @@
  */
 package co.edu.uniandes.csw.paseos.persistence;
 
+import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -71,6 +72,12 @@ public class InscripcionPersistence
         TypedQuery<InscripcionEntity> q = em.createQuery("select p from InscripcionEntity p where (p.caminante.id = :caminanteid)", InscripcionEntity.class);
         q.setParameter("caminanteid", caminanteid);
         return q.getResultList();
+    }
+    
+    public List<InscripcionEntity> findAll()
+    {
+        Query solicitud = em.createQuery("select u from InscripcionEntity u");
+        return solicitud.getResultList();
     }
     
     /**

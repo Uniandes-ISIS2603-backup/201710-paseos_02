@@ -37,25 +37,29 @@ import javax.persistence.NoResultException;
  *
  * @author Sebastian Millan
  */
-
 // TODO se deben definir la reglas de negocio. 
 // TODO Las fecahs cualquiera sirve? la variable costo qué significa? por qué hay uno en el pasdeo y otro en la inscripción=? son distintos? cómo están relacionados?
 @Stateless
-public class InscripcionLogic 
-{
-     @Inject private InscripcionPersistence persistence;
-     
-     @Inject CaminanteLogic caminanteLogic;
-    
+public class InscripcionLogic {
+
+    @Inject
+    private InscripcionPersistence persistence;
+
+    @Inject
+    CaminanteLogic caminanteLogic;
+
+    @Inject
+    PaseoInstanciaLogic paseoLogic;
+
     /**
      * Obtiene la lista de los registros de Inscripciones.
      *
      * @return Colección de objetos de InscripcionEntity.
-     * 
+     *
      */
     public List<InscripcionEntity> getInscripciones(Long caminanteid) {
-        CaminanteEntity caminante = caminanteLogic.getCaminante(caminanteid);
-        return caminante.getPaseosInscritos();
+
+        return persistence.findAll(caminanteid);
     }
 
     /**
@@ -66,41 +70,39 @@ public class InscripcionLogic
      * @generated
      */
     public InscripcionEntity createInscripcion(InscripcionEntity entity) throws BusinessLogicException {
-        System.out.println("Create ");
+        System.out.println("reglas de negocio");
         verificarReglasNegocio(entity);
         return persistence.create(entity);
     }
-    
+
     /**
      * Obtiene los datos de una instancia de Inscripcion a partir de su ID.
      *
      * @param caminanteid Identificador de la instancia a consultar
-     * @return Instancia de InscripcionEntity con los datos de la Inscripcion consultada.
+     * @return Instancia de InscripcionEntity con los datos de la Inscripcion
+     * consultada.
      *
      */
     public InscripcionEntity getInscripcion(Long caminanteid, Long inscripcionid) {
-        try{
+        try {
             return persistence.find(caminanteid, inscripcionid);
-        }
-        catch(NoResultException e)
-        {
+        } catch (NoResultException e) {
             throw new IllegalArgumentException("La inscripcion no existe");
         }
     }
-    
+
     /**
      * Actualiza la información de una instancia de Inscripcion.
      *
      * @param entity Instancia de InscripcionEntity con los nuevos datos.
      * @return Instancia de InscripcionEntity con los datos actualizados.
-     * 
+     *
      */
-   
     public InscripcionEntity updateInscripcion(InscripcionEntity entity) throws BusinessLogicException {
         verificarReglasNegocio(entity);
         return persistence.update(entity);
     }
-    
+
     /**
      * Elimina una instancia de Inscripcion de la base de datos.
      *
@@ -108,19 +110,21 @@ public class InscripcionLogic
      *
      */
     public void deleteInscripcion(Long caminanteid, Long id) {
-        InscripcionEntity old  = getInscripcion(caminanteid, id);
+        InscripcionEntity old = getInscripcion(caminanteid, id);
         persistence.delete(old.getId());
     }
-    
-    public void verificarReglasNegocio(InscripcionEntity entity) throws BusinessLogicException
-    {
-        System.out.println("holi holi");
-       Date actual = new Date();
-       boolean fecha = entity.getInstanciaPaseo().getFechaRealizacion().compareTo(actual)<0;
-       boolean costo = entity.getInstanciaPaseo().getPaseoEcologico().getCosto()<0;   
-       if (fecha || costo)
-       {
-           throw new BusinessLogicException("No se están cumpliendo las reglas de negocio.");
-       }
+
+    public void verificarReglasNegocio(InscripcionEntity entity) throws BusinessLogicException {
+        try {
+            long idPaseo = 0;
+            idPaseo = entity.getInstanciaPaseo().getId();
+            long idCaminante = 0;
+            idCaminante = entity.getCaminante().getId();
+            if (entity.getFechaInscripcion() == null || entity.getObservaciones() == null || idPaseo == 0 || idCaminante == 0) {
+                throw new BusinessLogicException("Para crear una inscripcion minimo debe enviar la fechaInscripcion, observaciones, el id del caminante, el id del paseo y si realizoPago");
+            }
+        } catch (Exception e) {
+            throw new BusinessLogicException("Para crear una inscripcion minimo debe enviar la fechaInscripcion, observaciones, el id del caminante, el id del paseo y si realizoPago");
+        }
     }
 }
