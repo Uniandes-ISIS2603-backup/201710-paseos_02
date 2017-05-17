@@ -68,6 +68,15 @@
                         
                     }
                 }
+            }).state('inscripcionesCreate', {
+                url: '/create',
+                parent: 'inscripciones',
+                views: {
+                    'listView': {
+                        templateUrl: basePath + 'inscripciones.create.html'
+                        
+                    }
+                }
             });
         }]);
 })(window.angular);

@@ -25,6 +25,14 @@ and open the template in the editor.
                         <hr>
                         <dt>Realizo Pago</dt>
                         <dd>{{currentInscripcion.realizoPago}}</dd>
+                        
+                        <hr>
+                        <dt>Caminante</dt>
+                        <dd><a ui-sref="caminanteDetail({caminanteId: currentInscripcion.caminante.id})">{{currentInscripcion.caminante.nombre}}</a></dd>
+                        
+                        <hr>
+                        <dt>Paseo inscrito</dt>
+                        <dd><a ui-sref="paseoDetail({paseoId: currentInscripcion.instanciaPaseo.id})">{{currentInscripcion.instanciaPaseo.id}}</a></dd>
                     </dl>
                 </div>
             </div>
