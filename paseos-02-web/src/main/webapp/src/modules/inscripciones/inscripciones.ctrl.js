@@ -26,7 +26,7 @@
     
 
     mod.controller("inscripcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'caminantesContext', 'inscripcionesContext',
-        function ($scope, $state, $stateParams, $http, caminantesContext, inscripcionesContext) {
+        function ($scope, $state, $params, $http, caminantesContext, inscripcionesContext) {
 
             
             $scope.records = {};

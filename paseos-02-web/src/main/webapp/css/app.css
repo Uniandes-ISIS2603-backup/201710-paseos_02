@@ -10,3 +10,22 @@ background: url(https://s-media-cache-ak0.pinimg.com/736x/9c/40/81/9c4081f424aa3
 .p {  
 background: url(https://i.ytimg.com/vi/UuKgKl1iIbU/maxresdefault.jpg);                   
 }
+
+.jumbotron { 
+    background-color: #0ca20b;
+    color: #ffffff;
+    padding-top: 10px;
+    height: 150px;
+}
+
+#verde{
+    color: #0ca20b;
+}
+a:hover, a:focus{
+   color: grey; 
+}
+
+
+
+
+
