@@ -1,16 +1,108 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div ng-messages="form.$error" multiple>
+    <ng-message when="required">
+        <alert type="warning">Please, Fill the required fields!</alert>
+    </ng-message>
+</div>
+
+<div class="col-md-12 well">
+    <form novalidate name="form" id="guia-form" role="form"
+          ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+        <fieldset>
+            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
+            <!--Correo electronico-->
+            <label class="control-label col-sm-3" for="correoElectronico">Correo electronico del nuevo guia</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="correoElectronico" placeholder="Correo electronico"
+                       ng-model="correo electronico del nuevo guia">
+            </div>
+
+            <!-- Contrasenia -->
+            <div class="form-group col-md-6"
+                 ng-class="{'has-success': form.contrasenia.$valid && form.contrasenia.$dirty, 'has-error': form.contrasenia.$invalid && (form.contrasenia.$dirty || form.$submitted)}">
+                <label for="contrasenia" class="col-md-2 control-label">Contrasenia</label>
+                <div class="col-md-10">
+                    <input id="contrasenia" name="contrasenia" class="form-control" type="text"
+                           ng-model="currentRecord.contrasenia" ng-init="currentRecord.contrasenia" required/>
+                </div>
+            </div>
+
+            <!--nombre-->
+            <label class="control-label col-sm-3" for="nombre">Nombre del nuevo guia</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre"
+                       ng-model="nombre del nuevo guia">
+            </div>
+
+            <!--identificacion-->
+            <label class="control-label col-sm-3" for="identificacion">Identificacion del nuevo guia</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="identificacion" placeholder="Identificacion"
+                       ng-model="identificacion del nuevo guia">
+            </div>
+
+            <!--Tipo Identificacion-->
+            <div class="form-group col-md-6"
+                 ng-class="{'has-success': form.tipoId.$valid && form.tipoId.$dirty, 'has-error': form.tipoId.$invalid && (form.tipoId.$dirty || form.$submitted)}">
+                <label for="tipoId" class="col-md-2 control-label">Tipo de Id</label>
+                <div class="col-md-10">
+                    <select class="form-control" id="tipoId" type="text" ng-model="currentRecord.tipoIdentificacion">
+                        <option>CC</option>
+                        <option>TI</option>
+                        <option>CE</option>
+                        <option>RC</option>
+                        <option>NIT</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--edad-->
+            <label class="control-label col-sm-3" for="edad">Edad del guia</label>
+            <div class="col-sm-9">
+                <input type="number" class="form-control" id="edad" ng-model="edad">
+            </div>
+
+            <!--Telefono-->
+            <label class="control-label col-sm-3" for="telefono">Telefono del guia</label>
+            <div class="col-sm-9">
+                <input type="telefono" class="form-control" id="telefono" ng-model="telefono">
+            </div>
+
+            <!--Dirección-->
+            <label class="control-label col-sm-3" for="direccion">Direccion del nuevo guia</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="direccion" placeholder="Direccion"
+                       ng-model="direccion del nuevo guia">
+            </div>
+
+            <!--Imagen-->
+            <div class="form-group col-md-6"
+                 ng-class="{'has-success': form.imagen.$valid && form.imagen.$dirty, 'has-error': form.imagen.$invalid && (form.imagen.$dirty || form.$submitted)}">
+                <label for="imagen" class="col-md-2 control-label">Imagen</label>
+                <div class="col-md-10">
+                    <input id="imagen" name="imagen" class="form-control" type="text" ng-model="currentRecord.imagen"
+                           ng-init="currentRecord.imagen" required/>
+                </div>
+            </div>
+
+
+            <!--Formacion-->
+            <label class="control-label col-sm-3" for="formacion">Formacion del nuevo guia</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="formacion" placeholder="Formacion"
+                       ng-model="formacion del nuevo guia">
+            </div>
+
+            <!--Experiencia-->
+            <label class="control-label col-sm-3" for="experiencia">Experiencia del nuevo guia</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="experiencia" placeholder="Experiencia"
+                       ng-model="experiencia del nuevo guia">
+            </div>
+
+        </fieldset>
+        <div class="form-group col-md-12">
+            <button type="button" ui-sref='guiasList'>Cancel</button>
+            <button type="submit" >Save</button>
+        </div>
+    </form>
+</div>

@@ -22,7 +22,6 @@ package co.edu.uniandes.csw.paseos.persistence;/*
  * THE SOFTWARE.
  */
 import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
-import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
 import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
 import co.edu.uniandes.csw.paseos.persistence.GuiaPersistence;

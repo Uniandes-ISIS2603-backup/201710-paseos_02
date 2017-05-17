@@ -63,15 +63,25 @@
                 parent: 'paseoDetail',
                 resolve: {
                     currentGuia: ['$http', 'guiasContext', 'currentPaseo', function ($http, guiasContext, currentPaseo) {
-                            return $http.get(guiasContext + '/' + currentPaseo.data.guia.id);
-                        }]
+                        return $http.get(guiasContext + '/' + currentPaseo.data.guia.id);
+                    }]
                 },
                 views: {
                     'paseoGuiaView': {
                         templateUrl: basePath + 'guias.detail.html',
                         controller: ['$scope', 'currentGuia', function ($scope, currentGuia) {
-                                $scope.currentGuia = currentGuia.data;
-                            }]
+                            $scope.currentGuia = currentGuia.data;
+                        }]
+                    }
+                }
+            }).state('guiaCreate', {
+                url: '/create',
+                parent: 'guias',
+                views: {
+                    'guiaView': {
+                        controller: 'guiasCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'guias.create.html'
                     }
                 }
             });
