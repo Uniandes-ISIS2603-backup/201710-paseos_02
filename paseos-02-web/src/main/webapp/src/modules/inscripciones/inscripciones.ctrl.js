@@ -32,8 +32,6 @@
             $scope.records = inscripciones.data;
                       
 
-            // el controlador recibió un caminanteId ??
-            // revisa los parámetros (ver el :caminanteId en la definición de la ruta)
             if ($params.inscripcionId !== null && $params.inscripcionId !== undefined) {
 
                 // toma el id del parámetro
@@ -56,8 +54,9 @@
                     observaciones: '' /*Tipo String*/,
                     fechaInscripcion: '' /*Tipo Integer*/,
                     realizoPago: false,
-                    instanciaPaseo:{},
-                    caminante: currentCaminante
+                    caminante: {
+                        id: currentCaminante.data.id
+                    }
                 };
 
                 $scope.alerts = [];
@@ -65,7 +64,7 @@
             
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
-
+             
                 // si el id es null, es un registro nuevo, entonces lo crea
                 if (id == null) {
 
@@ -74,7 +73,7 @@
                             .then(function () {
                                 // $http.post es una promesa
                                 // cuando termine bien, cambie de estado
-                                $state.go('caminanteDetail({caminanteId:currentCaminante.id})');
+                                $state.go('caminanteDetail',{caminanteId: currentRecord.caminante.id},{reload: true});
                             }, responseError);
 
                     // si el id no es null, es un registro existente entonces lo actualiza
@@ -85,12 +84,22 @@
                             .then(function () {
                                 // $http.put es una promesa
                                 // cuando termine bien, cambie de estado
-                                $state.go('inscripcionDetail({inscripcionId:currentRecord})');
+                                $state.go('inscripcionDetail', {caminanteId: currentRecord.caminante.id, inscripcionId: currentRecord.id}, {reload: true});
                             }, responseError);
                 }
                 ;
             };
            
+           this.deleteRecord = function(idCamin,idDelete)
+           {
+                return $http.delete(caminantesContext + '/' + idCamin + '/' + inscripcionesContext + '/' + idDelete)
+                            .then(function () {
+                                // $http.post es una promesa
+                                // cuando termine bien, cambie de estado
+                                //$scope.records = $http.get(caminantesContext);
+                                $state.go('caminanteDetail',{caminanteId: currentRecord.caminante.id},{reload: true});
+                            }, responseError);
+           };
 
 
             // -----------------------------------------------------------------

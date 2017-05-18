@@ -72,6 +72,22 @@
 
                     }
                 }
+            }).state('inscripcionesEdit', {
+                url: '/{inscripcionId:int}/edit',
+                parent: 'inscripciones',
+                views: {
+                    'nuevoView': {
+                        controller: 'inscripcionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'inscripciones.create.html'
+
+                    },
+                    'detailView': {
+                        controller: 'inscripcionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'inscripciones.detail.html'
+                    }
+                }
             });
         }]);
 })(window.angular);

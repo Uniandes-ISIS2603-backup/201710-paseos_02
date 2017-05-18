@@ -23,9 +23,10 @@
  */
 package co.edu.uniandes.csw.paseos.resources;
 
+import co.edu.uniandes.csw.paseos.dtos.CaminanteDTO;
 import co.edu.uniandes.csw.paseos.dtos.InscripcionDetailDTO;
-import co.edu.uniandes.csw.paseos.ejbs.InscripcionLogic;
 import co.edu.uniandes.csw.paseos.ejbs.CaminanteLogic;
+import co.edu.uniandes.csw.paseos.ejbs.InscripcionLogic;
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
@@ -132,9 +133,9 @@ public class InscripcionResource
             throw new WebApplicationException("El caminante no existe",404);
         }
         System.out.println("Create recurso pre");
-        InscripcionEntity nueva= inscripcionLogic.createInscripcion(dto.toEntity());
-        System.out.println("Create recurso post");
-        return new InscripcionDetailDTO(nueva);
+        dto.setCaminante(new CaminanteDTO(caminanteLogic.getCaminante(idCaminante)));
+       
+        return new InscripcionDetailDTO(inscripcionLogic.createInscripcion(dto.toEntity()));
     }
     
     /**
@@ -171,11 +172,14 @@ public class InscripcionResource
     @Path("{id: \\d+}")
     public void deleteInscripcion(@PathParam("idCaminante") Long idCaminante, @PathParam("id") Long id) throws BusinessLogicException
     {// TODO si la inscripción con el id dado no existe debe disparar una exception WebApplicationException 404
-       InscripcionEntity result = inscripcionLogic.getInscripcion(idCaminante,id);
+        System.out.println("eliminar 1");
+        InscripcionEntity result = inscripcionLogic.getInscripcion(idCaminante,id);
+        System.out.println("eliminar 4");
         if(result==null)
         {
             throw new WebApplicationException("La inscripción no existe",404);
         }
+        System.out.println("eliminar 2");
         inscripcionLogic.deleteInscripcion(idCaminante,id);
     }
     
