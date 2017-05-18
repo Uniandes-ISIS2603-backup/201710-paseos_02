@@ -81,23 +81,29 @@ SOFTWARE.
 </head>
 <body>
 <div class="container-fluid">
-    <div class="jumbotron text-center">
+    <div class="container-fluid juan">
+    <div class="text-center ">
+         <font color="white">
         <h1> Paseos Ecológicos</h1>
-        <p>El paseo que estabas esperando</p> 
+        <p>El paseo que estabas esperando</p>
+        </font>
         <!--<img class="img-responsive" ng-src="">-->
     </div>
     <div class="row">
         <div class="col-lg-12">
             <ul class="nav nav-tabs">
-                <li><a id="verde" ui-sref="paseosList">Paseos</a></li>
-                <li><a id="verde" ui-sref="caminantesList">Caminantes</a></li>
-                <li><a id="verde" ui-sref="guiasList">Guías</a></li>
-                <li><a id="verde" ui-sref="lugaresList">Lugares</a></li>
+                <li><a id="blanco" ui-sref="paseosList">Paseos</a></li>
+                <li><a id="blanco" ui-sref="caminantesList">Caminantes</a></li>
+                <li><a id="blanco" ui-sref="guiasList">Guías</a></li>
+                <li><a id="blanco" ui-sref="lugaresList">Lugares</a></li>
             </ul>
-
-        <div ui-view="mainView"></div>
+       
+     
         </div>
+          
     </div>
+    </div>
+     <div ui-view="mainView"></div>
 </div>
     <footer class="text-center">
             <div class="upper-footer">
