@@ -1,3 +1,4 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="ctrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
 <div class="container-fluid">
     <div class="row">
 
@@ -11,3 +12,5 @@
         </div>
     </div>
 </div>
+<div ui-view="mainView"></div>
+<div ui-view="nuevoView"></div>

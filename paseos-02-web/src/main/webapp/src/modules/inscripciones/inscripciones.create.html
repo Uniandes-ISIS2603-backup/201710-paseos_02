@@ -7,9 +7,10 @@
             <div class="form-group col-md-12" ng-class="{'has-success': form.fechaInscripcion.$valid && form.fechaInscripcion.$dirty, 'has-error': form.fechaInscripcion.$invalid && (form.fechaInscripcion.$dirty || form.$submitted)}" >
                 <label for="fechaInscripcion" class="col-md-4 control-label">Fecha de la inscripción</label>
                 <div class="col-md-8">
-                    <input id="fechaInscripcion" name="fechaInscripcion" class="form-control" type="date" ng-model="currentRecord.fechaInscripcion" ng-init="currentRecord.fechaInscripcion" required />
+                    <input id="fechaInscripcion" name="fechaInscripcion" class="form-control" type="text" ng-model="currentRecord.fechaInscripcion" ng-init="currentRecord.fechaInscripcion" required />
                 </div>
-            </div>
+            </div>           
+       
             
             <!-- Observaciones -->
             <div class="form-group col-md-12" ng-class="{'has-success': form.observaciones.$valid && form.observaciones.$dirty, 'has-error': form.observaciones.$invalid && (form.observaciones.$dirty || form.$submitted)}" >
@@ -30,7 +31,7 @@
 
         </fieldset>
         <div class="form-group col-md-12">
-            <button type="button" ui-sref='inscripcionesList'>Cancel</button>
+            <button type="button" ui-sref='caminanteDetail({caminanteId: currentRecord.caminante.id})'>Cancel</button>
             <button type="submit" >Save</button>   
         </div>
     </form>
