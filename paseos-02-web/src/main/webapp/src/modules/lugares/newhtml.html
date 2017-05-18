@@ -1,0 +1,107 @@
+<html>
+   <style type="text/css">
+body {  
+        background:url(http://slappedham.com/wp-content/uploads/2016/05/Aokigahara-Forest-Japan.jpg) repeat 0 0;                   
+ }
+</style>
+
+<div class="container-fluid prueba">
+    <form method="post">
+        <div class="panel-body">
+            <div class="row">
+                 <!--<form method="post">-->
+                <div class="col-md-3">
+                    <font color="white">
+                    <h2>Actualizar destino</h2>
+                    </font>
+                </div>
+            </div>
+            <div class="row">
+                <div class="">
+                    <dl>
+                        <font color="white">
+                        <hr>
+                        <dt>Nombre</dt>
+                        </font>
+                        <input type="text" name="nombre"><br>
+                        <dd></dd>
+
+                        <font color="white">
+                        <hr>
+                        <dt>Identificacion</dt>
+                        </font>
+                        <input type="text" name="id"><br>
+                        <dd></dd>
+
+                        <font color="white">
+                        <hr>
+                        <dt>Direccion</dt>
+                        </font>
+                        <input type="text" name="direccion"><br>
+                        <dd></dd>
+                         
+                        <font color="white">
+                        <hr>
+                        <dt>Link mapa</dt>
+                        </font>
+                        <input type="text" name="linkMaps"><br>
+                        <dd></dd>
+                         
+                        <font color="white">
+                        <hr>
+                        <dt>link imagen</dt>
+                        </font>
+                        <input type="text" name="imagen"><br>
+                        <dd></dd>
+                       
+                        <hr>
+                        <button ui-sref="lugaresList" value="actualizar" ng-click="actualizarlugar()">Actualizar</button>
+                    </dl>
+                </div>
+            <!--</form>-->
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="span12 carousel-container">
+          <div id="carousel" class="carousel slide carousel-fade">
+
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+              <div data-slide-no="0" class="item carousel-item active">
+                <img src="http://lorempixel.com/1920/1080/animals" alt="">
+                <div class="carousel-caption">
+                  <h4>We Help You Estimate!</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+              <div data-slide-no="1" class="item carousel-item">
+                <img src="http://lorempixel.com/1920/1080/food" alt="">
+                <div class="carousel-caption">
+                  <h4>second thumbnail</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+              <div data-slide-no="2" class="item carousel-item">
+                <img src="http://lorempixel.com/1920/1080/cats" alt="">
+                <div class="carousel-caption">
+                  <h4>Third Thumbnail label</h4>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Carousel nav -->
+            <a class="carousel-control left" href="#carousel" data-slide="prev">‹</a>
+            <a class="carousel-control right" href="#carousel" data-slide="next">›</a>
+          </div>
+          <ol class="carousel-indicators">
+            <li data-target="#carousel" data-slide-to="0" class="myCarousel-target active"></li>
+            <li data-target="#carousel" data-slide-to="1" class="myCarousel-target"></li>
+            <li data-target="#carousel" data-slide-to="2" class="myCarousel-target"></li>
+          </ol>
+
+      </div>
+    </div>
+  </div>
