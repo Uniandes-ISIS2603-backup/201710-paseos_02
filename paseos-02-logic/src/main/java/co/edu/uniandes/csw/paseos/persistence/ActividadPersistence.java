@@ -46,7 +46,7 @@ public class ActividadPersistence
      * @return actividad buscada.
      */
      public ActividadEntity find(Long paseoId, Long actividadId) {
-       TypedQuery<ActividadEntity> q = em.createQuery("select p from ActividadEntity p where (p.paseoEcologico.id = :paseoid) and (p.id = :actividadid)", ActividadEntity.class);
+       TypedQuery<ActividadEntity> q = em.createQuery("select p from ActividadEntity p where p.paseoEcologico.id = :paseoid and p.id = :actividadid", ActividadEntity.class);
         q.setParameter("paseoid", paseoId);
         q.setParameter("actividadid", actividadId);
         return q.getSingleResult();
@@ -57,7 +57,7 @@ public class ActividadPersistence
      * @return lista de todas las actividades.
      */
      public List<ActividadEntity> findAll(Long paseoEcologicoid) {
-        TypedQuery<ActividadEntity> q = em.createQuery("select p from ActividadEntity p where (p.paseoEcologico.id = :paseoEcologicoid)", ActividadEntity.class);
+        TypedQuery<ActividadEntity> q = em.createQuery("select p from ActividadEntity p where p.paseoEcologico.id = :paseoEcologicoid", ActividadEntity.class);
         q.setParameter("paseoEcologicoid", paseoEcologicoid);
         return q.getResultList();
     }
