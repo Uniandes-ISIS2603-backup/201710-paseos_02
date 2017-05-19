@@ -121,7 +121,7 @@
                                     <a ui-sref="inscripcionesEdit({inscripcionId: inscripcion.id,caminanteId: currentRecord.id })" type="button" class="btn btn-warning">Modificar Inscripcion</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a class="btn btn-danger" ng-click="ctrl.deleteRecords(currentRecord.id,inscripcion.id)">Borrar</a>
+                                    <a class="btn btn-danger" href="ctrl.deleteRecords(currentRecord.id,inscripcion.id)">Borrar</a>
                                 </div>
                             </div>    
                             </div> 
@@ -130,7 +130,7 @@
                  </div> 
                   
                 </div>
-<div class="col-md-2">
+            <div class="col-md-2">
                 <a ui-sref="inscripcionesCreate({caminanteId: currentRecord.id})" type="button" class="btn btn-primary">Nueva Inscripcion</a>
             </div>
             </div>
