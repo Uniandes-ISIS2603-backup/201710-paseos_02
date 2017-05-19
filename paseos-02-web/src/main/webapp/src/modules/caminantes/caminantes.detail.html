@@ -105,7 +105,7 @@
                     <div ng-repeat="inscripcion in currentRecord.inscripciones" class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{inscripcion.id}}">>>>>>>>></a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{inscripcion.id}}">Inscripcion #{{inscripcion.id}}</a>
                             </h4>                          
                         </div>
                         <div id="collapse{{inscripcion.id}}" class="panel-collapse collapse">
@@ -116,8 +116,13 @@
                                     <li class="list-group-item"><strong>Observaciones: </strong>{{inscripcion.observaciones}}</li>
                                     <li class="list-group-item"><a ui-sref="inscripcionDetail({inscripcionId: inscripcion.id, caminanteId: currentRecord.id})">Información Adicional</a></li>
                                 </ul>
-                            <div class="col-md-2">
-                            <a ui-sref="inscripcionesCreate()" type="button" class="btn btn-warning">Modificar Inscripcion</a>
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <a ui-sref="inscripcionesEdit({inscripcionId: inscripcion.id,caminanteId: currentRecord.id })" type="button" class="btn btn-warning">Modificar Inscripcion</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a class="btn btn-danger" href="ctrl.deleteRecords(currentRecord.id,inscripcion.id)">Borrar</a>
+                                </div>
                             </div>    
                             </div> 
                         </div>
@@ -125,12 +130,12 @@
                  </div> 
                   
                 </div>
-
-            </div>
-
             <div class="col-md-2">
-                <a ui-sref="inscripcionesCreate()" type="button" class="btn btn-primary">Nueva Inscripcion</a>
+                <a ui-sref="inscripcionesCreate({caminanteId: currentRecord.id})" type="button" class="btn btn-primary">Nueva Inscripcion</a>
             </div>
+            </div>
+
+            
         </div>
     </div>    
 </div>

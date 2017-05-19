@@ -25,24 +25,19 @@
     var mod = ng.module("inscripcionModule");
     
 
-    mod.controller("inscripcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'caminantesContext', 'inscripcionesContext',
-        function ($scope, $state, $stateParams, $http, caminantesContext, inscripcionesContext) {
+    mod.controller("inscripcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'inscripciones', 'caminantesContext', 'inscripcionesContext', 'currentCaminante',
+        function ($scope, $state, $params, $http, inscripciones, caminantesContext, inscripcionesContext, currentCaminante) {
 
             
-            $scope.records = {};
-            $http.get(caminantesContext + '/' + $stateParams.caminanteId + '/' + inscripcionesContext).then(function(response){
-                $scope.records = response.data;
-            }, responseError);
+            $scope.records = inscripciones.data;
                       
 
-            // el controlador recibió un caminanteId ??
-            // revisa los parámetros (ver el :caminanteId en la definición de la ruta)
-            if ($stateParams.inscripcionId !== null && $stateParams.inscripcionId !== undefined) {
+            if ($params.inscripcionId !== null && $params.inscripcionId !== undefined) {
 
                 // toma el id del parámetro
-                id = $stateParams.inscripcionId;
+                id = $params.inscripcionId;
                 // obtiene el dato del recurso REST
-                $http.get(caminantesContext + '/' + $stateParams.caminanteId + '/' + inscripcionesContext + '/' + $stateParams.inscripcionId)
+                $http.get(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext + '/' + $params.inscripcionId)
                         .then(function (response) {
                             // $http.get es una promesa
                             // cuando llegue el dato, actualice currentRecord
@@ -58,7 +53,10 @@
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
                     observaciones: '' /*Tipo String*/,
                     fechaInscripcion: '' /*Tipo Integer*/,
-                    realizoPago: ''
+                    realizoPago: false,
+                    caminante: {
+                        id: currentCaminante.data.id
+                    }
                 };
 
                 $scope.alerts = [];
@@ -66,32 +64,42 @@
             
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
-
+             
                 // si el id es null, es un registro nuevo, entonces lo crea
                 if (id == null) {
 
                     // ejecuta POST en el recurso REST
-                    return $http.post(caminantesContext + '/' + $stateParams.caminanteId + '/' + inscripcionesContext, currentRecord)
+                    return $http.post(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext, currentRecord)
                             .then(function () {
                                 // $http.post es una promesa
                                 // cuando termine bien, cambie de estado
-                                $state.go('inscripcionesList');
+                                $state.go('caminanteDetail',{caminanteId: currentRecord.caminante.id},{reload: true});
                             }, responseError);
 
                     // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
 
                     // ejecuta PUT en el recurso REST
-                    return $http.put(caminantesContext + '/' + $stateParams.caminanteId + '/' + inscripcionesContext + "/" + currentRecord.id, currentRecord)
+                    return $http.put(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext + "/" + currentRecord.id, currentRecord)
                             .then(function () {
                                 // $http.put es una promesa
                                 // cuando termine bien, cambie de estado
-                                $state.go('inscripcionesList');
+                                $state.go('inscripcionDetail', {caminanteId: currentRecord.caminante.id, inscripcionId: currentRecord.id}, {reload: true});
                             }, responseError);
                 }
                 ;
             };
            
+           this.deleteRecord = function(idCamin,idDelete)
+           {
+                return $http.delete(caminantesContext + '/' + idCamin + '/' + inscripcionesContext + '/' + idDelete)
+                            .then(function () {
+                                // $http.post es una promesa
+                                // cuando termine bien, cambie de estado
+                                //$scope.records = $http.get(caminantesContext);
+                                $state.go('caminanteDetail',{caminanteId: currentRecord.caminante.id},{reload: true});
+                            }, responseError);
+           };
 
 
             // -----------------------------------------------------------------

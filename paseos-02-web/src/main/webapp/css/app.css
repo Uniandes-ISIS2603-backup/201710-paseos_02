@@ -4,7 +4,7 @@
 }
 
 .pailas {  
-background: url(https://i.ytimg.com/vi/SrydkUYUoYo/maxresdefault.jpg);                   
+background: url(https://scontent.xx.fbcdn.net/v/t31.0-8/18517987_10155434453763701_3252648405285745701_o.jpg?oh=736747ea848b6c6a32f41d4f934050f2&oe=59B1491B);                   
 }
 
 .p {  
@@ -16,3 +16,80 @@ background: url(http://k34.kn3.net/taringa/3/1/B/5/5/0/Jeymisummer/161.jpg);
 .hola1{
     background: url(http://s1.1zoom.me/big3/796/Sunrises_and_sunsets_Ear_510886.jpg);
 }
+
+.jumbotron { 
+    background-color: #0ca20b;
+    color: #ffffff;
+    padding-top: 10px;
+    height: 150px;
+}
+
+
+#titulo1{
+    height: 65px;
+    
+}
+
+#titulo{
+    height: 160px;
+    clip: rect(5px, 40px, 45px, 5px);
+}
+
+#subtitulo{
+    height: 38px;
+    margin-top: 14px;
+}
+
+#verde{
+    color: #0ca20b;
+}
+#blanco{
+    color: wheat;
+}
+.negro
+{
+   background-color:#000000;
+}
+a:hover, a:focus{
+   color: grey; 
+}
+
+footer{
+   background-color: #0ca20b;
+    color: #ffffff;
+}
+
+.prueba
+{
+    background-color: rgba(231, 186, 176,0.3)
+}
+#juan{
+    padding: 20px;
+     height: 150px;
+     background: url(http://1gr.cz/fotky/idnes/16/034/org/JB624c13_Sedlar_Touha_putovat.jpg);
+     
+}
+ .trans{
+      background-color:#00BB00;
+      color:#CC0000;
+      position:absolute;
+      text-align:center;
+      top:50px;
+      left:40px;
+      padding:65px;
+      font-size:25px;
+      font-weight:bold;
+      width:300px;
+    }
+#blanco2
+{
+    color: #D3988B ;
+}
+.letra
+{
+    font-family: fantasy;
+}
+
+
+
+
