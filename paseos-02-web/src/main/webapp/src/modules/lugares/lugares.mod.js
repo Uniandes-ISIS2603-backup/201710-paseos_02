@@ -33,9 +33,10 @@
                                 $scope.lugaresRecords = lugares.data;
 //                                
 //                                
-                                $scope.borrarlugar = function(id){
-                                    var act = $scope.actividadesRecords[id];
-                                    $http.delete('api/lugares/'+act.id);
+                                $scope.borrarlugar = function(h_id){
+                                    console.log('mae');
+                                    console.log('mae');
+                                    $http.delete('api/lugares/'+h_id);
                                      }
 //                                
                             }]
@@ -102,14 +103,12 @@
                                                          
                                 $scope.actualizarlugar = function(){
                                     
-                                    var nombreA = document.getElementById('nombre').value;
-                                    var descripcionA = document.getElementById('id').value;
-                                    var imagenA = document.getElementById('imagen').value;
-                                    var linkA = document.getElementById('linkMaps').value;
-                                    var direccionA = document.getElementById('direccion').value;
+                                    var nombreA = $('#nombreInput').val();
+                                    var imagenA = $('#imagenInput').val();;
+                                    var linkA = $('#linkInput').val();;
+                                    var direccionA = $('#direccionInput').val();;
                                     var objLugar = {
                                         nombre: nombreA,
-                                        id: descripcionA,
                                         imagen: imagenA,
                                         linkGoogleMaps: linkA,
                                         direccion:direccionA
@@ -138,14 +137,14 @@
                                     
                                     console.log('mae');
                                     
-                                    var nombreA = document.getElementById('nombre').value;
-                                    var descripcionA = document.getElementById('id').value;
-                                    var imagenA = document.getElementById('imagen').value;
-                                    var linkA = document.getElementById('linkMaps').value;
-                                    var direccionA = document.getElementById('direccion').value;
+                                    var nombreA = $('#nombreInput').val();
+                                    var idA = $('#idInput').val();
+                                    var imagenA = $('#imagenInput').val();;
+                                    var linkA = $('#linkInput').val();;
+                                    var direccionA = $('#direccionInput').val();;
                                     var objLugar = {
                                         nombre: nombreA,
-                                        id: descripcionA,
+                                        id: idA,
                                         imagen: imagenA,
                                         linkGoogleMaps: linkA,
                                         direccion:direccionA
@@ -155,7 +154,7 @@
                             }]
                     }
                 }
-            });;      
+            });      
         }]);
 //    mod.controller('createLugarCurrent'['$scope','$http','lugarContext'])
 //    {
