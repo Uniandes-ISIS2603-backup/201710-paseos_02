@@ -24,6 +24,22 @@ background: url(http://k34.kn3.net/taringa/3/1/B/5/5/0/Jeymisummer/161.jpg);
     height: 150px;
 }
 
+
+#titulo1{
+    height: 65px;
+    
+}
+
+#titulo{
+    height: 160px;
+    clip: rect(5px, 40px, 45px, 5px);
+}
+
+#subtitulo{
+    height: 38px;
+    margin-top: 14px;
+}
+
 #verde{
     color: #0ca20b;
 }
@@ -47,8 +63,11 @@ footer{
 {
     background-color: rgba(231, 186, 176,0.3)
 }
-.juan{
-     background: url(http://www.templatemo.com/templates/templatemo_398_nature/images/nature5.jpg);
+#juan{
+    padding: 20px;
+     height: 150px;
+     background: url(http://1gr.cz/fotky/idnes/16/034/org/JB624c13_Sedlar_Touha_putovat.jpg);
+     
 }
  .trans{
       background-color:#00BB00;
