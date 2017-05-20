@@ -14,6 +14,23 @@ body {
 <div class="container-fluid prueba">
     <div id="blanco"><H1>¿En busqueda de un nuevo destino...?</h1></div>
     <a ui-sref="lugaresCreate()" type="button" class="btn btn-primary">Crear lugar nuevo</a>
+    <hr>
+     <div id="blanco2"><H2> ¿No encuentras lo que buscas?</h2></div>
+     <div><dt id="blanco">Id del lugar</dt>
+        <input type="number" name="nombre" id="nombreInput"><br>
+        <d></d>
+         <script>
+         function recibir() 
+    { var valor = document.getElementById("nombreInput").value;
+         console.log('mae');
+         console.log(valor);
+         return valor;
+     }
+        </script>
+        <div id="nombreInput"></div>
+        <a onclick="recibir()" ui-sref="lugarDetail({lugarId:recibir()})" type="button" class="btn btn-primary"> Buscar </a>
+     </div>
+    <hr>
     <div>
         <div id="blanco2"><H2> Aqui hay distintas opciones</h2></div>
     </div>
@@ -27,7 +44,7 @@ body {
                         <img class="img-responsive" ng-src="{{lugar.imagen}}" height="220px" width="220px">
                         <div id="blanco">Nombre: {{lugar.nombre}}</div>
                 </a><button class="active" ><a ui-sref="lugaresActualizar({lugarId: lugar.id})">Actualizar</a></button>
-                     <button class="active"><a ng-click="borrarlugar(lugar.id)">Borrar</a></button></center>
+                     <button class="active"><a ui-sref="lugaresList" ng-click="borrarlugar(lugar.id)">Borrar</a></button></center>
             </div>
         </div>
     </div>

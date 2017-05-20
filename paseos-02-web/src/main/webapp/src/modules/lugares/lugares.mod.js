@@ -37,8 +37,13 @@
                                     console.log('mae');
                                     console.log('mae');
                                     $http.delete('api/lugares/'+h_id);
+                                     },
+                                $scope.buscarLugar = function(){
+                                    console.log('mae');
+                                    var nombreA = $('#nombreInput').val();      
+                                    console.log(nombreA);
+                                    
                                      }
-//                                
                             }]
                             }
                         }
@@ -80,6 +85,7 @@
                         views: {
                             'paseoLugarView': {
                                 templateUrl: basePath + 'lugares.detail.html',
+                        
                                 controller: ['$scope', '$sce', 'currentLugar', function ($scope, $sce, currentLugar) {
                                         $scope.trust = function (data) {
                                             return $sce.trustAsResourceUrl(data);
@@ -137,15 +143,12 @@
                                     
                                     console.log('mae');
                                     
-
                                     var nombreA = $('#nombreInput').val();
-                                    var idA = $('#idInput').val();
                                     var imagenA = $('#imagenInput').val();;
                                     var linkA = $('#linkInput').val();;
                                     var direccionA = $('#direccionInput').val();;
                                     var objLugar = {
                                         nombre: nombreA,
-                                        id: idA,
                                         imagen: imagenA,
                                         linkGoogleMaps: linkA,
                                         direccion:direccionA
