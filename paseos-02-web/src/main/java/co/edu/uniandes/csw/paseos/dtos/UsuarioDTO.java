@@ -73,9 +73,22 @@ public class UsuarioDTO implements Serializable
      */
     protected String correoElectronico;
     
+    /**
+     * Atributo que representa la contrasenia del usuario.
+     */
     protected String contrasenia;
     
+    /**
+     * Atributo que representa el link de la imagen del usuario.
+     */
     protected String imagen;
+    
+    /**
+     * Atributo que representa el estado actual de la cuenta del usuario.
+     * Si es false, significa que el usuario no se encuentra activo
+     * y por tanto sus atributos no son visibles.
+     */
+    protected Boolean cuentaActiva;
 
     /**
      * Constructor de la clase
@@ -229,5 +242,12 @@ public class UsuarioDTO implements Serializable
         this.contrasenia = contrasenia;
     }
     
+    public Boolean getCuentaActiva() {
+        return cuentaActiva;
+    }
+
+    public void setCuentaActiva(Boolean cuentaActiva) {
+        this.cuentaActiva = cuentaActiva;
+    }
     
 }

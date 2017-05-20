@@ -57,7 +57,6 @@ public class CaminanteLogic {
      */
     public CaminanteEntity getCaminante(Long id) 
     {
-    
         return caminantePersistence.find(id);
     }
 
@@ -65,9 +64,13 @@ public class CaminanteLogic {
      * Crea en la persistencia una nueva instancia de la clase CaminanteEntity.
      * @param caminante instancia de la calse caminanteEntity que se desea crear
      * @return La instancia creada.
+     * @throws BusinessLogicException si ya existe otro usuario con la misma identificacion
      */
     public CaminanteEntity createCaminante(CaminanteEntity caminante) throws BusinessLogicException 
     {
+        //Al crear un caminante se establece que su cuenta está activa.
+        caminante.setCuentaActiva(Boolean.TRUE);
+        
         verificarDatos(caminante);
         if(!existeCaminanteConMismaIdentificacion(caminante.getIdentificacion()))
         {
@@ -84,6 +87,7 @@ public class CaminanteLogic {
      * Actualizar información de una instancia CaminanteEntity dada
      * @param caminante instancia de la clase GuiaEntity que se desea actualizar.
      * @return Instancia de la clase CaminanteEntity con la información actualizada.
+     * @throws BusinessLogicException si existe otro usuario con la misma identificacion
      */
     public CaminanteEntity updateCaminante(CaminanteEntity caminante) throws BusinessLogicException
     {
@@ -97,8 +101,19 @@ public class CaminanteLogic {
         else
         {
             throw new BusinessLogicException("Ya existe otro usuario con la misma identificacion");
-        }
-         
+        }         
+    }
+    
+     /**
+     * Desactiva la cuenta de un caminante marcando como false su atributo cuentaActiva.
+     * @param id id del caminante cuya cuenta sera desactivada.
+     * @return Caminante cuya cuenta se desactivo
+     */
+    public CaminanteEntity desactivarCuenta(Long id)
+    {
+        CaminanteEntity entity = caminantePersistence.find(id);
+        entity.setCuentaActiva(Boolean.FALSE);
+        return caminantePersistence.update(entity);
     }
 
     /**

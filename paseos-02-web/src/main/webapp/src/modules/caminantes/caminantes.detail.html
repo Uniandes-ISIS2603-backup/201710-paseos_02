@@ -6,9 +6,9 @@
                     <h2>{{currentRecord.nombre}}</h2>
                 </div>    
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="btn-group">
-                        <button id="{{$index}}-delete-btn" class="btn btn-default btn-lg" ng-click="ctrl.deleteRecord(currentRecord)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+                        <button id="{{$index}}-delete-btn" class="btn btn-default btn-lg" ng-click="ctrl.desactivarCuenta(currentRecord)"><span class="glyphicon glyphicon-minus"></span> Desactivar cuenta</button>
 
                         <button id="{{$index}}-edit-btn" class="btn btn-default btn-lg" ui-sref="caminanteEdit({caminanteId: currentRecord.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
                     </div>

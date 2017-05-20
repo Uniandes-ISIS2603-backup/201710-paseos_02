@@ -56,7 +56,7 @@ public class GuiaPersistence
      */
     public List<GuiaEntity> findAll( )
     {
-        Query solicitud = em.createQuery("select u from GuiaEntity u");
+        Query solicitud = em.createQuery("select u from GuiaEntity u where u.cuentaActiva = true");
         return solicitud.getResultList();
     }
 
