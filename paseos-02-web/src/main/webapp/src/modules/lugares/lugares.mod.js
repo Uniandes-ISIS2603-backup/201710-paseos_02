@@ -134,18 +134,18 @@
                         controller: ['$http','$scope',
                             function ($http,$scope) {
                                                          
-                                $scope.cearlugar = function(){
+                                $scope.crearLugar = function(){
                                     
                                     console.log('mae');
                                     
                                     var nombreA = document.getElementById('nombre').value;
-                                    var descripcionA = document.getElementById('id').value;
+                                    var id = document.getElementById('id').value;
                                     var imagenA = document.getElementById('imagen').value;
                                     var linkA = document.getElementById('linkMaps').value;
                                     var direccionA = document.getElementById('direccion').value;
                                     var objLugar = {
                                         nombre: nombreA,
-                                        id: descripcionA,
+                                        id: id,
                                         imagen: imagenA,
                                         linkGoogleMaps: linkA,
                                         direccion:direccionA

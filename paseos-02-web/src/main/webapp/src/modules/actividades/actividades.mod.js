@@ -35,7 +35,7 @@
                                 
                                 $scope.borrarActividad = function(index){
                                     var act = $scope.actividadesRecords[index];
-                                    $http.delete('api/paseos/'+$scope.currentPaseo.id +'/actividades/'+act.id).
+                                    $http.delete('api/paseos/'+$scope.currentRecord.id +'/actividades/'+act.id).
                                             then(function(response){
                                                 $scope.actividadesRecords.splice(index,1);
                                     })
@@ -68,10 +68,10 @@
                                         duracion: duracionA,
                                         equipamiento: equipamientoA.split(","),
                                         paseoEcologico:{
-                                            id: $scope.currentPaseo.id
+                                            id: $scope.currentRecord.id
                                         }
                                     };
-                                    $http.post('api/paseos/'+$scope.currentPaseo.id +'/actividades', objActividad);
+                                    $http.post('api/paseos/'+$scope.currentRecord.id +'/actividades', objActividad);
                                 };
                             }]
                     }
@@ -100,11 +100,11 @@
                                         duracion: duracionA,
                                         equipamiento: equipamientoA.split(","),
                                         paseoEcologico:{
-                                            id: $scope.currentPaseo.id
+                                            id: $scope.currentRecord.id
                                         }
                                     };
                                     
-                                    $http.put('api/paseos/'+$scope.currentPaseo.id +'/actividades/'+$params.actividadId, objActividad);
+                                    $http.put('api/paseos/'+$scope.currentRecord.id +'/actividades/'+$params.actividadId, objActividad);
                                     $state.go('actividadesList',{},{reload:true});
                                     
                                 };
