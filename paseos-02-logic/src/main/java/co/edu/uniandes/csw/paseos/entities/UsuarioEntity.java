@@ -82,11 +82,21 @@ public  class UsuarioEntity implements Serializable
     private String correoElectronico;
     
     /**
-     * Atributo que representa el correo electronico del usuario.
+     * Atributo que representa la contrasenia del usuario.
      */
     private String contrasenia;
     
+    /**
+     * Atributo que representa el link de la imagen del usuario.
+     */ 
     private String imagen;
+    
+    /**
+     * Atributo que representa el estado actual de la cuenta del usuario.
+     * Si es false, significa que el usuario no se encuentra activo
+     * y por tanto sus atributos no son visibles.
+     */
+    private Boolean cuentaActiva;
 
     /**
      * Obtiene el id del usuario.
@@ -232,10 +242,15 @@ public  class UsuarioEntity implements Serializable
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-    
-        
-    
-    
+
+    public Boolean getCuentaActiva() {
+        return cuentaActiva;
+    }
+
+    public void setCuentaActiva(Boolean cuentaActiva) {
+        this.cuentaActiva = cuentaActiva;
+    }    
+ 
      @Override
     public boolean equals(Object obj)
     {

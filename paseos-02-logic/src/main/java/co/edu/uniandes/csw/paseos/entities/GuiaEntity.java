@@ -56,7 +56,7 @@ public class GuiaEntity extends UsuarioEntity
      */
     @PodamExclude
     @OneToMany(mappedBy = "guia")
-    private List<PaseoEcologicoEntity> paseosEcologico;
+    private List<PaseoEcologicoEntity> paseosEcologicos;
 
     /**
      * Lista de calificaciones de un guía.
@@ -98,18 +98,6 @@ public class GuiaEntity extends UsuarioEntity
     }
 
     /**
-     * Obtiene los paseos ecologicos.
-     * @return lista de paseos ecologicos.
-     */
-    public List<PaseoEcologicoEntity> getPaseosEcologico() {
-        return paseosEcologico;
-    }
-
-    public void setPaseosEcologico(List<PaseoEcologicoEntity> paseosEcologico) {
-        this.paseosEcologico = paseosEcologico;
-    }
-
-    /**
      * Obtiene las calificaciones de un guía.
      * @return lista de calififcaciones de un guía.
      */
@@ -124,7 +112,14 @@ public class GuiaEntity extends UsuarioEntity
     public void setCalificaciones(List<CalificacionEntity> calificaciones) {
         this.calificaciones = calificaciones;
     }
-    
+
+    public List<PaseoEcologicoEntity> getPaseosEcologicos() {
+        return paseosEcologicos;
+    }
+
+    public void setPaseosEcologicos(List<PaseoEcologicoEntity> paseosEcologicos) {
+        this.paseosEcologicos = paseosEcologicos;
+    }
     
     @Override
     public boolean equals(Object obj)

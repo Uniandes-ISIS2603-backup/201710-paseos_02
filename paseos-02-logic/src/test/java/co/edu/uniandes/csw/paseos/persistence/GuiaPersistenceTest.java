@@ -225,8 +225,8 @@ public class GuiaPersistenceTest {
             Assert.assertTrue(calificaciones.contains(calificacion));
         }
 
-        List<PaseoEcologicoEntity> paseos = entityParaPrueba.getPaseosEcologico();
-        List<PaseoEcologicoEntity> paseosEncontrados = entityEncontrado.getPaseosEcologico();
+        List<PaseoEcologicoEntity> paseos = entityParaPrueba.getPaseosEcologicos();
+        List<PaseoEcologicoEntity> paseosEncontrados = entityEncontrado.getPaseosEcologicos();
         for (PaseoEcologicoEntity paseo: paseosEncontrados)
         {
             Assert.assertTrue(paseos.contains(paseo));

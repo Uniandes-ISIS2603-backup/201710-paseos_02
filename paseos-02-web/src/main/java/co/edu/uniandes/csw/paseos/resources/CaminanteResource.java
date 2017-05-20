@@ -110,6 +110,18 @@ public class CaminanteResource
         return new CaminanteDetailDTO(caminanteLogic.updateCaminante(caminanteUpdate));
     }
     
+    @PUT
+    @Path("desactivar/{id: \\d+}")
+    public CaminanteDetailDTO desactivarCuenta(@PathParam("id") Long id) throws BusinessLogicException 
+    {
+        CaminanteEntity entity = caminanteLogic.getCaminante(id);
+        if (entity == null) {
+            throw new WebApplicationException("El caminante con id dado no existe", 404);
+        }
+                
+        return new CaminanteDetailDTO(caminanteLogic.desactivarCuenta(id));
+    }
+    
     @DELETE
     @Path("{id: \\d+}")
     public void deleteCaminante(@PathParam("id") Long id)

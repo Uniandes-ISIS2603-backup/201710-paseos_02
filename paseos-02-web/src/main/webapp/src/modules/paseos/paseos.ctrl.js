@@ -24,13 +24,18 @@
 (function (ng) {
     var mod = ng.module("paseosModule");
     
-
-    mod.controller("paseosCtrl", ['$scope', '$state', '$stateParams', '$http', 'paseosContext', 'guiasContext', 'lugaresContext', 'paseos', '$filter',
-        function ($scope, $state, $stateParams, $http, paseosContext, guiasContext, lugaresContext, paseos, $filter) {
+    mod.controller("paseosCtrl", ['$scope', '$state', '$stateParams', '$http', 'paseosContext', 'guiasContext', 'lugaresContext', '$filter',
+        function ($scope, $state, $stateParams, $http, paseosContext, guiasContext, lugaresContext, $filter) {
 
             // inicialmente el listado de paseos está vacio
-            $scope.records = paseos.data;
-                      
+            $scope.records = {};
+            
+            // carga los paseos
+            $http.get(paseosContext).then(function (response) {
+                $scope.records = response.data;
+            }, responseError);
+            
+            $scope.guiaPaseoDetail = {};
 
             // el controlador recibió un paseoId ??
             // revisa los parámetros (ver el :paseoId en la definición de la ruta)
@@ -43,10 +48,14 @@
                         .then(function (response) {
                             // $http.get es una promesa
                             // cuando llegue el dato, actualice currentRecord
-                            $scope.currentRecord = response.data;                                        
-                           
+                            $scope.currentRecord = response.data;     
+                            $scope.guiaPaseoDetail = response.data.guia;                           
                         }, responseError);
-
+                        
+                if(document.getElementById('transporte') !== null)
+                {
+                    document.getElementById('transporte').checked = $scope.currentRecord.hayTransporte;
+                }
                 // el controlador no recibió un paseoId
             } else
             {
@@ -56,11 +65,13 @@
                     tematica: '' /*Tipo String*/,
                     nMinimCaminantes: '' /*Tipo Integer*/,
                     nMaxCaminantes: '' /*Tipo Integer*/,
-                    hayTransporte:true /*Tipo Boolean*/,
+                    hayTransporte:false /*Tipo Boolean*/,
                     costo: '' /*Tipo Double*/,
                     descripcion: '' /*Tipo String*/,                   
-                    condicionesFisicas:[0,0,0,0,0],
-                    guia:{} /*Objeto que representa instancia de Guia*/,
+                    condicionesFisicas:[0,0,0,0,0],            
+                    guia:{
+                        id:''
+                    } /*Objeto que representa instancia de Guia*/,
                     lugarDeDestino:{}/*Objeto que representa instancia de Lugar*/,
                     lugarDeEncuentro:{} /*Objeto que representa instancia de Lugar*/
                 };
@@ -78,12 +89,36 @@
             });
             
             this.saveRecord = function (id) {
-                currentRecord = $scope.currentRecord;
+                currentRecord = $scope.currentRecord;                
 
                 // si el id es null, es un registro nuevo, entonces lo crea
+               
                 if (id == null) {
-
-                    // ejecuta POST en el recurso REST
+                                                 
+                    //No se envia todo el detalle del guia, puesto que con ello también se envia
+                    //informacion asociada a la herencia (de usuario) y esta no se mapea correctamente.
+                    //Por ello, para indicar cual es el guia del paseo solo se manda su id.  
+                    currentRecord.guia.id = $scope.guiaPaseoDetail.id;  
+                    
+                    if(document.getElementById('encuentro').value === "")
+                    {
+                        currentRecord.lugarDeEncuentro = null;
+                    }
+                    
+                    if(document.getElementById('destino').value === "")
+                    {
+                        currentRecord.lugarDeDestino = null;
+                    }
+                    
+                    if(document.getElementById('destino').value === "")
+                    {
+                        $scope.guiaPaseoDetail = null;
+                    }
+                    
+                    
+                    
+                    
+                    // ejecuta POST en el recurso REST  
                     return $http.post(paseosContext, currentRecord)
                             .then(function () {
                                 // $http.post es una promesa
@@ -94,8 +129,8 @@
 
                     // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
-
-                    // ejecuta PUT en el recurso REST
+                                           
+                    // ejecuta PUT en el recurso REST    
                     return $http.put(paseosContext + "/" + currentRecord.id, currentRecord)
                             .then(function () {
                                 // $http.put es una promesa
@@ -104,7 +139,7 @@
                             }, responseError);
                 }
                 ;
-            };
+            };            
            
            this.deleteRecord = function(recordR)
            {
@@ -118,7 +153,7 @@
            };
 
             // -----------------------------------------------------------------
-            // Funciones para manejra los mensajes en la aplicación
+            // Funciones para manejar los mensajes en la aplicación
 
 
             //Alertas

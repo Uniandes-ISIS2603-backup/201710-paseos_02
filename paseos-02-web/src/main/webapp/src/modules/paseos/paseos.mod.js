@@ -119,10 +119,7 @@
                         controller: 'paseosCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'paseos.create.html'
-                    },
-                    'childView': {
-                        templateUrl: basePath + 'paseos.detail.html'
-                    }
+                    } 
                 }
             });
         }]);

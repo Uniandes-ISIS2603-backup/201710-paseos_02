@@ -57,10 +57,9 @@ public class CaminantePersistence
      */
     public List<CaminanteEntity> findAll( )
     {
-        Query solicitud = em.createQuery("select u from CaminanteEntity u");
+        Query solicitud = em.createQuery("select u from CaminanteEntity u where u.cuentaActiva = true");
         return solicitud.getResultList();
     }
-
     /**
      * Crea un nuevo caminante
      * @param entity caminante que se desea crear.

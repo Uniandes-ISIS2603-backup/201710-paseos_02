@@ -25,7 +25,9 @@ package co.edu.uniandes.csw.paseos.ejbs;
 
 import co.edu.uniandes.csw.paseos.entities.PaseoEcologicoEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.paseos.persistence.GuiaPersistence;
 import co.edu.uniandes.csw.paseos.persistence.InscripcionPersistence;
+import co.edu.uniandes.csw.paseos.persistence.LugarPersistence;
 import co.edu.uniandes.csw.paseos.persistence.PaseoEcologicoPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -43,6 +45,12 @@ public class PaseoEcologicoLogic {
 
     @Inject
     private InscripcionPersistence inscripcionPersistencia;
+    
+    @Inject
+    private GuiaPersistence guiaPersistencia;
+    
+    @Inject
+    private LugarPersistence lugarPersistencia;
 
     /**
      * Obtiene la lista de los guias.
@@ -73,8 +81,12 @@ public class PaseoEcologicoLogic {
      * @return La instancia creada.
      * @throws BusinessLogicException Si no hay suficiente informacion para persistir el paseo
      */
-    public PaseoEcologicoEntity createPaseo(PaseoEcologicoEntity paseo) throws BusinessLogicException {
+    public PaseoEcologicoEntity createPaseo(PaseoEcologicoEntity paseo) throws BusinessLogicException
+    {
         verificarDatos(paseo);
+        verificarNumeroDeCaminantes(paseo);
+        verificarExistenciaGuia(paseo);
+        verificarLugares(paseo);
         persistencia.create(paseo);
         return paseo;
     }
@@ -91,6 +103,9 @@ public class PaseoEcologicoLogic {
     public PaseoEcologicoEntity updatePaseo(PaseoEcologicoEntity paseo) throws BusinessLogicException {
         verificarDatos(paseo);
         verificarDatosUpdate(paseo);
+        verificarNumeroDeCaminantes(paseo);
+        verificarExistenciaGuia(paseo);
+        verificarLugares(paseo);
         return persistencia.update(paseo);
     }
 
@@ -102,12 +117,9 @@ public class PaseoEcologicoLogic {
      */
     public void deletePaseo(Long id) throws BusinessLogicException 
     {
-        if (inscripcionPersistencia.inscripcionesPorPaseo(id).isEmpty()) {
-            persistencia.delete(id);
-        } else {
-            throw new BusinessLogicException("No puede eliminar un paseo que tenga camiantes inscritos.");
-        }
-
+        PaseoEcologicoEntity entity = persistencia.find(id);
+        verificarBorrado(entity);
+        persistencia.delete(id);
     }
 
     public List<PaseoEcologicoEntity> darPaseosSegunTematica(String tematica) {
@@ -128,8 +140,8 @@ public class PaseoEcologicoLogic {
 
     private void verificarDatosUpdate(PaseoEcologicoEntity entity) throws BusinessLogicException 
     {
-        boolean noTieneInscritos = inscripcionPersistencia.inscripcionesPorPaseo(entity.getId()).isEmpty();
-        if (noTieneInscritos) {
+        boolean puedeActualizar = inscripcionPersistencia.inscripcionesPorPaseo(entity.getId()).isEmpty();
+        if (!puedeActualizar) {
             throw new BusinessLogicException("No puede realizar cambios sobre el paseo puesto que ya hay participantes inscritos.");
         }
     }
@@ -139,5 +151,54 @@ public class PaseoEcologicoLogic {
             throw new BusinessLogicException("Un paseo minimo debe tener tematica, costo, guia asociado, lugar de encuentro y lugar de destino. \n"
                     + "Verifique que dichos campos esten llenos y vuelva a intentar.");
         }
+    }
+    
+    private void verificarNumeroDeCaminantes(PaseoEcologicoEntity entity) throws BusinessLogicException
+    {
+        if(entity.getnMaxCaminantes() < entity.getnMinimCaminantes())
+        {
+             throw new BusinessLogicException("Error en las cantidades minima y maxima de caminantes. \n"
+                     + "Por favor verifique la coherencia de los valores ingresados.");            
+        }
+    }
+    private void verificarExistenciaGuia(PaseoEcologicoEntity entity) throws BusinessLogicException
+    {
+        if(guiaPersistencia.find(entity.getGuia().getId()) == null)
+        {
+            throw new BusinessLogicException("El guia que desea asignar al paseo no se encuentra registrado en la base de datos. \n"
+                    + "Por favor verifique la existencia del guia y vuelva a intentar.");             
+        }
+    }
+    
+    private void verificarLugares(PaseoEcologicoEntity entity) throws BusinessLogicException
+    {
+        if(lugarPersistencia.find(entity.getLugarDeEncuentro().getId()) == null)
+        {
+            throw new BusinessLogicException("El lugar de encuentro que desea asignar al paseo no se encuentra registrado en la base de datos. \n"
+                    + "Por favor verifique la existencia del lugar y vuelva a intentar.");                
+        }
+        
+         if(lugarPersistencia.find(entity.getLugarDeDestino().getId()) == null)
+        {
+            throw new BusinessLogicException("El lugar de destino que desea asignar al paseo no se encuentra registrado en la base de datos. \n"
+                    + "Por favor verifique la existencia del lugar y vuelva a intentar.");                
+        }
+    }
+    
+    private void verificarBorrado(PaseoEcologicoEntity entity) throws BusinessLogicException
+    {
+         boolean noTieneInscritos = inscripcionPersistencia.inscripcionesPorPaseo(entity.getId()).isEmpty();
+         boolean noTieneOpiniones = entity.getOpiniones().isEmpty();
+         boolean noTieneCalificaciones = entity.getCalificacionesGuia().isEmpty();
+         
+         if(!noTieneInscritos)
+         {
+             throw new BusinessLogicException("Este paseo tiene caminantes inscritos. No puede eliminarlo."); 
+         }
+         
+         if(!noTieneOpiniones || !noTieneCalificaciones)
+         {
+             throw new BusinessLogicException("Este paseo ya fue calificado por los usuarios. No puede eliminarlo.");             
+         }
     }
 }

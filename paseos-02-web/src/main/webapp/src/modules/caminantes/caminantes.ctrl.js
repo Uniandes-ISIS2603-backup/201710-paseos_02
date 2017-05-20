@@ -97,19 +97,17 @@
                 ;
             };
            
-           this.deleteRecord = function(recordR)
+           this.desactivarCuenta = function(recordR)
            {
-                return $http.delete(caminantesContext + "/" + recordR.id)
+                return $http.put(caminantesContext + "/desactivar/" + recordR.id)
                             .then(function () {
-                                // $http.post es una promesa
-                                // cuando termine bien, cambie de estado
-                                //$scope.records = $http.get(caminantesContext);
+  
                                 $state.go('caminantesList', null, {reload: true});
                             }, responseError);
            };
 
             // -----------------------------------------------------------------
-            // Funciones para manejra los mensajes en la aplicación
+            // Funciones para manejar los mensajes en la aplicación
 
 
             //Alertas

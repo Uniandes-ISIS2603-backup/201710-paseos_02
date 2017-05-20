@@ -35,118 +35,90 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author María del Rosario León
  */
 @XmlRootElement
-public class GuiaDetailDTO extends GuiaDTO
-{
-    /**
-     * Lista de los paseos del guía.
-     */
-    private List<PaseoEcologicoDTO> paseos;
+public class GuiaDetailDTO extends GuiaDTO {
 
     /**
-     * Lista de las calificaciones del guía.
+     * Lista de paseos ecologicos de un guía.
+     */
+    private List<PaseoEcologicoDTO> paseosEcologicos;
+
+    /**
+     * Lista de calificaciones de un guía.
      */
     private List<CalificacionDTO> calificaciones;
 
     /**
      * Constructor de la clase
      */
-    public GuiaDetailDTO( )
-    {
-        super( );
+    public GuiaDetailDTO() {
+        super();
     }
 
     /**
      * Constructor de la clase
      */
-    public GuiaDetailDTO(GuiaEntity entity)
-    {
+    public GuiaDetailDTO(GuiaEntity entity) {
         super(entity);
-        if(entity != null)
-        {
-            if(entity.getPaseosEcologico() != null)
-            {
-                paseos = new ArrayList<PaseoEcologicoDTO>();
-                for (PaseoEcologicoEntity paseo : entity.getPaseosEcologico()) 
-                {
-                    paseos.add(new PaseoEcologicoDTO(paseo));
-                }                
+        if (entity != null) {
+            if (entity.getPaseosEcologicos() != null) {
+                paseosEcologicos = new ArrayList<>();
+                for (PaseoEcologicoEntity paseo : entity.getPaseosEcologicos()) {
+                    paseosEcologicos.add(new PaseoEcologicoDTO(paseo));
+                }
             }
-            
-            if(entity.getCalificaciones( ) != null)
-            {
-                calificaciones = new ArrayList<CalificacionDTO>();
-                for (CalificacionEntity calificacion : entity.getCalificaciones())
-                {
+
+            if (entity.getCalificaciones() != null) {
+                calificaciones = new ArrayList<>();
+                for (CalificacionEntity calificacion : entity.getCalificaciones()) {
                     calificaciones.add(new CalificacionDTO(calificacion));
                 }
             }
-         
+
         }
     }
 
     /**
      * Método que convierte un DTO en Entity
+     *
      * @return Instancia de GuiaEntity
      */
     @Override
-    public GuiaEntity toEntity() 
-    {
+    public GuiaEntity toEntity() {
         GuiaEntity entity = super.toEntity();
-        
-        if(this.getPaseos() != null)
-        {            
-            List<PaseoEcologicoEntity> paseosE = new ArrayList<PaseoEcologicoEntity>( );
-            for(PaseoEcologicoDTO paseo : this.getPaseos())
-            {
+
+        if (this.getPaseosEcologicos() != null) {
+            List<PaseoEcologicoEntity> paseosE = new ArrayList<>();
+            for (PaseoEcologicoDTO paseo : this.getPaseosEcologicos()) {
                 paseosE.add(paseo.toEntity());
             }
-            entity.setPaseosEcologico(paseosE);
+            entity.setPaseosEcologicos(paseosE);
         }
-        
-        
-        if(this.getCalificaciones( ) != null)
-        {
-            List<CalificacionEntity> calificacionesG = new ArrayList<CalificacionEntity>();
-            for (CalificacionDTO calificacion : this.getCalificaciones()) 
-            {
+
+        if (this.getCalificaciones() != null) {
+            List<CalificacionEntity> calificacionesG = new ArrayList<>();
+            for (CalificacionDTO calificacion : this.getCalificaciones()) {
                 calificacionesG.add(calificacion.toEntity());
             }
             entity.setCalificaciones(calificacionesG);
         }
-       
-        
+
         return entity;
     }
 
-    /**
-     * Obtiene los paseos del guía.
-     * @return lista de paseos
-     */
-    public List<PaseoEcologicoDTO> getPaseos() {
-        return paseos;
+    public List<PaseoEcologicoDTO> getPaseosEcologicos() {
+        return paseosEcologicos;
     }
 
-    /**
-     * Modifica la lista de paseos de un guía
-     * @param paseos Nueva lista de paseos.
-     */
-    public void setPaseos(List<PaseoEcologicoDTO> paseos) {
-        this.paseos = paseos;
+    public void setPaseosEcologicos(List<PaseoEcologicoDTO> paseosEcologicos) {
+        this.paseosEcologicos = paseosEcologicos;
     }
 
-    /**
-     * Obtiene las calificaciones del guía.
-     * @return lista de calificaciones
-     */
     public List<CalificacionDTO> getCalificaciones() {
         return calificaciones;
     }
 
-    /**
-     * Modifica la lista de calificaciones de un guía
-     * @param calificaciones Nueva lista de paseos.
-     */
     public void setCalificaciones(List<CalificacionDTO> calificaciones) {
         this.calificaciones = calificaciones;
     }
+
 }
