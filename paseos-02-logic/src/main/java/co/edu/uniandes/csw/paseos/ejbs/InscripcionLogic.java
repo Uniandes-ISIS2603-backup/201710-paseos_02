@@ -72,6 +72,7 @@ public class InscripcionLogic {
     public InscripcionEntity createInscripcion(InscripcionEntity entity) throws BusinessLogicException {
         System.out.println("reglas de negocio");
         verificarReglasNegocio(entity);
+        
         return persistence.create(entity);
     }
 
@@ -116,15 +117,13 @@ public class InscripcionLogic {
 
     public void verificarReglasNegocio(InscripcionEntity entity) throws BusinessLogicException {
         try {
-            long idPaseo = 0;
-            idPaseo = entity.getInstanciaPaseo().getId();
             long idCaminante = 0;
             idCaminante = entity.getCaminante().getId();
-            if (entity.getFechaInscripcion() == null || entity.getObservaciones() == null || idPaseo == 0 || idCaminante == 0) {
+            if (entity.getFechaInscripcion() == null || entity.getObservaciones() == null || idCaminante == 0) {
                 throw new BusinessLogicException("Para crear una inscripcion minimo debe enviar la fechaInscripcion, observaciones, el id del caminante, el id del paseo y si realizoPago");
             }
         } catch (Exception e) {
-            throw new BusinessLogicException("Para crear una inscripcion minimo debe enviar la fechaInscripcion, observaciones, el id del caminante, el id del paseo y si realizoPago");
+            throw new BusinessLogicException(e.getMessage());
         }
     }
 }

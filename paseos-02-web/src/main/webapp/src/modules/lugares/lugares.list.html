@@ -7,11 +7,16 @@ pailas
 
 <style type="text/css">
 body {  
-        background:url(http://static5.depositphotos.com/1000167/451/i/950/depositphotos_4514476-stock-photo-weathered-white-wood.jpg) repeat 0 0;                   
+        background:url(https://scontent.xx.fbcdn.net/v/t31.0-8/18517987_10155434453763701_3252648405285745701_o.jpg?oh=736747ea848b6c6a32f41d4f934050f2&oe=59B1491B);                   
  }
 </style>
 
-<div class="container-fluid pailas">
+<div class="container-fluid prueba">
+    <div id="blanco"><H1>¿En busqueda de un nuevo destino...?</h1></div>
+    <a ui-sref="lugaresCreate()" type="button" class="btn btn-primary">Crear lugar nuevo</a>
+    <div>
+        <div id="blanco2"><H2> Aqui hay distintas opciones</h2></div>
+    </div>
    <!-- http://static5.depositphotos.com/1000167/451/i/950/depositphotos_4514476-stock-photo-weathered-white-wood.jpg
    -->
     <!--Header-->
@@ -20,13 +25,11 @@ body {
             <div class="col-lg-2">
                 <center><a ui-sref="lugarDetail({lugarId: lugar.id})">
                         <img class="img-responsive" ng-src="{{lugar.imagen}}" height="220px" width="220px">
-                        <div class="well">Nombre: {{lugar.nombre}}</div>
-                </a><button class="active"><a ui-sref="lugaresActualizar({lugarId: lugar.id})">Actualizar</a></button>
-                     <button class="active"><a ng-click="borrarLugar(lugar.id)">Borrar</a></button></center>
+                        <div id="blanco">Nombre: {{lugar.nombre}}</div>
+                </a><button class="active" ><a ui-sref="lugaresActualizar({lugarId: lugar.id})">Actualizar</a></button>
+                     <button class="active"><a ng-click="borrarlugar(lugar.id)">Borrar</a></button></center>
             </div>
         </div>
     </div>
-    <div class="well">¿En busqueda de un nuevo destino?...</div>
-    <div class="col-md-2">
-                <a ui-sref="lugaresCreate()" type="button" class="btn btn-primary">Crear lugar nuevo</a>
-           </div>
+</div>
+

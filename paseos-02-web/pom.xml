@@ -61,6 +61,7 @@
             <groupId>co.edu.uniandes.csw.paseos</groupId>
             <artifactId>paseos-02-logic</artifactId>
             <version>0.1.0</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.graphene</groupId>

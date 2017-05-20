@@ -70,6 +70,7 @@ SOFTWARE.
 
     <!-- Inscripciones -->
     <script src="src/modules/inscripciones/inscripciones.mod.js" type="text/javascript"></script>
+    <script src="src/modules/inscripciones/inscripciones.ctrl.js" type="text/javascript"></script>
     
     <!-- Calificaciones -->
     <script src="src/modules/calificaciones/calificaciones.mod.js" type="text/javascript"></script>
@@ -80,36 +81,53 @@ SOFTWARE.
 
 </head>
 <body>
-<div class="container-fluid">
-    <div class="jumbotron text-center">
-        <h1> Paseos Ecológicos</h1>
-        <p>El paseo que estabas esperando</p> 
+    <div class="im">
+<div class="text-center ">
+        <div class="letra">
+         <font  FACE="tahoma" color="white">
+         <div id="titulo1">
+             <img id="titulo" src="css/a.png" class="img">
+         </div>
+         <img id="subtitulo" src="css/b.png" class="img">
+        </font>
+        </div>
         <!--<img class="img-responsive" ng-src="">-->
     </div>
+    <div class="container-fluid">
+    
     <div class="row">
         <div class="col-lg-12">
             <ul class="nav nav-tabs">
-                <li><a id="verde" ui-sref="paseosList">Paseos</a></li>
-                <li><a id="verde" ui-sref="caminantesList">Caminantes</a></li>
-                <li><a id="verde" ui-sref="guiasList">Guías</a></li>
-                <li><a id="verde" ui-sref="lugaresList">Lugares</a></li>
+                <li><a id="blanco" ui-sref="paseosList">Paseos</a></li>
+                <li><a id="blanco" ui-sref="caminantesList">Caminantes</a></li>
+                <li><a id="blanco" ui-sref="guiasList">Guías</a></li>
+                <li><a id="blanco" ui-sref="lugaresList">Lugares</a></li>
             </ul>
-
-        <div ui-view="mainView"></div>
+       
+     
         </div>
+          
     </div>
+    </div>
+    </div>
+     <div ui-view="mainView"></div>
 </div>
     <footer class="text-center">
+        <div class="negro" id="blanco">
             <div class="upper-footer">
                 <div class="container">
                     <div class="row">
                         <div class="footer-col col-md-offset-4 col-md-4">
+                            <div class="negro" id="blanco">
                             <h3>Desarrolladores</h3>
-                            <p>
+                            <p >
                                 Sebastián Millán - Juan David Vega<br>
                                 María del Rosario León - Juan Diego Chaves<br>
-                                Andrea <br>
+
+                                Andrea López<br>
+
                             </p>
+                            </div>
                         </div>
                     </div>
                 </div>

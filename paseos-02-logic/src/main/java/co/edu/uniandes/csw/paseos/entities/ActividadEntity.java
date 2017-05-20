@@ -34,6 +34,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -70,6 +71,7 @@ public class ActividadEntity implements Serializable {
     /**
      * Atributo que representa el paseo que esta asociado a la una actividad
      */
+    @PodamExclude
     @ManyToOne
     private PaseoEcologicoEntity paseoEcologico;
 
