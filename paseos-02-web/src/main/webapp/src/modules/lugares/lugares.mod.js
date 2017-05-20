@@ -133,10 +133,11 @@
                         controller: ['$http','$scope',
                             function ($http,$scope) {
                                                          
-                                $scope.cearlugar = function(){
+                                $scope.crearLugar = function(){
                                     
                                     console.log('mae');
                                     
+
                                     var nombreA = $('#nombreInput').val();
                                     var idA = $('#idInput').val();
                                     var imagenA = $('#imagenInput').val();;
