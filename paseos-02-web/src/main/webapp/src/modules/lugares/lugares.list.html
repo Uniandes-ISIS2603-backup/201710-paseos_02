@@ -21,11 +21,11 @@ body {
         <d></d>
          <script>
          function recibir() 
-    { var valor = document.getElementById("nombreInput").value;
-         console.log('mae');
-         console.log(valor);
-         return valor;
-     }
+            { var valor = document.getElementById("nombreInput").value;
+                console.log('mae');
+                console.log(valor);
+                return valor;
+            }
         </script>
         <div id="nombreInput"></div>
         <a onclick="recibir()" ui-sref="lugarDetail({lugarId:recibir()})" type="button" class="btn btn-primary"> Buscar </a>
@@ -44,7 +44,7 @@ body {
                         <img class="img-responsive" ng-src="{{lugar.imagen}}" height="220px" width="220px">
                         <div id="blanco">Nombre: {{lugar.nombre}}</div>
                 </a><button class="active" ><a ui-sref="lugaresActualizar({lugarId: lugar.id})">Actualizar</a></button>
-                     <button class="active"><a ui-sref="lugaresList" ng-click="borrarlugar(lugar.id)">Borrar</a></button></center>
+                     <button class="active"><a ui-sref="paseosList" ng-click="borrarlugar(lugar.id)">Borrar</a></button></center>
             </div>
         </div>
     </div>
