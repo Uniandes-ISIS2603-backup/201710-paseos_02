@@ -5,44 +5,35 @@
 </div>
 
 <div class="col-md-12 well">
-    <form novalidate name="form" id="guia-form" role="form"
-          ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+    <form novalidate name="form" id="guia-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
         <fieldset>
             <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
-            <!--Correo electronico-->
-            <label class="control-label col-sm-3" for="correoElectronico">Correo electronico del nuevo guia</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="correoElectronico" placeholder="Correo electronico"
-                       ng-model="correo electronico del nuevo guia">
-            </div>
 
-            <!-- Contrasenia -->
-            <div class="form-group col-md-6"
-                 ng-class="{'has-success': form.contrasenia.$valid && form.contrasenia.$dirty, 'has-error': form.contrasenia.$invalid && (form.contrasenia.$dirty || form.$submitted)}">
-                <label for="contrasenia" class="col-md-2 control-label">Contrasenia</label>
+            <!-- Correo electronico -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.correoElectronico.$valid && form.correoElectronico.$dirty, 'has-error': form.correoElectronico.$invalid && (form.correoElectronico.$dirty || form.$submitted)}" >
+                <label for="correoElectronico" class="col-md-2 control-label">Email</label>
                 <div class="col-md-10">
-                    <input id="contrasenia" name="contrasenia" class="form-control" type="text"
-                           ng-model="currentRecord.contrasenia" ng-init="currentRecord.contrasenia" required/>
+                    <input id="correoElectronico" name="correoElectronico" class="form-control" type="text" ng-model="currentRecord.correoElectronico" ng-init="currentRecord.correoElectronico" required />
+                </div>
+            </div>
+            <!-- Contrasenia -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.contrasenia.$valid && form.contrasenia.$dirty, 'has-error': form.contrasenia.$invalid && (form.contrasenia.$dirty || form.$submitted)}" >
+                <label for="contrasenia" class="col-md-2 control-label">Contraseña</label>
+                <div class="col-md-10">
+                    <input id="contrasenia" name="contrasenia" class="form-control" type="text" ng-model="currentRecord.contrasenia" ng-init="currentRecord.contrasenia" required />
                 </div>
             </div>
 
-            <!--nombre-->
-            <label class="control-label col-sm-3" for="nombre">Nombre del nuevo guia</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="nombre" placeholder="Nombre"
-                       ng-model="nombre del nuevo guia">
+            <!-- Identificacion -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.identificacion.$valid && form.identificacion.$dirty, 'has-error': form.identificacion.$invalid && (form.identificacion.$dirty || form.$submitted)}" >
+                <label for="identificacion" class="col-md-2 control-label">Identificacion</label>
+                <div class="col-md-10">
+                    <input id="identificacion" name="identificacion" class="form-control" type="text" ng-model="currentRecord.identificacion" ng-init="currentRecord.identificacion" required />
+                </div>
             </div>
 
-            <!--identificacion-->
-            <label class="control-label col-sm-3" for="identificacion">Identificacion del nuevo guia</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="identificacion" placeholder="Identificacion"
-                       ng-model="identificacion del nuevo guia">
-            </div>
-
-            <!--Tipo Identificacion-->
-            <div class="form-group col-md-6"
-                 ng-class="{'has-success': form.tipoId.$valid && form.tipoId.$dirty, 'has-error': form.tipoId.$invalid && (form.tipoId.$dirty || form.$submitted)}">
+            <!-- Tipo de identificacion -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.tipoId.$valid && form.tipoId.$dirty, 'has-error': form.tipoId.$invalid && (form.tipoId.$dirty || form.$submitted)}" >
                 <label for="tipoId" class="col-md-2 control-label">Tipo de Id</label>
                 <div class="col-md-10">
                     <select class="form-control" id="tipoId" type="text" ng-model="currentRecord.tipoIdentificacion">
@@ -51,58 +42,69 @@
                         <option>CE</option>
                         <option>RC</option>
                         <option>NIT</option>
-                    </select>
+                    </select>                   
                 </div>
             </div>
 
-            <!--edad-->
-            <label class="control-label col-sm-3" for="edad">Edad del guia</label>
-            <div class="col-sm-9">
-                <input type="number" class="form-control" id="edad" ng-model="edad">
+            <!-- Nombre -->
+            <div class="form-group col-md-4" ng-class="{'has-success': form.nombre.$valid && form.nombre.$dirty, 'has-error': form.nombre.$invalid && (form.nombre.$dirty || form.$submitted)}" >
+                <label for="nombre" class="col-md-2 control-label">Nombre</label>
+                <div class="col-md-10">
+                    <input id="nombre" name="nombre" class="form-control" type="text" ng-model="currentRecord.nombre" ng-init="currentRecord.nombre" required />
+                </div>
+            </div>
+            <!-- Edad -->
+            <div class="form-group col-md-4" ng-class="{'has-success': form.edad.$valid && form.edad.$dirty, 'has-error': form.edad.$invalid && (form.edad.$dirty || form.$submitted)}" >
+                <label for="edad" class="col-md-2 control-label">Edad</label>
+                <div class="col-md-10">
+                    <input id="edad" name="edad" class="form-control" type="text" ng-model="currentRecord.edad" ng-init="currentRecord.edad" required />
+                </div>
             </div>
 
-            <!--Telefono-->
-            <label class="control-label col-sm-3" for="telefono">Telefono del guia</label>
-            <div class="col-sm-9">
-                <input type="telefono" class="form-control" id="telefono" ng-model="telefono">
+            <!-- Telefono -->
+            <div class="form-group col-md-4" ng-class="{'has-success': form.telefono.$valid && form.telefono.$dirty, 'has-error': form.telefono.$invalid && (form.telefono.$dirty || form.$submitted)}" >
+                <label for="telefono" class="col-md-2 control-label">Telefono</label>
+                <div class="col-md-10">
+                    <input id="telefono" name="telefono" class="form-control" type="text" ng-model="currentRecord.telefono" ng-init="currentRecord.telefono" required />
+                </div>
             </div>
 
-            <!--Dirección-->
-            <label class="control-label col-sm-3" for="direccion">Direccion del nuevo guia</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="direccion" placeholder="Direccion"
-                       ng-model="direccion del nuevo guia">
+            <!-- Direccion -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.direccion.$valid && form.direccion.$dirty, 'has-error': form.direccion.$invalid && (form.direccion.$dirty || form.$submitted)}" >
+                <label for="direccion" class="col-md-2 control-label">Direccion</label>
+                <div class="col-md-10">
+                    <input id="direccion" name="direccion" class="form-control" type="text" ng-model="currentRecord.direccion" ng-init="currentRecord.direccion" />
+                </div>
             </div>
 
-            <!--Imagen-->
-            <div class="form-group col-md-6"
-                 ng-class="{'has-success': form.imagen.$valid && form.imagen.$dirty, 'has-error': form.imagen.$invalid && (form.imagen.$dirty || form.$submitted)}">
+            <!-- Image -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.imagen.$valid && form.imagen.$dirty, 'has-error': form.imagen.$invalid && (form.imagen.$dirty || form.$submitted)}" >
                 <label for="imagen" class="col-md-2 control-label">Imagen</label>
                 <div class="col-md-10">
-                    <input id="imagen" name="imagen" class="form-control" type="text" ng-model="currentRecord.imagen"
-                           ng-init="currentRecord.imagen" required/>
+                    <input id="imagen" name="imagen" class="form-control" type="text" ng-model="currentRecord.imagen" ng-init="currentRecord.imagen" required />
                 </div>
             </div>
-
-
-            <!--Formacion-->
-            <label class="control-label col-sm-3" for="formacion">Formacion del nuevo guia</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="formacion" placeholder="Formacion"
-                       ng-model="formacion del nuevo guia">
+            
+            <!-- Experiencia -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.experiencia.$valid && form.experiencia.$dirty, 'has-error': form.experiencia.$invalid && (form.experiencia.$dirty || form.$submitted)}" >
+                <label for="experiencia" class="col-md-2 control-label">Imagen</label>
+                <div class="col-md-10">
+                    <input id="experiencia" name="experiencia" class="form-control" type="text" ng-model="currentRecord.experiencia" ng-init="currentRecord.experiencia" required />
+                </div>
             </div>
-
-            <!--Experiencia-->
-            <label class="control-label col-sm-3" for="experiencia">Experiencia del nuevo guia</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" id="experiencia" placeholder="Experiencia"
-                       ng-model="experiencia del nuevo guia">
+            
+            <!-- Formación -->
+            <div class="form-group col-md-6" ng-class="{'has-success': form.formacion.$valid && form.formacion.$dirty, 'has-error': form.formacion.$invalid && (form.formacion.$dirty || form.$submitted)}" >
+                <label for="formacion" class="col-md-2 control-label">Formacion</label>
+                <div class="col-md-10">
+                    <input id="formacion" name="experiencia" class="form-control" type="text" ng-model="currentRecord.formacion" ng-init="currentRecord.experiencia" required />
+                </div>
             </div>
 
         </fieldset>
         <div class="form-group col-md-12">
             <button type="button" ui-sref='guiasList'>Cancel</button>
-            <button type="submit" >Save</button>
+            <button type="submit" >Save</button>   
         </div>
     </form>
 </div>
