@@ -4,7 +4,10 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div class="container-fluid">   
-    <div class="row">
+    <label for="tematicaPaseo">Buscar paseo por tematica:</label>
+    <br><input type="text" name="tematicaPaseo" placeholder="Ingrese la tematica del paseo" class="col-lg-3" style="position: absolute;margin-left: 30px;" id="buscarIn">
+    <button value="Buscar" class="glyphicon glyphicon-search" ng-click="buscar()" style="color: black;width: 30px; height: 26px"></button>
+    <div class="row" style="padding-top: 20px">
         <div ng-repeat="paseo in records">
             <div class="col-lg-2">
                 <center><a ui-sref="paseoDetail({paseoId: paseo.id})">
