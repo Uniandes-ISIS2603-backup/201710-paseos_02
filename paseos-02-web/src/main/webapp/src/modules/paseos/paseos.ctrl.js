@@ -30,6 +30,16 @@
             // inicialmente el listado de paseos está vacio
             $scope.records = {};
             
+            $scope.buscar = function()
+            {
+                var nombre = document.getElementById('buscarIn').value;
+                console.log(nombre);
+                $http.get('api/paseos/tematica?' + nombre)
+                        .then(function(response){
+                            $scope.records = response.data;
+                })
+            }
+            
             // carga los paseos
             $http.get(paseosContext).then(function (response) {
                 $scope.records = response.data;
@@ -184,6 +194,11 @@
 
                 self.showError(response.data);
             }
-        }]);
+        }]
+            
+            
+            
+            
+            );
 
 })(window.angular);
