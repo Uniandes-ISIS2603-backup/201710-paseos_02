@@ -36,18 +36,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Rol Positivo SAS
+ * @author js.millan10
  */
+
+@RunWith(Arquillian.class)
 public class InscripcionLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
 
@@ -72,8 +76,8 @@ public class InscripcionLogicTest {
                 .addPackage(InscripcionEntity.class.getPackage())
                 .addPackage(InscripcionLogic.class.getPackage())              
                 .addPackage(InscripcionPersistence.class.getPackage())
-                .addPackage(UsuarioEntity.class.getPackage())
                 .addPackage(CaminanteEntity.class.getPackage())
+                .addPackage(UsuarioEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
