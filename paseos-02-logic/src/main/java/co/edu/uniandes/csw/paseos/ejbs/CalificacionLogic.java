@@ -122,11 +122,10 @@ public class CalificacionLogic
     
     public void verificarReglasNegocio(CalificacionEntity entity) throws BusinessLogicException
     {
-       boolean id = entity.getId() == null;
        boolean puntuacion = entity.getPuntuacion()>5;
-       if (id || puntuacion)
+       if (entity.getComentario() == null || puntuacion || entity.getFecha()== null)
        {
-           throw new BusinessLogicException("No se están cumpliendo las reglas de negocio.");
+           throw new BusinessLogicException("Para crear una inscripcion minimo debe enviar la fecha, un comentario y la puntuación la cual debe estar entre un rango del 0 al 5");
        }
     }
 }

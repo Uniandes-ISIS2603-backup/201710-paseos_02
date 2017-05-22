@@ -123,7 +123,7 @@ public class InscripcionLogic {
                 throw new BusinessLogicException("Para crear una inscripcion minimo debe enviar la fechaInscripcion, observaciones, el id del caminante, el id del paseo y si realizoPago");
             }
         } catch (Exception e) {
-            throw new BusinessLogicException(e.getMessage());
+            throw new BusinessLogicException("Para crear una inscripcion minimo debe enviar la fechaInscripcion, observaciones, el id del caminante, el id del paseo y si realizoPago");
         }
     }
 }

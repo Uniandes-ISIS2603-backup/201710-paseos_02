@@ -82,24 +82,39 @@
                     <h3>Calificaciones</h3>
                 </div>
             </div>
-            <div class="row">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Puntuación</th>    
-                            <th>Fecha</th>  
-                            <th>Comentarios</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="calificacion in currentGuia.calificaciones">
-                            <td >{{calificacion.puntuacion}}</td>
-                            <td >{{calificacion.fecha}}</td>
-                            <td >{{calificacion.comentario}}</td>   
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-md-12">
+                <div class="panel-group" id="accordion">
+                    <div ng-repeat="calificacion in currentGuia.calificaciones" class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{calificacion.id}}">Calificacion #{{calificacion.id}}</a>
+                            </h4>                          
+                        </div>
+                        <div id="collapse{{calificacion.id}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><strong>Fecha: </strong>{{calificacion.fecha}}</li>
+                                    <li class="list-group-item"><strong>Comentarios: </strong>{{calificacion.comentario}}</li>
+                                    <li class="list-group-item"><strong>Puntuación: </strong>{{calificacion.puntuacion}}</li>
+                                    <li class="list-group-item"><a ui-sref="calificacionDetail({calificacionId: calificacion.id, guiaId: currentGuia.id})">Información Adicional</a></li>
+                                </ul>
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <a ui-sref="calificacionesEdit({calificacionId: calificacion.id,guiaId: currentGuia.id })" type="button" class="btn btn-warning">Modificar Calificación</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a class="btn btn-danger" href="ctrl.deleteRecords(currentGuia.id,calificacion.id)">Borrar</a>
+                                </div>
+                            </div>    
+                            </div> 
+                        </div>
+                    </div>
+                 </div> 
+                  
+                </div>
+            <div class="col-md-2">
+                <a ui-sref="calificacionesCreate({guiaId: currentGuia.id})" type="button" class="btn btn-primary">Nueva Calificacion</a>
+            </div>
             </div>
         </div>
     </div>

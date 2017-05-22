@@ -8,26 +8,40 @@ and open the template in the editor.
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-3">
-                    <h2>Calificaciones</h2>
+                <div class="col-md-12">
+                    <h2>Detalle Calificación</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <dl>
                         <hr>
-                        <dt>Comentario</dt>
-                        <dd></dd>
+                        <dt>Fecha</dt>
+                        <dd>{{currentRecord.fecha}}</dd>
+
+                        <hr>
+                        <dt>Comentarios</dt>
+                        <dd>{{currentRecord.comentarios}}</dd>
 
                         <hr>
                         <dt>Puntuación</dt>
-                        <dd></dd>
-
+                        <dd>{{currentRecord.puntuacion}}</dd>
+                        
                         <hr>
-                        <dt>Fecha</dt>
-                        <dd></dd>
-
+                        <dt>Guia</dt>
+                        <dd><a ui-sref="guiaDetail({guiaId: currentRecord.guia.id})">{{currentRecord.guia.nombre}}</a></dd>
+                        
+                        <hr>
+                        <dt>Paseo ecologico</dt>
+                        <dd><a ui-sref="paseoDetail({paseoId: currentRecord.paseoEcologico.id})">{{currentRecord.paseoEcologico.id}}</a></dd>
+                        
+                        <hr>
+                        <dt>Mi perfil</dt>
+                        <dd><a ui-sref="caminanteDetail({caminanteId: currentRecord.caminante.id})">{{currentRecord.paseoEcologico.id}}</a></dd>
                     </dl>
+                </div>
+                <div class="container-fluid">
+                <a class="btn btn-danger" href="ctrl.deleteRecord(currentRecord.guia.id,currentRecord.id)">Borrar</a>
                 </div>
             </div>
         </div>
