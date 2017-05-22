@@ -159,8 +159,7 @@ public class CalificacionPersistenceTest {
     @Test
     public void getCalificacionesGuiaTest( )
     {
-        Assert.assertNotNull(guiaActual);
-        List<CalificacionEntity> encontrados = calificacionPersistence.findAll(guiaActual.getId());
+        List<CalificacionEntity> encontrados = calificacionPersistence.findAll();
         Assert.assertEquals(data.size(), encontrados.size());   
     }
     

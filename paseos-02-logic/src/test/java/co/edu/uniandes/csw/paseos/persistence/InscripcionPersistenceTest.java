@@ -148,8 +148,7 @@ public class InscripcionPersistenceTest {
     @Test
     public void getInscripcionesCaminanteTest( )
     {
-        Assert.assertNotNull(caminanteActual);
-        List<InscripcionEntity> encontrados = inscripcionPersistence.findAll(caminanteActual.getId());
+        List<InscripcionEntity> encontrados = inscripcionPersistence.findAll();
         Assert.assertEquals(data.size(), encontrados.size());   
         
     }
