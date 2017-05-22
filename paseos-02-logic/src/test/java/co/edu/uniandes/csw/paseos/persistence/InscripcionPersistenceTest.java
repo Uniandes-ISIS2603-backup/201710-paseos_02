@@ -26,6 +26,7 @@ package co.edu.uniandes.csw.paseos.persistence;
 
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
+import co.edu.uniandes.csw.paseos.entities.UsuarioEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -58,6 +59,7 @@ public class InscripcionPersistenceTest {
                 .addPackage(InscripcionEntity.class.getPackage())
                 .addPackage(InscripcionPersistence.class.getPackage())
                 .addPackage(CaminanteEntity.class.getPackage())
+                .addPackage(UsuarioEntity.class.getPackage())
                 .addPackage(CaminantePersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
@@ -103,7 +105,9 @@ public class InscripcionPersistenceTest {
      */
     private void clearData() {
         em.createQuery("delete from InscripcionEntity").executeUpdate();
-    }
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
+        em.createQuery("delete from CaminanteEntity").executeUpdate();
+    }   
 
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
@@ -112,10 +116,12 @@ public class InscripcionPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-          
+         CaminanteEntity nuevo = factory.manufacturePojo(CaminanteEntity.class);
+         caminanteActual = nuevo;
+         em.persist(nuevo);
         for (int i = 0; i < 3; i++) {
             InscripcionEntity entity = factory.manufacturePojo(InscripcionEntity.class);
-            //entity.setGuia(guiaActual);   Problema al asignarle un guía
+            entity.setCaminante(caminanteActual);
             em.persist(entity);
             data.add(entity);
         }
@@ -148,7 +154,7 @@ public class InscripcionPersistenceTest {
     @Test
     public void getInscripcionesCaminanteTest( )
     {
-        List<InscripcionEntity> encontrados = inscripcionPersistence.findAll();
+        List<InscripcionEntity> encontrados = inscripcionPersistence.findAll(caminanteActual.getId());
         Assert.assertEquals(data.size(), encontrados.size());   
         
     }
