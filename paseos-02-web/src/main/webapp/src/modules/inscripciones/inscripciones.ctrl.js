@@ -89,6 +89,7 @@
                 }
                 ;
             };
+       
            
            this.deleteRecord = function(idCamin,idDelete)
            {
