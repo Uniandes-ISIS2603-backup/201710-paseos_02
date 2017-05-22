@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-md-4">
             <h3> Paseo a {{currentRecord.lugarDeDestino.nombre}} </h3>
-            <h4> {{currentRecord.tematica}} </h4>
+            <h4> {{currentRecord.tematica}} </h4>            
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
             <ul class="nav nav-tabs">
                 <li role="navigation"> <a ui-sref="paseoFicha({paseoId: currentRecord.id})">Ficha Tecnica</a></li>
                 <li role="presentation"> <a ui-sref="actividadesList({paseoId: currentRecord.id})">Actividades</a></li>
@@ -12,6 +12,13 @@
                 <li role="presentation"> <a ui-sref="paseoGuia({paseoId: currentRecord.id})">Guia</a></li>
                 <li role="presentation"> <a ui-sref="paseoLugar({paseoId: currentRecord.id})">Lugar</a></li>
             </ul>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button id="{{$index}}-delete-btn" class="btn btn-default btn-md" ng-click="ctrl.deleteRecord(currentRecord)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
+
+                <button id="{{$index}}-edit-btn" class="btn btn-default btn-md" ui-sref="paseoEdit({paseoId: currentRecord.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+            </div>
         </div>
     </div>
 
@@ -23,9 +30,5 @@
 
     <div ui-view="childrenView"></div>
 
-    <div class="btn-group">
-        <button id="{{$index}}-delete-btn" class="btn btn-default btn-lg" ng-click="ctrl.deleteRecord(currentRecord)"><span class="glyphicon glyphicon-minus"></span> Remove</button>
-
-        <button id="{{$index}}-edit-btn" class="btn btn-default btn-lg" ui-sref="paseoEdit({paseoId: currentRecord.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-    </div>
+    
 </div>
