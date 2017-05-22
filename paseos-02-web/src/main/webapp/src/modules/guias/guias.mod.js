@@ -83,6 +83,19 @@
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'guias.create.html'
                     }
+                },
+            }).state('guiaEdit', {
+                url: '/{guiaId:int}/edit',
+                parent: 'guias',
+                views: {
+                    'guiaView': {
+                        controller: 'guiasCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'guias.create.html'
+                    },
+                    'childView': {
+                        templateUrl: basePath + 'guias.detail.html'
+                    }
                 }
             });
         }]);
