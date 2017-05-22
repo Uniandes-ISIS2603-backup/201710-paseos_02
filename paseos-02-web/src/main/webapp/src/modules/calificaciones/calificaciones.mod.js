@@ -13,16 +13,23 @@
             $urlRouterProvider.otherwise("/calificacionesList");
             // Definición del estado 'caminantesList' donde se listan los caminantes
             $stateProvider.state('calificaciones', {
-                url: '/calificaciones',
+                url: '/calificaciones/{guiaId:int}/calificaciones',
                 abstract: true,
-                parent: 'guiaDetail',
+                param: {
+                    guiaId: null
+                },
                 resolve: {
+                    currentGuia: ['$http', 'guiasContext', '$stateParams', function ($http, guiasContext, $params) {
+                            return $http.get(guiasContext + '/' + $params.guiaId);
+                        }],
                     calificaciones: ['$http', 'guiasContext', 'calificacionesContext', '$stateParams', function ($http, guiasContext, calificacionesContext, $params) {
                             return $http.get(guiasContext + '/' + $params.guiaId + '/' + calificacionesContext);
                         }]
                 },
                 views: {
-                    'childrenView': {
+                    'mainView': {
+                        controller: 'calificacionesCtrl',
+                        controllerAs: 'ctrl',
                         templateUrl: basePath + 'calificaciones.html'
                     }
                 }
@@ -31,10 +38,46 @@
                 parent: 'calificaciones',
                 views: {
                     'listView': {
-                        templateUrl: basePath + 'calificaciones.list.html',
-                        controller: ['$scope', 'calificaciones', function ($scope, calificaciones) {
-                                $scope.calificacionesRecords = calificaciones.data;
-                            }]
+                        controller: 'calificacionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'calificaciones.list.html'
+                    }
+                }
+            }).state('calificacionDetail', {
+                url: '/{guiaId:int}/detail',
+                parent: 'calificaciones',
+                views: {
+                    'detailView': {
+                        controller: 'calificacionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'calificaciones.detail.html'
+                    }
+                }
+            }).state('calificacionesCreate', {
+                url: '/create',
+                parent: 'calificaciones',
+                views: {
+                    'nuevoView': {
+                        controller: 'calificacionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'calificaciones.create.html'
+
+                    }
+                }
+            }).state('calificacionesEdit', {
+                url: '/{guiaId:int}/edit',
+                parent: 'calificaciones',
+                views: {
+                    'nuevoView': {
+                        controller: 'calificacionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'calificaciones.create.html'
+
+                    },
+                    'detailView': {
+                        controller: 'calificacionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'calificaciones.detail.html'
                     }
                 }
             });

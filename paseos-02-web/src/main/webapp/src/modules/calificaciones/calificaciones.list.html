@@ -1,19 +1,28 @@
 <div class="container-fluid">   
+    <div class="panel panel-default">
+        <div class="panel-body">
     <div class="col-sm-12">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>{{currentGuia.nombre}} Calificaciones </th>                      
+                    <th> Id Calificación </th>
+                    <th> Fecha </th>
+                    <th> Puntuación </th>
+                    <th> Guia </th>
+                    <th> Paseo Ecologico </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="calificacion in calificacionesRecords ">
+                <tr ng-repeat="calificacion in records ">
+                    <td id="{{$index}}-idInscripcion"><a ui-sref="calificacionDetail({calificacionId: calificacion.id, caminanteId: calificacion.caminante.id})">{{calificacion.id}}</a></td>                                     
+                    <td id="{{$index}}-fechaDeInscripcion">{{calificacion.fecha}}</td>
                     <td id="{{$index}}-puntuacion">{{calificacion.puntuacion}}</td>
-                    <td id="{{$index}}-comentario">{{inscripcion.comentario}}</td>                                  
-                    <td id="{{$index}}-fecha">{{inscripcion.fecha}}</td>                                     
+                    <td id="{{$index}}-guia"><a ui-sref="guiaDetail({guiaId: calificacion.guia.id})">{{calificacion.guia.id}}</a></td>
+                    <td id="{{$index}}-paseoEcologico"><a ui-sref="paseoDetail({paseoId: calificacion.paseoEcologico.id})">{{calificacion.paseoEcologico.id}}</a></td>
                 </tr>
             </tbody>
         </table>
     </div>
-
+</div>
+        </div>
 </div>

@@ -24,6 +24,7 @@
 package co.edu.uniandes.csw.paseos.resources;
 
 import co.edu.uniandes.csw.paseos.dtos.CalificacionDetailDTO;
+import co.edu.uniandes.csw.paseos.dtos.GuiaDTO;
 import co.edu.uniandes.csw.paseos.ejbs.CalificacionLogic;
 import co.edu.uniandes.csw.paseos.ejbs.GuiaLogic;
 import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
@@ -77,14 +78,14 @@ public class CalificacionResource
      * @return Lista de calificaciones
      */
     @GET
-    public List<CalificacionDetailDTO> getCalificaciones(@PathParam("idCalificacion") Long idCalificacion ) throws BusinessLogicException
+    public List<CalificacionDetailDTO> getCalificaciones(@PathParam("idGuia") Long idGuia ) throws BusinessLogicException
     {
-        GuiaEntity guia = guiaLogic.getGuia(idCalificacion);
+        GuiaEntity guia = guiaLogic.getGuia(idGuia);
         if(guia==null)
         {
             throw new WebApplicationException("El guia no existe",404);
         }
-        return listEntity2DTO(calificacionLogic.getCalificaciones(idCalificacion)); 
+        return listEntity2DTO(calificacionLogic.getCalificaciones(idGuia)); 
     }
     
     /**
@@ -123,6 +124,7 @@ public class CalificacionResource
         {
             throw new WebApplicationException("El guía no existe", 404);
         }
+        dto.setGuia(new GuiaDTO(guiaLogic.getGuia(idGuia)));
         return new CalificacionDetailDTO(calificacionLogic.createCalificacion(dto.toEntity()));
     }
     
