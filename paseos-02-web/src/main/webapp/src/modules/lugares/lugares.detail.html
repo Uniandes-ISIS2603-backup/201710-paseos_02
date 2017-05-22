@@ -40,6 +40,8 @@ body {
                             <hr>
                             <dt>Direccion</dt>
                             <dd>{{currentLugar.direccion}}</dd>
+                            <hr>
+                            <a ui-sref="paseosList" type="button" class="btn btn-primary">Volver a lista de paseos</a></center>
                              </font>
                              
                         </dl>
@@ -49,6 +51,7 @@ body {
                             <dt> </dt>
                
                             <iframe src= '{{trust(currentLugar.linkGoogleMaps)}}' width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            
 
                         </dl>
                     </div>

@@ -28,7 +28,7 @@ body {
             }
         </script>
         <div id="nombreInput"></div>
-        <a onclick="recibir()" ui-sref="lugarDetail({lugarId:recibir()})" type="button" class="btn btn-primary"> Buscar </a>
+        <a onclick="recibir()" ui-sref="lugarDetail({lugarId:1001})" type="button" class="btn btn-primary"> Buscar </a>
      </div>
     <hr>
     <div>
@@ -43,8 +43,8 @@ body {
                 <center><a ui-sref="lugarDetail({lugarId: lugar.id})">
                         <img class="img-responsive" ng-src="{{lugar.imagen}}" height="220px" width="220px">
                         <div id="blanco">Nombre: {{lugar.nombre}}</div>
-                </a><button class="active" ><a ui-sref="lugaresActualizar({lugarId: lugar.id})">Actualizar</a></button>
-                     <button class="active"><a ui-sref="paseosList" ng-click="borrarlugar(lugar.id)">Borrar</a></button></center>
+                </a><a ui-sref="lugaresActualizar({lugarId: lugar.id})" type="button" class="btn btn-primary">Actualizar</a>
+                     <a ui-sref="paseosList" ng-click="borrarlugar(lugar.id)" type="button" class="btn btn-primary">Borrar</a></center>
             </div>
         </div>
     </div>
