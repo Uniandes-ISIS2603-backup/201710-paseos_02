@@ -93,7 +93,7 @@
                     'childView': {
                         templateUrl: basePath + 'caminantes.detail.html'
                     }
-                }
+                } 
             });
         }]);
 })(window.angular);

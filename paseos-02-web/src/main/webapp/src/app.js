@@ -6,7 +6,7 @@
         //'ui.select',
         
         // Internal modules dependencies
-
+        
         'caminanteModule',
         'guiaModule',
         'inscripcionModule',
