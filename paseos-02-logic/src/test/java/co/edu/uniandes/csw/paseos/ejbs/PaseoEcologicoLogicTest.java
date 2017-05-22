@@ -99,7 +99,6 @@ public class PaseoEcologicoLogicTest
     
     private List<OpinionParticipanteEntity> opinionData = new ArrayList<>();
     
-    private Long idGuia;
 
     /**
      * 

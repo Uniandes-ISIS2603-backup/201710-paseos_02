@@ -21,6 +21,11 @@
             }).state('opinionesList', {
                 url: '/list',
                 parent: 'opiniones',
+                resolve: {
+                    currentPaseo: ['$http', 'paseosContext', '$stateParams', function ($http, paseosContext, $stateParams) {
+                            return $http.get(paseosContext + '/' + $stateParams.paseoId);
+                        }]
+                },
                 views: {
                     'listView': {
                         templateUrl: basePath + 'opiniones.list.html',

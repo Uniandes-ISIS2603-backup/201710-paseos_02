@@ -220,8 +220,7 @@ public class PaseoEcologicoPersistenceTest
         paseoPersistence.delete(entity.getId());
         PaseoEcologicoEntity eliminado = em.find(PaseoEcologicoEntity.class, entity.getId());
         Assert.assertNull(eliminado);
-    }
-    
+    }    
     
     private void verificarConsistenciaAtributos(PaseoEcologicoEntity p1, PaseoEcologicoEntity p2)
     {

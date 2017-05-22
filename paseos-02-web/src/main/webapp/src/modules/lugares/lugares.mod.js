@@ -78,6 +78,9 @@
                         url: '/lugar',
                         parent: 'paseoDetail',
                         resolve: {
+                            currentPaseo: ['$http', 'paseosContext', '$stateParams', function ($http, paseosContext, $stateParams) {
+                                    return $http.get(paseosContext + '/' + $stateParams.paseoId);
+                                }],
                             currentLugar: ['$http', 'lugaresContext', 'currentPaseo', function ($http, lugaresContext, currentPaseo) {
                                     return $http.get(lugaresContext + '/' + currentPaseo.data.lugarDeDestino.id);
                                 }]
