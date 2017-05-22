@@ -47,8 +47,20 @@
                 views: {
                     'detailView': {
                         templateUrl: basePath + 'guias.detail.html',
-                        controller: ['$scope', 'currentGuia', function ($scope, currentGuia) {
+                        controller: ['$scope', 'currentGuia', '$http', 'guiasContext', '$state', function ($scope, currentGuia, $http, guiasContext, $state) {
                                 $scope.currentGuia = currentGuia.data;
+
+                                $scope.desactivarCuenta = function (recordR)
+                                {
+                                    console.log(123);
+                                    recordR.cuentaActiva = false;
+                                    return $http.put(guiasContext + "/" + recordR.id, recordR)
+                                            .then(function () {
+
+                                                $state.go('guiasList', null, {reload: true});
+                                            });
+                                };
+
                             }]
                     },
                     'listView': {
@@ -66,15 +78,15 @@
                             return $http.get(paseosContext + '/' + $stateParams.paseoId);
                         }],
                     currentGuia: ['$http', 'guiasContext', 'currentPaseo', function ($http, guiasContext, currentPaseo) {
-                        return $http.get(guiasContext + '/' + currentPaseo.data.guia.id);
-                    }]
+                            return $http.get(guiasContext + '/' + currentPaseo.data.guia.id);
+                        }]
                 },
                 views: {
                     'paseoGuiaView': {
                         templateUrl: basePath + 'guias.detail.html',
                         controller: ['$scope', 'currentGuia', function ($scope, currentGuia) {
-                            $scope.currentGuia = currentGuia.data;
-                        }]
+                                $scope.currentGuia = currentGuia.data;
+                            }]
                     }
                 }
             }).state('guiaCreate', {

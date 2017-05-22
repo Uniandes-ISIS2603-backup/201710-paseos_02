@@ -74,6 +74,7 @@ public class GuiaLogic {
             }
         }
         if (!existe) {
+            guia.setCuentaActiva(Boolean.TRUE);
             guiaPersisence.create(guia);
             return guia;
         } else {
