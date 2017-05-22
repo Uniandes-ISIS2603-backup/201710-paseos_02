@@ -62,6 +62,9 @@
                 url: '/guia',
                 parent: 'paseoDetail',
                 resolve: {
+                    currentPaseo: ['$http', 'paseosContext', '$stateParams', function ($http, paseosContext, $stateParams) {
+                            return $http.get(paseosContext + '/' + $stateParams.paseoId);
+                        }],
                     currentGuia: ['$http', 'guiasContext', 'currentPaseo', function ($http, guiasContext, currentPaseo) {
                         return $http.get(guiasContext + '/' + currentPaseo.data.guia.id);
                     }]

@@ -1,4 +1,5 @@
-<div class="col-md-8 well">
+<div class="container-fluid">
+<div class="col-md-12 well">
     <form novalidate name="form" id="inscripcion-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
         <fieldset>
             <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id"/>
@@ -12,10 +13,10 @@
             </div>
             
             <!-- Fecha -->
-            <div class="form-group col-md-12" ng-class="{'has-success': form.fecha.$valid && form.fecha.$dirty, 'has-error': form.observaciones.$invalid && (form.fecha.$dirty || form.$submitted)}" >
+            <div class="form-group col-md-12" ng-class="{'has-success': form.fecha.$valid && form.fecha.$dirty, 'has-error': form.fecha.$invalid && (form.fecha.$dirty || form.$submitted)}" >
                 <label for="fecha" class="col-md-4 control-label">Fecha</label>
                 <div class="col-md-8">
-                    <input id="fecha" name="fecha" class="form-control" type="date" ng-model="currentRecord.observaciones" ng-init="currentRecord.fecha" required />
+                    <input id="fecha" name="fecha" class="form-control" type="date" ng-model="currentRecord.fecha" ng-init="currentRecord.fecha" required />
                 </div>
             </div>
 
@@ -30,8 +31,9 @@
 
         </fieldset>
         <div class="form-group col-md-12">
-            <button type="button" ui-sref='inscripcionesList'>Cancel</button>
+            <button type="button" ui-sref='calificacionesList'>Cancel</button>
             <button type="submit" >Save</button>   
         </div>
     </form>
+</div>
 </div>

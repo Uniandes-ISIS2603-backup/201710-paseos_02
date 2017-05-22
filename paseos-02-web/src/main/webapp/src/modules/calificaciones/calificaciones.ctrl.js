@@ -22,22 +22,22 @@
  * THE SOFTWARE.
  */
 (function (ng) {
-    var mod = ng.module("inscripcionModule");
+    var mod = ng.module("calificacionModule");
     
 
-    mod.controller("inscripcionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'inscripciones', 'caminantesContext', 'inscripcionesContext', 'currentCaminante',
-        function ($scope, $state, $params, $http, inscripciones, caminantesContext, inscripcionesContext, currentCaminante) {
+    mod.controller("calificacionesCtrl", ['$scope', '$state', '$stateParams', '$http', 'calificaciones', 'guiasContext', 'calificacionesContext', 'currentGuia',
+        function ($scope, $state, $params, $http, calificaciones, guiasContext, calificacionesContext, currentGuia) {
 
             
-            $scope.records = inscripciones.data;
+            $scope.records = calificaciones.data;
                       
 
-            if ($params.inscripcionId !== null && $params.inscripcionId !== undefined) {
+            if ($params.calificacionId !== null && $params.calificacionId !== undefined) {
 
                 // toma el id del parámetro
-                id = $params.inscripcionId;
+                id = $params.calificacionId;
                 // obtiene el dato del recurso REST
-                $http.get(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext + '/' + $params.inscripcionId)
+                $http.get(guiasContext + '/' + $params.guiaId + '/' + calificacionesContext + '/' + $params.calificacionId)
                         .then(function (response) {
                             // $http.get es una promesa
                             // cuando llegue el dato, actualice currentRecord
@@ -54,8 +54,8 @@
                     observaciones: '' /*Tipo String*/,
                     fechaInscripcion: '' /*Tipo Integer*/,
                     realizoPago: false,
-                    caminante: {
-                        id: currentCaminante.data.id
+                    guia: {
+                        id: currentGuia.data.id
                     }
                 };
 
@@ -69,36 +69,35 @@
                 if (id == null) {
 
                     // ejecuta POST en el recurso REST
-                    return $http.post(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext, currentRecord)
+                    return $http.post(guiasContext + '/' + $params.guiaId + '/' + calificacionesContext, currentRecord)
                             .then(function () {
                                 // $http.post es una promesa
                                 // cuando termine bien, cambie de estado
-                                $state.go('caminanteDetail',{caminanteId: currentRecord.caminante.id},{reload: true});
+                                $state.go('guiaDetail',{guiaId: currentRecord.guia.id},{reload: true});
                             }, responseError);
 
                     // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
 
                     // ejecuta PUT en el recurso REST
-                    return $http.put(caminantesContext + '/' + $params.caminanteId + '/' + inscripcionesContext + "/" + currentRecord.id, currentRecord)
+                    return $http.put(guiasContext + '/' + $params.guiaId + '/' + calificacionesContext + "/" + currentRecord.id, currentRecord)
                             .then(function () {
                                 // $http.put es una promesa
                                 // cuando termine bien, cambie de estado
-                                $state.go('inscripcionDetail', {caminanteId: currentRecord.caminante.id, inscripcionId: currentRecord.id}, {reload: true});
+                                $state.go('calificacionDetail', {guiaId: currentRecord.guia.id, calificacionId: currentRecord.id}, {reload: true});
                             }, responseError);
                 }
                 ;
             };
-       
            
-           this.deleteRecord = function(idCamin,idDelete)
+           this.deleteRecord = function(idGuia,idDelete)
            {
-                return $http.delete(caminantesContext + '/' + idCamin + '/' + inscripcionesContext + '/' + idDelete)
+                return $http.delete(guiasContext + '/' + idGuia + '/' + calificacionesContext + '/' + idDelete)
                             .then(function () {
                                 // $http.post es una promesa
                                 // cuando termine bien, cambie de estado
                                 //$scope.records = $http.get(caminantesContext);
-                                $state.go('caminanteDetail',{caminanteId: currentRecord.caminante.id},{reload: true});
+                                $state.go('guiaDetail',{guiaId: currentRecord.guia.id},{reload: true});
                             }, responseError);
            };
 
