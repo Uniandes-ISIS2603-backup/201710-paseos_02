@@ -107,9 +107,6 @@
                         controller: 'guiasCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'guias.create.html'
-                    },
-                    'childView': {
-                        templateUrl: basePath + 'guias.detail.html'
                     }
                 }
             });
