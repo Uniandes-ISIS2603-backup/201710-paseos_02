@@ -102,7 +102,6 @@ public class PaseoEcologicoPersistenceTest
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
-     *
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();

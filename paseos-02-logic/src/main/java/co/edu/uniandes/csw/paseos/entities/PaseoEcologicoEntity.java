@@ -67,7 +67,7 @@ public class PaseoEcologicoEntity implements Serializable
 
     /**
      * Atributo que representa el numero minimo de participantes en un paseo
-     */
+     */   
     private Integer nMinimCaminantes;
 
     /**
