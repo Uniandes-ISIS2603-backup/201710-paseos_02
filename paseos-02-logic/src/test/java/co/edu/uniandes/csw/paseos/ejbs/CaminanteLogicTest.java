@@ -101,8 +101,6 @@ public class CaminanteLogicTest
 
     /**
      * Configuración inicial de la prueba.
-     *
-     * 
      */
     @Before
     public void setUp() {

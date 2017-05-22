@@ -34,6 +34,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -52,12 +53,14 @@ public class PaseoInstanciaEntity implements Serializable
     /**
      * Atributo que representa el paseo ecológico al que pertenece la instancia
      */
+    @PodamExclude
     @ManyToOne
     private PaseoEcologicoEntity paseoEcologico;
 
      /**
      * Atributo que representa la lista de inscripciones a un paseo
      */
+    @PodamExclude
     @OneToMany(mappedBy = "instanciaPaseo")
     private List<InscripcionEntity> inscripciones;
 
