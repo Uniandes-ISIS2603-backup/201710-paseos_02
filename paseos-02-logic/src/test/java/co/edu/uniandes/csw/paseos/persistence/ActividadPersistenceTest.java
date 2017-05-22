@@ -60,6 +60,7 @@ public class ActividadPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ActividadEntity.class.getPackage())
                 .addPackage(ActividadPersistence.class.getPackage())
+                .addPackage(PaseoEcologicoEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }    
@@ -96,8 +97,7 @@ public class ActividadPersistenceTest {
             insertData();
             utx.commit();
             PodamFactory factory = new PodamFactoryImpl();
-            paseoActual = factory.manufacturePojo(PaseoEcologicoEntity.class);
-            paseoActual.setId((long)10);
+          
         } catch (Exception e) {
             e.printStackTrace();
             try {
@@ -123,9 +123,8 @@ public class ActividadPersistenceTest {
     @Test
     public void getActividadesTest() {
         List<ActividadEntity> list = actividadPersistence.findAll(paseoActual.getId());
-        Assert.assertTrue(list.isEmpty());
         
-        Assert.assertEquals(data.size(), 3);
+        Assert.assertEquals(data.size(), list.size());
         for (ActividadEntity ent : list) {
             boolean found = false;
             for (ActividadEntity entity : data) {
@@ -172,8 +171,12 @@ public class ActividadPersistenceTest {
 
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
+          paseoActual = factory.manufacturePojo(PaseoEcologicoEntity.class);
+            paseoActual.setId((long)10);
+            em.persist(paseoActual);
         for (int i = 0; i < 3; i++) {
             ActividadEntity entity = factory.manufacturePojo(ActividadEntity.class);
+            entity.setPaseoEcologico( paseoActual);
             em.persist(entity);
             data.add(entity);
         }
