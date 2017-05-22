@@ -51,9 +51,9 @@
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    observaciones: '' /*Tipo String*/,
-                    fechaInscripcion: '' /*Tipo Integer*/,
-                    realizoPago: false,
+                    puntuacion: '' /*Tipo String*/,
+                    fecha: '' /*Tipo Integer*/,
+                    comentarios: '',
                     guia: {
                         id: currentGuia.data.id
                     }

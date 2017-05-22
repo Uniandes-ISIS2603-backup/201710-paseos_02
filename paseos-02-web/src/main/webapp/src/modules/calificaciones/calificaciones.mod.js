@@ -47,6 +47,12 @@
                 url: '/{guiaId:int}/detail',
                 parent: 'calificaciones',
                 views: {
+                    'listView': {
+                        controller: 'calificacionesCtrl',
+                        controllerAs: 'ctrl',
+                        templateUrl: basePath + 'calificaciones.list.html'
+
+                    },
                     'detailView': {
                         controller: 'calificacionesCtrl',
                         controllerAs: 'ctrl',

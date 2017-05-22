@@ -26,6 +26,7 @@ package co.edu.uniandes.csw.paseos.ejbs;
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
+import co.edu.uniandes.csw.paseos.entities.UsuarioEntity;
 import co.edu.uniandes.csw.paseos.persistence.CalificacionPersistence;
 import co.edu.uniandes.csw.paseos.persistence.InscripcionPersistence;
 import java.util.ArrayList;
@@ -71,6 +72,7 @@ public class InscripcionLogicTest {
                 .addPackage(InscripcionEntity.class.getPackage())
                 .addPackage(InscripcionLogic.class.getPackage())              
                 .addPackage(InscripcionPersistence.class.getPackage())
+                .addPackage(UsuarioEntity.class.getPackage())
                 .addPackage(CaminanteEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
@@ -104,16 +106,21 @@ public class InscripcionLogicTest {
     private void clearData() {
         em.createQuery("delete from InscripcionEntity").executeUpdate();             
         em.createQuery("delete from CaminanteEntity").executeUpdate();
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
     }
     
     private void insertData() {
-
+        PodamFactory factory = new PodamFactoryImpl();
+         CaminanteEntity nuevo = factory.manufacturePojo(CaminanteEntity.class);
+         caminante = nuevo;
+         em.persist(nuevo);
         for (int i = 0; i < 3; i++) {
             InscripcionEntity entity = factory.manufacturePojo(InscripcionEntity.class);
+            entity.setCaminante(caminante);
             em.persist(entity);
             data.add(entity);
         }
-        caminante = factory.manufacturePojo(CaminanteEntity.class);
+        
         
     }
 

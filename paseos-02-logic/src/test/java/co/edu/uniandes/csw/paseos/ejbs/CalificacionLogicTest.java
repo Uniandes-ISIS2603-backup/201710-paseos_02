@@ -26,6 +26,7 @@ package co.edu.uniandes.csw.paseos.ejbs;
 import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
+import co.edu.uniandes.csw.paseos.entities.UsuarioEntity;
 import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.paseos.persistence.CalificacionPersistence;
 import java.util.ArrayList;
@@ -79,6 +80,7 @@ public class CalificacionLogicTest {
                 .addPackage(CalificacionLogic.class.getPackage())              
                 .addPackage(CalificacionPersistence.class.getPackage())
                 .addPackage(GuiaEntity.class.getPackage())
+                .addPackage(UsuarioEntity.class.getPackage())
                 .addPackage(CaminanteEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
@@ -113,17 +115,21 @@ public class CalificacionLogicTest {
         em.createQuery("delete from CalificacionEntity").executeUpdate();             
         em.createQuery("delete from CaminanteEntity").executeUpdate();
         em.createQuery("delete from GuiaEntity").executeUpdate();
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
     }
     
     private void insertData() {
-
+            PodamFactory factory = new PodamFactoryImpl();
+            GuiaEntity nuevo = factory.manufacturePojo(GuiaEntity.class);
+            guia = nuevo;
+            em.persist(nuevo);
         for (int i = 0; i < 3; i++) {
             CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class);
+            entity.setGuia(guia);
             em.persist(entity);
             data.add(entity);
         }
-        guia = factory.manufacturePojo(GuiaEntity.class);
-        //em.persist(guia);
+        
     }
 
  @Test

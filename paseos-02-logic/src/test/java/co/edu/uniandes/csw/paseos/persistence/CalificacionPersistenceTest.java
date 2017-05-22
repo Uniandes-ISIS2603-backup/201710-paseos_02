@@ -26,6 +26,7 @@ package co.edu.uniandes.csw.paseos.persistence;
 import co.edu.uniandes.csw.paseos.entities.CalificacionEntity;
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
+import co.edu.uniandes.csw.paseos.entities.UsuarioEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -60,6 +61,7 @@ public class CalificacionPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(GuiaEntity.class.getPackage())
                 .addPackage(GuiaEntity.class.getPackage())
+                .addPackage(UsuarioEntity.class.getPackage())
                 .addPackage(CalificacionEntity.class.getPackage())
                 .addPackage(CalificacionPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
@@ -85,10 +87,7 @@ public class CalificacionPersistenceTest {
     @Before
     public void setUp() {
         try {
-            PodamFactory factory = new PodamFactoryImpl();
-            GuiaEntity nuevo = factory.manufacturePojo(GuiaEntity.class);
-            guiaActual = nuevo;
-            //em.persist(nuevo);
+            
             utx.begin();
             em.joinTransaction();
             clearData(); 
@@ -112,6 +111,7 @@ public class CalificacionPersistenceTest {
     private void clearData() {
         em.createQuery("delete from CalificacionEntity").executeUpdate();
         em.createQuery("delete from GuiaEntity").executeUpdate();
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
     }
 
     /**
@@ -121,10 +121,12 @@ public class CalificacionPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-        
+        GuiaEntity nuevo = factory.manufacturePojo(GuiaEntity.class);
+            guiaActual = nuevo;
+            em.persist(nuevo);
         for (int i = 0; i < 3; i++) {
             CalificacionEntity entity = factory.manufacturePojo(CalificacionEntity.class); 
-            guiaActual = entity.getGuia();
+            entity.setGuia(guiaActual);
             em.persist(entity);
             
             data.add(entity);
@@ -159,7 +161,7 @@ public class CalificacionPersistenceTest {
     @Test
     public void getCalificacionesGuiaTest( )
     {
-        List<CalificacionEntity> encontrados = calificacionPersistence.findAll();
+        List<CalificacionEntity> encontrados = calificacionPersistence.findAll(guiaActual.getId());
         Assert.assertEquals(data.size(), encontrados.size());   
     }
     
