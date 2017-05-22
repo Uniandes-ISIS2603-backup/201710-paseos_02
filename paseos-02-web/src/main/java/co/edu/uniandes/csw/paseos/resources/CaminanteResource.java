@@ -124,7 +124,7 @@ public class CaminanteResource
     
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteCaminante(@PathParam("id") Long id)
+    public void deleteCaminante(@PathParam("id") Long id) throws BusinessLogicException
     {
         CaminanteEntity entity = caminanteLogic.getCaminante(id);
         if (entity == null) {

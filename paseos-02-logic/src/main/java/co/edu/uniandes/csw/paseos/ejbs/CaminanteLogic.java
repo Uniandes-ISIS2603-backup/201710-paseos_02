@@ -93,7 +93,11 @@ public class CaminanteLogic {
     {
         verificarDatos(caminante);        
         CaminanteEntity original = caminantePersistence.find(caminante.getId());
-        boolean mismoIdentViejo = original.getIdentificacion().equals(caminante.getIdentificacion());
+        
+        //Existen dos opciones: El caminante conserva la identificacion que ya estaba persistida o
+        // el caminante cambia su identificacion.
+        //Si cambio su identificacion, hay que verificar que la nueva no sea igual a la de otro caminante.
+        boolean mismoIdentViejo = original.getIdentificacion().equals(caminante.getIdentificacion());        
         if(!existeCaminanteConMismaIdentificacion(caminante.getIdentificacion()) || mismoIdentViejo)
         {
             return caminantePersistence.update(caminante);
@@ -120,8 +124,11 @@ public class CaminanteLogic {
      * Elimina una instancia de la clase CaminanteEnity dada por su id.
      * @param id id de la instancia que se quiere eliminar.
      */
-    public void deleteCaminante(Long id) {
-        caminantePersistence.delete(id);
+    public void deleteCaminante(Long id) throws BusinessLogicException 
+    {
+        CaminanteEntity entity = caminantePersistence.find(id);
+        verificarBorrado(entity);
+        caminantePersistence.delete(id);        
     }
     
     public boolean existeCaminanteConMismaIdentificacion(Integer identificacion)
@@ -129,7 +136,7 @@ public class CaminanteLogic {
         return caminantePersistence.encontrarPorIdentificacion(identificacion) != null;
     }
     
-    private void verificarDatos(CaminanteEntity entity) throws BusinessLogicException 
+   private void verificarDatos(CaminanteEntity entity) throws BusinessLogicException 
    {
        boolean nombre = entity.getNombre() == null;
        boolean identificacion = entity.getIdentificacion() == null;
@@ -139,6 +146,19 @@ public class CaminanteLogic {
        {
            throw new BusinessLogicException("Para registrar un caminante, minimo debe tener nombre, identificacion, tipoIdentificacion y edad. \n"
                    + "Verifique que dichos campos esten llenos y vuelva a intentar.");
+       }
+   }
+   
+   private void verificarBorrado(CaminanteEntity entity) throws BusinessLogicException
+   {
+       boolean noTieneOpiniones = entity.getOpiniones().isEmpty();
+       boolean noTieneInscripciones = entity.getPaseosInscritos().isEmpty();
+       boolean noTieneCalificacionesGuia = entity.getCalificacionesGuia().isEmpty();
+      
+       if (!noTieneOpiniones || !noTieneCalificacionesGuia || !noTieneInscripciones) 
+       {
+           throw new BusinessLogicException("No puede eliminar el caminante puesto que tiene inscripciones asociadas, \n"
+                   + "opiniones registradas o calificaciones hechas.");
        }
    }
 

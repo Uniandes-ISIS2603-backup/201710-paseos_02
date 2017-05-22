@@ -69,6 +69,7 @@ public class OpinionParticipanteEntity implements Serializable
     /**
      * Paseo ecologico sobre el que se realiza la opinion.
      */
+    @PodamExclude
     @ManyToOne
     private PaseoEcologicoEntity paseoEcologico;
 
@@ -181,5 +182,22 @@ public class OpinionParticipanteEntity implements Serializable
         this.caminante = caminante;
     }
     
-    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this.getId() != null) {
+            return this.getId().equals(((OpinionParticipanteEntity) obj).getId());
+        }
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        if (this.getId() != null) {
+            return this.getId().hashCode();
+        }
+        return super.hashCode();
+    }
+
 }

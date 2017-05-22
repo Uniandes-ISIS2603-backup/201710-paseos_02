@@ -201,7 +201,7 @@ public class CalificacionEntity implements Serializable
     @Override
     public boolean equals(Object obj) {
         if (this.getId() != null) {
-            return this.getId().equals(((InscripcionEntity) obj).getId());
+            return this.getId().equals(((CalificacionEntity) obj).getId());
         }
         return super.equals(obj);
     }
