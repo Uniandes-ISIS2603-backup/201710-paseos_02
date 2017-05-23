@@ -23,28 +23,28 @@
  */
 (function (ng) {
     var mod = ng.module("paseosModule");
-    
+
     mod.controller("paseosCtrl", ['$scope', '$state', '$stateParams', '$http', 'paseosContext', 'guiasContext', 'lugaresContext', '$filter',
         function ($scope, $state, $stateParams, $http, paseosContext, guiasContext, lugaresContext, $filter) {
 
             // inicialmente el listado de paseos está vacio
             $scope.records = {};
-            
-            $scope.buscar = function()
+
+            $scope.buscar = function ()
             {
                 var nombre = document.getElementById('buscarIn').value;
                 console.log(nombre);
-                $http.get('api/paseos/tematica?' + nombre)
-                        .then(function(response){
+                $http.get('api/paseos/tematica', {params: {tematica: nombre}})
+                        .then(function (response) {
                             $scope.records = response.data;
-                })
+                        })
             }
-            
+
             // carga los paseos
             $http.get(paseosContext).then(function (response) {
                 $scope.records = response.data;
             }, responseError);
-            
+
             $scope.guiaPaseoDetail = {};
 
             // el controlador recibió un paseoId ??
@@ -58,11 +58,11 @@
                         .then(function (response) {
                             // $http.get es una promesa
                             // cuando llegue el dato, actualice currentRecord
-                            $scope.currentRecord = response.data;     
-                            $scope.guiaPaseoDetail = response.data.guia;                           
+                            $scope.currentRecord = response.data;
+                            $scope.guiaPaseoDetail = response.data.guia;
                         }, responseError);
-                        
-                if(document.getElementById('transporte') !== null)
+
+                if (document.getElementById('transporte') !== null)
                 {
                     document.getElementById('transporte').checked = $scope.currentRecord.hayTransporte;
                 }
@@ -75,59 +75,59 @@
                     tematica: '' /*Tipo String*/,
                     nMinimCaminantes: '' /*Tipo Integer*/,
                     nMaxCaminantes: '' /*Tipo Integer*/,
-                    hayTransporte:false /*Tipo Boolean*/,
+                    hayTransporte: false /*Tipo Boolean*/,
                     costo: '' /*Tipo Double*/,
-                    descripcion: '' /*Tipo String*/,                   
-                    condicionesFisicas:[0,0,0,0,0],            
-                    guia:{
-                        id:''
+                    descripcion: '' /*Tipo String*/,
+                    condicionesFisicas: [0, 0, 0, 0, 0],
+                    guia: {
+                        id: ''
                     } /*Objeto que representa instancia de Guia*/,
-                    lugarDeDestino:{}/*Objeto que representa instancia de Lugar*/,
-                    lugarDeEncuentro:{} /*Objeto que representa instancia de Lugar*/
+                    lugarDeDestino: {}/*Objeto que representa instancia de Lugar*/,
+                    lugarDeEncuentro: {} /*Objeto que representa instancia de Lugar*/
                 };
 
                 $scope.alerts = [];
- 
+
             }
-            
-             $http.get(guiasContext).then(function (response) {
+
+            $http.get(guiasContext).then(function (response) {
                 $scope.guias = response.data;
             });
-            
-             $http.get(lugaresContext).then(function (response) {
+
+            $http.get(lugaresContext).then(function (response) {
                 $scope.lugares = response.data;
             });
-            
+
             this.saveRecord = function (id) {
-                currentRecord = $scope.currentRecord;                
+                currentRecord = $scope.currentRecord;
 
                 // si el id es null, es un registro nuevo, entonces lo crea
-               
+
                 if (id == null) {
-                                                 
+
                     //No se envia todo el detalle del guia, puesto que con ello también se envia
                     //informacion asociada a la herencia (de usuario) y esta no se mapea correctamente.
                     //Por ello, para indicar cual es el guia del paseo solo se manda su id.  
-                    currentRecord.guia.id = $scope.guiaPaseoDetail.id;  
-                    
-                    if(document.getElementById('encuentro').value === "")
+                    currentRecord.guia.id = $scope.guiaPaseoDetail.id;
+
+                    if (document.getElementById('encuentro').value === "")
                     {
                         currentRecord.lugarDeEncuentro = null;
                     }
-                    
-                    if(document.getElementById('destino').value === "")
+
+                    if (document.getElementById('destino').value === "")
                     {
                         currentRecord.lugarDeDestino = null;
                     }
-                    
-                    if(document.getElementById('destino').value === "")
+
+                    if (document.getElementById('destino').value === "")
                     {
                         $scope.guiaPaseoDetail = null;
                     }
-                    
-                    
-                    
-                    
+
+
+
+
                     // ejecuta POST en el recurso REST  
                     return $http.post(paseosContext, currentRecord)
                             .then(function () {
@@ -139,7 +139,7 @@
 
                     // si el id no es null, es un registro existente entonces lo actualiza
                 } else {
-                                           
+
                     // ejecuta PUT en el recurso REST    
                     return $http.put(paseosContext + "/" + currentRecord.id, currentRecord)
                             .then(function () {
@@ -149,18 +149,18 @@
                             }, responseError);
                 }
                 ;
-            };            
-           
-           this.deleteRecord = function(recordR)
-           {
+            };
+
+            this.deleteRecord = function (recordR)
+            {
                 return $http.delete(paseosContext + "/" + recordR.id)
-                            .then(function () {
-                                // $http.post es una promesa
-                                // cuando termine bien, cambie de estado
-                                //$scope.records = $http.get(paseosContext);
-                                $state.go('paseosList', null, {reload: true});
-                            }, responseError);
-           };
+                        .then(function () {
+                            // $http.post es una promesa
+                            // cuando termine bien, cambie de estado
+                            //$scope.records = $http.get(paseosContext);
+                            $state.go('paseosList', null, {reload: true});
+                        }, responseError);
+            };
 
             // -----------------------------------------------------------------
             // Funciones para manejar los mensajes en la aplicación
@@ -195,10 +195,10 @@
                 self.showError(response.data);
             }
         }]
-            
-            
-            
-            
+
+
+
+
             );
 
 })(window.angular);
