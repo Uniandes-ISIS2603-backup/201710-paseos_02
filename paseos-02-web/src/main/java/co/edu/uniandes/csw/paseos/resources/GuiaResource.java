@@ -137,7 +137,7 @@ public class GuiaResource
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteGuia(@PathParam("id") Long id)
+    public void deleteGuia(@PathParam("id") Long id) throws BusinessLogicException
     {
         if (guiaLogic.getGuia(id) == null)
         {
