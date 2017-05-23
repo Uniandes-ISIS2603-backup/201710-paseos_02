@@ -97,6 +97,7 @@ public class OpinionesParticipanteLogicTest {
     public void setUp() {
         try {
             utx.begin();
+            em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
@@ -131,28 +132,30 @@ public class OpinionesParticipanteLogicTest {
         em.persist(nuevo);
         System.out.println("caminante:" + caminante.getId());
         System.out.println(em.find(CaminanteEntity.class, nuevo.getId()));
-        
+
         PaseoEcologicoEntity nuevoPaseo = factory.manufacturePojo(PaseoEcologicoEntity.class);
         paseo = nuevoPaseo;
         em.persist(nuevoPaseo);
         System.out.println("paseo:" + paseo.getId());
         System.out.println(em.find(PaseoEcologicoEntity.class, nuevoPaseo.getId()));
-        
+
         PaseoInstanciaEntity instanciaTemp = factory.manufacturePojo(PaseoInstanciaEntity.class);
+        instanciaTemp.setPaseoEcologico(paseo);
         instancia = instanciaTemp;
-        instancia.setPaseoEcologico(paseo);
         em.persist(instanciaTemp);
-        System.out.println("instancia:" +instancia.getId() + ", PaseoId: " + instancia.getPaseoEcologico().getId());
+        System.out.println("instancia:" + instancia.getId() + ", PaseoId: " + instancia.getPaseoEcologico().getId());
         System.out.println(em.find(PaseoInstanciaEntity.class, instanciaTemp.getId()));
-        
+
         InscripcionEntity nuevaInscripcion = factory.manufacturePojo(InscripcionEntity.class);
+        System.out.println("mira esteee" +nuevaInscripcion.getId());
+        nuevaInscripcion.setCaminante(caminante);
+        nuevaInscripcion.setId(Long.MAX_VALUE);
+        nuevaInscripcion.setInstanciaPaseo(instancia);
         inscripcion = nuevaInscripcion;
-        inscripcion.setCaminante(caminante);
-        inscripcion.setInstanciaPaseo(instancia);
         em.persist(nuevaInscripcion);
         System.out.println(inscripcion.getId() + "," + nuevaInscripcion.getId());
-        System.out.println("inscripcion:" +inscripcion.getId() + ", CaminanteId: " + inscripcion.getCaminante().getId() + ", instanciaPaseo"+ inscripcion.getInstanciaPaseo().getId());
-        System.out.println(em.find(InscripcionEntity.class, nuevaInscripcion.getId()));
+        System.out.println("inscripcion:" + inscripcion.getId() + ", CaminanteId: " + inscripcion.getCaminante().getId() + ", instanciaPaseo" + inscripcion.getInstanciaPaseo().getId());
+        System.out.println(em.find(InscripcionEntity.class, inscripcion.getId()).getCaminante().getNombre());
 
         for (int i = 0; i < 3; i++) {
             OpinionParticipanteEntity entity = factory.manufacturePojo(OpinionParticipanteEntity.class);
@@ -166,11 +169,10 @@ public class OpinionesParticipanteLogicTest {
 
     @Test
     public void createOpinionesParticipantesTest() {
-        OpinionParticipanteEntity newEntity= factory.manufacturePojo(OpinionParticipanteEntity.class);
+        OpinionParticipanteEntity newEntity = factory.manufacturePojo(OpinionParticipanteEntity.class);
         OpinionParticipanteEntity result = null;
         newEntity.setCaminante(caminante);
         newEntity.setPaseoEcologico(paseo);
-        
 
         try {
             result = opiLogic.createOpinionParticipante(newEntity);
@@ -182,7 +184,6 @@ public class OpinionesParticipanteLogicTest {
             Assert.assertEquals(newEntity.getComentario(), result.getComentario());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            Assert.fail();
         }
     }
 
@@ -215,15 +216,15 @@ public class OpinionesParticipanteLogicTest {
         Assert.assertEquals(entity.getComentario(), resultEntity.getComentario());
         Assert.assertEquals(entity.getImagen(), resultEntity.getImagen());
     }
-    
-     @Test
+
+    @Test
     public void deleteOpinionTest() {
         OpinionParticipanteEntity entity = data.get(1);
         opiLogic.deleteOpinionParticipante(entity.getId());
         InscripcionEntity deleted = em.find(InscripcionEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
+
     @Test
     public void updateInscripcionTest() {
         OpinionParticipanteEntity entity = data.get(0);
@@ -232,18 +233,16 @@ public class OpinionesParticipanteLogicTest {
         pojoEntity.setId(entity.getId());
         pojoEntity.setCaminante(caminante);
         pojoEntity.setPaseoEcologico(paseo);
-        
-                
-        try{
-        opiLogic.updateOpinionParticipante(pojoEntity);
 
-        OpinionParticipanteEntity resp = em.find(OpinionParticipanteEntity.class, entity.getId());
+        try {
+            opiLogic.updateOpinionParticipante(pojoEntity);
 
-        Assert.assertEquals(pojoEntity.getComentario(), resp.getComentario());
-        Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        }
-        catch(Exception e){
-        Assert.fail();
+            OpinionParticipanteEntity resp = em.find(OpinionParticipanteEntity.class, entity.getId());
+
+            Assert.assertEquals(pojoEntity.getComentario(), resp.getComentario());
+            Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        } catch (Exception e) {
+            Assert.fail();
         }
     }
 }

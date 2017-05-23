@@ -79,9 +79,9 @@ public class GuiaLogicTest
   
     private List<GuiaEntity> data = new ArrayList<>();
 
-    private  List<PaseoEcologicoEntity> paseosEcologicos;    
+    private  List<PaseoEcologicoEntity> paseosEcologicos = new ArrayList<PaseoEcologicoEntity>();    
     
-    private List<CalificacionEntity> calificaciones;
+    private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
 
     /**
      * 
@@ -104,9 +104,7 @@ public class GuiaLogicTest
         try {
             utx.begin();
             clearData();
-            System.out.println("holaaa");
             insertData();
-            System.out.println("chaooo");
             utx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,7 +140,7 @@ public class GuiaLogicTest
             GuiaEntity entity = factory.manufacturePojo(GuiaEntity.class);
             entity.setCuentaActiva(Boolean.TRUE);           
             em.persist(entity);
-            System.out.println(em.find(GuiaEntity.class, entity.getId()));
+            System.out.println(em.find(GuiaEntity.class, entity.getId()).getId());
             entity.setPaseosEcologicos(new ArrayList<>());
             entity.setCalificaciones(new ArrayList<>());
             data.add(entity);
@@ -150,7 +148,8 @@ public class GuiaLogicTest
         
         for(int i = 0; i < 4; i++)
         {
-            PaseoEcologicoEntity entity = factory.manufacturePojo(PaseoEcologicoEntity.class);          
+            PaseoEcologicoEntity entity = factory.manufacturePojo(PaseoEcologicoEntity.class);
+            System.out.println(entity);
             entity.setGuia(data.get(i%3));            
             em.persist(entity);
             data.get(i%3).getPaseosEcologicos().add(entity);
@@ -233,6 +232,7 @@ public class GuiaLogicTest
     public void getGuiaTest( )
     {
         List<GuiaEntity> encontrados = guiaLogic.getGuias();
+        System.out.println(encontrados.size());
         Assert.assertEquals(data.size(), encontrados.size());
         boolean found;
         for(GuiaEntity encontrado : encontrados)
