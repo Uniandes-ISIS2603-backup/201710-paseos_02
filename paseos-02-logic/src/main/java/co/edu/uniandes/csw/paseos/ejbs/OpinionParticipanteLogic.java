@@ -60,27 +60,9 @@ public class OpinionParticipanteLogic {
 //    Todo revizar
     public OpinionParticipanteEntity createOpinionParticipante(OpinionParticipanteEntity entity) throws Exception {
 
-        Long idCam = entity.getCaminante().getId();
-        long idPaseo = entity.getPaseoEcologico().getId();
-        if ( camLog.getCaminante(idCam)!= null)
-        {
-           List<InscripcionEntity> list = inscrp.getInscripciones(idCam);
-            for (InscripcionEntity inscripcion: list)
-            {
-                if(inscripcion.getCaminante().getId().equals(idCam) && inscripcion.getInstanciaPaseo().getPaseoEcologico().getId().equals(idPaseo))
-                {
+      
                     persistence.create(entity);
-                }
-                else
-                {
-                    throw new Exception("El caminante no se encuentra registrado al paseo correspondiente, no se puede crear la opinion");
-                }
-            }
-        }
-        else
-        {
-            throw new Exception("El caminante no existe, no se puede crear la opinion");
-        }
+         
         return entity;
     }
 
