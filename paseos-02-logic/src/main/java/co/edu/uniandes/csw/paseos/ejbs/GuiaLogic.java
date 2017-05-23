@@ -24,6 +24,7 @@
 package co.edu.uniandes.csw.paseos.ejbs;
 
 import co.edu.uniandes.csw.paseos.entities.GuiaEntity;
+import co.edu.uniandes.csw.paseos.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.paseos.persistence.GuiaPersistence;
 
 import javax.ejb.Stateless;
@@ -64,21 +65,16 @@ public class GuiaLogic {
      * @param guia instancia de la calse guiaEntity que se desea crear
      * @return La instancia creada.
      */
-    public GuiaEntity createGuia(GuiaEntity guia) throws Exception {
-        List<GuiaEntity> guias = getGuias();
-        boolean existe = false;
-        for (GuiaEntity guiaAct : guias) {
-            if (guiaAct.getIdentificacion().equals(guia.getIdentificacion())) {
-                existe = true;
-                break;
-            }
-        }
-        if (!existe) {
+    public GuiaEntity createGuia(GuiaEntity guia) throws BusinessLogicException {
+         verificarDatos(guia);
+        
+        if (!verificarMismaIdentificacion(guia)) 
+        {
             guia.setCuentaActiva(Boolean.TRUE);
             guiaPersisence.create(guia);
             return guia;
         } else {
-            throw new Exception("El guía ya existe");
+            throw new BusinessLogicException("El guía ya existe");
         }
     }
 
@@ -88,8 +84,20 @@ public class GuiaLogic {
      * @param guia instancia de la clase GuiaEntity que se desea actualizar.
      * @return Instancia de la clase GuiaEntity con la información actualizada.
      */
-    public GuiaEntity updateGuia(GuiaEntity guia) {
-        return guiaPersisence.update(guia);
+    public GuiaEntity updateGuia(GuiaEntity guia) throws BusinessLogicException {
+        
+        verificarDatos(guia);        
+       GuiaEntity original = guiaPersisence.find(guia.getId());
+       boolean mismoIdentViejo = original.getIdentificacion().equals(guia.getIdentificacion());        
+        if(!verificarMismaIdentificacion(guia) || mismoIdentViejo)
+        {
+        
+            return guiaPersisence.update(guia);
+        }
+        else
+        {
+            throw new BusinessLogicException("Ya existe otro usuario con la misma identificacion");
+        } 
     }
 
     /**
@@ -97,8 +105,49 @@ public class GuiaLogic {
      *
      * @param id id de la instancia que se quiere eliminar.
      */
-    public void deleteGuia(Long id)
+    public void deleteGuia(Long id) throws BusinessLogicException
     {
+        GuiaEntity entity = guiaPersisence.find(id);
+        verificarBorrado(entity);
         guiaPersisence.delete(id);
+    }
+    
+     
+    private void verificarDatos(GuiaEntity entity) throws BusinessLogicException
+   {
+       boolean nombre = entity.getNombre() == null;
+       boolean identificacion = entity.getIdentificacion() == null;
+       boolean tipoIden = entity.getTipoIdentificacion() == null;
+       boolean edad = entity.getEdad() == null;
+           if (nombre || identificacion || tipoIden || edad )
+       {
+           throw new BusinessLogicException("Para registrar un guia, minimo debe tener nombre, identificacion, tipoIdentificacion y edad. \n"
+                   + "Verifique que dichos campos esten llenos y vuelva a intentar.");
+       }
+   }
+    
+    private void verificarBorrado(GuiaEntity entity) throws BusinessLogicException
+   {
+       boolean noTienePaseos = entity.getPaseosEcologicos().isEmpty();
+       boolean noTieneCalificaciones = entity.getCalificaciones().isEmpty();
+      
+       if (!noTienePaseos || !noTieneCalificaciones) 
+       {
+           throw new BusinessLogicException("No puede eliminar el guia puesto que tiene paseos asociadas, \n"
+                   + "calificaciones registradas.");
+       }
+   }
+    
+    private boolean verificarMismaIdentificacion(GuiaEntity guia)
+    {
+        List<GuiaEntity> guias = getGuias();
+        boolean existe = false;
+        for (GuiaEntity guiaAct : guias) {
+            if (guiaAct.getIdentificacion().equals(guia.getIdentificacion())) {
+                existe = true;
+                break;
+            }
+        }
+        return existe;
     }
 }

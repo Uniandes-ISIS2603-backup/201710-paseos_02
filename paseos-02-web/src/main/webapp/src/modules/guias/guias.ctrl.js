@@ -30,7 +30,8 @@
 
             // inicialmente el listado de caminantes está vacio
             $scope.records = guias.data;
-                      
+                  
+            
 
             // el controlador recibió un caminanteId ??
             // revisa los parámetros (ver el :caminanteId en la definición de la ruta)
@@ -73,7 +74,8 @@
             
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
-
+                console.log(currentRecord);
+                
                 // si el id es null, es un registro nuevo, entonces lo crea
                 if (id == null) {
 
