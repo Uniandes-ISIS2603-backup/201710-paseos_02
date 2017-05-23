@@ -125,7 +125,6 @@ public class InscripcionLogicTest {
             data.add(entity);
         }
         
-        
     }
 
  @Test

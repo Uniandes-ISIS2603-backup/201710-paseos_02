@@ -23,7 +23,6 @@
  */
 package co.edu.uniandes.csw.paseos.ejbs;
 
-
 import co.edu.uniandes.csw.paseos.entities.CaminanteEntity;
 import co.edu.uniandes.csw.paseos.entities.InscripcionEntity;
 import co.edu.uniandes.csw.paseos.entities.OpinionParticipanteEntity;
@@ -52,9 +51,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  *
  * @author mdr.leon10
  */
-
 @RunWith(Arquillian.class)
 public class OpinionesParticipanteLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -67,22 +66,23 @@ public class OpinionesParticipanteLogicTest {
     private UserTransaction utx;
 
     private List<OpinionParticipanteEntity> data = new ArrayList<OpinionParticipanteEntity>();
-    
+
     private CaminanteEntity caminante;
-    
+
     private PaseoEcologicoEntity paseo;
-    
+
     private InscripcionEntity inscripcion;
-    
+
     private PaseoInstanciaEntity instancia;
+
     /**
-     * 
+     *
      */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(OpinionParticipanteEntity.class.getPackage())
-                .addPackage(OpinionParticipanteLogic.class.getPackage())              
+                .addPackage(OpinionParticipanteLogic.class.getPackage())
                 .addPackage(OpinionParticipantePersistence.class.getPackage())
                 .addPackage(CaminanteEntity.class.getPackage())
                 .addPackage(UsuarioEntity.class.getPackage())
@@ -113,34 +113,47 @@ public class OpinionesParticipanteLogicTest {
     /**
      * Limpia las tablas que están implicadas en la prueba.
      *
-     * 
+     *
      */
     private void clearData() {
-        em.createQuery("delete from OpinionParticipanteEntity").executeUpdate();             
-        em.createQuery("delete from CaminanteEntity").executeUpdate();
-        em.createQuery("delete from PaseoEcologicoEntity").executeUpdate();
+        em.createQuery("delete from OpinionParticipanteEntity").executeUpdate();
         em.createQuery("delete from InscripcionEntity").executeUpdate();
+        em.createQuery("delete from CaminanteEntity").executeUpdate();
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
         em.createQuery("delete from PaseoInstanciaEntity").executeUpdate();
+        em.createQuery("delete from PaseoEcologicoEntity").executeUpdate();
     }
-    
+
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
-         CaminanteEntity nuevo = factory.manufacturePojo(CaminanteEntity.class);
-         caminante = nuevo;
-         em.persist(nuevo);
-         PaseoEcologicoEntity nuevoPaseo = factory.manufacturePojo(PaseoEcologicoEntity.class);
-         paseo = nuevoPaseo;
-         em.persist(nuevoPaseo);
-         PaseoInstanciaEntity instanciaTemp = factory.manufacturePojo(PaseoInstanciaEntity.class);
-         instancia = instanciaTemp;
-         instancia.setPaseoEcologico(paseo);
-         em.persist(instanciaTemp);
-         InscripcionEntity nuevaInscripcion = factory.manufacturePojo(InscripcionEntity.class);
-         inscripcion = nuevaInscripcion;
-         inscripcion.setCaminante(caminante);
-         inscripcion.setInstanciaPaseo(instancia);
-         em.persist(nuevaInscripcion);
-         
+        CaminanteEntity nuevo = factory.manufacturePojo(CaminanteEntity.class);
+        caminante = nuevo;
+        em.persist(nuevo);
+        System.out.println("caminante:" + caminante.getId());
+        System.out.println(em.find(CaminanteEntity.class, nuevo.getId()));
+        
+        PaseoEcologicoEntity nuevoPaseo = factory.manufacturePojo(PaseoEcologicoEntity.class);
+        paseo = nuevoPaseo;
+        em.persist(nuevoPaseo);
+        System.out.println("paseo:" + paseo.getId());
+        System.out.println(em.find(PaseoEcologicoEntity.class, nuevoPaseo.getId()));
+        
+        PaseoInstanciaEntity instanciaTemp = factory.manufacturePojo(PaseoInstanciaEntity.class);
+        instancia = instanciaTemp;
+        instancia.setPaseoEcologico(paseo);
+        em.persist(instanciaTemp);
+        System.out.println("instancia:" +instancia.getId() + ", PaseoId: " + instancia.getPaseoEcologico().getId());
+        System.out.println(em.find(PaseoInstanciaEntity.class, instanciaTemp.getId()));
+        
+        InscripcionEntity nuevaInscripcion = factory.manufacturePojo(InscripcionEntity.class);
+        inscripcion = nuevaInscripcion;
+        inscripcion.setCaminante(caminante);
+        inscripcion.setInstanciaPaseo(instancia);
+        em.persist(nuevaInscripcion);
+        System.out.println(inscripcion.getId() + "," + nuevaInscripcion.getId());
+        System.out.println("inscripcion:" +inscripcion.getId() + ", CaminanteId: " + inscripcion.getCaminante().getId() + ", instanciaPaseo"+ inscripcion.getInstanciaPaseo().getId());
+        System.out.println(em.find(InscripcionEntity.class, nuevaInscripcion.getId()));
+
         for (int i = 0; i < 3; i++) {
             OpinionParticipanteEntity entity = factory.manufacturePojo(OpinionParticipanteEntity.class);
             entity.setCaminante(caminante);
@@ -148,51 +161,89 @@ public class OpinionesParticipanteLogicTest {
             em.persist(entity);
             data.add(entity);
         }
-        
-        
+
     }
 
- @Test
+    @Test
     public void createOpinionesParticipantesTest() {
-        OpinionParticipanteEntity newEntity = factory.manufacturePojo(OpinionParticipanteEntity.class);
+        OpinionParticipanteEntity newEntity= factory.manufacturePojo(OpinionParticipanteEntity.class);
         OpinionParticipanteEntity result = null;
         newEntity.setCaminante(caminante);
         newEntity.setPaseoEcologico(paseo);
-        System.out.println(caminante.getId());
-     
-     try{
-         result = opiLogic.createOpinionParticipante(newEntity);
-     
-        Assert.assertNotNull(result);
-        OpinionParticipanteEntity entity = em.find(OpinionParticipanteEntity.class, result.getId());
-        Assert.assertNotNull(entity);
-        Assert.assertEquals(newEntity.getComentario(), result.getComentario());
-     }
-     catch(Exception e){
-         System.out.println(e.getMessage());
-         Assert.fail();
-     }
+        
+
+        try {
+            result = opiLogic.createOpinionParticipante(newEntity);
+
+            Assert.assertNotNull(result);
+            OpinionParticipanteEntity entity
+                    = em.find(OpinionParticipanteEntity.class, result.getId());
+            Assert.assertNotNull(entity);
+            Assert.assertEquals(newEntity.getComentario(), result.getComentario());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            Assert.fail();
+        }
     }
 
-     @Test
-    public void getInscripcionesTest() {
-        try
-        {
+    @Test
+    public void getOpinionesTest() {
+        try {
             List<OpinionParticipanteEntity> list = opiLogic.getOpinionesParticipantes();
-        Assert.assertEquals(data.size(), list.size());
-        for (OpinionParticipanteEntity entity : list) {
-            boolean found = false;
-            for (OpinionParticipanteEntity storedEntity : data) {
-                if (entity.getId().equals(storedEntity.getId())) {
-                    found = true;
+            Assert.assertEquals(data.size(), list.size());
+            for (OpinionParticipanteEntity entity : list) {
+                boolean found = false;
+                for (OpinionParticipanteEntity storedEntity : data) {
+                    if (entity.getId().equals(storedEntity.getId())) {
+                        found = true;
+                    }
                 }
+                Assert.assertTrue(found);
             }
-            Assert.assertTrue(found);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            Assert.fail();
         }
+    }
+
+    @Test
+    public void getOpinionTest() {
+        OpinionParticipanteEntity entity = em.find(OpinionParticipanteEntity.class, data.get(0).getId());
+        OpinionParticipanteEntity resultEntity = opiLogic.getOpinionParticipante(data.get(0).getId());
+
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getComentario(), resultEntity.getComentario());
+        Assert.assertEquals(entity.getImagen(), resultEntity.getImagen());
+    }
+    
+     @Test
+    public void deleteOpinionTest() {
+        OpinionParticipanteEntity entity = data.get(1);
+        opiLogic.deleteOpinionParticipante(entity.getId());
+        InscripcionEntity deleted = em.find(InscripcionEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
+    
+    @Test
+    public void updateInscripcionTest() {
+        OpinionParticipanteEntity entity = data.get(0);
+        OpinionParticipanteEntity pojoEntity = factory.manufacturePojo(OpinionParticipanteEntity.class);
+
+        pojoEntity.setId(entity.getId());
+        pojoEntity.setCaminante(caminante);
+        pojoEntity.setPaseoEcologico(paseo);
+        
+                
+        try{
+        opiLogic.updateOpinionParticipante(pojoEntity);
+
+        OpinionParticipanteEntity resp = em.find(OpinionParticipanteEntity.class, entity.getId());
+
+        Assert.assertEquals(pojoEntity.getComentario(), resp.getComentario());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
         }
-     catch(Exception e){
-         System.out.println(e.getMessage());
-         Assert.fail();
-     }
+        catch(Exception e){
+        Assert.fail();
+        }
     }
 }

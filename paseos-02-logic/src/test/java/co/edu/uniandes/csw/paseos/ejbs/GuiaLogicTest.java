@@ -104,7 +104,9 @@ public class GuiaLogicTest
         try {
             utx.begin();
             clearData();
+            System.out.println("holaaa");
             insertData();
+            System.out.println("chaooo");
             utx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,7 +126,8 @@ public class GuiaLogicTest
     private void clearData() {       
         em.createQuery("delete from CalificacionEntity").executeUpdate();
         em.createQuery("delete from PaseoEcologicoEntity").executeUpdate();       
-        em.createQuery("delete from GuiaEntity").executeUpdate();        
+        em.createQuery("delete from GuiaEntity").executeUpdate();
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
     }
 
     /**
