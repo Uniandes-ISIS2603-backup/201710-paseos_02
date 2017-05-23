@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-6">
                     <div class="btn-group">
-                        <button id="{{$index}}-delete-btn" class="btn btn-default btn-lg" ng-click="eliminar(currentOpinion)"><span class="glyphicon glyphicon-minus"></span> Eliminar opinion</button>
+                        <button id="{{$index}}-delete-btn" class="btn btn-default btn-lg" ng-click="eliminar(currentOpinion.id)"><span class="glyphicon glyphicon-minus"></span> Eliminar opinion</button>
 
                         <a id="{{$index}}-edit-btn" class="btn btn-default btn-lg" ui-sref="opinionEdit({guiaId: currentOpinion.id})"><span class="glyphicon glyphicon-edit"></span>Editar opinion</a>
                     </div>

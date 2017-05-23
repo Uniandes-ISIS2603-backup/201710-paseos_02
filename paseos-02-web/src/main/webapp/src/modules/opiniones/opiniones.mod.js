@@ -29,7 +29,7 @@
                 views: {
                     'listView': {
                         templateUrl: basePath + 'opiniones.list.html',
-                        controller: ['$scope', 'currentPaseo',function ($scope,currentPaseo) {
+                        controller: ['$scope', 'currentPaseo', function ($scope, currentPaseo) {
                                 $scope.opinionesRecords = currentPaseo.data.opiniones;
                             }]
                     }
@@ -40,21 +40,29 @@
                 param: {
                     opinionId: null
                 },
-                resolve:  {
+                resolve: {
                     currentOpinion: ['$http', 'opinionesContext', '$stateParams', function ($http, opinionesContext, $params) {
-                            return $http.get(opinionesContext+'/'+$params.opinionId);
+                            return $http.get(opinionesContext + '/' + $params.opinionId);
                         }]
                 },
                 views: {
                     'detailView': {
                         templateUrl: basePath + 'opiniones.detail.html',
-                        controller: ['$scope', 'currentOpinion', function ($scope,  currentOpinion) {
+                        controller: ['$scope', 'currentOpinion', '$http', '$state','opinionesContext' , function ($scope, currentOpinion, $http, $state, opinionesContext) {
                                 $scope.currentOpinion = currentOpinion.data;
+
+                                $scope.eliminar = function (id)
+                                {
+                                    currentRecord = $scope.currentRecord;
+                                    $http.delete(opinionesContext + "/" + id, currentRecord).then
+                                    $state.go('opinionesList');
+                                }
+
                             }]
                     },
                     'listView': {
                         templateUrl: basePath + 'opiniones.list.html',
-                        controller: ['$scope', 'currentPaseo',function ($scope,currentPaseo) {
+                        controller: ['$scope', 'currentPaseo', function ($scope, currentPaseo) {
                                 $scope.opinionesRecords = currentPaseo.data.opiniones;
                             }]
                     }
@@ -64,8 +72,17 @@
                 parent: 'opiniones',
                 views: {
                     'opinionView': {
-                        controller: 'opinionesCtrl',
-                        controllerAs: 'ctrl',
+                        controller: ['$scope', '$http', '$state','opinionesContext', function($scope, $http, $state, opinionesContext){
+                           
+                                $scope.opinionACrear  = {};
+                                        
+                                $scope.crear = function ()
+                                {
+                                    $http.post(opinionesContext, $scope.opinionACrear)
+                                    $state.go('opinionDetail',{},{reload:true});
+                                };    
+                        }],
+                    
                         templateUrl: basePath + 'opiniones.create.html'
                     }
                 }
